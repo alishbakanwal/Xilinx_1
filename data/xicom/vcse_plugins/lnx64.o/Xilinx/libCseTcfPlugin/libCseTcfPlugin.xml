@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright (c) 2007 Xilinx, Inc.  All rights reserved. -->
+<CsePlugin>
+	<fullname>Xilinx Tcf Plug-in</fullname>
+	<libname>libCseTcfPlugin</libname>
+	<vendor>Xilinx</vendor>
+	<version>1.1</version>
+	<description>This plug-in is intended to connect to a TCF agent with support for the JTAG service.</description>
+	<targets>
+		<target>
+			<fullname>Xilinx Tcf Cable</fullname>
+			<targetname>xilinx_tcf</targetname>
+			<description>The frequency argument is mandatory but is not used.</description>
+			<!-- guivisible tells the application not to show this target in a gui.
+			     useful for targets that cannot read back data, like file writers. -->
+			<guivisible>false</guivisible>
+			<arguments>
+				<argument>
+					<key displayname="Speed">frequency</key>
+					<validvalues>
+						<!-- validvalue can be a single value (ex: 200), a value
+						     range (ex: 1-200), or when none is specified the
+						     application assumes a string input -->
+						<validvalue displayname="100 KHz" default="1">100000</validvalue>
+						<validvalue displayname="200 KHz">200000</validvalue>
+						<validvalue displayname="400 KHz">400000</validvalue>
+					</validvalues>
+					<!-- guicontroltype should be one of the following
+					     and are only used as suggestions:
+					     checkbox, radiobutton, combobox, list,
+					     slider, spinner, textfield, passwordfield -->
+					<guicontroltype>combobox</guicontroltype>
+				</argument>
+			</arguments>
+		</target>
+	</targets>
+</CsePlugin>

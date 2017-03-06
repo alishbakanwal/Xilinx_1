@@ -1,0 +1,45 @@
+#####################################################################
+# File: hw_server_device_info_file.csv
+# 
+# Xilinx, Inc.
+# XILINX IS PROVIDING THIS DESIGN, CODE, OR INFORMATION "AS IS" AS A
+# COURTESY TO YOU.  BY PROVIDING THIS DESIGN, CODE, OR INFORMATION AS
+# ONE POSSIBLE   IMPLEMENTATION OF THIS FEATURE, APPLICATION OR
+# STANDARD, XILINX IS MAKING NO REPRESENTATION THAT THIS IMPLEMENTATION
+# IS FREE FROM ANY CLAIMS OF INFRINGEMENT, AND YOU ARE RESPONSIBLE
+# FOR OBTAINING ANY RIGHTS YOU MAY REQUIRE FOR YOUR IMPLEMENTATION.
+# XILINX EXPRESSLY DISCLAIMS ANY WARRANTY WHATSOEVER WITH RESPECT TO
+# THE ADEQUACY OF THE IMPLEMENTATION, INCLUDING BUT NOT LIMITED TO
+# ANY WARRANTIES OR REPRESENTATIONS THAT THIS IMPLEMENTATION IS FREE
+# FROM CLAIMS OF INFRINGEMENT, IMPLIED WARRANTIES OF MERCHANTABILITY
+# AND FITNESS FOR A PARTICULAR PURPOSE.
+#
+# Description: 
+#   This is a sample jtag ID table. This file can be used to define 
+#   additional devices to be detected by the hw_server application. 
+#
+#   In this file empty lines, lines with spaces, and lines that begin 
+#   with the '#' character will be ignored.
+#
+#   The format of this file is as follows:
+#
+#     ROW 1: fields 
+#            The standard JTAG id fields are "idcode,mask,irlen,name"
+#     ROW 2: field types
+#            For each field specified in ROW 1, the type is used to 
+#            interpret the field data read per device. The types 
+#            accepted are "i" for integer and "s" for string. If
+#            you use the standard fields on ROW 1 then you should
+#            use "i,i,i,s" in ROW 2 to set the fields idcode,mask
+#            irlength to integer and name as string
+#
+#   To use this table you start hw_server with the following 
+#   command line arguments:
+#
+#    hw_server -e "set device-info-file <file>"
+#
+#   Where <file> is replaced with this filename.
+#####################################################################
+idcode,mask,irlen,name
+i,i,i,s
+167784595,268435455,10,chipscope_soft_tap

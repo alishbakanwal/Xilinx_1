@@ -1,0 +1,460 @@
+######################################################################
+# File: usage_statistics_webtalk.wdm
+# This file is used to map client data given to webtalk into a
+# XML and HTML document object model (DOM). The syntax of the
+# file conforms to the libconfig package
+# (http://www.hyperrealm.com/libconfig/libconfig_manual.html).
+#
+# Here is a basic synopsis:
+# 1. Webtalk has a list of clients.
+# 2. For each client, there must be one or more data mapping rules.
+# 3. Each data mapping rule specifies:
+#    -What style of table the data should appear in in the HTML report.
+#    -Where in the HTML report the data should appear.
+#    -Where in the XML report the data should appear.
+#    -An optional context. The context string just provides 
+#    another level of specification, w/o it you would only be
+#    able to have one rule per client.
+# Note that the \\ is used as a hierarchy separater in the context,
+# xml_map, and html_map elements. You should also not use a comma
+# in the context value.
+######################################################################
+version = "1.0";
+clients =
+(
+	{ client_name = "project"; 
+		rules = ( 
+			{ 
+				context="vivado_usage\\project_data";
+				xml_map="vivado_usage\\project_data";
+				html_map="vivado_usage\\project_data";
+				html_format="UnisimStatsStyle";
+			},
+			{ 
+				context="vivado_usage\\other_data";
+				xml_map="vivado_usage\\other_data";
+				html_map="vivado_usage\\other_data";
+				html_format="UnisimStatsStyle";
+			},
+			{ 
+				context="vivado_usage\\java_command_handlers";
+				xml_map="vivado_usage\\java_command_handlers";
+				html_map="vivado_usage\\java_command_handlers";
+				html_format="UnisimStatsStyle";
+			},
+#			{ 
+#				context="vivado_usage\\gui_resources";
+#				xml_map="vivado_usage\\gui_resources";
+#				html_map="vivado_usage\\gui_resources";
+#				html_format="UnisimStatsStyle";
+#			},
+			{ 
+				context="ip_statistics";
+				xml_map="ip_statistics";
+				html_map="ip_statistics";
+				html_format="UnisimStatsStyle";
+			},
+#			{ 
+#				context="tcl_task_statistics";
+#				xml_map="tcl_task_statistics";
+#				html_map="tcl_task_statistics";
+#				html_format="TclTasksStyle";
+#			},
+			{ 
+				context="software_version_and_target_device";
+				xml_map="software_version_and_target_device";
+				html_map="software_version_and_target_device";
+				html_format="UserEnvStyle";
+			},
+			{ 
+				context="user_environment";
+				xml_map="user_environment";
+				html_map="user_environment";
+				html_format="UserEnvStyle";
+			}
+		);
+        },
+
+	{ client_name = "funnel"; 
+		rules = ( 
+			{ 
+				context="unisim_transformation\\pre_unisim_transformation";
+				xml_map="unisim_transformation\\pre_unisim_transformation";
+				html_map="unisim_transformation\\pre_unisim_transformation";
+				html_format="UnisimStatsStyle";
+			},
+			{ 
+				context="unisim_transformation\\post_unisim_transformation";
+				xml_map="unisim_transformation\\post_unisim_transformation";
+				html_map="unisim_transformation\\post_unisim_transformation";
+				html_format="UnisimStatsStyle";
+			}
+		);
+        },
+
+	{ client_name = "placer"; 
+		rules = ( 
+			{ 
+				context="placer\\usage";
+				xml_map="placer\\usage";
+				html_map="placer\\usage";
+				html_format="UnisimStatsStyle";
+			}
+		);
+	},
+
+	{ client_name = "tclstore"; 
+		rules = ( 
+			{ 
+				context="tclstore\\usage";
+				xml_map="tclstore\\usage";
+				html_map="tclstore\\usage";
+				html_format="UnisimStatsStyle";
+			}
+		);
+	},
+
+	{ client_name = "report_utilization"; 
+		rules = ( 
+			{ 
+				context="report_utilization\\slice_logic";
+				xml_map="report_utilization\\slice_logic";
+				html_map="report_utilization\\slice_logic";
+				html_format="UnisimStatsStyle";
+			},
+			{ 
+				context="report_utilization\\memory";
+				xml_map="report_utilization\\memory";
+				html_map="report_utilization\\memory";
+				html_format="UnisimStatsStyle";
+			},
+			{ 
+				context="report_utilization\\dsp";
+				xml_map="report_utilization\\dsp";
+				html_map="report_utilization\\dsp";
+				html_format="UnisimStatsStyle";
+			},
+			{ 
+				context="report_utilization\\io_and_gtx";
+				xml_map="report_utilization\\io_and_gtx";
+				html_map="report_utilization\\io_and_gtx";
+				html_format="UnisimStatsStyle";
+			},
+			{ 
+				context="report_utilization\\clocking";
+				xml_map="report_utilization\\clocking";
+				html_map="report_utilization\\clocking";
+				html_format="UnisimStatsStyle";
+			},
+			{ 
+				context="report_utilization\\specific_feature";
+				xml_map="report_utilization\\specific_feature";
+				html_map="report_utilization\\specific_feature";
+				html_format="UnisimStatsStyle";
+			},
+			{ 
+				context="report_utilization\\primitives";
+				xml_map="report_utilization\\primitives";
+				html_map="report_utilization\\primitives";
+				html_format="UnisimStatsStyle";
+			},
+			{ 
+				context="report_utilization\\io_standard";
+				xml_map="report_utilization\\io_standard";
+				html_map="report_utilization\\io_standard";
+				html_format="UnisimStatsStyle";
+			}
+		);
+        },
+
+	{ client_name = "incremental_compile"; 
+		rules = ( 
+			{ 
+				context="incremental_compile\\usage";
+				xml_map="incremental_compile\\usage";
+				html_map="incremental_compile\\usage";
+				html_format="UnisimStatsStyle";
+			},
+			{ 
+				context="incremental_compile\\reuse_statistics";
+				xml_map="incremental_compile\\reuse_statistics";
+				html_map="incremental_compile\\reuse_statistics";
+				html_format="UnisimStatsStyle";
+			},
+			{ 
+				context="incremental_compile\\qor";
+				xml_map="incremental_compile\\qor";
+				html_map="incremental_compile\\qor";
+				html_format="UnisimStatsStyle";
+			}
+		);
+        },
+
+	{ client_name = "synthesis"; 
+		rules = ( 
+			{ 
+				context="synthesis\\command_line_options";
+				xml_map="synthesis\\command_line_options";
+				html_map="synthesis\\command_line_options";
+				html_format="UnisimStatsStyle";
+			},
+			{ 
+				context="synthesis\\usage";
+				xml_map="synthesis\\usage";
+				html_map="synthesis\\usage";
+				html_format="UnisimStatsStyle";
+			}
+		);
+        },
+
+	{ client_name = "cpd"; 
+		rules = ( 
+		        { 
+				context="cpd";
+				xml_map="cpd";
+				html_map="cpd";
+				html_format="UnisimStatsStyle";
+			}
+		);
+        },
+
+	{ client_name = "hd"; 
+		rules = ( 
+			{ 
+				context="hd\\flow";
+				xml_map="hd\\flow";
+				html_map="hd\\flow";
+				html_format="UnisimStatsStyle";
+			},
+			{ 
+				context="hd\\usage_static";
+				xml_map="hd\\usage_static";
+				html_map="hd\\usage_static";
+				html_format="UnisimStatsStyle";
+			},
+			{ 
+				context="hd";
+				xml_map="hd";
+				html_map="hd";
+				html_format="UnisimStatsStyle";
+			}
+		);
+        },
+
+	{ client_name = "xsim"; 
+		rules = ( 
+			{ 
+				context="xsim\\command_line_options"; 
+				xml_map="xsim\\command_line_options";
+				html_map="xsim\\command_line_options";
+				html_format="UnisimStatsStyle";
+			}
+		);
+        },
+
+	{ client_name = "report_drc"; 
+		rules = ( 
+			{ 
+				context="report_drc\\command_line_options";
+				xml_map="report_drc\\command_line_options";
+				html_map="report_drc\\command_line_options";
+				html_format="UnisimStatsStyle";
+			},
+			{ 
+				context="report_drc\\results";
+				xml_map="report_drc\\results";
+				html_map="report_drc\\results";
+				html_format="UnisimStatsStyle";
+			},
+			{ 
+				context="report_drc\\usage";
+				xml_map="report_drc\\usage";
+				html_map="report_drc\\usage";
+				html_format="UnisimStatsStyle";
+			}
+		);
+        },
+
+	{ client_name = "report_methodology"; 
+		rules = ( 
+			{ 
+				context="report_methodology\\command_line_options";
+				xml_map="report_methodology\\command_line_options";
+				html_map="report_methodology\\command_line_options";
+				html_format="UnisimStatsStyle";
+			},
+			{ 
+				context="report_methodology\\results";
+				xml_map="report_methodology\\results";
+				html_map="report_methodology\\results";
+				html_format="UnisimStatsStyle";
+			},
+			{ 
+				context="report_methodology\\usage";
+				xml_map="report_methodology\\usage";
+				html_map="report_methodology\\usage";
+				html_format="UnisimStatsStyle";
+			}
+		);
+        },
+
+	{ client_name = "report_power"; 
+		rules = ( 
+			{ 
+				context="report_power\\command_line_options";
+				xml_map="report_power\\command_line_options";
+				html_map="report_power\\command_line_options";
+				html_format="UnisimStatsStyle";
+			},
+			{ 
+				context="report_power\\usage";
+				xml_map="report_power\\usage";
+				html_map="report_power\\usage";
+				html_format="UnisimStatsStyle";
+			}
+		);
+        },
+
+	{ client_name = "report_power_opt"; 
+		rules = ( 
+			{ 
+				context="report_power_opt\\command_line_options";
+				xml_map="report_power_opt\\command_line_options";
+				html_map="report_power_opt\\command_line_options";
+				html_format="UnisimStatsStyle";
+			},
+			{ 
+				context="report_power_opt\\usage";
+				xml_map="report_power_opt\\usage";
+				html_map="report_power_opt\\usage";
+				html_format="UnisimStatsStyle";
+			}
+		);
+        },
+
+	{ client_name = "power_opt_design"; 
+		rules = ( 
+			{ 
+				context="power_opt_design\\command_line_options_spo";
+				xml_map="power_opt_design\\command_line_options_spo";
+				html_map="power_opt_design\\command_line_options_spo";
+				html_format="UnisimStatsStyle";
+			},
+			{ 
+				context="power_opt_design\\usage";
+				xml_map="power_opt_design\\usage";
+				html_map="power_opt_design\\usage";
+				html_format="UnisimStatsStyle";
+			}
+		);
+        },
+
+	{ client_name = "router"; 
+		rules = ( 
+			{ 
+				context="router\\usage";
+				xml_map="router\\usage";
+				html_map="router\\usage";
+				html_format="UnisimStatsStyle";
+			}
+		);
+        },
+
+	{ client_name = "report_cdc"; 
+		rules = ( 
+			{ 
+				context="report_cdc\\command_line_options";
+				xml_map="report_cdc\\command_line_options";
+				html_map="report_cdc\\command_line_options";
+				html_format="UnisimStatsStyle";
+			},
+			{ 
+				context="report_cdc\\usage";
+				xml_map="report_cdc\\usage";
+				html_map="report_cdc\\usage";
+				html_format="UnisimStatsStyle";
+			}
+		);
+        },
+
+	{ client_name = "report_design_analysis"; 
+		rules = ( 
+			{ 
+				context="report_design_analysis\\command_line_options";
+				xml_map="report_design_analysis\\command_line_options";
+				html_map="report_design_analysis\\command_line_options";
+				html_format="UnisimStatsStyle";
+			},
+			{ 
+				context="report_design_analysis\\usage";
+				xml_map="report_design_analysis\\usage";
+				html_map="report_design_analysis\\usage";
+				html_format="UnisimStatsStyle";
+			},
+                        {
+                                context="report_design_analysis\\usage_count";
+                                xml_map="report_design_analysis\\usage_count";
+                                html_map="report_design_analysis\\usage_count";
+                                html_format="UnisimStatsStyle";
+                        },
+                        {
+                                context="report_design_analysis\\flow_sequence";
+                                xml_map="report_design_analysis\\flow_sequence";
+                                html_map="report_design_analysis\\flow_sequence";
+                                html_format="UnisimStatsStyle";
+                        }
+		);
+        },
+
+	{ client_name = "timing_constraints_wizard"; 
+		rules = ( 
+			{ 
+				context="timing_constraints_wizard\\command_line_options";
+				xml_map="timing_constraints_wizard\\command_line_options";
+				html_map="timing_constraints_wizard\\command_line_options";
+				html_format="UnisimStatsStyle";
+			},
+			{ 
+				context="timing_constraints_wizard\\usage";
+				xml_map="timing_constraints_wizard\\usage";
+				html_map="timing_constraints_wizard\\usage";
+				html_format="UnisimStatsStyle";
+			}
+		);
+        },
+
+	{ client_name = "phys_opt_design_post_place"; 
+		rules = ( 
+			{ 
+				context="phys_opt_design_post_place\\command_line_options";
+				xml_map="phys_opt_design_post_place\\command_line_options";
+				html_map="phys_opt_design_post_place\\command_line_options";
+				html_format="UnisimStatsStyle";
+			},
+			{ 
+				context="phys_opt_design_post_place\\usage";
+				xml_map="phys_opt_design_post_place\\usage";
+				html_map="phys_opt_design_post_place\\usage";
+				html_format="UnisimStatsStyle";
+			}
+		);
+        }, 
+
+	{ client_name = "phys_opt_design_post_route"; 
+		rules = ( 
+			{ 
+				context="phys_opt_design_post_route\\command_line_options";
+				xml_map="phys_opt_design_post_route\\command_line_options";
+				html_map="phys_opt_design_post_route\\command_line_options";
+				html_format="UnisimStatsStyle";
+			},
+			{ 
+				context="phys_opt_design_post_route\\usage";
+				xml_map="phys_opt_design_post_route\\usage";
+				html_map="phys_opt_design_post_route\\usage";
+				html_format="UnisimStatsStyle";
+			}
+		);
+        }
+
+);

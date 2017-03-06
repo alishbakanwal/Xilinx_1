@@ -1,0 +1,12 @@
+STAGE_NAME,GUI_DISPLAY_NAME,READ_SIMPLE,READ_COMPLEX,WRITE_SIMPLE,WRITE_COMPLEX,WRITE_DM
+01_dqs_gate_cal,1 - DQS Gate Cal,0,0,0,0,0
+02_read_deskew_stage,2 - Read Deskew Stage,1,0,0,0,0
+03_address_calibration,3 - Address Calibration,0,0,0,0,0
+04_write_data_centering,4 - Write Data Centering,0,0,1,0,0
+05_write_data_bit_slip,5 - Write Data Bit Slip,0,0,0,0,0
+06_read_data_bit_slip,6 - Read Data Bit Slip,0,0,0,0,0
+07_byte_writes_centering,7 - Byte Writes Centering,0,0,0,0,0
+08_byte_writes_bit_slip,8 - Byte Writes Bit Slip,0,0,0,0,0
+09_complex_read_deskew,9 - Complex Read Deskew,0,0,0,0,0
+10_complex_read_centering,10 - Complex Read Centering,0,0,0,0,0
+11_read_valid_calibration,11 - Read Valid Calibration,0,0,0,0,0

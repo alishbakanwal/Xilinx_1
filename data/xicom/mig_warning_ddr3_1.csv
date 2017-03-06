@@ -1,0 +1,37 @@
+STAGE_NAME,STAGE,CODE,UNIT_1,UNIT_2,WARNING
+startup,0,1,na,na,RTL XSDB BRAM setting smaller than code computes range required.
+DQS Gate,1,2,nibble,rank,Sampled 1XX or 01X with initial CAS read latency setting when expected to find 000 or 001.
+DQS Gate,1,3,nibble,rank,"When searching with fine taps all samples returned “0” on GT_STATUS, did not find “1”."
+DQS Gate,1,4,nibble,rank,Did not find a stable “1” on GT_STATUS when searching with fine taps.
+DQS Gate,1,5,na,rank,DQS gate ran without BISC enabled.
+DQS Gate,1,6,byte,rank,Data failure seen after DQS gate calibration for a given byte. XSDB contains the data seen in the BUS_DATA_BURST field.
+Multi Rank Adjustment and Checks,26,7,byte,rank,Coarse tap adjusted to be less than 8.
+DQS Gate,1,8,byte,rank,"Coarse check of 0-180 degrees before fine tap search did not find stable ""1""."
+Write Leveling,3,9,byte,rank,Odelay offset computation from BISC results is 0.
+Write Leveling,3,10,byte,rank,Step size speed up computation from BISC results is 0.
+Write Leveling,3,11,byte,rank,Did not find a stable “1” when searching with ODELAY taps.
+Write Leveling,3,12,byte,rank,Lowest ODELAY setting is maximum ODELAY taps allowed.
+Read DQS Centering (Simple),6,13,nibble,rank,"Small eye found, less than 30% of expected for a given nibble (rising edge data, PQTR)."
+Read DQS Centering (Complex),15,14,nibble,rank,"Small eye found, less than 30% of expected for a given nibble (rising edge data, PQTR)."
+Read DQS Centering (Simple),6,15,nibble,rank,"Small eye found, less than 30% of expected for a given nibble (falling edge data, NQTR)."
+Read DQS Centering (Complex),15,16,nibble,rank,"Small eye found, less than 30% of expected for a given nibble (falling edge data, NQTR)."
+Read DQS Centering (Simple),6,17,nibble,rank,"Right edge of window found is less than left edge setting(rising edge data, PQTR)."
+Read DQS Centering (Complex),15,18,nibble,rank,"Right edge of window found is less than left edge setting(rising edge data, PQTR)."
+Read DQS Centering (Simple),6,19,nibble,rank,"Right edge of window found is less than left edge setting(falling edge data, NQTR)."
+Read DQS Centering (Complex),15,20,nibble,rank,"Right edge of window found is less than left edge setting(falling edge data, NQTR)."
+Read DQS Centering (Simple),6,21,nibble,rank,"Right edge of window set at maximum tap value, true edge not found (rising edge data, PQTR)."
+Read DQS Centering (Complex),15,22,nibble,rank,"Right edge of window set at maximum tap value, true edge not found (rising edge data, PQTR)."
+Read DQS Centering (Simple),6,23,nibble,rank,"Right edge of window set at maximum tap value, true edge not found (falling edge data, NQTR)."
+Read DQS Centering (Complex),15,24,nibble,rank,"Right edge of window set at maximum tap value, true edge not found (falling edge data, NQTR)."
+Read DQS Centering Multi Rank Adjustment,24,25,nibble,na,PQTR_FINAL from XSDB does not match what is in the RIU for the PQTR delay.
+Read DQS Centering Multi Rank Adjustment,24,26,nibble,na,NQTR_FINAL from XSDB does not match what is in the RIU for the NQTR delay.
+Write DQS to DQ (Simple),10,27,byte,na,"Small eye found, less than 30% of expected for a given byte."
+Write DQS to DQ (Complex),19,28,byte,na,"Small eye found, less than 30% of expected for a given byte."
+Write DQS to DQ (Simple),10,29,byte,na,After adjustment window size found is smaller than differences between right and left margin times 4.
+Write DQS to DQ (Complex),19,30,byte,na,After adjustment window size found is smaller than differences between right and left margin times 4.
+Write DQS to DM/DBI (Simple),11,31,byte,na,"When recentering in aggregate eye for DQ and DM/DBI, DQ margin from XSDB all 0, used DM/DBI margin only."
+Write DQS to DM/DBI (Simple),11,32,byte,na,"Small eye found, less than 30% of expected for a given DM/DBI pin."
+Write DQS to DM/DBI (Simple),11,33,byte,na,"Underflow of DM/DBI odelay requested, set to 0 instead."
+Write DQS to DM/DBI (Simple),11,34,byte,na,"Overflow of DM/DBI odelay requested, set to tap limit instead."
+Write VREF Training,22,35,byte,rank,VREF value read back from the DRAM did not match expected value.
+Write Leveling,3,36,byte,rank,Could not preserve the full offset skew on the Write DQS-to-DQ/DM output for the given rank.

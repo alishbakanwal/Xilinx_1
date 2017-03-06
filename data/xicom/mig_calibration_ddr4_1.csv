@@ -1,0 +1,28 @@
+STAGE_NAME,GUI_DISPLAY_NAME,READ_SIMPLE,READ_COMPLEX,WRITE_SIMPLE,WRITE_COMPLEX,WRITE_DM
+01_dqs_gate,1 - DQS Gate,0,0,0,0,0
+02_dqs_gate_sanity_check,2 - DQS Gate Sanity Check,0,0,0,0,0
+03_write_leveling,3 - Write Leveling,0,0,0,0,0
+04_read_per_bit_deskew,4 - Read Per-Bit Deskew,0,0,0,0,0
+05_read_per_bit_deskew_dbi,5 - Read Per-Bit DBI Deskew,0,0,0,0,0
+06_read_dqs_centering,6 - Read DQS Centering (Simple),1,0,0,0,0
+07_read_sanity_check,7 - Read Sanity Check,0,0,0,0,0
+08_write_dqs_to_dq_deskew,8 - Write DQS to DQ Deskew,0,0,0,0,0
+09_write_dqs_to_dm_dbi_deskew,9 - Write DQS to DM/DBI Deskew,0,0,0,0,0
+10_write_dqs_to_dq(simple),10 - Write DQS to DQ (Simple),0,0,1,0,0
+11_write_dqs_to_dm_dbi(simple),11 - Write DQS to DM/DBI (Simple),0,0,0,0,1
+12_read_dqs_centering_dbi,12 - Read DQS Centering DBI (Simple),0,0,0,0,0
+13_write_latency_calibration,13 - Write Latency Calibration,0,0,0,0,0
+14_write_read_sanity_check,14 - Write Read Sanity Check 0,0,0,0,0,0
+15_read_leveling(complex),15 - Read DQS Centering (Complex),0,1,0,0,0
+16_write_read_sanity_check,16 - Write Read Sanity Check 1,0,0,0,0,0
+17_read_vref_training,17 - Read VREF Training,0,0,0,0,0
+18_write_read_sanity_check,18 - Write Read Sanity Check 2,0,0,0,0,0
+19_write_dqs_to_dq(complex),19 - Write DQS to DQ (Complex),0,0,0,1,0
+20_write_dqs_to_dm_dbi(complex),20 - Write DQS to DM/DBI (Complex),0,0,0,0,0
+21_write_read_sanity_check,21 - Write Read Sanity Check 3,0,0,0,0,0
+22_write_vref_training,22 - Write VREF Training,0,0,0,0,0
+23_write_read_sanity_check,23 - Write Read Sanity Check 4,0,0,0,0,0
+24_read_dqs_centering_multi_rank_adjustment,24 - Read DQS Centering Multi Rank Adjustment,0,0,0,0,0
+25_write_read_sanity_check,25 - Write Read Sanity Check 5,0,0,0,0,0
+26_multi_rank_adjust_check,26 - Multi Rank Adjustment and Checks,0,0,0,0,0
+27_write_read_sanity_check,27 - Write Read Sanity Check 6,0,0,0,0,0
