@@ -1,0 +1,66 @@
+
+Description:
+
+  Update the INPUT_VALUE and ACTIVITY_VALUE properties of the input probes of
+  the specified VIO debug cores with values read from the hw_vio core on the
+  hardware device.
+
+  The Virtual Input/Output (VIO) debug core can both monitor and drive
+  internal signals on a programmed Xilinx device in real time. The VIO core
+  uses hardware probes, hw_probe objects, to monitor and drive signals on the
+  device. Input probes monitor signals as inputs to the VIO core. Output
+  probes drive signals to specified values from the VIO core.
+
+  The refresh_hw_vio command reads the signal values at the input probes of
+  the VIO debug core on the device, and applies the value to the INPUT_VALUE
+  property of the hw_probe, and updates the ACTIVITY_VALUE property on the
+  probe as well.
+
+  This command returns nothing if successful, or returns an error if it fails.
+
+Arguments:
+
+  -update_output_values - (Optional) Update hardware probe OUTPUT_VALUE
+  property with values read from the signals at the specified VIO debug
+  cores. This is a boolean argument enabled by its presence. This option has
+  the affect of resetting the OUTPUT_VALUE on the probe to match the signal
+  value on the hw_vio debug core.
+
+  Note: This is the reverse of the commit_hw_vio command, which applies the
+  OUTPUT_VALUE on the probe to the hw_vio debug core on the device.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <hw_vios> - (Required) Specify one or more hw_vio objects to refresh. The
+  hw_vio objects can either be specified as objects returned by the
+  get_hw_vios command, or specified by name.
+
+Example:
+
+  The following example refreshes the specified hw_vio debug core, specified
+  by name, including updating the OUTPUT_VALUE property on the hw_probes:
+
+    refresh_hw_vio -update_output_values hw_vio_1
+
+See Also:
+
+   *  commit_hw_vio
+   *  connect_hw_server
+   *  current_hw_device
+   *  get_hw_probes
+   *  get_hw_vios
+   *  program_hw_devices
+   *  reset_hw_vio_activity
+   *  reset_hw_vio_outputs
+   *  set_property

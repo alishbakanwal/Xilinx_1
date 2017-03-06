@@ -1,0 +1,44 @@
+BD_PORT
+
+Description: 
+A block design port is a special type of hierarchical pin, a pin on the top-level 
+diagram. In block designs, the ports are primary ports communicating the external 
+connection of the block design or diagram to the overall FPGA design, or system
+level design. 
+
+Related Objects:
+The block design port, bd_port object, occurs in a block design, or diagram. It is 
+connected by block design nets (bd_net) to the pins (bd_pin) of block design cells 
+(bd_cell) in the diagram. You can query the bd_ports of the diagram, or those 
+connected to block design nets. 
+
+	get_bd_ports -of_objects [get_bd_nets]
+
+You can also query the block design nets connected to bd_port objects:
+
+	get_bd_nets -of_objects [get_bd_ports aux_reset_in]
+
+Properties:
+The specific properties on a block design port object can vary depending on the 
+type of the port. The following table lists some of the properties assigned to a 
+RESET type bd_port object in the Vivado Design Suite, with example values:
+
+Property         Type    Read-only  Visible  Value
+CLASS            string  true       true     bd_port
+CONFIG.POLARITY  string  false      true     ACTIVE_LOW
+DIR              string  true       true     I
+INTF             string  true       true     FALSE
+LEFT             string  false      true     
+LOCATION         string  false      true     130 560
+NAME             string  false      true     aux_reset_in
+PATH             string  true       true     /aux_reset_in
+RIGHT            string  false      true     
+TYPE             string  true       true     rst
+
+To report the properties for a bd_port object, you can copy and paste the 
+following command into the Vivado Design Suite Tcl shell or Tcl console:
+
+	report_property -all [lindex [get_bd_ports] 0]
+
+
+

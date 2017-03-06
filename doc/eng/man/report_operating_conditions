@@ -1,0 +1,92 @@
+
+Description:
+
+  Displays the real-world operating conditions that are used when performing
+  analysis of the design.
+
+  The environmental operating conditions of the device are used for power
+  analysis when running the report_power command, but are not used during
+  timing analysis. The values of operating conditions can be defined by the
+  set_operating_conditions command.
+
+  Note: By default the report is written to the Tcl console or STD output.
+  However, the results can also be written to a file or returned as a string
+  if desired.
+
+Arguments:
+
+  -voltage - (Optional) Report the list of voltage pairs. Supported voltage
+  supplies vary by family.
+
+  -grade - (Optional) Report the temperature grade of the target device
+
+  -process - (Optional) Report the manufacturing process characteristics to
+  be assumed.
+
+  -junction_temp - (Optional) Report the device junction temperature used for
+  modeling
+
+  -ambient_temp - (Optional) Reports the environment ambient temperature
+
+  -thetaja - (Optional) Report the Theta-JA thermal resistance used for
+  modeling
+
+  -thetasa - (Optional) Report the Theta-SA thermal resistance used for
+  modeling
+
+  -airflow - (Optional) Report the Linear Feet Per Minute (LFM) airflow to be
+  used for modeling.
+
+  -heatsink - (Optional) Report the heatsink type to be used for modeling.
+
+  -thetajb - (Optional) Report the Theta-JB thermal resistance used for
+  modeling
+
+  -board - (Optional) Report the board size to be used for modeling.
+
+  -board_temp - (Optional) Report the board temperature in degrees Centigrade
+  to be used for modeling.
+
+  -board_layers - (Optional) Report the number of board layers to be used for
+  modeling
+
+  -all - (Optional) Report the current values of all operating conditions.
+  Use this to avoid having to report each condition separately.
+
+  -file <arg> - (Optional) Write the report into the specified file.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -return_string - (Optional) Directs the output to a Tcl string rather than
+  to the standard output. The Tcl string can be captured by a variable
+  definition and parsed or otherwise processed.
+
+  Note: This argument cannot be used with the -file option.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  Specify an industrial temperature grade device with an ambient temperature
+  of 75 degrees C and then write those settings to a file on disk.
+
+    set_operating_conditions -grade industrial -junction_temp 75 
+    report_operating_conditions -grade -junction_temp -return_string -file \ 
+    ~/conditions.txt
+
+See Also:
+
+   *  set_operating_conditions

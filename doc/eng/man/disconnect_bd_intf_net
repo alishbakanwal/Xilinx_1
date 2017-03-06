@@ -1,0 +1,61 @@
+
+Description:
+
+  Disconnect a single interface net in the IP Integrator subsystem design
+  from the specified objects. An interface is a grouping of signals that
+  share a common function in the IP Integrator subsystem design.
+
+  This command lets you disconnect the specified interface net from pins or
+  ports in the IP subsystem design, without deleting the whole net. To delete
+  the whole net, you should use the delete_bd_objs command.
+
+  This command returns TCL_OK is successful, or TCL_ERROR if it fails.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <intf_net> - (Required) Specifies a single interface net in the IP
+  subsystem design to disconnect from the specified objects. The net can be
+  specified by name, or as a single object returned by the get_bd_intf_nets
+  command.
+
+  <objects> - (Required) The list of interface pin or port objects to
+  disconnect the net from. The interface pins and ports must be specified as
+  design objects returned by the get_bd_intf_pins or get_bd_intf_ports
+  commands. They cannot simply be referenced by name.
+
+Example:
+
+  The following example disconnects the only interface net in the IP
+  subsystem design, from all interface pin and port objects that are
+  connected to it:
+
+    disconnect_bd_intf_net [get_bd_intf_nets] \ 
+    [get_bd_intf_pins -of_objects [get_bd_intf_nets]] \ 
+    [get_bd_intf_ports -of_objects [get_bd_intf_nets]]
+
+  Note: In this example you know there is only one interface net in the
+  design, or an error would be returned by the disconnect_bd_intf_net
+  command, which only accepts a single interface net.
+
+See Also:
+
+   *  connect_bd_intf_net
+   *  connect_bd_net
+   *  delete_bd_objs
+   *  disconnect_bd_intf_net
+   *  get_bd_nets
+   *  get_bd_pins
+   *  get_bd_ports

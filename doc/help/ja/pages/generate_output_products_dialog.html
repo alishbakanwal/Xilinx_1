@@ -1,0 +1,94 @@
+﻿<html xml:lang="ja-jp" lang="ja-jp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="reference"/>
+<meta name="DC.Title" content="[Generate Output Products] ダイアログ ボックス"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_bqj_lqr_b5"/>
+<meta name="DC.Language" content="ja-JP"/>
+<link rel="stylesheet" type="text/css" href="../commonltr-ja.css"/>
+<title>[Generate Output Products] ダイアログ ボックス</title>
+</head>
+<body id="concept_bqj_lqr_b5">
+
+
+<h1 class="title topictitle1">[Generate Output Products] ダイアログ ボックス</h1>
+
+<div class="body refbody">
+<div class="section">
+<p class="p">[Generate Output Products] ダイアログ ボックスには、デザイン内の IP コアまたはブロック デザインがリストされ、それらの IP に必要な出力ファイルを生成する方法を指定できます。出力ファイルには、インスタンシエーション テンプレート、HDL、制約、シミュレーション ファイルなどが含まれます。 アウト オブ コンテキスト合成がオンになっている場合は、合成済みネットリスト (DCP) と、サードパーティ合成ツール用のブラックボックスを推論するためのスタブ ファイルも作成されます。</p>
+
+<p class="p">このダイアログ ボックスでは、デザインおよびブロック デザイン内の IP をいつどのように合成するかも指定できます。Vivado<sup>®</sup> Design Suite では、グローバル合成フローとデフォルトのアウト オブ コンテキスト デザイン フローの両方がサポートされています。詳細は、<cite class="cite">『Vivado Design Suite ユーザー ガイド : デザイン フローの概要』 (UG892)</cite> の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug892-vivado-design-flows-overview.pdf;a=xOutOfContextDesignFlow" target="_blank">このセクション</a>を参照してください。</p>
+
+<ul class="ul" id="concept_bqj_lqr_b5__ul_bpj_jlz_55">
+<li class="li"><span Class="uicontrol">[Preview] : </span>現在のデザインの IP すべて、または <span Class="uicontrol">[Generate Output Products]</span> コマンドを使用する前に選択した IP のいずれかが表示されます。これらは、このコマンドの影響を受ける IP です。</li>
+
+<li class="li"><span Class="uicontrol">[Synthesis Options] : </span>リストされる IP に対するアウト オブ コンテキスト (OOC) のサポート レベルを示すオプションです。<ul class="ul" id="concept_bqj_lqr_b5__ul_d4q_qlz_55">
+<li class="li"><span Class="uicontrol">[Global] : </span>リストされた IP が残りの最上位デザインを使用して合成されます。これにより、リストされる IP のアウト オブ コンテキスト フローは無効になります。</li>
+
+<li class="li"><span Class="uicontrol">[Out of context per IP] : </span>リストされた IP が最上位デザインとは別にアウト オブ コンテキストで合成されます。これにより、リストされている IP それぞれに対して合成 run が作成され、これらの IP の合成ネットリストが別々に管理されるようになります。</li>
+
+<li class="li"><span Class="uicontrol">[Out of context per Block Design] : </span>ブロック デザインは最上位デザインから独立してアウト オブ コンテキストで合成されますが、ブロック デザインで使用される IP はすべてブロック デザインの一部として合成されます。<div Class="note_tip"><span class="tiptitle">ヒント:</span> Vivado IP インテグレーター ブロック デザインの出力ファイルを生成する場合にのみ使用できます。</div>
+</li>
+
+</ul>
+</li>
+
+<li class="li"><span Class="uicontrol">[Run Settings] : </span>複数の合成 run を実行する際に使用するプロセッサの数を指定します。</li>
+
+</ul>
+
+<p class="p">ツールバー メニューには、次のコマンドが含まれます。</p>
+
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="concept_bqj_lqr_b5__table_rdz_bvv_y5" class="table" frame="void" border="1" rules="all">    <tbody class="tbody"> <tr class="row">
+<td class="entry" align="center" valign="top" width="5.005005005005005%"><img class="image" id="concept_bqj_lqr_b5__image_c4l_lk2_p5" src="../../images/search_button.png"/></td>
+
+<td class="entry" align="left" valign="top" width="14.764764764764765%"><span Class="uicontrol">Search</span></td>
+
+<td class="entry" align="left" valign="top" width="80.23023023023023%">検索パターンを入力する検索フィールドが開きます。[I/O Ports] の表から指定した値が検索されます。</td>
+</tr>
+ <tr class="row">
+<td class="entry" align="center" valign="top" width="5.005005005005005%"><img class="image" id="concept_bqj_lqr_b5__image_i32_nk2_p5" src="../../images/collapse_button.png"/></td>
+
+<td class="entry" align="left" valign="top" width="14.764764764764765%"><span Class="uicontrol">Collapse All</span></td>
+
+<td class="entry" align="left" valign="top" width="80.23023023023023%">リストされた IP の展開が閉じられます。</td>
+</tr>
+ <tr class="row">
+<td class="entry" align="center" valign="top" width="5.005005005005005%"><img class="image" id="concept_bqj_lqr_b5__image_oll_mk2_p5" src="../../images/expand_button.png"/></td>
+
+<td class="entry" align="left" valign="top" width="14.764764764764765%"><span Class="uicontrol">Expand All</span></td>
+
+<td class="entry" align="left" valign="top" width="80.23023023023023%">リストされた IP が展開されます。</td>
+</tr>
+ </tbody>
+ </table>
+</div>
+
+<p class="p"><span Class="uicontrol">[Apply]</span> をクリックすると、出力ファイルの生成なしで IP がコンフィギュレーションされ、<span Class="uicontrol">[Generate]</span> をクリックすると、出力ファイルが指定どおりに生成されます。 出力ファイルを後で生成する場合は <span Class="uicontrol">[Skip]</span> をクリックします。</p>
+
+<div Class="note_tip"><span class="tiptitle">ヒント:</span> 既存 IP の出力ファイルを生成する場合は、<span Class="uicontrol">[Skip]</span> の代わりに <span Class="uicontrol">[Cancel]</span> を使用してください。<span Class="uicontrol">[Skip]</span> または <span Class="uicontrol">[Cancel]</span> をクリックした場合は、[Generate Output Products] ダイアログ ボックスの設定への変更は保持されません。</div>
+
+</div>
+
+<div class="section"><h2 class="title sectiontitle">関連項目</h2>
+<table cellpadding="4" cellspacing="0" summary="" id="concept_bqj_lqr_b5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow"> <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_bqj_lqr_b5__image_smm_1vr_b5" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">『Vivado Design Suite ユーザー ガイド : IP を使用した設計』 (UG896) </cite>の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug896-vivado-ip.pdf;a=xGeneratingOutputProducts" target="_blank">「出力ファイルの生成」</a></td>
+ </tr>
+<tr class="strow"> <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_d4d_jkz_55" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry"><cite class="cite">『Vivado Design Suite ユーザー ガイド : IP インテグレーターを使用した IP サブシステムの設計』</cite> (UG994) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug994-vivado-ip-subsystems.pdf;a=xGeneratingOutputProducts" target="_blank">「出力ファイルの生成」</a></td>
+ </tr>
+<tr class="strow"> <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_av4_jvr_b5" src="../../images/play.png" alt="Icon"/></td>
+ <td valign="top" class="stentry"><a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/ndoc?t=video;d=hardware/configuring-managing-reusable-ip-vivado.html" target="_blank">Vivado Design Suite QuickTake ビデオ : Vivado での再利用可能な IP のコンフィギュレーションおよび管理</a></td>
+ </tr>
+</table>
+
+</div>
+
+</div>
+
+
+</body>
+</html>

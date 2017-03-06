@@ -1,0 +1,130 @@
+
+Description:
+
+  This command is used to report different kinds of switching activity on
+  design nets, ports, pins, and cells in the current synthesized or
+  implemented design. These include simple signal rate and simple static
+  probability on nets, ports, and pins; and state dependent static
+  probabilities on cells.
+
+  The reported values are defined using the set_switching_activity command.
+
+  Note: This command returns the switching activity for the specified
+  objects, or the current design.
+
+  By default the report is written to the Tcl console or STD output. However,
+  the results can also be written to a file or returned as a string if
+  desired.
+
+Arguments:
+
+  -static_probability - (Optional) Specifies that the command returns static
+  probability as part of the report.
+
+  -signal_rate - (Optional) Specifies that the command returns the signal
+  rate as part of the report.
+
+  -toggle_rate - (Optional) Report the toggle rate (%) as the switching rate
+  of the output of synchronous logic elements compared to a given clock
+  input.
+
+  -default_static_probability - (Optional) Reports the default static
+  probability to be used in power analysis on the current design. The default
+  static probability is set using the set_switching_activity command.
+
+  Note: This option does not require objects to be specified since the
+  default applies to the current design.
+
+  -default_toggle_rate - (Optional) Reports the default toggle rate to be
+  used in power analysis on the primary inputs of the current design. You can
+  define the default toggle rate using the set_switching_activity command.
+
+  Note: This option does not require objects to be specified since the
+  default applies to the current design.
+
+  -file <filename> - (Optional) Write the report to the specified path and
+  file.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -append - (Optional) Append the output of the command to the specified file
+  rather than overwriting it.
+
+  Note: The -append option can only be used with the -file option.
+
+  -return_string - (Optional) Returns the data as a text string for
+  assignment to a Tcl variable.
+
+  -hier - (Optional) Report the switching activity hierarchically for signals
+  in the specified hierarchical <objects>. Without -hier, the switching
+  activity is applied to the specified <objects> at the current level of the
+  hierarchy.
+
+  -all - (Optional) Must be used with -type, report the switching activity on
+  nets within all instances specified by -type.
+
+  -type <arg> - (Optional) Report the switching activity for the specified
+  type of logic entity. By default, the command is applied to the top-level
+  of the current design, or to the specified <objects>. The -type option
+  applies the command settings to the specified type of logic objects in the
+  top-level of the current design. The -all option or -hier option can be
+  used to modify the scope of objects the command applies to. Valid logic
+  types include:
+
+   *  io_output - Primary outputs.
+
+   *  io_bidir_enable - Enable pin of Bidir ports.
+
+   *  register - All register outputs in the design/hierarchy specified.
+
+   *  lut - All LUT outputs in the design/hierarchy specified.
+
+   *  lut_ram - All distributed ram outputs in the design/hierarchy specified.
+
+   *  dsp - All DSP outputs in the design/hierarchy specified.
+
+   *  bram_enable - Enable pins (ENARDEN/ENBWREN) of BRAMs.
+
+   *  bram_wr_enable - Write enables of BRAMs (WEA/WEBWE).
+
+   *  gt_txdata - Output TX data pins of all GTs.
+
+   *  gt_rxdata - Output RX data pins of all GTs.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <objects> - (Optional) A list of port, pin, and net objects to report the
+  switching activity of; or a list of cells when specified with -type to
+  define logic objects.
+
+Examples:
+
+  The following example reports the signal_rate and static probability value
+  on all output ports:
+
+    report_switching_activity -signal_rate -static_probability [all_outputs]
+
+  The following example reports the signal_rate and static probability value
+  on all LUT objects in the design:
+
+    report_switching_activity -signal_rate -static_probability -type lut -all
+
+See Also:
+
+   *  power_opt_design
+   *  report_power
+   *  reset_switching_activity
+   *  set_switching_activity

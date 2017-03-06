@@ -1,0 +1,63 @@
+
+Description:
+
+  Describe an HDL object (variable, signal, wire, or reg) by printing type
+  and declaration information, as well as path, and file information for the
+  HDL source of the specified objects.
+
+  Note: The describe command works for a single HDL object. Use the
+  report_objects command for a brief report on multiple HDL objects.
+
+  HDL objects include HDL signals, variables, or constants as defined in the
+  Verilog or VHDL testbench and source files. An HDL signal includes Verilog
+  wire or reg entities, and VHDL signals. Examples of HDL variables include
+  Verilog real, realtime, time, and event. HDL constants include Verilog
+  parameters and localparams, and VHDL generic and constants.
+
+  The command returns the description of specified HDL objects, or returns an
+  error if it fails.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <hdl_object> - (Required) Specifies a single HDL object to describe.
+
+  Note: Objects can be specified by name, or returned as objects by the
+  get_objects command.
+
+Examples:
+
+  The following example shows how the objects description depends on the
+  scope of the current simulation:
+
+    current_scope testbench 
+    /testbench 
+    describe leds_n 
+        Signal: {leds_n[3:0]} 
+        Path: {/testbench/leds_n} 
+        Location: {File "C:/Data/ug937/sim/testbench.v" Line 9} 
+    current_scope dut 
+    /testbench/dut 
+    describe leds_n 
+        Port(OUT): {LEDS_n[3:0]} 
+        Path: {/testbench/dut/LEDS_n} 
+        Location: {File "C:/Data/sources/sinegen_demo.vhd" Line 42} 
+    
+
+See Also:
+
+   *  current_scope
+   *  get_objects
+   *  report_objects

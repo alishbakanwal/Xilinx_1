@@ -1,0 +1,24 @@
+
+Description:
+
+  Launches the GUI when the tool is running in the Vivado Design Suite Tcl
+  shell. The GUI is invoked with the current project, design, and run
+  information.
+
+Arguments:
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example is executed from the command prompt when the tool is
+  running in Tcl mode:
+
+    Vivado% start_gui
+
+See Also:
+
+   *  stop_gui

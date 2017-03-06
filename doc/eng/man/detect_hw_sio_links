@@ -1,0 +1,62 @@
+
+Description:
+
+  Automatically detects existing or previously defined communication pathways
+  between GT transmitters and receivers that are defined on the open hardware
+  target.
+
+  You can use this command if you change board connections while the serial
+  I/O analyzer is running. The detection algorithm uses changing transmit
+  patterns and detects links on received patterns to determine how GTs are
+  connected to one another on the open hardware target.
+
+  A transmitter or receiver of an individual GT on the IBERT debug core can
+  only be used in one hw_sio_link at a time, so the command will not check
+  GTs that are used in existing links. The -force option lets you clear all
+  existing links before scanning the open hardware target to check all GTs.
+
+  The detect_hw_sio_links command defines the found links, and creates a link
+  group to associate the new links.
+
+  This command returns the number of links found and the created
+  hw_sio_linkgroup object, or returns an error if it fails.
+
+Arguments:
+
+  -force - (Optional) Delete existing link objects and re-detect links by
+  examining all GTs to ensure the current hardware configuration is properly
+  reflected in the link definitions.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Example:
+
+  The following example examines the IBERT debug core on the open hardware
+  target to look for existing communication links:
+
+    detect_hw_sio_links
+
+  Note: Without the -force option, GTs used in existing links will not be
+  examined.
+
+See Also:
+
+   *  create_hw_sio_link
+   *  create_hw_sio_linkgroup
+   *  current_hw_device
+   *  get_hw_sio_iberts
+   *  get_hw_sio_links
+   *  get_hw_sio_linkgroups
+   *  remove_hw_sio_links
+   *  remove_hw_sio_linkgroups

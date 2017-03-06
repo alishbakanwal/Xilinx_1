@@ -1,0 +1,41 @@
+
+Description:
+
+  Closes the hardware design in the tool active session. 
+
+  Design modification is not allowed in the current release, otherwise it 
+  will prompt to save the design prior to closing.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <name> - The name of the hardware design object to close.
+
+
+Example:
+
+  The following example closes the current Hardware design object in the current
+  session:
+
+    close_hw_design [current_hw_design]
+    close_hw_design
+    close_hw_design design_1_imp
+
+
+See Also:
+
+   *  current_hw_design
+   *  open_hw_design
+

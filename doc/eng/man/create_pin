@@ -1,0 +1,83 @@
+
+Description:
+
+  Add single pins or bus pins to the current netlist of an open Synthesized
+  or Implemented Design. You may define attributes of the pin such as
+  direction and bus width, as well as the pin name.
+
+  Bus pins can be created with increasing or decreasing bus indexes, using
+  negative and positive index values.
+
+  The pins must be created on an existing cell instance, or it is considered
+  a top-level pin which should be created using the create_port command. If
+  the instance name of a cell is not specified as part of the pin name, an
+  error will be returned.
+
+  Note: You cannot add pins to library macros, or macro-primitives.
+
+  Netlist editing changes the in-memory view of the netlist in the current
+  design. It does not change the files in the source fileset, or change the
+  persistent design on the disk. Changes made to the netlist may be saved to
+  a design checkpoint using the write_checkpoint command, or may be exported
+  to a netlist file such as Verilog, VHDL, or EDIF, using the appropriate
+  write_* command.
+
+  Note: Netlist editing is not allowed on the elaborated RTL design.
+
+Arguments:
+
+  -from <arg> - (Optional) The starting index of a bus pin.
+
+  -to <arg> - (Optional) The ending index of a bus pin.
+
+  -direction - (Required) The direction of the pin. Valid values are IN, OUT,
+  and INOUT.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <pins> - (Required) The name of the pins to create. You must specify the
+  pin names hierarchically from the cell instance the pin is assigned to.
+  Pins created at the top-level of the design are ports, and should be
+  created with the create_port command.
+
+Examples:
+
+  The following example creates a new input pin on the cpuEngine module with
+  the specified pin name:
+
+    create_pin -direction IN cpuEngine/inPin
+
+  The following example sets the hierarchy separator, creates a new black box
+  instance of the reference cell, and creates a twenty-four bit bidirectional
+  bus for that instance:
+
+    set_hierarchy_separator | 
+    create_cell -reference dmaBlock -black_box usbEngine0|myDMA 
+    create_pin -direction INOUT -from 0 -to 23 usbEngine0|myDMA|dataBus
+
+See Also:
+
+   *  create_cell
+   *  create_net
+   *  create_port
+   *  connect_net
+   *  disconnect_net
+   *  remove_cell
+   *  remove_pin
+   *  resize_pin_bus
+   *  set_hierarchy_separator
+   *  write_checkpoint
+   *  write_edif
+   *  write_verilog
+   *  write_vhdl

@@ -1,0 +1,32 @@
+
+Description:
+
+  Closes the open Value Change Dump (VCD) file.
+
+  Only one VCD file can be open in the Vivado simulator at one time. You must
+  close the currently opened VCD file before opening another file.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example closes the current VCD object:
+
+    close_vcd
+
+See Also:
+
+   *  open_vcd

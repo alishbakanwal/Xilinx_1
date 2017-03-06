@@ -1,0 +1,49 @@
+HW_CFGMEM
+
+Description: 
+Xilinx FPGAs are configured by loading design-specific configuration data, in 
+the form of a  bitstream file, into the internal memory of the hw_device. The 
+hw_cfgmem defines a flash memory device used for configuring and booting the 
+Xilinx FPGA device in the Hardware Manager feature of the Vivado Design Suite. 
+
+The hw_cfgmem object is created using the create_hw_cfgmem command. Once the 
+hw_cfgmem object is created, and associated with the hw_device, the configuration 
+memory can be programmed with the bitstream and other data using the 
+program_hw_cfgmem command.
+
+Related Objects:
+The hw_cfgmem object is associated with the specified hw_device object through the 
+PROGRAM.HW_CFGMEM property on the device object. To work with the  hw_cfgmem object, 
+use the get_property command to obtain the object from a hw_device: 
+
+	get_property PROGRAM.HW_CFGMEM [current_hw_device]
+
+Properties:
+You can use the report_property command to report the properties assigned to a 
+hw_cfgmem object. Refer to the Vivado Design Suite Tcl Command Reference (UG835) 
+for more information. The properties on the hw_cfgmem object include the 
+following, with example values:
+
+Property               Type         Read-only  Visible  Value
+CFGMEM_NAME            string       true       true     28f00ap30t-bpi-x16_0
+CFGMEM_PART            cfgmem_part  false      true     28f00ap30t-bpi-x16
+CLASS                  string       true       true     hw_cfgmem
+NAME                   string       false      true     28f00ap30t-bpi-x16_0
+PROGRAM.ADDRESS_RANGE  string       false      true     use_file
+PROGRAM.BIN_OFFSET     int          false      true     0
+PROGRAM.BLANK_CHECK    bool         false      true     0
+PROGRAM.BPI_RS_PINS    string       false      true     NONE
+PROGRAM.CFG_PROGRAM    bool         false      true     0
+PROGRAM.ERASE          bool         false      true     1
+PROGRAM.FILE           string       false      true     C:/Data/Vivado_Debug/kc705_8led.mcs
+PROGRAM.FILE_1         string       false      true     C:/Data/Vivado_Debug/kc705_8led.mcs
+PROGRAM.FILE_2         string       false      true     
+PROGRAM.VERIFY         bool         false      true     0
+PROGRAM.ZYNQ_FSBL      string       false      true     
+
+To report the properties for a hw_cfgmem object, you can copy and paste the 
+following command into the Vivado Design Suite Tcl shell or Tcl console when the
+Hardware Manager feature is open:
+
+	report_property -all [get_property PROGRAM.HW_CFGMEM [current_hw_device] ]
+

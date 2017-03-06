@@ -1,0 +1,64 @@
+
+Description:
+
+  Commit the current values of properties defined on the specified serial I/O
+  hardware objects in the Hardware Manager feature of the Vivado Design Suite
+  to the current hardware device.
+
+  Specified objects can include any serial I/O object such as GTs, RXs, TXs,
+  PLLs, or Commons, excluding hw_sio_scan and hw_sio_sweep objects. SIO
+  objects also include device, target, or server hardware objects.
+
+  The SIO IBERT core operates on an object property-based set/commit use
+  model. You can set the property values on the hardware objects using the
+  set_property command. You can then drive those values onto the current
+  hardware device using the commit_hw_sio command.
+
+  Note: To update the properties on the hardware object with the actual value
+  on the device use the refresh_hw_sio command.
+
+  This command returns nothing if successful, or returns an error if it fails.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <hw_objects> - (Required) Specify one or more hw_sio objects to refresh.
+  The hw_sio objects must be specified as objects returned by one of the
+  get_hw_sio_* commands.
+
+Example:
+
+  The following example sets the value of the CPLL_REFCLK_DIV property on the
+  specified serial I/O GT object, and then commits the values of all
+  properties on that object to the current hardware device:
+
+    set_property CPLL_REFCLK_DIV 3 [get_hw_sio_gts *MGT_X0Y8] 
+    commit_hw_sio [list [get_hw_sio_gts *MGT_X0Y8}] ]
+
+See Also:
+
+   *  current_hw_device
+   *  get_hw_devices
+   *  get_hw_servers
+   *  get_hw_sio_commons
+   *  get_hw_sio_gts
+   *  get_hw_sio_iberts
+   *  get_hw_sio_sio_link
+   *  get_hw_sio_plls
+   *  get_hw_sio_rxs
+   *  get_hw_sio_txs
+   *  get_hw_targets
+   *  report_property
+   *  set_property

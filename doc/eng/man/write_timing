@@ -1,0 +1,47 @@
+
+Description:
+
+  Write the results of timing analysis to the specified file. This command
+  writes the results from timing analysis previously created by the
+  report_timing command; it does not actually run timing analysis.
+
+  write_timing produces a legacy timing path report. The format of this file
+  is different from the output of the report_timing -file command.
+
+Arguments:
+
+  -force - Overwrite the timing file if it already exists.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <name> - The name of the results set created by the report_timing command.
+  These are the timing results that will be output to the specified file.
+
+  <file> - The filename of the timing file to write.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+Examples:
+
+  The following example runs timing analysis and creates a timing results set
+  called time_1, then writes the named timing results to the specified file:
+
+    report_timing -name time_1 
+    write_timing time_1 C:/Data/FPGA_Design/bft_time_1.txt
+
+See Also:
+
+   *  report_timing

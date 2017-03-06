@@ -1,0 +1,53 @@
+
+Description:
+
+  Defines the current synthesis or implementation run, or returns the name of
+  the current run. The current run is the one automatically selected when the
+  Synthesize or Implement commands are launched.
+
+  You can use the get_runs command to determine the list of defined runs in
+  the current design.
+
+Arguments:
+
+  -synthesis - (Optional) Specifies that the current_run command should set
+  or return the name of the current synthesis run.
+
+  -implementation - (Optional) Specifies that the current_run command should
+  set or return the name of the current implementation run. This is the
+  default used when neither -synthesis or -implementation are specified.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <run> - (Optional) Sets the name of the synthesis or implementation run to
+  make the current run.
+
+Examples:
+
+  The following example defines the synth_1 run as the current_run:
+
+    current_run synth_1
+
+  Note: The -synthesis and -implementation arguments are not required because
+  the name allows the tool to identify the specific run of interest.
+
+  The following command returns the name of the current implementation run:
+
+    current_run -implementation -quiet
+
+See Also:
+
+   *  create_run
+   *  get_runs
+   *  launch_runs

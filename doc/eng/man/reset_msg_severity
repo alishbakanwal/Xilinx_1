@@ -1,0 +1,41 @@
+
+Description:
+
+  Restores the specified message ID to its default severity.
+
+  Use this command after set_msg_severity to restore a specific message ID to
+  its original severity level.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <id> - (Required) The ID of the message for which the severity should be
+  reset.
+
+Examples:
+
+  The following example restores the severity of message ID common-99 to its
+  original severity:
+
+    reset_msg_severity common-99
+
+  The following example restores the severity of message ID Netlist-1129 to
+  its original severity:
+
+    reset_msg_severity Netlist-1129
+
+See Also:
+
+   *  set_msg_severity

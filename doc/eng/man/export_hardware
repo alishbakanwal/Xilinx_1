@@ -1,0 +1,81 @@
+
+Description:
+
+  Specify the embedded processor block design files to export to SDK.
+
+  Export the Embedded Processor system hardware platform from an IP
+  Integrator block design, for use by the Software Development Kit (SDK), to
+  support the design of software for the embedded processor sources in your
+  project.
+
+  The export_hardware command writes an XML file that contains the hardware
+  description of the IP Integrator block design for use in SDK, including
+  what IP cores are used, and where they reside in the memory map. It also
+  exports the bitstream (.bit) and block memory map (.bmm) file to enable
+  device programming and debug in SDK. The output of the command can be used
+  to invoke SDK with the launch_sdk command.
+
+  Note: The export_hardware command requires the IP Integrator block design
+  to be integrated into a top-level design using an HDL wrapper or
+  instantiation template. In some cases it also requires the prior generation
+  of output products for the block design, as created by the generate_target
+  command. Refer to the Vivado Design Suite User Guide: Designing IP
+  Subsystems Using IP Integrator (UG994) for more information on working with
+  block designs.
+
+  The tool will export the hardware description to the <project_name>
+  .sdk/SDK/SDK_Export/hw directory in the current project, writing a file
+  named after the IP Integrator block design. However, the output of the
+  export_hardware command can be redirected to a user-defined directory with
+  the -dir option.
+
+  This command returns the name of the SDK export file, or returns an error
+  if it fails.
+
+Arguments:
+
+  -bitstream - (Optional) Export the bitstream and BMM model data for the
+  Embedded Processor, in addition to the hardware specification file.
+
+  Note: When this option is used, the tool will return an error if the
+  bitstream file does not exist.
+
+  -dir <arg> - (Optional) Specify the directory to write exported files to.
+  By default the hardware files will be written to the local project
+  directory, under <project_name> .sdk/SDK/SDK_Export/hw.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <files> - (Required) A files object that contains the list of Block Design
+  files (.bd) to export.
+
+  Note: Use get_files to specify a files object, rather than specifying a
+  file name.
+
+  <run> - (Optional) Specify an implementation run to export when the project
+  contains multiple runs.
+
+Examples:
+
+  The following example exports the Embedded Processor design to the standard
+  SDK export directory, and includes the Bitstream and BMM model data:
+
+    export_hardware -bitstream [get_files *.bd]
+
+See Also:
+
+   *  generate_target
+   *  get_files
+   *  get_runs
+   *  launch_sdk

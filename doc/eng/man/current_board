@@ -1,0 +1,86 @@
+
+Description:
+
+  Returns the board in use in the current project.
+
+  The board file, board.xml located in the data/boards folder of the Vivado
+  Design Suite installation area, stores information regarding board
+  attributes. The board provides a representation of the overall system that
+  the Xilinx device is a part of, and can help define key aspects of the
+  design, such as clock constraints, I/O port assignments, and supported
+  interfaces. You can create custom boards by defining a custom Board
+  Interface file, as described in the Vivado Design Suite User Guide:
+  System-Level Design Entry (UG895).
+
+  The board can be specified:
+
+   *  When the project is created by selecting Boards from the Default Part
+      dialog box.
+
+   *  By setting the BOARD_PART property on the current project as shown in
+      the example.
+
+   *  By selecting the Project Device in the Project Settings dialog box in
+      an open project in the Vivado IDE.
+
+  Refer to the Vivado Design Suite User Guide: System-Level Design Entry
+  (UG895) for information on creating projects, and on configuring project
+  settings.
+
+  Note: When you specify the board with the set_property command, the target
+  part is also changed to match the part required by the specified BOARD
+  property.
+
+  The current_board command returns the Vendor:Board_Name:File_Version
+  attributes of the current board, as defined in the BOARD_PART property. The
+  command returns nothing when the project targets a Xilinx FPGA device
+  instead of a TRD and board, or when the BOARD_PART property has not been
+  defined. The command returns an error if it fails.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Example:
+
+  The following example sets the BOARD property for the current project, then
+  reports the board in use by the project:
+
+    set_property BOARD_PART xilinx.com:kc705:1.0 [current_project] 
+    current_board 
+       xilinx.com:kintex7:kc705:1.0
+
+  This example shows the results of setting the BOARD_PART property, causing
+  the target part to be changed as a result. The target part, as defined in
+  the PART property, is changed automatically, and a warning is returned:
+
+    set_property BOARD_PART xilinx.com:ac701:1.0 [current_project] 
+       WARNING: [Project 1-153] The current project part `xc7k325tffg900-2` does  
+       not match with the `XILINX.COM:AC701:1.0` board part settings. The project  
+       part will be reset to `XILINX.COM:AC701:1.0` board part.
+
+  Note: You can use the report_property command to check the BOARD_PART and
+  PART property on the current_project to see the changes.
+
+See Also:
+
+   *  current_board_part
+   *  current_project
+   *  get_board_components
+   *  get_board_interfaces
+   *  get_board_parts
+   *  get_board_pins
+   *  get_boards
+   *  report_property
+   *  set_property

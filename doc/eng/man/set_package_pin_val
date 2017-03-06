@@ -1,0 +1,67 @@
+
+Description:
+
+  Create user-defined package pin attributes and assign values to specific
+  pins on the package.
+
+  User-defined pin attributes can be defined in a CSV file and imported into
+  an I/O Pin Planning project using read_csv , or can be edited in the
+  project using this command.
+
+  Note: Use the set_property command to set tool-defined properties of a
+  package pin.
+
+Arguments:
+
+  <column> - (Required) Specify the user-defined column name. The column name
+  is case-sensitive. If the column does not already exist, a new attribute is
+  created for package pins. If the user-defined column name already exists,
+  the specified value is assigned to the specified pins.
+
+  Note: Column refers to the display of the attribute in the Package Pins
+  view in the tool GUI. The result of the command is an attribute on the
+  specified package pins that can be exported with write_csv for instance.
+
+  <value> - (Required) Specify the value to assign to the specified column.
+  You can repeat the set_package_pin_val command to assign different values
+  to different pins in the same column.
+
+  <package_pins> - (Required) Specify the package pins to assign the value
+  to. You can use the get_package_pins command to specify the package pins to
+  set.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example creates a new user-defined column in the Package Pins
+  view, and assigns the value true to the specified pin:
+
+    
+    set_package_pin_val -column track1 -value true -package_pins AK27
+
+  The following example creates a user-defined column called Test, then
+  assigns the value RED to all "AK" package pins, then changes the value to
+  GREEN for the three specified pins:
+
+    set_package_pin_val -column Test -value RED \ 
+       -package_pins [get_package_pins AK*] 
+    set_package_pin_val -column Test -value GREEN \ 
+       -package_pins {AK1 AK2 AK3}
+
+See Also:
+
+   *  get_package_pins
+   *  set_property
+   *  write_csv

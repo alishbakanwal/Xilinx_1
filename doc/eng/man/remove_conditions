@@ -1,0 +1,51 @@
+
+Description:
+
+  Remove specified conditions from the current simulation. You must have an
+  open simulation to use this command.
+
+  Conditions can be defined prior to starting the simulation. When a
+  condition is added, the simulator evaluates the condition expression
+  anytime a signal change is detected. When a specified condition expression
+  becomes TRUE, the condition commands are run.
+
+  The conditions in the current simulation can be reported using the
+  report_conditions command.
+
+  This command returns nothing, or an error if the command fails.
+
+Arguments:
+
+  -all - (Optional) Remove all conditions in the current simulation.
+
+  Note: This option will remove ALL conditions without warning, even if other
+  options are specified.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <ConditionObjs> - Specifies one or more condition identifiers to remove
+  from the current simulation. The condition identifiers are returned by the
+  add_condition command when the condition is defined.
+
+Examples:
+
+  The following example removes the specified condition from the current
+  simulation:
+
+    remove_conditions condition3
+
+See Also:
+
+   *  add_condition
+   *  report_conditions

@@ -1,0 +1,53 @@
+
+Description:
+
+  Resets the ACTIVITY_VALUE properties for all hardware probes on the
+  specified VIO debug core objects. The ACTIVITY_VALUE property is used by
+  the Vivado IDE to represent transitions on the input probes of the VIO
+  debug cores.
+
+  In addition to reading values from the VIO input probes, you can also
+  monitor the activity of the VIO input probes. The ACTIVITY_VALUE property
+  is used to indicate when the values on the VIO inputs have changed in
+  between periodic updates to the Vivado IDE. Refer to the Vivado Design
+  Suite User Guide: Programming and Debugging (UG908) for more information.
+
+  This command returns nothing if successful, or returns an error if it fails.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <hw_vios> - (Required) Specify one or more hw_vio objects to reset. The
+  hw_vio objects can either be specified as objects returned by the
+  get_hw_vios command, or specified by name.
+
+Example:
+
+  The following example resets the input activity properties of the VIO debug
+  core:
+
+    reset_hw_vio_activity [get_hw_vios]
+
+See Also:
+
+   *  commit_hw_vio
+   *  connect_hw_server
+   *  current_hw_device
+   *  get_hw_probes
+   *  get_hw_vios
+   *  program_hw_devices
+   *  refresh_hw_vio
+   *  reset_hw_vio_outputs
+   *  set_property

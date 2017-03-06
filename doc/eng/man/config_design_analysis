@@ -1,0 +1,41 @@
+
+Description:
+
+  This command configures features of the report_design_analysis command.
+
+  The design analysis report analyzes timing paths at various stages in the
+  Vivado tool flow, including synthesis, optimization, placement, routing.
+  The -max_common_paths option specifies how many setup timing paths to
+  capture at each stage in the flow.
+
+  Note: This command returns nothing if successful, or returns an error if it
+  fails.
+
+Arguments:
+
+  -max_common_paths <arg> - (Optional) The number of paths to consider when
+  examining the distribution of common paths across phases of implementation.
+  Specified as an integer value less than 20,000, the default is 1000.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example ignores the package delays during timing analysis:
+
+    config_design_analysis 500
+
+See Also:
+
+   *  report_design_analysis

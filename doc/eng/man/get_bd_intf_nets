@@ -1,0 +1,141 @@
+
+Description:
+
+  Gets a list of interface nets in the current IP Integrator subsystem design
+  that match a specified search pattern. The default command gets a list of
+  all interface nets in the subsystem design.
+
+  Note: To improve memory and performance, the get_* commands return a
+  container list of a single type of objects (e.g. cells, nets, pins, or
+  ports). You can add new objects to the list (using lappend for instance),
+  but you can only add the same type of object that is currently in the list.
+  Adding a different type of object, or string, to the list is not permitted
+  and will result in a Tcl error.
+
+Arguments:
+
+  -regexp - (Optional) Specifies that the search <patterns> are written as
+  regular expressions. Both search <patterns> and -filter expressions must be
+  written as regular expressions when this argument is used. Xilinx regular
+  expression Tcl commands are always anchored to the start of the search
+  string. You can add ".*" to the beginning or end of a search string to
+  widen the search to include a substring. See
+  http://perldoc.perl.org/perlre.html for help with regular expression
+  syntax.
+
+  Note: The Tcl built-in command regexp is not anchored, and works as a
+  standard Tcl command. For more information refer to
+  http://www.tcl.tk/man/tcl8.5/TclCmd/regexp.htm.
+
+  -hierarchical - (Optional) Get interface nets from all levels of the IP
+  Integrator subsystem design hierarchy. Without this argument, the command
+  will only get interface nets from the top of the subsystem design, or from
+  the current subsystem instance. When using -hierarchical, the search
+  pattern should not contain a hierarchy separator because the search pattern
+  is applied at each level of the hierarchy, not to the full hierarchical
+  name. For instance, searching for /bridge_1/* searches each level of the
+  hierarchy for nets with /bridge_1/ in the name. This may not return the
+  intended results.
+
+  Note: When used with -regexpr, the specified search string is matched
+  against the full hierarchical name, and the U1/* search pattern will work
+  as intended.
+
+  -filter <args> - (Optional) Filter the results list with the specified
+  expression. The -filter argument filters the list of objects returned by
+  get_bd_intf_nets based on property values on the block design interface
+  nets. You can find the properties on an object with the report_property or
+  list_property commands. In the case of the IP Integrator interface nets
+  object, "NAME" and "PATH" are two of the properties that can be used to
+  filter results.
+
+  The filter search pattern should be quoted to avoid having to escape
+  special characters that may be found in net, pin, or cell names, or other
+  properties. String matching is case-sensitive and is always anchored to the
+  start and to the end of the search string. The wildcard "*" character can
+  be used at the beginning or at the end of a search string to widen the
+  search to include a substring of the property value.
+
+  Note: The filter returns an object if a specified property exists on the
+  object, and the specified pattern matches the property value on the object.
+  In the case of the "*" wildcard character, this will match a property with
+  a defined value of "".
+
+  For string comparison, the specific operators that can be used in filter
+  expressions are "equal" (==), "not-equal" (!=), "match" (=~), and
+  "not-match" (!~). Numeric comparison operators <, >, <=, and >= can also be
+  used. Multiple filter expressions can be joined by AND and OR (&& and ||).
+  The following gets input pins that do NOT contain the "RESET" substring
+  within their name:
+
+    get_pins * -filter {DIRECTION == IN && NAME !~ "*RESET*"}
+
+  Boolean (bool) type properties can be directly evaluated in filter
+  expressions as true or not true:
+
+    -filter {IS_PRIMITIVE && !IS_LOC_FIXED}
+
+  -boundary_type [ upper | lower | both ] - (Optional) Gets the net at the
+  level (upper) of a specified hierarchical pin, at the level below (lower)
+  the pin or port, or both the level of and the level below. Valid values are
+  upper, lower, or both. The default value is upper.
+
+  Note: This argument must be used with the -of_objects argument to specify
+  the hierarchical pin.
+
+  -of_objects <args> - (Optional) Get a list of the nets connected to the
+  specified IP Integrator subsystem cell, pin, or port objects.
+
+  Note: The -of_objects option requires objects to be specified using the
+  get_* commands, such as get_cells or get_pins, rather than specifying
+  objects by name. In addition, -of_objects cannot be used with a search
+  <pattern>.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <patterns> - (Optional) Match IP subsystem interface nets against the
+  specified patterns. The default pattern is the wildcard `*` which returns a
+  list of all interface nets in the current IP Integrator subsystem design.
+  More than one pattern can be specified to find multiple nets based on
+  different search criteria.
+
+  Note: You must enclose multiple search patterns in braces {} to present the
+  list as a single element.
+
+Examples:
+
+  The following example gets the interface net attached to the specified pin
+  of an IP Integrator hierarchical module, and returns both the net at the
+  level of the hierarchical module, and the net inside the hierarchical
+  module:
+
+    get_bd_intf_nets -boundary_type both -of_objects [get_bd_pins /newMod1/aclk]
+
+  Note: If there are no interface nets matching the pattern you will get a
+  warning.
+
+  The following example returns a list of all interface nets at all levels of
+  the IP Integrator subsystem design hierarchy:
+
+    get_bd_intf_nets -hierarchical
+
+See Also:
+
+   *  connect_debug_port
+   *  get_cells
+   *  get_clocks
+   *  get_pins
+   *  get_ports
+   *  list_property
+   *  report_property

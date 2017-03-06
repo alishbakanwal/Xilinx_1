@@ -1,0 +1,97 @@
+
+Description:
+
+  Writes constraints to a Xilinx<tm tmtype="reg"/> Design Constraints file
+  (XDC). The XDC can be exported from the top-level, which is the default, or
+  from a specific hierarchical cell.
+
+  The write_xdc command lets you write invalid XDC constraints so that you
+  can quickly report constraints that have been ignored by the Vivado Design
+  Suite due to a problem with the way the constraint is written or applied.
+  This is useful for debugging constraint files applied in specific designs.
+
+  This command can be used to create an XDC file from a design with UCF
+  files. All constraints from the active constraint fileset will be exported
+  to the XDC, even if they come from multiple files.
+
+  Note: The write_xdc command will not convert all UCF constraints into XDC
+  format, and is not intended to automatically convert UCF based designs to
+  XDC. Refer to the Vivado Design Suite Migration Methodology Guide (UG911)
+  for more information on migrating UCF constraints to XDC.
+
+Arguments:
+
+  -no_fixed_only - (Optional) Export both fixed and unfixed placement LOCs to
+  the constraint file being written. By default only the fixed LOCs will be
+  written to the XDC file. Fixed LOCs are associated with user-assigned
+  placements, while unfixed LOCs are associated with tool assigned
+  placements.
+
+  -constraints <arg> - (Optional) Export constraints that are flagged valid,
+  invalid, or all constraints (both valid and invalid). The default behavior
+  is to export only valid constraints to the XDC file. Valid values are
+  VALID, INVALID, or ALL.
+
+  -cell <arg> - (Optional) The name of a hierarchical cell in the current
+  design to export the constraints from. The constraints will be written to
+  the specified XDC file relative to the specified cell.
+
+  Note: A design must be open when using this option.
+
+  -sdc - (Optional) Export only the timing constraints in a file format that
+  is 100% SDC compatible from the current design. Does not export any other
+  defined constraints.
+
+  -no_tool_comments - (Optional) Do not add tool generated comments into the
+  XDC file.
+
+  -force - (Optional) Overwrite a file of the same name if one already exists.
+
+  -exclude_timing - (Optional) Don`t export timing constraints. This results
+  in an XDC file that contains only physical constraints.
+
+  -exclude_physical - (Optional) Don`t export physical constraints. This
+  results in an XDC file that contains only timing constraints.
+
+  -add_netlist_placement - (Optional) Include placement constraints that are
+  defined in the netlist file as part of the written XDC file.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <file> - (Required) The filename of the XDC file to write.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+Examples:
+
+  The following example writes the valid and invalid constraints, including
+  both fixed and unfixed cells, to the specified file:
+
+    write_xdc -no_fixed_only -constraints all C:/Data/design.xdc
+
+  This example writes only the invalid constraints, including both fixed and
+  unfixed cells, to the specified file:
+
+    write_xdc -constraints invalid C:/Data/bad_constraints.xdc
+
+  The following example writes the physical constraints only, including any
+  placement constraints defined in any netlist source files:
+
+    write_xdc -exclude_timing -add_netlist_placement C:/Data/physical.xdc
+
+See Also:
+
+   *  read_xdc

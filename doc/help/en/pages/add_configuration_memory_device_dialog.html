@@ -1,0 +1,116 @@
+﻿<html xml:lang="en-us" lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="reference"/>
+<meta name="DC.Title" content="Add Configuration Memory Device"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_bqj_lqr_b5"/>
+<link rel="stylesheet" type="text/css" href="../../commonltr.css"/>
+<title>Add Configuration Memory Device</title>
+</head>
+<body id="concept_bqj_lqr_b5">
+
+
+ <h1 class="title topictitle1">Add Configuration Memory Device</h1>
+
+ <div class="body refbody">
+     <div class="section">
+            <p class="p">The process whereby the design specific data is loaded or programmed into a Xilinx
+                device is called configuration. Xilinx devices can be configured from an external
+                flash memory device, or they can be configured by an external smart source, such as
+                a microprocessor, DSP processor, or board tester. Two configuration datapaths
+                include the serial peripheral interface (SPI) that is used to minimize the device
+                pin requirements for configuration, and a parallel byte peripheral interface (BPI)
+                used for higher performance configuration. The Add Configuration Memory Device
+                dialog box lets you select a configuration memory device to store the bitstream of
+                the current design, and for configuring and booting the hardware device. </p>
+
+            <p class="p">The Vivado device programmer can indirectly program flash-based configuration memory
+                devices via JTAG, using a special configuration memory file (cfgmem) created with
+                the <a class="xref" href="write_memory_configuration_file_dialog.html#concept_bqj_lqr_b5">Write Configuration Memory File</a> command in the Vivado
+                Hardware Manager. The configuration memory device can be programmed with the
+                bitstream and other data from the cfgmem file using the <a class="xref" href="program_configuration_memory_device_dialog.html#concept_bqj_lqr_b5">Program Configuration Memory Device</a> command.</p>
+
+            <ul class="ul" id="concept_bqj_lqr_b5__ul_azt_c5r_b5">
+                <li class="li"><span Class="uicontrol">Filter</span>: Filter the listed configuration memory devices
+                    according to the following criteria.<ul class="ul" id="concept_bqj_lqr_b5__ul_exz_vnl_dx">
+                        <li class="li"><span Class="uicontrol">Manufacturer</span>: Choose from one of the supported
+                            manufacturers of configuration memory devices.</li>
+
+                        <li class="li"><span Class="uicontrol">Density</span>: Select the memory size for the
+                            device.</li>
+
+                        <li class="li"><span Class="uicontrol">Type</span>: Filter according to byte peripheral
+                            interface (BPI) or serial peripheral interface (SPI) type devices, or
+                            show all types.</li>
+
+                        <li class="li"><span Class="uicontrol">Width</span>: Select the programming data width for the
+                            device. </li>
+
+                    </ul>
+<div Class="note_tip"><span class="tiptitle">Tip:</span> The <span Class="uicontrol">Reset Filters</span> command removes
+                        the filters and restores the default settings. </div>
+</li>
+
+                <li class="li"><span Class="uicontrol">Search</span>: Lets you further filter the devices displayed in
+                    the results table by pattern matching the specified search string. </li>
+
+            </ul>
+
+            <p class="p">The <span Class="uicontrol">Select Configuration Memory Part</span> table lists the available
+                devices based on the filters applied, or the search string pattern. The resulting
+                table displays several columns of information, such as Name, Part, Manufacturer, and
+                Type. To sort the results table, click in a column header. If you click once, the
+                column is sorted in ascending order. If you click twice, the column is sorted in
+                descending order. To sort multiple columns, press and hold the
+                    <span Class="uicontrol">Ctrl</span> key while clicking in the column headers. </p>
+
+            <p class="p">Select a configuration memory device and click <span Class="uicontrol">OK</span>. The
+                configuration memory device is added to the current device, and displayed in the
+                    <a class="xref" href="hardware_window.html#concept_aqj_x3c_d5">Hardware</a> window.</p>
+
+        </div>
+
+        <div class="section"><h2 class="title sectiontitle">See Also</h2>
+            
+            <table cellpadding="4" cellspacing="0" summary="" id="concept_bqj_lqr_b5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow">
+                    <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_bqj_lqr_b5__image_smm_1vr_b5" src="../../images/book_icon.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">Vivado Design Suite User Guide: Programming and Debug</cite>
+                        (UG908), <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug908-vivado-programming-debugging.pdf;a=xProgrammingConfigurationMemoryDevices" target="_blank">Programming Configuration Memory
+                            Devices</a></td>
+
+                </tr>
+<tr class="strow">
+                    <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_wwm_gzl_dx" src="../../images/book_icon.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry"><cite class="cite">Vivado Design Suite User Guide: Programming and Debug</cite>
+                        (UG908), <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug908-vivado-programming-debugging.pdf;a=xConfigurationMemorySupport" target="_blank">Configuration Memory
+                        Support</a></td>
+
+                </tr>
+<tr class="strow">
+                    <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_twh_kyy_yw" src="../../images/book_icon.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry"><cite class="cite">Vivado Design Suite Tcl Command Reference Guide</cite> (UG835),
+                            <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xcreate_hw_cfgmem" target="_blank">create_hw_cfgmem</a></td>
+
+                </tr>
+<tr class="strow">
+                    <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_av4_jvr_b5" src="../../images/play.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry"><a class="xref" href="http://www.xilinx.com/video/hardware/indirectly-program-fpga-using-vivado.html" target="_blank">Vivado Design Suite QuickTake Video: Indirectly Program an FPGA using
+                            Vivado Device Programmer</a></td>
+
+                </tr>
+</table>
+
+        </div>
+
+ </div>
+
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+﻿<html xml:lang="en-us" lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="reference"/>
+<meta name="DC.Title" content="Analog Settings"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_bqj_lqr_b5"/>
+<link rel="stylesheet" type="text/css" href="../../commonltr.css"/>
+<title>Analog Settings</title>
+</head>
+<body id="concept_bqj_lqr_b5">
+
+
+ <h1 class="title topictitle1">Analog Settings</h1>
+
+ <div class="body refbody">
+     <div class="section">
+            <p class="p">This dialog box lets you establish the waveform characteristics of an analog signal
+                in the <a class="xref" href="waveform_window.html#concept_aqj_x3c_d5">Waveform
+                    window</a>. In the right-click menu of the timeline, you can define the
+                    <span Class="uicontrol">Waveform Style</span> of a signal as either digital, or analog.
+                The Analog Settings dialog box lets you define the characteristics of the waveform
+                for that signal. </p>
+
+            <ul class="ul" id="concept_bqj_lqr_b5__ul_gc5_ccp_v5">
+                <li class="li"><span Class="uicontrol">Row Height</span>: Specify the number of pixels to use for the
+                    analog signal waveform in the Waveform window. </li>
+
+                <li class="li"><span Class="uicontrol">Y Range</span>: Define the range of values on the Y-axis for the
+                    analog signal waveform. <ul class="ul" id="concept_bqj_lqr_b5__ul_mk5_nf1_xw">
+                        <li class="li"><span Class="uicontrol">Auto</span>: Have the Waveform window automatically
+                            define the Y value range based on the signal values encountered during
+                            simulation. </li>
+
+                        <li class="li"><span Class="uicontrol">Fixed</span>: Specify a minimum and maximum value for
+                            the analog signal waveform. The waveform will be drawn within the range
+                            of values specified. <ul class="ul" id="concept_bqj_lqr_b5__ul_ugy_pf1_xw">
+                                <li class="li"><span Class="uicontrol">Min</span>: Specify the minimum value at the
+                                    bottom of the waveform. </li>
+
+                                <li class="li"><span Class="uicontrol">Max</span>: Specify the maximum value at the top
+                                    of the waveform. </li>
+
+                            </ul>
+</li>
+
+                    </ul>
+</li>
+
+                <li class="li"><span Class="uicontrol">Interpolation style</span>:  Specify the method of interpolating
+                    the signal waveform when the data is sparse. The tool can perform a
+                        <span Class="uicontrol">Linear</span> extension of the current waveform curve, or
+                        <span Class="uicontrol">Hold</span> the last value until the next value. </li>
+
+                <li class="li"><span Class="uicontrol">Off scale</span>: Specify the method of handling the signal when
+                    its value exceeds the specified <span Class="uicontrol">Y Range</span> value. The tool
+                    can <span Class="uicontrol">Hide</span> the excess waveform, or
+                        <span Class="uicontrol">Clip</span> the signal at the Min or Max value to stay
+                    within the specified range, or <span Class="uicontrol">Overlap</span> the signal with
+                    neighboring signal waveforms above and below as needed. </li>
+
+                <li class="li"><span Class="uicontrol">Horizontal Line</span>: Draw a horizontal line through the
+                    analog waveform at the <span Class="uicontrol">Y Value</span> specified as a center-line
+                    for the waveform. <ul class="ul" id="concept_bqj_lqr_b5__ul_mjw_xh1_xw">
+                        <li class="li"><span Class="uicontrol">Y Value</span>: Specifies the value on the analog
+                            waveform where the horizontal line will be drawn if enabled. </li>
+
+                    </ul>
+</li>
+
+            </ul>
+
+        </div>
+
+        <div class="section"><h2 class="title sectiontitle">See Also</h2>
+            
+            <table cellpadding="4" cellspacing="0" summary="" id="concept_bqj_lqr_b5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow">
+                    <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_bqj_lqr_b5__image_smm_1vr_b5" src="../../images/book_icon.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">Vivado<sup>®</sup> Design Suite User Guide: Logic
+                            Simulation</cite> (UG900), <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug900-vivado-logic-simulation.pdf;a=xUsingAnalogWaveforms" target="_blank">Using Analog Waveforms</a></td>
+
+                </tr>
+</table>
+
+        </div>
+
+ </div>
+
+
+</body>
+</html>

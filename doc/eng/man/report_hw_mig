@@ -1,0 +1,71 @@
+
+Description:
+
+  Report formatted information on memory IP hardware configuration,
+  calibration, and margin. Does not include the graphical margin scan plots
+  that are available within the Vivado logic analyzer, or Vivado Lab Edition.
+
+  In the Vivado tools, memory controllers implemented into a design are
+  associated with hw_mig objects. These hw_mig objects let you verify the
+  calibration, read, and write window margins in your memory interface
+  design. You can use the hardware manager GUI to check the calibration
+  status, verify the read margin for both rising and falling edges of the
+  clock, and write margin for both simple and complex patterns, or DQS. You
+  can also use an ILA core to verify the data integrity for the read and
+  write operations.
+
+  This command returns the reported data, or returns an error if it fails.
+
+Arguments:
+
+  -file <arg> - (Optional) Write the report into the specified file.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -append - (Optional) Append the output of the command to the specified file
+  rather than overwriting it.
+
+  Note: The -append option can only be used with the -file option.
+
+  -return_string - (Optional) Directs the output to a Tcl string rather than
+  to the standard output. The Tcl string can be captured by a variable
+  definition and parsed or otherwise processed.
+
+  Note: This argument cannot be used with the -file option.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <hw_objects> - (Optional) Inputs can be any hw_mig, hw_device, hw_target,
+  or hw_server object.
+
+  Note: The objects must be specified using the appropriate get_hw_xxx
+  command, for instance get_hw_migs, rather than specified by name.
+
+Examples:
+
+  The following example generates the report on the hw_mig objects and
+  outputs to the text file specified:
+
+    report_hw_mig -file C:/Data/hw_mig_report.txt [get_hw_migs]
+
+See Also:
+
+   *  commit_hw_mig
+   *  current_hw_device
+   *  get_hw_migs
+   *  implement_mig_cores
+   *  refresh_hw_mig
+   *  set_property

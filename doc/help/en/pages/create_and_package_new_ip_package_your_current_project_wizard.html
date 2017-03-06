@@ -1,0 +1,93 @@
+﻿<html xml:lang="en-us" lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="reference"/>
+<meta name="DC.Title" content="Package Your Current Project"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_bqj_lqr_b5"/>
+<link rel="stylesheet" type="text/css" href="../../commonltr.css"/>
+<title>Package Your Current Project</title>
+</head>
+<body id="concept_bqj_lqr_b5">
+
+
+ <h1 class="title topictitle1">Package Your Current Project</h1>
+
+ <div class="body refbody">
+     <div class="section">
+  <ul class="ul" id="concept_bqj_lqr_b5__ul_azt_c5r_b5">
+   <li class="li"><span Class="uicontrol">IP Location</span>: Specify the directory location to output the packaged IP.
+                    You must add this location  as an IP repository to the Vivado<sup>®</sup>
+                    IP Catalog to use the new IP in other projects. Refer to this  <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug896-vivado-ip.pdf;a=xUsingIPProjectSettings" target="_blank">link</a> in the <cite class="cite">Vivado Design Suite
+                        User Guide: Designing with IP</cite> (UG896) for more information on using
+                    the Repository Manager.</li>
+
+   <li class="li"><span Class="uicontrol">Packaging IP in the project</span>: The following options determine how the
+                    IP in your current project are packaged as part of the newly created top-level
+                    IP. <ul class="ul" id="concept_bqj_lqr_b5__ul_q2n_pwm_h5">
+                        <li class="li"><span Class="uicontrol">Include .xci files</span>: Includes only the XCI file in
+                            the packaged top-level IP. If you select this option, the required
+                            output products for all IP used by the top-level IP must be generated
+                            when the IP is used in another design. In addition, included IP must be
+                            updated to the latest version to generate the output products in the
+                            Vivado tools. Refer to this <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug896-vivado-ip.pdf;a=xUpgradingIP" target="_blank">link</a> in the <cite class="cite">Vivado
+                                Design Suite User Guide: Designing with IP</cite> (UG896) for more
+                            information on upgrading IP. <div Class="note_tip"><span class="tiptitle">Tip:</span> Updating the included IP
+                                in your custom IP might create some change management issues for
+                                your custom IP. </div>
+</li>
+
+                        <li class="li"><span Class="uicontrol">Include IP generated files</span>: Includes all required
+                            output products that support the included IP through simulation and
+                            implementation with the packaged top-level IP. If you select this
+                            option, the newly packaged IP is self-contained and does not need to be
+                            upgraded for use in other designs. This option removes any references to
+                            the included IP customizations and treats the included IP as
+                            hierarchical project source files in the newly packaged top-level
+                            IP.</li>
+
+                    </ul>
+</li>
+
+  </ul>
+
+  <p class="p">Click <span Class="uicontrol">Next</span> to open the <a class="xref" href="create_and_package_new_ip_new_ip_creation_wizard.html">New IP
+                    Creation</a> page. </p>
+
+   </div>
+
+        <div class="section"><h2 class="title sectiontitle">See Also</h2>
+            
+            <table cellpadding="4" cellspacing="0" summary="" id="concept_bqj_lqr_b5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow">
+                    <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_bqj_lqr_b5__image_smm_1vr_b5" src="../../images/book_icon.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">Vivado Design Suite User Guide: Creating and Packaging Custom
+                            IP</cite> (UG1118), <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug1118-vivado-creating-packaging-custom-ip.pdf;a=xPackagingYourCurrentProject" target="_blank">Packaging Your Current
+                        Project</a></td>
+
+                </tr>
+<tr class="strow">
+                    <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_av4_jvr_b5" src="../../images/play.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry"><a class="xref" href="http://www.xilinx.com/cgi-bin/docs/ndoc?t=video;d=hardware/configuring-managing-reusable-ip-vivado.html" target="_blank">Vivado Design Suite QuickTake Video: Configuring and
+                            Managing Reusable IP in Vivado</a></td>
+
+                </tr>
+<tr class="strow">
+                    <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_rdj_m43_h5" src="../../images/play.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry"><a class="xref" href="http://www.xilinx.com/cgi-bin/docs/ndoc?t=video;d=hardware/packaging-custom-ip-integrator.html" target="_blank">Vivado Design Suite QuickTake Video: Packaging Custom
+                            IP for use with IP Integrator</a></td>
+
+                </tr>
+</table>
+
+        </div>
+
+ </div>
+
+
+</body>
+</html>

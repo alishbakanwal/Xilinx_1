@@ -1,0 +1,38 @@
+
+Description:
+
+  Deletes the specified Pblocks from the design. Pblocks are created using
+  the create_pblock command.
+
+Arguments:
+
+  -hier - (Optional) Specifies that Pblocks nested inside the specified
+  Pblock should also be deleted. If the parent Pblock is deleted without the
+  -hier option specified, the nested Pblocks will simply be moved up one
+  level.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <pblocks> - (Required) One or more Pblocks to be deleted.
+
+Examples:
+
+  The following example deletes the specified Pblock as well as any Pblocks
+  nested inside:
+
+    delete_pblock -hier cpuEngine
+
+See Also:
+
+   *  create_pblock

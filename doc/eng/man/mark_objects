@@ -1,0 +1,51 @@
+
+Description:
+
+  Marks specified objects in GUI mode. This command places an iconic mark to
+  aid in the location of the specified object or objects. The mark is
+  displayed in a color as determined by one of the color options.
+
+  Objects can be unmarked with the unmark_objects command.
+
+  Note: Use only one color option. If both color options are specified, -rgb
+  takes precedence over -color.
+
+Arguments:
+
+  -rgb <args> - (Optional) The color to use in the form of an RGB code
+  specified as {R G B}. For instance, {255 255 0} specifies the color yellow,
+  while {0 255 0} specifies green.
+
+  -color <arg> - (Optional) The color to use for marking the specified object
+  or objects. Supported colors are: red, green, blue, magenta, yellow, cyan,
+  and orange.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <objects> - (Required) One or more objects to be marked.
+
+Examples:
+
+  The following example adds a red icon to mark the currently selected objects:
+
+    mark_objects -color red [get_selected_objects]
+
+See Also:
+
+   *  get_highlighted_objects
+   *  get_marked_objects
+   *  get_selected_objects
+   *  highlight_objects
+   *  select_objects
+   *  unmark_objects

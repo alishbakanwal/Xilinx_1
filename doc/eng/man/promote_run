@@ -1,0 +1,62 @@
+
+Description:
+
+  Promotes previously implemented partitions to make them available for
+  import and reuse in other designs.
+
+Arguments:
+
+  -partition_names <arg> - (Optional) The partition or partitions to be
+  promoted.
+
+  -promote_dir <arg> - (Optional) The path and directory into which to write
+  the partition data.
+
+  Note: If the specified directory already exists, the promote_run command
+  will overwrite it without warning.
+
+  Note: If the path is not specified as part of the directory name, the tool
+  will create a directory in your home directory.
+
+   *  For Windows: %APPDATA%/Xilinx/PlanAhead
+
+   *  For Linux: $HOME/.Xilinx/PlanAhead
+
+  -description <{text description}> - (Optional) A description of the
+  partition being promoted. Enclose <text> in braces {}. This description can
+  be displayed or queried when using the partition in another design.
+
+  -no_state_update - (Optional) Do not automatically update partition states.
+  By default the tool will notify you of any updates to a promoted partition.
+  After promotion, the partition state will change to import for promoted
+  partitions.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <run> - The implemented run to be promoted.
+
+Examples:
+
+  The following example promotes the synthesis run for the usbEngine0 and
+  usbEngine1 partitions, and promotes the implementation run for usbEngine0:
+
+    promote_run -run synth_1 -partition_names {usbEngine0 usbEngine1} -promote_dir \ 
+    C:/Data/partition/DP_RTL.promote/Xsynth_1 
+    promote_run -run impl_1 -partition_names usbEngine0 -promote_dir \ 
+    C:/Data/partition/DP_RTL.promote/Ximpl_1 -description {Implementation of USB0}
+
+See Also:
+
+   *  config_partition
+   *  load_reconfig_modules

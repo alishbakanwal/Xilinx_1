@@ -1,0 +1,51 @@
+
+Description:
+
+  Updates timing for the current design.
+
+  Update the timing data to reflect any timing constraints that were added to
+  the design since the timing engine was last run. This command updates the
+  in-memory view of the timing database, without incurring the time of a full
+  timing analysis.
+
+  Timing is automatically updated by commands that change timing or need
+  updated timing information, such as the report_timing command. The
+  update_timing command lets you manually trigger the timing update to insure
+  the latest constraints are applied to the timing engine.
+
+  The update_timing command uses an incremental analysis approach by default,
+  which updates only out-of-date information, to reduce process and analysis
+  time. You can also specify a complete or full update to insure a
+  comprehensive review of timing data in the design. However, to avoid long
+  timing analysis run times, you should use the -full option only when you
+  need to.
+
+Arguments:
+
+  -full - (Optional) Perform a complete timing analysis rather than the
+  default incremental update of the timing data.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example performs a full update of the in-memory timing data:
+
+    update_timing -full
+
+See Also:
+
+   *  report_timing
+   *  report_timing_summary
+   *  reset_timing

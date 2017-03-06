@@ -1,0 +1,62 @@
+
+Description:
+
+  Saves the design at any point in the design process so that you can quickly
+  import it back into the tool as needed. A design checkpoint (DCP) can
+  contain the netlist, the constraints, and any placement and routing
+  information from the implemented design.
+
+  Note: In the Project mode, a DCP will not have timing constraints after
+  synthesis. The timing constraints are annotated against the design during
+  open_run or link_design commands, or when launching an implementation run.
+  To create a DCP with timing constraints, create the design checkpoint after
+  opt_design, or after the implementation run completes.
+
+  Use the read_checkpoint command to import a checkpoint file.
+
+Arguments:
+
+  -force - (Optional) Overwrite an existing checkpoint file of the same name
+  if it already exists.
+
+  -cell <arg> - (Optional) Instructs the tool to output the contents of the
+  specified hierarchical cell into a checkpoint file. Only one cell can be
+  specified for output.
+
+  -logic_function_stripped - (Optional) Hides the INIT values for LUTs & RAMs
+  by converting them to fixed values in order to create a checkpoint for
+  debug purposes that will not behave properly in simulation or synthesis.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <file> - (Required) The name of the checkpoint file to be created. A .dcp
+  extension will be added if no extension is specified.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+Examples:
+
+  The following example creates the specified checkpoint file, overwriting a
+  file of the same name if one already exists:
+
+    write_checkpoint C:/Data/checkpoint1 -force
+
+  Note: The tool will add the .dcp extension to the specified file name, and
+  will overwrite an existing checkpoint1.dcp file.
+
+See Also:
+
+   *  read_checkpoint

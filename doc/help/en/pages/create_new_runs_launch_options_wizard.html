@@ -1,0 +1,93 @@
+﻿<html xml:lang="en-us" lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="reference"/>
+<meta name="DC.Title" content="Launch Options"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="create_new_runs_create_new_runs_wizard"/>
+<meta name="DC.Language" content="en-us"/>
+<link rel="stylesheet" type="text/css" href="../../commonltr.css"/>
+<title>Launch Options</title>
+</head>
+<body id="create_new_runs_create_new_runs_wizard">
+
+
+ 
+ <h1 class="title topictitle1">Launch Options</h1>
+
+ <div class="body refbody">
+  <div class="section">
+   <p class="p">The Launch Options page lets you define the actions to take after creating the synthesis or
+    implementation runs. </p>
+
+   <ul class="ul" id="create_new_runs_create_new_runs_wizard__ul_hmn_4p4_c5">
+    <li class="li"><span Class="uicontrol">Launch Directory</span>: Specify the directory to write the run files and
+     results into for the defined runs. <div Class="note_important"><span class="importanttitle">Important:</span> The default launch directory is
+      inside the current project. If you define a location outside of the current project structure,
+      it can create problems for source control and design portability.  </div>
+</li>
+
+    <li class="li"><span Class="uicontrol">Launch runs on local host</span>: Launch the newly created runs immediately
+     on the local host. <ul class="ul" id="create_new_runs_create_new_runs_wizard__ul_mcg_tcx_45">
+      <li class="li"><span Class="uicontrol">Number of jobs</span>: Specify the number of design runs to launch
+       concurrently on the local host. The synthesis run must complete prior to launching a
+       dependent implementation run. </li>
+
+     </ul>
+</li>
+
+    <li class="li"><span Class="uicontrol">Launch runs on remote host</span>: This option is only available on Linux
+     machines and launches the new runs on a specified remote computer. <ul class="ul" id="create_new_runs_create_new_runs_wizard__ul_ijk_ddx_45">
+      <li class="li"><span Class="uicontrol">Configure Hosts</span>: This launches the <a class="xref" href="vivado_options_dialog.html">Vivado Options</a>
+       dialog box to let you configure the remote computers available on your network.</li>
+
+     </ul>
+</li>
+
+    <li class="li"><span Class="uicontrol">Launch runs using LSF</span>: This option is only available on Linux
+     operating systems and lets you use Load Sharing Facility (LSF) to manage runs on a distributed
+     processing system. <ul class="ul" id="create_new_runs_create_new_runs_wizard__ul_wzt_2dx_45">
+      <li class="li"><span Class="uicontrol">Configure LSF</span>: This launches the <a class="xref" href="vivado_options_dialog.html">Vivado Options</a> dialog box to let you
+       configure the <span class="keyword cmdname">bsub</span> command options to launch runs under the control of
+       LSF.</li>
+
+     </ul>
+</li>
+
+    <li class="li"><span Class="uicontrol">Generate scripts only</span>: Generate the scripts for the synthesis or
+     implementation run, but do not launch the run at this time. The script file is written to the
+     run directory and can be launched manually or run in a batch process. </li>
+
+    <li class="li"><span Class="uicontrol">Do not launch now</span>: Only create the new synthesis and implementation
+     runs. Do not launch them or create scripts at this time. </li>
+
+   </ul>
+
+  </div>
+
+  <div class="section"><h2 class="title sectiontitle">See Also</h2>
+   
+   <table cellpadding="4" cellspacing="0" summary="" id="create_new_runs_create_new_runs_wizard__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow">
+     <td valign="top" class="stentry" width="28.490028490028493%"><img class="image" id="create_new_runs_create_new_runs_wizard__image_smm_1vr_b5" src="../../images/book_icon.png" alt="Icon"/></td>
+
+     <td valign="top" class="stentry" width="71.5099715099715%"><cite class="cite">Vivado Design Suite User Guide: Implementation</cite> (UG904), <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug904-vivado-implementation.pdf;a=xUsingRemoteHostsAndLSF" target="_blank">Using Remote Hosts and LSF</a></td>
+
+    </tr>
+<tr class="strow">
+     <td valign="top" class="stentry"><img class="image" id="create_new_runs_create_new_runs_wizard__image_av4_jvr_b5" src="../../images/play.png" alt="Icon"/></td>
+
+     <td valign="top" class="stentry"><a class="xref" href="http://www.xilinx.com/cgi-bin/docs/ndoc?t=video;d=hardware/creating-and-managing-runs.html" target="_blank">Vivado Design Suite QuickTake Video: Creating and Managing
+       Runs</a></td>
+
+    </tr>
+</table>
+
+  </div>
+
+ </div>
+
+
+</body>
+</html>

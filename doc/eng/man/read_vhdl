@@ -1,0 +1,48 @@
+
+Description:
+
+  Reads a VHDL source file. This command is similar to the add_files command.
+  The VHDL file is added to the source fileset as it is read. If the -library
+  argument is specified, the file is added with the Library property defined
+  appropriately.
+
+  You can use this command to read the contents of source files into the
+  in-memory design, when running the Vivado tool in Non Project mode, in
+  which there is no project file to maintain and manage the various project
+  source files. Refer to the Vivado Design Suite User Guide: Design Flows
+  Overview (UG892) for more information on Non Project mode.
+
+Arguments:
+
+  -library <arg> - (Optional) The library the VHDL file should reference. The
+  default VHDL library is work.
+
+  <file> - (Required) Filename of the VHDL file to be read.
+
+  Note: If the path is not specified as part of the file name, the tool will
+  search for the specified file in the current working directory and then in
+  the directory from which the tool was launched.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example reads the specified VHDL file and adds it to the
+  source fileset:
+
+    read_vhdl C:/Data/FPGA_Design/new_module.vhdl
+
+See Also:
+
+   *  add_files

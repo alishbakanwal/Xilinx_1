@@ -1,0 +1,114 @@
+
+Description:
+
+  Create a "datasheet" report for the current design. Reports setup and hold
+  times of input I/Os in relation to clocks, max/min delays from clocks to
+  output pads, skews of input/ output buses.
+
+  The datasheet report has the timing characteristics of a design at the
+  package balls/pads, including the package trace flight times. To disable
+  flight times use the following command:
+
+    config_timing_analysis -disable_flight_delays true
+
+  The source synchronous output skew can be automatically calculated by the
+  Vivado Design Suite by using the -group switch for report_datasheet and
+  grouping together all the ports of the data bus including the sourced clock
+  output port. The sourced clock output port must be first in the group list.
+  For example:
+
+    report_datasheet -file output_filename -group [get_ports \ 
+       {clock_port data_bit[0] data_bit[1] data_bit[2]}]
+
+Arguments:
+
+  -significant_digits <arg> - (Optional) Number of digits to display from 0
+  to 3. The default is 3.
+
+  -file <arg> - (Optional) Write the report into the specified file. The
+  specified file will be overwritten if one already exists, unless -append is
+  also specified.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -append - (Optional) Append the output of the command to the specified file
+  rather than overwriting it.
+
+  Note: The -append option can only be used with the -file option.
+
+  -return_string - (Optional) Directs the output to a Tcl string rather than
+  to the standard output. The Tcl string can be captured by a variable
+  definition and parsed or otherwise processed.
+
+  Note: This argument cannot be used with the -file option.
+
+  -sort_by [ port | clock ] - (Optional) Sorting order. Valid values are
+  clock or port. The default is to sort the report by clocks.
+
+  -name <arg> - (Optional) The name of the Datasheet report view to display
+  in the Vivado IDE when run in GUI mode. If the name has already been used
+  in an open Report view, that view will be closed and a new report opened.
+
+  -show_all_corners - (Optional) Report all process corners.
+
+  -show_oe_timing - (Optional) Report max and min values for paths using
+  output enable, showing both ON and OFF states.
+
+  -group [get_ports {xxx1 xxx2 ... xxxN}] - (Optional) Allows you to define
+  your own custom group of ports for analysis. This option requires a list of
+  port objects as returned by the get_ports command. The first port in the
+  list will be used as the reference for skew calculation. In most cases,
+  this will be a clock port of a source synchronous output interface.
+  Multiple groups can be specified, each with its own reference clock port.
+  When -group is not specified the timer automatically finds the group of
+  output ports based on the launching clock, and reports skew based on that
+  clock.
+
+  -rpx <arg> - (Optional) Specify the file name and path of an Xilinx report
+  file (RPX) to write. This is different from writing the report results to a
+  file using the -file argument. The RPX file is an interactive report that
+  contains all the report information and can be reloaded into memory in the
+  Vivado Design Suite using the open_report command. You should add a .rpx
+  file extension to the specified file name, as the Vivado tool will not
+  automatically assign a file extension.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example returns the datasheet sorted by ports, for all
+  process corners:
+
+    
+    report_datasheet -sort_by port -show_all_corners
+
+  The following example reports the datasheet with the skew calculation for
+  two groups of ports, with the first port of each group providing the
+  reference for the skew calculation for that group. In this example, CLK0OUT
+  is the forwarded clock for DATA0-4 and CLK1OUT is the forwarded clock for
+  DATA4-7:
+
+    report_datasheet -file ds.txt -group [get_ports \ 
+       {CLK0OUT DATA0 DATA1 DATA2 DATA3}] \ 
+       -group [get_ports {CLK1OUT DATA4 DATA5 DATA6 DATA7}]
+
+See Also:
+
+   *  get_ports

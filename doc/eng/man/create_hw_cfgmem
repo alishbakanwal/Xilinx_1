@@ -1,0 +1,93 @@
+
+Description:
+
+  Create a hw_cfgmem object associated with the specified hw_device.
+
+  The process whereby the bitstream data is loaded or programmed into the
+  Xilinx<tm tmtype="reg"/> FPGA is called configuration. Configuration is
+  designed to be flexible to accommodate different application needs and,
+  wherever possible, to leverage existing system resources to minimize system
+  costs.
+
+  Xilinx FPGAs are configured by loading design-specific configuration data,
+  in the form of a bitstream file, into the internal memory of the hw_device.
+  The hw_cfgmem defines a flash memory device used for configuring and
+  booting the Xilinx FPGA device. Once the hw_cfgmem object is created, and
+  associated with the hw_device, the configuration memory can be programmed
+  with the bitstream and other data using the program_hw_cfgmem command.
+
+  The hw_cfgmem object is associated with the specified hw_device object
+  through the PROGRAM.HW_CFGMEM property on the device object. Use the
+  get_hw_cfgmems command to work with the hw_cfgmem object, or use the
+  get_property command to obtain the object from the hw_device:
+
+    get_property PROGRAM.HW_CFGMEM [current_hw_device]
+
+  Note: When creating a new hw_cfgmem object, you can also associate the
+  object with a Tcl variable as shown in the example below. By referring to
+  the variable, you can set properties on the object, and use the object with
+  other Tcl commands like program_hw_cfgmem or readback_hw_cfgmem.
+
+  This command returns the created hw_cfgmem object, or returns an error if
+  it fails.
+
+Arguments:
+
+  -hw_device <arg> - (Required) Specify the hw_device object to associate the
+  memory configuration device with. The hw_device must be specified as an
+  object as returned by the get_hw_devices command or current_hw_device
+  command.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <mem_device> - (Required) Specify the flash memory device to use for
+  configuring the associated hw_device. The configuration memory must be
+  specified as a cfgmem_part object object using the get_cfgmem_parts
+  command.
+
+  Note: The COMPATIBLE_PARTS property of the cfgmem_part object identifies
+  which Xilinx devices a configuration memory is compatible with.
+
+Example:
+
+  The following example:
+
+   *  Gets the PART associated with the current_hw_device.
+
+   *  Gets a list of cfgmem_parts that are compatible with the device part.
+
+   *  Uses one of the compatible parts to create a new hw_cfgmem object.
+
+   *  Sets the PROGRAM.FILE property of the current hw_cfgmem object to the
+      cfgmem file created with the write_cfgmem command.
+
+   *  Programs the current hw_cfgmem object.
+
+    set devPart [get_property PART [current_hw_device]] 
+    set cfgParts [get_cfgmem_parts -of [get_parts $devPart]] 
+    create_hw_cfgmem -hw_device [current_hw_device] [lindex $cfgParts 0 ] 
+    set_property PROGRAM.FILE {C:/Data/cfgmem_file.mcs} [current_hw_cfgmem] 
+    program_hw_cfgmem [current_hw_cfgmem]
+
+See Also:
+
+   *  current_hw_cfgmem
+   *  current_hw_device
+   *  delete_hw_cfgmem
+   *  get_cfgmem_parts
+   *  get_hw_cfgmems
+   *  get_property
+   *  program_hw_cfgmem
+   *  readback_hw_cfgmem
+   *  write_cfgmem

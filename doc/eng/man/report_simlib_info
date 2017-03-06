@@ -1,0 +1,45 @@
+
+Description:
+
+  Report information on libraries compiled by the compile_simlib command.
+
+Arguments:
+
+  -file <arg> - (Optional) Write the report into the specified file. The
+  specified file will be overwritten if one already exists, unless -append is
+  also specified.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -append - (Optional) Append the output of the command to the specified file
+  rather than overwriting it.
+
+  Note: The -append option can only be used with the -file option.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <path> - (Required) The path to the compiled simulation library.
+
+Examples:
+
+  The following example reports information related to the compiled
+  simulation library at the specified path:
+
+    report_simlib_info C:/Data/compiled_simlib
+
+See Also:
+
+   *  compile_simlib

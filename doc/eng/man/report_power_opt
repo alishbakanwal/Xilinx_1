@@ -1,0 +1,69 @@
+
+Description:
+
+  Report power optimizations that have been performed on the design with the
+  power_opt_design command.
+
+  Note: By default the report is written to the Tcl console or STD output.
+  However, the results can also be written to a file or returned as a string
+  if desired.
+
+Arguments:
+
+  -cell <args> - (Optional) Report power optimization for the specified cell
+  or cell instances. By default, the power optimizations performed on the
+  whole design are reported.
+
+  -file <arg> - (Optional) Write the report into a file. The specified file
+  will be overwritten if one already exists.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -format [ text | xml ] - (Optional) Specify the file format of the Power
+  Optimization report when used with -file. The default file output is a text
+  format file. The Vivado tool can also write an XML format file to allow for
+  use by third party applications.
+
+  Note: When -format xml is specified, the -append option is not supported.
+
+  -name <arg> - (Optional) The name to assign to the Power Optimization
+  report when the command is run in GUI mode.
+
+  -append - (Optional) Append the output of the command to the specified file
+  rather than overwriting it.
+
+  Note: The -append option can only be used with the -file option, and is not
+  compatible with the XML format.
+
+  -return_string - (Optional) Directs the output to a Tcl string rather than
+  to the standard output. The Tcl string can be captured by a variable
+  definition and parsed or otherwise processed.
+
+  Note: This argument cannot be used with the -file option.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example reports the power optimizations performed on the
+  current design, writing them to the specified file in an XML format:
+
+    report_power_opt -format xml -file C:/Data/power_opt.xml
+
+See Also:
+
+   *  power_opt_design
+   *  report_power

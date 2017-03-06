@@ -1,0 +1,55 @@
+
+Description:
+
+  Returns a list of all input port objects in the current design.
+
+  To get a list of specific inputs in the design, use the get_ports command,
+  or use the filter command to filter the results returned by all_inputs.
+
+  The all_inputs command is scoped to return the objects hierarchically, from
+  the top-level of the design or from the level of the current instance. By
+  default the current instance is defined as the top level of the design, but
+  can be changed by using the current_instance command.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example returns all input port objects in the current design:
+
+    all_inputs
+
+  This example gets all input port objects, filters out the GT ports, and
+  sets the IOSTANDARD property for the non-GT ports:
+
+    set non_gt_ports [filter [all_inputs] {!is_gt_term}]  
+    set_property IOSTANDARD LVCMOS18 $non_gt_ports
+
+  The following example shows how the list returned can be passed to another
+  command:
+
+    set_input_delay 5 -clock REFCLK [all_inputs]
+
+See Also:
+
+   *  all_clocks
+   *  all_outputs
+   *  current_instance
+   *  filter
+   *  get_clocks
+   *  get_ports
+   *  set_input_delay
+   *  set_property

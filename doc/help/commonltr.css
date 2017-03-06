@@ -1,0 +1,317 @@
+
+body {
+    font-size: small;
+    /*font-family: Helvetica;*/
+    font-family: Verdana, Arial, Tahoma, Dialog, Helvetica, Calibri, SansSerif, Arial, sans-serif;
+    /*font-family: Calibri Light, Calibri, Helvetica, SansSerif, Arial, sans-serif;*/
+    margin-left: 0;
+    margin-right: 5px;
+    /*color: #565656;*/
+    color: #494949;
+    background-color: White;
+}
+
+p {
+    font-size: small;
+    margin-top: 11px;
+    margin-bottom: 3px;
+}
+
+.p {
+    font-size: small;
+    margin-top: 11px;
+    margin-bottom: 3px;
+}
+
+pre {
+    font-size: medium;
+}
+
+.codeblock {
+    padding-top: 5px;
+    font-size: small;
+    font-family: Courier New, Courier, monospace;
+}
+
+/*main header*/
+h1 {
+    font-size: x-large;
+    font-weight: normal;
+    margin-top: 3px;
+    margin-bottom: 7px;
+}
+
+/*tab titles*/
+h2 {
+    font-size: large;
+    font-weight: normal;
+    margin-top: 9px;
+    margin-bottom: 5px;
+}
+
+/*titled borders and other titles with bold*/
+h3 {
+    font-size: small;
+    font-weight: bold;
+    margin-top: 9px;
+    margin-bottom: 7px;
+}
+
+ol {
+    margin-top: 7px;
+    margin-bottom: 0;
+    margin-left: 30px;
+}
+
+li {
+    margin-top: 0;
+    margin-bottom: 7px;
+}
+
+li p {
+    margin-top: 7px;
+    margin-bottom: 0;
+}
+
+ul {
+    font-size: small;
+    list-style-image: url('images/list_image.png');
+    margin-top: 7px;
+    margin-bottom: 0;
+    /*leave 12px to the left so the image can be visible in the list*/
+    /*margin-left: 12px;*/
+    /*leave 0px to the left so left aligns*/
+    margin-left: 0;
+    vertical-align: text-top;
+}
+
+/*img.image {*/
+    /*margin-right: 3px;*/
+    /*margin-left: 3px;*/
+    /*margin-bottom: -4px;*/
+/*}*/
+
+/*.image {*/
+    /*margin-right: 3px;*/
+    /*margin-left: 3px;*/
+    /*margin-bottom: -4px;*/
+/*}*/
+
+/*.listimage {*/
+    /*margin-right: 20px;*/
+    /*margin-left: 3px;*/
+    /*margin-bottom: -4px;*/
+    /*margin: 30px;*/
+/*}*/
+
+.uicontrol {
+    font-weight: bold;
+}
+
+.filepath {
+    font-family: Courier New, Courier, monospace;
+}
+
+table {
+    font-size: small;
+    border-style: none;
+    margin-top: 9px;
+    margin-bottom: 5px;
+}
+
+/* table border only outside for table id=t01 */
+/*table#t01 {*/
+    /*border: 1px solid silver;*/
+/*}*/
+
+/* alternating row color for table id=t01
+Doesn't work in QH */
+/*table#t01 tr:nth-child(even) {*/
+    /*background-color: #eee;*/
+/*}*/
+
+/*table#t01 tr:nth-child(odd) {*/
+    /*background-color:#fff;*/
+/*}*/
+
+/*table#t01 th	{*/
+    /*background-color: black;*/
+    /*color: white;*/
+/*}*/
+
+/*table#t01 td {*/
+    /*border-style: solid;*/
+    /*border-color: silver;*/
+    /*border-collapse: inherit;*/
+    /*border-width: 1px;*/
+    /*padding: 7px;*/
+
+    /*border-style: solid;*/
+    /*border-color: silver;*/
+    /*border-collapse: collapse;*/
+    /*border: 1px;*/
+    /*border-bottom: 1px;*/
+/*}*/
+
+
+/*
+In order to make table border work in QH we need to set up border the following way:
+- table draws border to left and bottom (1px) AND sets border-spacing to 0
+- table cell (td) draws border to top and right (1px)
+This way we get a table with 1px border around it and no space between the cell borders
+*/
+.table_with_border {
+    font-size: small;
+    border-style: solid;
+    border-width: 0 0 1px 1px;
+    border-color: silver;
+    margin-top: 9px;
+    margin-bottom: 5px;
+    border-spacing: 0;
+}
+
+td {
+    border-style: none;
+    padding: 5px 5px 5px 0;
+    /* don't work in QH, use 'td valign="top"' in html instead*/
+    /*vertical-align: top;*/
+}
+
+.td_nowrap {
+    white-space: nowrap;
+}
+
+.td_with_border {
+    border-style: solid;
+    border-color: silver;
+    border-width: 1px 1px 0 0;
+    padding: 7px;
+}
+
+th {
+    border-style: none;
+    padding: 7px;
+    text-align: left;
+}
+
+.th_with_border {
+    border-style: solid;
+    border-color: silver;
+    border-width: 1px 1px 0 0;
+    padding: 7px;
+}
+
+/*Notes of all types*/
+
+.note_important {
+    margin: 9px 0 9px 0;
+    padding: 5px 7px 7px 7px;
+    border-style: solid;
+    border-width: 1px 1px 1px 1px;
+    border-color: #fdd587;
+    background-color: #fafafa;
+}
+
+.note{
+    margin: 5px 0 5px 0;
+    padding: 5px 7px 7px 7px;
+    border-style: solid;
+    border-width: 1px 1px 1px 1px;
+    border-color: silver;
+    background-color: #fafafa;
+}
+
+.note_tip {
+    margin: 5px 0 5px 0;
+    padding: 5px 7px 7px 7px;
+    border-style: solid;
+    border-width: 1px 1px 1px 1px;
+    border-color: silver;
+    background-color: #fafafa;
+}
+
+.note_caution {
+    margin: 9px 0 9px 0;
+    padding: 5px 7px 7px 7px;
+    border-style: solid;
+    border-width: 1px 1px 1px 1px;
+    border-color: #f58281;
+    background-color: #fafafa;
+}
+
+/*.note_important:before {*/
+    /*content: url('images/important.png') "  ";*/
+/*}*/
+
+/*.note_tip:before {*/
+    /*content: url('images/tip.png') "  ";*/
+/*}*/
+
+/*.note_caution:before {*/
+    /*content: url('images/caution.png') "  ";*/
+/*}*/
+
+.notetitle {
+    font-style: normal;
+    font-weight: bold;
+}
+
+.tiptitle {
+    font-style: normal;
+    font-weight: bold;
+}
+
+.importanttitle {
+    font-style: normal;
+    font-weight: bold;
+}
+
+.cautiontitle {
+    font-style: normal;
+    font-weight: bold;
+}
+
+a {
+    color: #0275ca;
+}
+
+/* unvisited link */
+a:link {
+    color: #0275ca;
+}
+
+/* visited link */
+a:visited {
+    color: #5c1361;
+}
+
+/* mouse over link */
+a:hover {
+    color: #24a2ff;
+}
+
+/* selected link */
+a:active {
+    color: #24a2ff;
+}
+
+hr {
+    border: 0;
+    height: 0;
+    border-top: 1px solid #bebebe;
+    /*border-top: 1px solid #ffffff;*/
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    /*border-bottom: 1px solid #d2d2d2;*/
+    /*border-bottom: 1px solid #ffffff;*/
+    display: block;
+    /*margin-top: 0;*/
+    /*margin-bottom: 0;*/
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+    /*border-style: solid;*/
+    /*border-width: 1px;*/
+    /*height: 0.001em;*/
+}
+
+/*small {font-size: 150%}*/
+

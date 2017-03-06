@@ -1,0 +1,94 @@
+
+Description:
+
+  Exclude the specified AXI peripheral address segment from access by the AXI
+  master it is mapped to, in order to support sparse connectivity and
+  eliminate unneeded device resources.
+
+  This command lets you exclude specific peripherals from being accessed by
+  specific AXI masters. For example, in the case where AXI peripherals P0 and
+  P1 are connected to two masters M0 and M1, you can use sparse connectivity
+  to let M0 access both P0 and P1, and let M1 accesses P1, but exclude it
+  from P0.
+
+  In the IP Integrator block design, address segments of AXI peripherals will
+  have one of three states:
+
+   *  Unmapped - An AXI peripheral, or slave interface, is connected to an
+      AXI master, but the peripheral has not been assigned an address segment
+      in the master's address space and is not visible to the master.
+
+   *  Mapped - The AXI peripheral is mapped into the AXI master`s address
+      space, assigned an address segment or range, and is accessible through
+      the master.
+
+   *  Excluded - The AXI peripheral is mapped to the AXI master, and has been
+      assigned an address, but is not accessible to the master. The address
+      segment that the AXI slave occupies within the master address space is
+      also considered filled.
+
+  The purpose of excluding the address segment is to restrict access to
+  peripherals that are connected to multiple masters. The validate_bd_design
+  command will return a critical warning if a peripheral interface is
+  connected to a master, but not mapped to an address segment of that master.
+  However, by excluding the peripheral after it is mapped, the resources
+  required to connect and provide access between the AXI master and the
+  peripheral (the muxes and decoding for example) can be eliminated to
+  conserve resources on the implemented design.
+
+  Note: When running assign_bd_address, the IP Integrator feature will map
+  unmapped address segments into address spaces, but will not map excluded
+  address spaces.
+
+  This command offers two syntaxes, for a previously mapped address segment,
+  and an unmapped address segment:
+
+    exclude_bd_addr_seg <master_addr_seg> 
+    exclude_bd_addr_seg -target_address_space <master_addr_space> <slave_addr_seg>
+
+  In the second command syntax, when a slave segment is specified, the slave
+  will first be assigned or mapped to the specified AXI master address space,
+  and then it will be excluded from access by the master.
+
+  This command returns nothing if successful, or returns an error if it failed.
+
+Arguments:
+
+  -target_address_space <arg> - (Optional) The target address space to map
+  the address segment into. This option provides the mapping assignment
+  usually performed by the assign_bd_address command, to let you assign the
+  address segment to an address space, and exclude the address segment in a
+  single command.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <segment_to_exclude> - Specify a single address segment object,
+  bd_addr_seg, to exclude from access by its assigned AXI master.
+
+Example:
+
+  The following example assigns an address segment defined by an AXI
+  peripheral, or slave, to an AXI master address space, and then excludes the
+  address segment from access by that master:
+
+    assign_bd_address [get_bd_addr_segs {axi_gpio_1/S_AXI/Reg }] 
+    exclude_bd_addr_seg [get_bd_addr_segs microblaze_1/Data/SEG_axi_gpio_1_Reg]
+
+See Also:
+
+   *  assign_bd_address
+   *  create_bd_addr_seg
+   *  get_bd_addr_segs
+   *  get_bd_addr_spaces
+   *  include_bd_addr_seg

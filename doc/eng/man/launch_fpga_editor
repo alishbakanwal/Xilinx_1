@@ -1,0 +1,50 @@
+
+Description:
+
+  Launches the Xilinx FPGA Editor tool for the active run, or a specified
+  run. When the design is open in the FPGA Editor, you can place critical
+  elements of the design and examine critical timing pathways. You can also
+  cross-probe between the tool and the FPGA Editor using the crossprobe_fed
+  command to quickly locate elements of your design in the two editors.
+
+Arguments:
+
+  -run <arg> - (Optional) The run name to use when launching the FPGA Editor.
+  The specified run must have a mapped NCD or routed NCD file to launch the
+  FPGA Editor.
+
+  -more_options <arg> - (Optional) Additional options to use when invoking
+  the FPGA Editor software. For more information, see the online Help
+  provided with FPGA Editor.
+
+  -mapped_ncd - (Optional) Use the mapped NCD file as input for FPGA Editor.
+  This allows you to view the NCD file output from MAP, without the placement
+  and routing data from PAR. You can use this to perform some preplacement
+  and routing of critical components if necessary.
+
+  Note: By default the launch_fpga_editor command loads the <design>
+  _routed.ncd file, unless this option is specified.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example launches FPGA Editor, specifying the implementation
+  run to use and to open the mapped NCD instead of the placed and routed NCD:
+
+    launch_fpga_editor -run impl_4 -mapped_ncd
+
+See Also:
+
+   *  crossprobe_fed

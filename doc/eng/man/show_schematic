@@ -1,0 +1,78 @@
+
+Description:
+
+  Create a schematic view containing the specified design objects when the
+  tool is invoked in GUI mode.
+
+  The scope of the schematic that is displayed depends on the objects
+  specified. A schematic created with cells, shows the specified cells and
+  any connections between the cells. A schematic created with pins, shows the
+  pin objects, or shows them connected as appropriate if -pin_pairs is
+  specified. A schematic created with nets shows the nets, as well as the
+  cells and ports connected to the nets.
+
+  To display a schematic with multiple levels of hierarchy, use the
+  current_instance command to set the top-level of the hierarchy, or the
+  level of interest, and use the -hierarchical option when specifying design
+  objects with a get_* command.
+
+  Note: This command is only useful when run in the Vivado IDE. When run in
+  Tcl or Batch mode the command simply returns without error or comment.
+
+Arguments:
+
+  -add - (Optional) Add the specified objects to the schematic window.
+
+  -remove - (Optional) Remove the specified objects from the schematic window.
+
+  -regenerate - (Optional) Regenerate the schematic window.
+
+  -pin_pairs - (Optional) When specified with a pair of connected pin
+  objects, the schematic shows the pins and the wire between the pins. When
+  the -pin_pairs option is not specified, or is specified with disconnected
+  pins, the wire is not shown.
+
+  -name <arg> - (Optional) Defines a name for the schematic window opened in
+  the GUI. Use this name to add to, remove from, or regenerate the schematic.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <objects> - (Required) The netlist objects to display in the schematic
+  window.
+
+Examples:
+
+  The following example creates a schematic for the top-level of the design,
+  displaying the nets as well as the ports and cells they connect to:
+
+    show_schematic [get_nets]
+
+  The following example sets the level of hierarchy of interest, and creates
+  a hierarchical schematic from the current level down:
+
+    current_instance A 
+    show_schematic [get_nets -hier]
+
+  The following example creates a schematic window showing the specified
+  pins, and the wire connection between them:
+
+    show_schematic -pin_pairs [get_pins {data0_i/O data_reg/D}]
+
+See Also:
+
+   *  current_instance
+   *  get_cells
+   *  get_nets
+   *  get_pins
+   *  get_ports

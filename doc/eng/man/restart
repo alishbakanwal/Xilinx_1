@@ -1,0 +1,36 @@
+
+Description:
+
+  Return the current simulation to its initial state, as if the design was
+  reloaded, resetting the current simulation time to 0.
+
+  The restart command retains breakpoints, Tcl forces, and settings in the
+  waveform configuration window, but resets all simulation values, and clears
+  all other Tcl commands.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example restarts the current simulation:
+
+    restart
+
+See Also:
+
+   *  current_time
+   *  run
+   *  stop

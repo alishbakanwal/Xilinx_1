@@ -1,0 +1,76 @@
+
+Description:
+
+  Connects a signal from the netlist design to a port on an ILA debug core
+  that was added to the design using the create_debug_core command. The
+  signal can either be connected to a specific channel index on the port, or
+  simply connected to an available channel on the port.
+
+  If you try to connect too many signals to a port, or there are not enough
+  channels to support the connection, the tool will return an error.
+
+  Additional ports can be added to a debug core through the use of the
+  create_debug_port command, and you can increase the available channels on
+  an existing port with the set_property port_width command. See the examples
+  below.
+
+  You can disconnect signals from ports using the disconnect_debug_port
+  command.
+
+  When the debug core has been defined and connected, you can implement the
+  debug core as a block for inclusion in the netlist design. Use the
+  implement_debug_core command to implement the core.
+
+Arguments:
+
+  -channel_start_index <arg> - (Optional) The channel index to use for the
+  connection. If more than one signal has been specified, this is the channel
+  index where connections will start to be added. Channel indexes are
+  numbered starting at 0.
+
+  Note: If this argument is not specified, the tool will place connections on
+  the first available channel index.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <port> - (Required) The name of the port to connect signals to. The port
+  must be referenced by the core_name/port_name.
+
+  <nets> - (Required) A list of one or more net names from the netlist design
+  to connect to the specified debug port.
+
+Examples:
+
+  The following example creates a new PROBE port on the myCore debug core,
+  increases the PORT_WIDTH property of the port in order to prepare it to
+  receive the number of signals to be connected, and connects signals to the
+  port starting at the third channel position (index 2).
+
+    create_debug_port myCore PROBE 
+    set_property PORT_WIDTH 8 [get_debug_ports myCore/PROBE1] 
+    connect_debug_port myCore/PROBE1 [get_nets [list m0_ack_o m0_cyc_i \ 
+       m0_err_o m0_rty_o m0_stb_i m0_we_i ]] -channel_start_index 2
+
+  Note: If you specify too many nets to connect to the available channels on
+  the port, the tool will return an error and will not connect the ports.
+
+See Also:
+
+   *  create_debug_core
+   *  create_debug_port
+   *  disconnect_debug_port
+   *  get_debug_ports
+   *  get_nets
+   *  implement_debug_core
+   *  set_property

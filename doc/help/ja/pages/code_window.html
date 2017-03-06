@@ -1,0 +1,94 @@
+﻿<html xml:lang="ja-jp" lang="ja-jp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="concept"/>
+<meta name="DC.Title" content="テキスト エディター"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_aqj_x3c_d5"/>
+<meta name="DC.Language" content="ja-JP"/>
+<link rel="stylesheet" type="text/css" href="../commonltr-ja.css"/>
+<title>テキスト エディター</title>
+</head>
+<body id="concept_aqj_x3c_d5">
+
+
+<h1 class="title topictitle1">テキスト エディター</h1>
+
+<div class="body conbody">
+<div class="section">
+<div class="p" id="concept_aqj_x3c_d5__p_ftk_rrw_25">テキスト エディターは、HDL ソース ファイル、XDC 制約ファイル、Tcl スクリプト、およびその他のテキスト ベースのファイルを編集する環境です。テキスト エディターでは、特定のファイル形式 (Verilog、SystemVerilog、VHDL、SDC、XDC、および Tcl) の言語構文が認識され、ファイルを編集中にその言語のキーワードおよび識別子がハイライトされます。認識されたファイル形式の場合は、リアルタイムの構文チェックも実行されるので、エラーを見つけて修正しやすくなります。<div Class="note_tip"><span class="tiptitle">ヒント:</span> 言語構文が認識されない場合は、テキスト エディターでそのファイルが単純なテキスト ファイルとして処理されます。</div>
+</div>
+
+<p class="p">テキスト エディターには、タブおよびスペースを管理する方法を設定できる右クリック メニューがあるほか、階層の言語構文のコードを折り返す機能があり、Verilog モジュール、VHDL エンティティ、および Tcl proc の展開を閉じたり、開いたりできます。ファイルを変更した場合は、メモリ内のファイルとディスクに保存されたファイルが比較され、ファイルを保存する前にどのような変更があったかが確認されます。</p>
+
+<p class="p">テキスト エディターのツールバーには、[Copy] (<img class="image" id="concept_aqj_x3c_d5__image_tlz_5dg_xw" src="../../images/copy.png"/>)、[Cut] (<img class="image" id="concept_aqj_x3c_d5__image_rhj_wdg_xw" src="../../images/cut.png"/>)、[Paste] (<img class="image" id="concept_aqj_x3c_d5__image_zlw_wdg_xw" src="../../images/paste.png"/>)、[Delete] (<img class="image" id="concept_aqj_x3c_d5__image_lvk_xdg_xw" src="../../images/delete.png"/>) などのファイルを編集する一般的なコマンドが含まれます。[Save] (<img class="image" id="concept_aqj_x3c_d5__image_xvr_ydg_xw" src="../../images/save.png"/>) コマンドでは変更を編集したテキスト ファイルに保存でき、[Undo] (<img class="image" id="concept_aqj_x3c_d5__image_kx1_c2g_xw" src="../../images/undo.png"/>) および [Redo] (<img class="image" id="concept_aqj_x3c_d5__image_c4h_c2g_xw" src="../../images/redo.png"/>) コマンドで必要に応じて変更を取り消したり、取り消した変更を元に戻したりできます。</p>
+
+<p class="p">また、テキスト エディターのツールバーには Verilog、VHDL、Tcl および XDC ファイルなどのコード ファイルを編集するためのコマンドが含まれます。</p>
+
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="concept_aqj_x3c_d5__table_rdz_bvv_y5" class="table" frame="void" border="0" rules="none">    <tbody class="tbody"> <tr class="row">
+<td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_ybb_2cg_xw" src="../../images/ToggleLineComment.png"/></td>
+
+<td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Toggle Line Comments</span></td>
+
+<td class="entry" align="left" valign="top" width="73.4959349593496%">コードの行をコメントに変更したり、1 行のコメントをテキスト行にすばやく変更したりできます。テキスト エディターでは、編集されるファイルの言語構文に基づいて、適切な文字列が挿入または削除され、1 行のコメントが作成または削除されます。<ul class="ul" id="concept_aqj_x3c_d5__ul_qbd_kfg_xw">
+<li class="li">// for Verilog and SystemVerilog</li>
+
+<li class="li">-- for VHDL</li>
+
+<li class="li"># for Tcl and XDC</li>
+
+</ul>
+</td>
+</tr>
+ <tr class="row">
+<td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_ywb_ncg_xw" src="../../images/column_select.png"/></td>
+
+<td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Toggle Column Selection Mode</span></td>
+
+<td class="entry" align="left" valign="top" width="73.4959349593496%">各行の文字を選択するのではなく、列および行に基づいてグリッド ベースで文字を選択できるようになります。</td>
+</tr>
+ <tr class="row">
+<td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_mq2_ncg_xw" src="../../images/findInText.png"/></td>
+
+<td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Find</span></td>
+
+<td class="entry" align="left" valign="top" width="73.4959349593496%">テキスト エディターの一番下に [Find] フィールドが表示されるようになり、現在のテキスト ファイルを検索できるようになります。</td>
+</tr>
+ <tr class="row">
+<td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_gth_ncg_xw" src="../../images/LanguageTemplates.png"/></td>
+
+<td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Language Templates</span></td>
+
+<td class="entry" align="left" valign="top" width="73.4959349593496%">[Language Template] ダイアログ ボックスを開いて、前もって定義済みの Verilog、SystemVerilog、VHDL、XDC デザイン テンプレートのコレクションから参照および選択できるようにします。</td>
+</tr>
+ <tr class="row">
+<td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_qvq_gdg_xw" src="../../images/InsertTemplate.png"/></td>
+
+<td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Insert Template</span></td>
+
+<td class="entry" align="left" valign="top" width="73.4959349593496%">[Language Template] ダイアログ ボックスで現在選択されているテンプレートがテキスト ファイルのカーソル位置に追加されます。<div Class="note"><span class="notetitle">注:</span> 選択したテンプレートを挿入するために [Language Template] ダイアログ ボックスを開く必要はありません。</div>
+</td>
+</tr>
+ </tbody>
+ </table>
+</div>
+
+<p class="p">テキスト エディターは、Vivado<sup>®</sup> IDE のワークスペースに表示されます。ワークスペースの詳細は、<cite class="cite">『Vivado Design Suite ユーザー ガイド : Vivado IDE の使用』</cite> (UG893) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug893-vivado-ide.pdf;a=xUsingTheWorkspace" target="_blank">このセクション</a>を参照してください。</p>
+
+</div>
+
+<div class="section"><h2 class="title sectiontitle">関連項目</h2>
+<table cellpadding="4" cellspacing="0" summary="" id="concept_aqj_x3c_d5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow"> <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_aqj_x3c_d5__image_smm_1vr_b5" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">『Vivado Design Suite ユーザー ガイド : Vivado IDE の使用』</cite> (UG893) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug893-vivado-ide.pdf;a=xUsingTheTextEditor" target="_blank">「テキスト エディターの使用」</a></td>
+ </tr>
+</table>
+
+</div>
+
+</div>
+
+
+</body>
+</html>

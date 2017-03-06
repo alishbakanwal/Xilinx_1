@@ -1,0 +1,183 @@
+
+Description:
+
+  This command lets you manage the Vivado Design Suite out-of-context (OOC)
+  IP cache. The Vivado Design Suite caches the synthesis results for
+  customized OOC IP in an IP repository, so multiple IP that use the same
+  customization profile can share OOC synthesis results to decrease run time.
+  The cached synthesis results can be reused in a single project from the
+  project cache, or across multiple projects using a remote cache location.
+
+  When generating the synthesis output products for an OOC IP, if a matching
+  IP customization is found in the IP repository, the cached synthesis
+  results will be used. If no suitable match is found in the IP repository,
+  the synthesis output products will be generated as usual and the results,
+  including the design checkpoint (DCP), will be copied into the IP synthesis
+  cache for future use.
+
+  Note: When cached results are used, an information message is displayed in
+  the TCL console indicating the IP cache location used.
+
+  You can specify a repository of cached IP synthesis results either within
+  the current project, or at an external location. The location of the IP
+  cache is defined by the IP_OUTPUT_REPO property on a project, with the
+  value of a string defining a valid file system directory. You can set this
+  property using the check_ip_cache command with either the
+  -use_cache_location or the -use_project_cache options. The default IP
+  synthesis cache location is in the current project folders.
+
+  The use of the IP synthesis cache is controlled by the IP_CACHE_PERMISSIONS
+  property that can be set with the set_property command. The current values
+  are:
+
+   *  disabled - Do not use the IP synthesis cache. This is the default
+      setting.
+
+   *  read - Use the IP synthesis cache to read OOC synthesis results from
+      and apply as appropriate in the current project.
+
+   *  write - Use the IP synthesis cache to write OOC synthesis results into,
+      but do not use them to read IP into the current project.
+
+   *  read write - Use the IP synthesis cache for both writing results to,
+      and using those results in the current project.
+
+  The check_ip_cache command should be followed by the update_ip_catalog
+  command to read the specified IP cache repository into the Vivado tool.
+
+  Note: The IP synthesis cache can be enabled, and the cache repository
+  specified, in the Vivado Design Suite IDE using the Project Settings dialog
+  box. Refer to the Vivado Design Suite User Guide: Designing with IP (UG896)
+  for more information on using the cache.
+
+  This command returns a transcript of its process, or returns an error if it
+  fails.
+
+Arguments:
+
+  -use_cache_location <> - (Optional) Specify an external directory to use
+  for the IP cache repository in the current project.
+
+  -use_project_cache <> - (Optional) This is the default behavior of the
+  cached synthesis results. This option enables the current project to use
+  the default IP cache location inside the local project directory. You can
+  use this option to restore the default.
+
+  -disable_cache - (Optional) Disable the IP synthesis cache. This has the
+  effect of setting the IP_CACHE_PERMISSIONS property to "disabled".
+
+  Note: After disabling the cache, you will need to set the
+  IP_CACHE_PERMISSIONS property, or use the Vivado Design Suite IDE to
+  re-enable the cache.
+
+  -clear_output_repo - (Optional) This clears the IP synthesis cache of all
+  existing cached results.
+
+  Note: You will not be prompted to confirm this command before the cached
+  results are deleted.
+
+  -disk_usage_output_repo - (Optional) Reports the cumulative disk usage of
+  the IP synthesis cache in KBytes.
+
+  -filter <args> - (Optional) Filter the results list with the specified
+  expression. The -filter argument filters the results returned by
+  check_ip_cache based on property values on the ip_cache_entry object. You
+  can find the properties on a cached IP with the report_property or
+  list_property commands. Any property/value pair can be used as a filter. In
+  the case of the ip_cache_entry object, "INSTANCE_NAME", "CORE_VLNV", and
+  "CUSTOMIZATION" are some of the properties that can be used to filter
+  results.
+
+  The filter search pattern should be quoted to avoid having to escape
+  special characters that may be found in net, pin, or cell names, or other
+  properties. String matching is case-sensitive and is always anchored to the
+  start and to the end of the search string. The wildcard "*" character can
+  be used at the beginning or at the end of a search string to widen the
+  search to include a substring of the property value.
+
+  Note: The filter returns an object if a specified property exists on the
+  object, and the specified pattern matches the property value on the object.
+  In the case of the "*" wildcard character, this will match a property with
+  a defined value of "".
+
+  For string comparison, the specific operators that can be used in filter
+  expressions are "equal" (==), "not-equal" (!=), "match" (=~), and
+  "not-match" (!~). Numeric comparison operators <, >, <=, and >= can also be
+  used. Multiple filter expressions can be joined by AND and OR (&& and ||).
+  The following gets input pins that do NOT contain the "RESET" substring
+  within their name:
+
+    get_pins * -filter {DIRECTION == IN && NAME !~ "*RESET*"}
+
+  Boolean (bool) type properties can be directly evaluated in filter
+  expressions as true or not true:
+
+    -filter {IS_PRIMITIVE && !IS_LOC_FIXED}
+
+  -regexp - (Optional) Specifies that the search <patterns> are written as
+  regular expressions. Both search <patterns> and -filter expressions must be
+  written as regular expressions when this argument is used. Xilinx regular
+  expression Tcl commands are always anchored to the start of the search
+  string. You can add ".*" to the beginning or end of a search string to
+  widen the search to include a substring. See
+  http://perldoc.perl.org/perlre.html for help with regular expression
+  syntax.
+
+  Note: The Tcl built-in command regexp is not anchored, and works as a
+  standard Tcl command. For more information refer to
+  http://www.tcl.tk/man/tcl8.5/TclCmd/regexp.htm.
+
+  -nocase - (Optional) Perform case-insensitive matching when a pattern has
+  been specified. This argument applies to the use of -regexp only.
+
+  -get_id - (Optional) Return the ID string for the cached IP from the
+  repository that is used for the specified <ip> object in the current
+  project.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <ip> - (Optional) A single IP instance object as returned by the get_ips
+  command.
+
+Example:
+
+  The following example specifies the use of an external IP cache location,
+  and then updates the repository settings of the IP catalog:
+
+    check_ip_cache -use_cache_location C:/Data/ip 
+    update_ip_catalog
+
+  This example filters the ip_cache_entry objects returned by the
+  check_ip_cache command, returning the object with the specified instance
+  name, and then reports the properties on that object:
+
+    report_property -all [check_ip_cache -filter {INSTANCE_NAME == clk_core}]
+
+  The following example disables the IP cache feature so that cached
+  synthesis results are not used:
+
+    check_ip_cache -disable_cache
+
+  The following example gets the synthesis cache ID for the specified IP core:
+
+    check_ip_cache -get_id [get_ips clk_core]
+
+See Also:
+
+   *  get_ips
+   *  import_ip
+   *  set_property
+   *  synth_design
+   *  synth_ip
+   *  update_ip_catalog

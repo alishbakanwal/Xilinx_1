@@ -1,0 +1,48 @@
+
+Description:
+
+  Create a copy of an IP core that has been previously instanced into the
+  current project.
+
+Arguments:
+
+  -name <arg> - (Required) Specify the name of the new IP to be created.
+
+  -dir <arg> - (Optional) The path to a directory outside of the local
+  project to store the newly created IP. The specified directory must already
+  exist, or the command will return an error.
+
+  Note: If a directory is not specified, the new IP will be added to the
+  local project directory structure at <project_name> .srcs/sources_1/ip.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <object> - (Required) The IP object to copy. The copy_ip command can only
+  be used to copy a single IP core at one time. The IP must be specified as
+  an IP object returned by the get_ips command, and not simply referenced by
+  name.
+
+Example:
+
+  The following example create a copy of the FIFO core previously instanced
+  into the current project and writes it to the specified directory:
+
+    copy_ip -name newFIFO -dir C:/Data/new_IP [get_ips oldFIFO]
+
+See Also:
+
+   *  create_ip
+   *  get_ips
+   *  import_ip
+   *  read_ip

@@ -1,0 +1,31 @@
+
+Description:
+
+  Gets the character currently used for separating levels of hierarchy in the
+  design. You can set the hierarchy separator using the
+  set_hierarchy_separator command.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example gets the currently defined hierarchy separator:
+
+    get_hierarchy_separator
+
+See Also:
+
+   *  set_hierarchy_separator

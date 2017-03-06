@@ -1,0 +1,70 @@
+
+Description:
+
+  Send a message to the Tcl Console and the application log file.
+
+  Use this command to send a specific message from a Tcl script for instance,
+  under certain conditions.
+
+  The command returns the specified message.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <id> - (Optional) Defines the message ID, including a prefix name, and
+  numeric identifier. The ID consists of a pair of values: the first value
+  can be an alphanumeric (with an underscore), the second value must be a
+  number. The ID requires a dash between the two values, but cannot contain
+  any other non-alphanumeric characters.
+
+  <severity> - (Optional) Specifies the severity of the message to send.
+  There are five message severities:
+
+   *  ERROR - An ERROR condition implies an issue has been encountered which
+      will render design results unusable and cannot be resolved without user
+      intervention.
+
+   *  {CRITICAL WARNING} - A CRITICAL WARNING message indicates that certain
+      input/constraints will either not be applied or are outside the best
+      practices for a FPGA family. User action is strongly recommended.
+
+      Note: Since this is a two word value, it must be enclosed in {} or "".
+
+   *  WARNING - A WARNING message indicates that design results may be
+      sub-optimal because constraints or specifications may not be applied as
+      intended. User action may be taken or may be reserved.
+
+   *  INFO - An INFO message is the same as a STATUS message, but includes a
+      severity and message ID tag. An INFO message includes a message ID to
+      allow further investigation through answer records if needed.
+
+   *  STATUS - A STATUS message communicates general status of the process
+      and feedback to the user regarding design processing. A STATUS message
+      does not include a message ID.
+
+  <msg> - Defines the text of the message to send. The message must be
+  enclosed in quotes ("") or braces ({}).
+
+Examples:
+
+  The following are some examples messages:
+
+    send_msg_id {USER-23} "INFO" "This is a test message." 
+    send_msg_id 22-22 WARNING "This is it!" 
+    send_msg_id "MyApp-101" {CRITICAL WARNING} {Too much information.}
+
+See Also:
+
+   *  set_msg_limit

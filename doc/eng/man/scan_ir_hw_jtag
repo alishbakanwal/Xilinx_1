@@ -1,0 +1,136 @@
+
+Description:
+
+  The scan_ir_hw_jtag command specifies a scan pattern to be scanned into the
+  JTAG interface target instruction register.
+
+  The command targets a hw_jtag object which is created when the hw_target is
+  opened in JTAG mode through the use of the open_hw_target -jtag_mode
+  command.
+
+  When targeting the hw_jtag object prior to shifting the scan pattern
+  specified in the scan_ir_hw_jtag command, the last defined header property
+  (HIR) will be pre-pended to the beginning of the specified data pattern,
+  and the last defined trailer property (TIR) will be appended to the end of
+  the data pattern.
+
+  The options can be specified in any order, but can only be specified once.
+  The number of bits represented by the hex strings specified for -tdi, -tdo
+  , -mask, or -smask cannot be greater than the maximum specified by <length>
+  . Leading zeros are assumed for a hex string if the number of bits
+  represented by the hex strings specified is less than the <length>.
+
+  When shifting the bits into the target instruction register, the
+  scan_ir_hw_jtag command moves the JTAG TAP from the current stable state to
+  the IRSHIFT state according to the state transition table below:
+
+    
+    Current     Transitions to get to  
+    State       IRSHIFT state 
+    RESET       IDLE > DRSELECT > IRSELECT > IRCAPTURE > IRSHIFT 
+    IDLE        IRSELECT > IRCAPTURE > IRSHIFT 
+    DRPAUSE     DREXIT2 > DRUPDATE > DRSELECT > IRSELECT > IRCAPTURE > IRSHIFT 
+    IRPAUSE     IREXIT2 > IRSHIFT 
+    IRPAUSE*    IREXIT2 > IRUPDATE > DRSELECT > IRSELECT > IRCAPTURE > IRSHIFT
+
+  Note: * With -force_update option set.
+
+  After the last data bit is shifted into the target data register, the
+  scan_ir_hw_jtag command moves the JTAG TAP to the IDLE state, or to the
+  stable state defined by the run_state_hw_jtag command.
+
+  The scan_ir_hw_jtag command returns a hex array containing captured TDO
+  data from the hw_jtag, or returns an error if it fails.
+
+  The command raises an error that can be trapped by the Tcl catch command if
+  TDO data from the hw_jtag does not match specified -tdo argument.
+
+  Note: If TDO and MASK arguments are specified, then the mask is applied to
+  the -tdo option and the hw_jtag TDO data returned before comparing the two.
+
+Arguments:
+
+  -tdi <arg> - (Optional) The value to be scanned into the target, expressed
+  as a hex value. If this option is not specified, the -tdi value from the
+  last scan_ir_hw_jtag command will be used. The -tdi option must be
+  explicitly specified for the first scan_ir_hw_jtag command, and when the
+  <length> changes.
+
+  -tdo <arg> - (Optional) Specifies the data value, expressed as a hex
+  string, to be compared against the actual TDO value scanned out of the
+  hw_jtag instruction register. If this option is not specified no comparison
+  will be performed. If the -tdo option is not specified, the -mask option
+  will be ignored.
+
+  -mask <arg> - (Optional) The mask to use when comparing -tdo value against
+  the actual TDO value scanned out of the hw_jtag. A '1' in a specific bit
+  position indicates the bit value should be compared. A '0' indicates the
+  value should not be used for comparison. If -mask is not specified, the
+  -mask value from the last scan_ir_hw_jtag command will be used.
+
+  Note: If the <length> changes and the -mask option is not specified, the
+  -mask pattern used is all `1`s.
+
+  -smask <arg> - (Optional) The mask to use with -tdi data. A '1' in a
+  specific bit position indicates the TDI data in that bit position is
+  significant; a '0' indicates it is not. The -smask option will be applied
+  even if the -tdi option is not specified. If -smask is not specified, the
+  -smask value from the last scan_ir_hw_jtag command will be used.
+
+  Note: If the <length> changes and the -smask option is not specified, the
+  -smask pattern used is all `1`s.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <length> - (Required) A 32-bit unsigned decimal integer greater than 0,
+  specifying the number of bits to be scanned from the instruction register.
+
+Example:
+
+  The following example scans the JTAG instruction register for a 24 bit value:
+
+    
+    scan_ir_hw_jtag  24
+
+  The following example sends a 24 bit value 0x00_0010 (LSB first) to TDI,
+  then captures the TDO output, applies a mask with 0xF3_FFFF, and compares
+  the returned TDO value against the specified value -tdo 0x81_8181:
+
+    
+    scan_ir_hw_jtag  24 -tdi 000010 -tdo 818181 -mask F3FFFF -smask 0
+
+  This example pads the specified TDI value 0x3f with leading 0x:
+
+    scan_ir_hw_jtag 24 -tdi 3f
+
+  To break up a long instruction register shift into multiple shifts, specify
+  an end_state of IRPAUSE. This will cause the first scan_ir_hw_jtag command
+  to end in the IRPAUSE stable state, and then the subsequent scan_ir_hw_jtag
+  commands will go to IREXIT2 state before going back to IRSHIFT.
+
+    
+    run_state_hw_jtag IRPAUSE   
+    scan_ir_hw_jtag 8 -tdi aa   
+    scan_ir_hw_jtag 8 -tdi bb   
+    scan_ir_hw_jtag 8 -tdi cc   
+    scan_dr_hw_jtag 128 -tdi 0
+
+See Also:
+
+   *  connect_hw_server
+   *  current_hw_target
+   *  open_hw_target
+   *  run_state_hw_jtag
+   *  runtest_hw_jtag
+   *  scan_ir_hw_jtag

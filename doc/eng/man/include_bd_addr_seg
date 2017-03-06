@@ -1,0 +1,60 @@
+
+Description:
+
+  Reverses the exclusion of an AXI peripheral address segment from access by
+  the AXI master, and restores the address segment to a mapped state.
+
+  In the block design, address segments of AXI peripherals can have one of
+  three states:
+
+   *  Unmapped - An AXI peripheral, or slave interface, is connected to an
+      AXI master, but the peripheral has not been assigned an address segment
+      in the master's address space and is not visible to the master.
+
+   *  Mapped - The AXI peripheral is mapped into the AXI master`s address
+      space, assigned an address segment or range, and is accessible through
+      the master.
+
+   *  Excluded - The AXI peripheral is mapped to the AXI master, and has been
+      assigned an address segment, but is not accessible to the master. The
+      address segment that the AXI slave occupies within the master address
+      space is also considered filled.
+
+  The exclude_bd_addr_seg command lets you exclude specific address segments
+  from access by the AXI master they are mapped to. The include_bd_addr_seg
+  restores access to the mapped address segment.
+
+  This command returns nothing if successful, or returns an error if it failed.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <segment_to_include> - A single address segment object, bd_addr_seg, to
+  restore to the AXI master address space.
+
+Example:
+
+  The following example restores the AXI peripheral address segment for
+  access by its AXI master:
+
+    include_bd_addr_seg [get_bd_addr_segs microblaze_1/Data/SEG_axi_gpio_1_Reg]
+
+See Also:
+
+   *  assign_bd_address
+   *  create_bd_addr_seg
+   *  exclude_bd_addr_seg
+   *  get_bd_addr_segs
+   *  get_bd_addr_spaces

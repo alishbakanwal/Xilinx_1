@@ -1,0 +1,54 @@
+HW_AXI
+
+Description: 
+The JTAG to AXI Master core, or hw_axi object, is a customizable IP core that 
+works as an AXI Master to drive AXI transactions and drive AXI signals on the 
+Xilinx FPGA device, hw_device object. The AXI Master core supports AXI4 interfaces 
+and AXI-Lite protocol. The width of AXI data bus is configurable. The AXI core 
+can drive AXI4-Lite or AXI4 Memory mapped Slave through an AXI4 interconnect. The 
+core can also be connected to interconnect as the master.
+
+The JTAG to AXI Master core must be instantiated in the RTL code, from the Xilinx 
+IP catalog. Detailed documentation on the AXI core can be found in the LogiCORE IP 
+JTAG to AXI Master Product Guide (PG174). 
+
+Related Objects:
+The AXI Master cores can be added to a design in the RTL source files from the 
+Xilinx IP catalog. AXI cores can be found in the synthesized netlist design using 
+the get_debug_cores command. These are not the hardware AXI Master core objects, 
+hw_axi, found in the Hardware Manager feature of the Vivado Design Suite, though 
+they are related. 
+
+The HW_AXI core can be found in the Hardware Manager on the programmed hardware 
+device object, hw_device. You can query the hw_axi of the hw_device as follows:
+
+	get_hw_axis -of [get_hw_devices]
+
+In addition, the HW_AXI core has AXI transactions associated with the core that can 
+be queried as follows:
+
+	get_hw_axi_txns -of [get_hw_axis]
+
+Properties:
+You can use the report_property command to report the properties assigned to a 
+HW_AXI core. Refer to the Vivado Design Suite Tcl Command Reference (UG835) for 
+more information. The properties assigned to HW_AXI objects include the following, 
+with examples:  
+
+Property               Type    Read-only  Visible  Value
+CLASS                  string  true       true     hw_axi
+HW_CORE                string  true       false    core_8
+NAME                   string  true       true     hw_axi_1
+PROTOCOL               string  true       true     AXI4_Full
+STATUS.AXI_READ_BUSY   bool    true       true     0
+STATUS.AXI_READ_DONE   bool    true       true     0
+STATUS.AXI_WRITE_BUSY  bool    true       true     0
+STATUS.AXI_WRITE_DONE  bool    true       true     0
+STATUS.BRESP           string  true       true     OKAY
+STATUS.RRESP           string  true       true     OKAY
+
+To report the properties for a specific HW_AXI, you can copy and paste the following command 
+into the Vivado Design Suite Tcl shell or Tcl console:
+
+	report_property -all [lindex [get_hw_axis] 0]
+

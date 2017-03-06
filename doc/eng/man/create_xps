@@ -1,0 +1,53 @@
+
+Description:
+
+  Create an Embedded Processor source for use in the current project, and add
+  it to the source files.
+
+  This command will launch the Xilinx Platform Studio (XPS) to let you design
+  the hardware portion of the embedded processor system. In XPS you can
+  define and configure the microprocessor, peripherals, and the
+  interconnection of these components. After you exit XPS, the created files
+  for the Embedded Processor sub-design will be written to the local project
+  directory (<project_name>.srcs/sources_1/edk/<name> ), and added to the
+  source files.
+
+  For more information on using specific features of XPS refer to EDK
+  Concepts, Tools, and Techniques (UG683).
+
+  You can also add existing Xilinx Microprocessor Project (.xmp) files from
+  XPS in the current project using the add_files command.
+
+  The command returns the name of the Embedded Processor sub-design created.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <name> - (Required) The name of the Embedded Processor sub-design to create
+  and add to the current project.
+
+Examples:
+
+  The following example launches XPS to define and configure the specified
+  Embedded Processor sub-design:
+
+    create_xps xpsTest1
+
+See Also:
+
+   *  add_files
+   *  generate_target
+   *  list_targets
+   *  make_wrapper

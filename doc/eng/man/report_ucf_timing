@@ -1,0 +1,100 @@
+
+Description:
+
+  Report timing for designs with UCF constraints.
+
+Arguments:
+
+  -file <arg> - (Optional) Write the report into the specified file. The
+  specified file will be overwritten if one already exists, unless -append is
+  also specified.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -append - (Optional) Append the output of the command to the specified file
+  rather than overwriting it.
+
+  Note: The -append option can only be used with the -file option.
+
+  -name <arg> - (Optional) Specifies the name of the results set for the GUI.
+
+  -return_string - (Optional) Directs the output to a Tcl string rather than
+  to the standard output. The Tcl string can be captured by a variable
+  definition and parsed or otherwise processed.
+
+  Note: This argument cannot be used with the -file option.
+
+  -speed [ -1 | -2 | -3 ] - (Optional) Specify the speed grade for the device
+  to report. When not specified, the default is -2.
+
+  -from <args> - (Optional) The starting points of the timing paths to be
+  analyzed. Ports, pins, or cells can be specified as timing path
+  startpoints. You can also specify a clock object, and all startpoints
+  clocked by the named clock will be analyzed.
+
+  -to <args> - (Optional) The endpoints, or destination objects of timing
+  paths to be analyzed. Ports, pins, and cell objects can be specified as
+  endpoints. A clock object can also be specified, in which case endpoints
+  clocked by the named clock are analyzed.
+
+  -thru <args> - (Optional) Consider only paths through the specified pins,
+  cell instance, or nets during timing analysis. You can specify individual
+  -through points in sequence to define a specific path through the design
+  for analysis. The order of the specified through points is important to
+  define a specific path. You can also specify through points with multiple
+  objects, in which case the timing path can pass through any of the
+  specified through objects.
+
+  -min_max [ min | max ] - (Optional) Run max (setup) or min (hold) timing
+  analysis.
+
+  -transition [ rise | fall ] - (Optional) Report rising or falling edge
+  transitions.
+
+  -sort_by [ slack | group ] - (Optional) Sort timing paths in the report by
+  slack values, or by path group. Valid values are slack or group. By
+  default, the report_timing command reports the worst, or -nworst, timing
+  paths in the design. However, with -sort_by group, the report_timingcommand
+  returns the worst, or -nworst, paths of each path group.
+
+  Note: Each clock creates a path group. Path groups can also be defined with
+  the group_path command.
+
+  -interconnect_type <arg> - (Optional) Interconnect delay type
+
+  -max_paths <arg> - (Optional) The maximum number of paths to output when
+  sorted by slack; or the maximum number of paths per path group when sorted
+  by group, as specified by -sort_by. This is specified as a value greater
+  than or equal to 1. By default the report_timing command will report the
+  single worst timing path, or the worst path per path group.
+
+  -nworst <arg> - (Optional) The number of timing paths to output in the
+  timing report. The timing report will return the <N> worst paths based on
+  the specified value, greater than or equal to 1. The default setting is 1.
+
+  -required_times - (Optional) Calculate all required times.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example returns the timing:
+
+    report_ucf_timing
+
+See Also:
+
+   *  report_timing

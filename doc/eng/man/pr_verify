@@ -1,0 +1,84 @@
+
+Description:
+
+  This command is used to compare design checkpoint files for use in the
+  Partial Reconfiguration flow.
+
+  For Partial Reconfigurable designs to work in hardware, the placement and
+  routing of static logic must be consistent between all configurations. In
+  addition, proxy logic must be placed in the same locations and clock spine
+  routing must match. The pr_verify command compares routed design checkpoint
+  files (DCP) created for a Partial Reconfiguration design to verify that all
+  imported resources match. For more information refer to the Vivado Design
+  Suite User Guide: Partial Reconfiguration (UG909) .
+
+  The two modes for pr_verify let you specify two DCP files to compare, or
+  multiple DCP files to compare against the first DCP file. The syntax for
+  the two modes is:
+
+   *  pr_verify DCP1 DCP2
+
+   *  pr_verify -initial DCP1 -additional {DCP2 DCP3 DCP4}
+
+  The second mode is the same as repeating the pr_verify command to compare
+  each additional DCP with the initial DCP, but keeps the initial DCP open to
+  speed the additional comparisons:
+
+    pr_verify DCP1 DCP2 
+    pr_verify DCP1 DCP3 
+    pr_verify DCP1 DCP4
+
+  This command returns the results of the comparison, or returns an error if
+  it fails.
+
+Arguments:
+
+  -full_check - (Optional) Run a complete check of the two design checkpoints
+  to report all mismatched resources. By default the pr_verify command will
+  stop after the first mismatch since the two design checkpoints are not
+  valid for partial reconfiguration.
+
+  -file <arg> - (Optional) Write the comparison results into the specified
+  file. The specified file will be overwritten if one already exists.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -initial <arg> - (Optional) Specify the initial design checkpoint file to
+  use for comparison.
+
+  -additional <args> - (Optional) Specify one or more additional checkpoints
+  to compare against the -initial checkpoint. Multiple checkpoints should be
+  enclosed in quotes or braces.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <file1> - The first design checkpoint file to compare.
+
+  <file2> - The second design checkpoint file to compare.
+
+Examples:
+
+  The following example compares the two corner DCPs, specified with the
+  -additional option, against the inital DCP, running a full check on the
+  designs:
+
+    pr_verify -full_check -initial FastConfig.dcp \ 
+       -additional {corner1.dcp corner2.dcp}
+
+See Also:
+
+   *  read_checkpoint
+   *  write_checkpoint

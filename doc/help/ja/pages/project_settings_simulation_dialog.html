@@ -1,0 +1,72 @@
+﻿<html xml:lang="ja-jp" lang="ja-jp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="reference"/>
+<meta name="DC.Title" content="[Project Settings] ダイアログ ボックス : [Simulation] ページ"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_bqj_lqr_b5"/>
+<meta name="DC.Language" content="ja-JP"/>
+<link rel="stylesheet" type="text/css" href="../commonltr-ja.css"/>
+<title>[Project Settings] ダイアログ ボックス : [Simulation] ページ</title>
+</head>
+<body id="concept_bqj_lqr_b5">
+
+
+<h1 class="title topictitle1">[Project Settings] ダイアログ ボックス : [Simulation] ページ</h1>
+
+<div class="body refbody">
+<div class="section">
+<p class="p">[Project Settings] ダイアログ ボックスでは、デザイン フローを通して使用されるさまざまな設定に対して値を指定できます。設定ページは、合成、シミュレーション、インプリメンテーションなどのデザイン フローの手順別に分類されています。</p>
+
+<p class="p">[Simulation] ページでは、シミュレータ、言語、および詳細なシミュレーション設定が指定できます。</p>
+
+<ul class="ul" id="concept_bqj_lqr_b5__ul_azt_c5r_b5">
+<li class="li"><span Class="uicontrol">[Target simulator] : </span>シミュレーションに使用するシミュレータを指定します。デフォルトは Vivado<sup>®</sup> シミュレータですが、多くのサードパーティ シミュレータもサポートされています。詳細は、<cite class="cite">『Vivado Design Suite ユーザー ガイド : ロジック シミュレーション』</cite> (UG900) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug900-vivado-logic-simulation.pdf;a=xUsingThirdPartySimulators" target="_blank">このセクション</a>を参照してください。</li>
+
+<li class="li"><span Class="uicontrol">[Simulator language] : </span>シミュレータの言語モードを指定します。デザインのさまざまな IP に使用されるシミュレーション モデルは、IP でサポートされる言語によって異なります。詳細は、<cite class="cite">『Vivado Design Suite ユーザー ガイド : ロジック シミュレーション』</cite> (UG900) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug900-vivado-logic-simulation.pdf;a=xUnderstandingTheSimulatorLanguageOption" target="_blank">このセクション</a>を参照してください。</li>
+
+<li class="li"><span Class="uicontrol">[Simulation set] : </span>シミュレーション コマンドによりデフォルトで使用されるシミュレーション セットを指定します。</li>
+
+<li class="li"><span Class="uicontrol">[Simulation top module name] : </span>シミュレーション中に使用する別のトップ モジュール名を指定します。</li>
+
+<li class="li"><span Class="uicontrol">[Clean up simulation files] : </span>シミュレーション ディレクトリ全体が削除されるので、次の run がきれいなディレクトリで実行されます。</li>
+
+<li class="li"><span Class="uicontrol">[Compilation tab] : </span>Verilog および VHDL ソース ファイルをシミュレーション用にコンパイルするため、シミュレーション ファイルセットのプロパティとして格納され、<span Class="filepath">xvlog</span> および <span Class="filepath">xvhdl</span> ユーティリティで使用されるコンパイラ指示子を定義および管理できます。<ul class="ul" id="concept_bqj_lqr_b5__ul_fsm_lfk_w5">
+<li class="li"><span Class="uicontrol">[Verilog options] : </span>すべての識別子を大文字に設定したりできる [Verilog Options] ダイアログ ボックスを開いて、<span Class="filepath">'include</span> および <span Class="filepath">'define</span> 値を指定します。</li>
+
+<li class="li"><span Class="uicontrol">[Generics/Parameters options] : </span>VHDL ジェネリック値および Verilog パラメーター値を定義するための [Generics/Parameters] ダイアログ ボックスが開きます。</li>
+
+<li class="li"><span Class="uicontrol">[Properties] : </span>シミュレーション ファイルセットに格納するコンパイラ指示子プロパティが表示されます。表のプロパティを選択すると、そのプロパティの詳細が表示されます。</li>
+
+</ul>
+
+<div Class="note_important"><span class="importanttitle">重要:</span> Verilog オプションおよびジェネリック/パラメーター オプションは、<a class="xref" href="project_settings_general_dialog.html">[Project Settings] ダイアログ ボックスの [General] ページ</a>からも定義できます。[General] ページの設定はデザイン ソース ファイルセット (sources_1) に適用されます。 これは合成には影響しますが、シミュレーションには影響しません。</div>
+</li>
+
+<li class="li"><span Class="uicontrol">[Elaboration tab] : </span>エラボレーション指示子が定義および管理されます。これらの指示子はシミュレーション ファイルセットのプロパティとして格納され、<span Class="filepath">xelab</span> ユーティリティでシミュレーション スナップショットをエラボレートおよび生成する際に使用されます。表のプロパティを選択すると、そのプロパティの詳細が表示され、値を変更できます。</li>
+
+<li class="li"><span Class="uicontrol">[Simulation tab] : </span>シミュレーション指示子が定義および管理されます。これらの指示子はシミュレーション ファイルセットのプロパティとして格納され、<span Class="filepath">xsim</span> アプリケーションで現在のプロジェクトをシミュレーションする際に使用されます。表のプロパティを選択すると、そのプロパティの詳細が表示され、値を変更できます。</li>
+
+<li class="li"><span Class="uicontrol">[Netlist tab] : </span>Verilog ネットリストの SDF アノテーションおよび SDF 遅延で取り込まれるプロセス コーナーに関するネットリスト コンフィギュレーション オプションにアクセスできます。これらのオプションは、シミュレーション ファイルセットのプロパティとして格納され、シミュレーション用ネットリストを書き出す際に使用されます。</li>
+
+<li class="li"><span Class="uicontrol">[Advanced tab] : </span>シミュレーション用のすべてのデザイン ソースが含まれます。このオプションはオンのままにしておきます。</li>
+
+</ul>
+
+</div>
+
+<div class="section"><h2 class="title sectiontitle">関連項目</h2>
+<table cellpadding="4" cellspacing="0" summary="" id="concept_bqj_lqr_b5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow"> <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_bqj_lqr_b5__image_ifx_flv_c5" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">『Vivado Design Suite ユーザー ガイド : ロジック シミュレーション』</cite> (UG900) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug900-vivado-logic-simulation.pdf;a=xUsingSimulationSettings" target="_blank">「シミュレーション設定の使用」</a></td>
+ </tr>
+</table>
+
+</div>
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,119 @@
+
+Description:
+
+  This command allows the user to connect a specified net to one or more pins
+  or ports in the netlist of an open Synthesized or Implemented Design.
+
+  The connect_net command will also connect nets across levels of hierarchy
+  in the design, by adding pins and hierarchical nets as needed to complete
+  the connection. Added nets and pins can be assigned a custom basename to
+  make them easy to identify, or will be assigned a basename by the Vivado
+  tool.
+
+  Note: You can specify multiple nets, and a list of pins and ports to
+  connect those nets to, using a single connect_net command with the
+  -net_object_list option, to significantly speed the addition of multiple
+  nets to the current design.
+
+  Netlist editing changes the in-memory view of the netlist in the current
+  design. It does not change the files in the source fileset, or change the
+  persistent design on the disk. Changes made to the netlist may be saved to
+  a design checkpoint using the write_checkpoint command, or may be exported
+  to a netlist file such as Verilog, VHDL, or EDIF, using the appropriate
+  write_* command.
+
+  Note: Netlist editing is not allowed on the elaborated RTL design.
+
+Arguments:
+
+  -hierarchical - (Optional) Connect the net across different levels of the
+  hierarchy.
+
+  Note: If -hierarchical is not specified, attempting to connect to
+  hierarchical pins will fail with a warning.
+
+  -basename <arg> - (Optional) Specifies a custom name to use for any
+  hierarchical nets or pins that are needed to connect the specified net
+  across levels of the hierarchy. If this option is not used, the basename is
+  automatically derived from the net being connected.
+
+  -net <arg> - (Required) Specifies the net to connect.
+
+  Note: Although you can create a bus using the -from and -to arguments of
+  the create_net command, you must connect each bit of the bus separately
+  using the connect_net command.
+
+  -objects <args> - (Required) Specified the list of pins or ports to connect
+  the net to. You can connect a net to one or more pin or port objects.
+
+  -net_object_list <args> - (Optional) A list of multiple nets and the pins
+  and ports to connect those nets to. This option lets you connect multiple
+  nets with a single connect_net command. When -net_object_list is specified,
+  -net and -objects should not be specified, and will be ignored by the tool.
+  The nets and pin/port list are paired in the following form <codeph>{net1
+  {pin1 pin2...pinN} net2 {pin1 pin2} ...netN {pin1 pin2...pinN}}</codeph>:
+
+    -net_object_list {top_I[2] {I[2] a2_i/I} top_O[2] {O[2] a2_i/O} \ 
+       top_clk a2_i/clk}
+
+  Note: Although -net/-objects and -net_object_list are all listed as
+  optional, you must specify the net and objects to connect using one of
+  those argument forms.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Example:
+
+  The following example creates a port; creates a pin on the myDMA instance;
+  creates a net called myEnable; and connects the net to the newly created
+  port and pin:
+
+    create_port -direction IN enableIn 
+    create_pin -direction IN myDMA/en  
+    create_net myEnable 
+    connect_net -net myEnable -objects {enableIn myDMA/en}
+
+  The following example creates 32-bit bus ports, pins, and nets, then
+  connects them together one bit at a time using a for loop to connect each
+  bit individually:
+
+    create_port -from 0 -to 31 -direction IN dataIN 
+    create_pin -from 0 -to 31 -direction IN myDMA/data 
+    create_net -from 0 -to 31 dataBus 
+    for {set x 0} {$x<32} {incr x} { \ 
+       connect_net -net dataBus[$x] -objects [list dataIN[$x] myDMA/data[$x]] }
+
+  Note: Attempting to connect the dataBus will result in a "Net not found
+  error." Each bit of the bus must be separately connected.
+
+  This example creates a new cells, then uses the -net_object_list to connect
+  multiple nets in a single connect_net command:
+
+    
+    create_cell -ref inv a2_i 
+    connect_net -net_object_list {top_I[2] {I[2] a2_i/I} \ 
+       top_O[2] {O[2] a2_i/O} top_clk a2_i/clk}
+
+See Also:
+
+   *  create_net
+   *  create_pin
+   *  create_port
+   *  disconnect_net
+   *  remove_net
+   *  resize_net_bus
+   *  write_checkpoint
+   *  write_edif
+   *  write_verilog
+   *  write_vhdl

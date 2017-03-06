@@ -1,0 +1,82 @@
+﻿<html xml:lang="ja-jp" lang="ja-jp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="concept"/>
+<meta name="DC.Title" content="[ILA Settings] ウィンドウ"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_aqj_x3c_d5"/>
+<meta name="DC.Language" content="ja-JP"/>
+<link rel="stylesheet" type="text/css" href="../commonltr-ja.css"/>
+<title>[ILA Settings] ウィンドウ</title>
+</head>
+<body id="concept_aqj_x3c_d5">
+
+
+<h1 class="title topictitle1">[ILA Settings] ウィンドウ</h1>
+
+<div class="body conbody">
+<div class="section">
+<p class="p">このウィンドウは、<a class="xref" href="hw_ila_window.html#concept_aqj_x3c_d5">[Hardware ILA]</a> ダッシュボードに表示されるデフォルトの 5 つのウィンドウの 1 つで、現在のデバイスにプログラムされたした ILA (Integrated Logic Analyzer) デバッグ コアを選択して、オプションを設定できます。ILA コアを使用すると、デザインの特定の信号のプローブ、プログラムされたハードウェア イベントでのトリガー、ザイリンクス FPGA デバイスからのリアルタイムでのデータ キャプチャを実行できます。</p>
+
+<ul class="ul" id="concept_aqj_x3c_d5__ul_id4_12g_cx">
+<li class="li"><span Class="uicontrol">[Trigger Mode] : </span>デバッグ コアのトリガー イベントのタイプを指定します。<a class="xref" href="ila_trigger_window.html#concept_aqj_x3c_d5">[ILA Trigger Setup] ウィンドウ</a>で使用できるコマンドおよびオプションは、トリガー モードを [BASIC] タイプのトリガーにするか [ADVANCED] タイプのトリガーにするかによって異なります。<ul class="ul" id="concept_aqj_x3c_d5__ul_w4b_c2g_cx">
+<li class="li"><span Class="uicontrol">[BASIC_ONLY] : </span>トリガー条件は、関連の各 ILA プローブの各値を評価するのに使用したブール式の結果です。</li>
+
+<li class="li"><span Class="uicontrol">[BASIC_OR_TRIG_IN] : </span>ILA コアが、プローブ値を考慮するブール式またはコアの TRIG_IN ポートによりトリガーされます。</li>
+
+<li class="li"><span Class="uicontrol">[ADVANCED_ONLY] </span> : ILA コアが、ユーザー定義のトリガー ステート マシン (TSM) で定義されたアドバンス トリガー機能を持つよう設定されます。</li>
+
+<li class="li"><span Class="uicontrol">[ADVANCED_OR_TRIG_IN] : </span>ILA コアは、TMS またはコアの TRIG_IN ポートによりトリガーされます。</li>
+
+<li class="li"><span Class="uicontrol">[TRIG_IN_ONLY] : </span>ILA コアは、コアの TRIG_IN ポートによりトリガーされます。</li>
+
+</ul>
+</li>
+
+<li class="li"><span Class="uicontrol">[TRIG OUT mode] : </span>ILA コアの TRIG_OUT をいつどのように遷移するのかを指定します。ほかの ILA デバッグ コアの場合、TRIG_OUT 信号は入力トリガー メカニズムとして使用できます。<ul class="ul" id="concept_aqj_x3c_d5__ul_hsv_4vg_cx">
+<li class="li"><span Class="uicontrol">[DISABLED] : </span>ILA コアの TRIG_OUT ポートがディスエーブルになります。これがデフォルトです。</li>
+
+<li class="li"><span Class="uicontrol">[TRIGGER_ONLY] : </span>トリガー条件が満たされたときにのみ TRIG_OUT ポートが遷移されます。</li>
+
+<li class="li"><span Class="uicontrol">[TRIG_IN_ONLY] : </span>TRIG_IN 信号が遷移したときにのみ TRIG_OUT ポートが遷移されます。ILA コアのチェーンでトリガー イベントを伝搬する際に使用します。</li>
+
+<li class="li"><span Class="uicontrol">[TRIGGER_OR_TRIG_IN] : </span>トリガー条件が満たされたとき、または TRIG_IN が遷移したときに TRIG_OUT ポートを遷移します。</li>
+
+</ul>
+</li>
+
+<li class="li"><span Class="uicontrol">[Capture Mode] : </span>[ALWAYS] か [BASIC] に設定します。[ALWAYS] に設定すると、デバッグ コアのプローブのデータ サンプルが常にキャプチャおよび格納されます。[BASIC] に設定すると、条件が true の場合にのみデータ サンプルがキャプチャおよび格納されます。[BASIC] に設定した場合は、各プローブのキャプチャ条件が <a class="xref" href="ila_capture_window.html#concept_aqj_x3c_d5">[ILA Capture Setup] ウィンドウ</a>で定義できます。</li>
+
+<li class="li"><span Class="uicontrol">[Number of windows] : </span>キャプチャされたサンプル データを格納するためのデータ ウィンドウ数を指定します。最初のトリガー イベントからのデータで最初のウィンドウが一杯になると、続くウィンドウそれぞれにはその後のトリガー イベントまたはキャプチャ条件で順にデータが格納されます。</li>
+
+<li class="li"><span Class="uicontrol">[Window data depth] : </span>選択した ILA デバッグ コアがデータ ウィンドウでキャプチャ可能なデータ サンプル数を定義します。データの深さはデフォルトでその ILA デバッグ コアの MAX_DATA_DEPTH プロパティになり、コアが作成されたときに定義されます。データの深さは 1 からコアの MAX_DATA_DEPTH まで、2 のべき乗の整数として指定できます。</li>
+
+<li class="li"><span Class="uicontrol">[Trigger position in window] : </span>トリガー イベントよりも前にサンプル データをキャプチャできるようにする <span Class="uicontrol">[Window data depth]</span> に関連する整数値です。たとえば、データの深さが 1024 の場合、トリガー ポジションを 100 に設定すると、トリガー前の 100 個のデータ サンプルと残りのトリガー時およびトリガー後の 155 個のデータ サンプルをキャプチャできます。</li>
+
+<li class="li"><span Class="uicontrol">[General Settings] : </span>現在の ILA デバッグ コアに対する <span Class="uicontrol">[Refresh rate]</span> (更新頻度) をミリ秒で指定します。</li>
+
+</ul>
+
+</div>
+
+<div class="section"><h2 class="title sectiontitle">関連項目</h2>
+<table cellpadding="4" cellspacing="0" summary="" id="concept_aqj_x3c_d5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow"> <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_aqj_x3c_d5__image_exb_qcg_cx" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">『Vivado Design Suite ユーザー ガイド : プログラムおよびデバッグ』</cite> (UG908) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug908-vivado-programming-debugging.pdf;a=xUsingTheILADefaultDashboard" target="_blank">「ILA デフォルト ダッシュボードの使用」</a></td>
+ </tr>
+<tr class="strow"> <td valign="top" class="stentry"><img class="image" id="concept_aqj_x3c_d5__image_n5n_s3d_dx" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry"><cite class="cite">『Vivado Design Suite ユーザー ガイド : プログラムおよびデバッグ』</cite> (UG908) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug908-vivado-programming-debugging.pdf;a=xModifyingPropertiesOnTheDebugCores" target="_blank">「デバッグ コアのプロパティの変更」</a></td>
+ </tr>
+<tr class="strow"> <td valign="top" class="stentry"><img class="image" id="concept_aqj_x3c_d5__image_twh_kyy_yw" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry"><cite class="cite">『Vivado Design Suite Tcl コマンド リファレンス ガイド』</cite> (UG835) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xrun_hw_ila" target="_blank">「run_hw_ila」</a></td>
+ </tr>
+</table>
+
+</div>
+
+</div>
+
+
+</body>
+</html>

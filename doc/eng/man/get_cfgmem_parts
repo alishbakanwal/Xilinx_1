@@ -1,0 +1,137 @@
+
+Description:
+
+  Get a list of configuration flash memory devices supported by the Vivado
+  Design Suite or Vivado Lab Edition.
+
+  Xilinx FPGAs can be configured from an external nonvolatile memory device,
+  or they can be configured by an external smart source, such as a
+  microprocessor, DSP processor, microcontroller, PC, or board tester. The
+  two configuration datapaths include a serial datapath that is used to
+  minimize the device pin requirements for configuration, and a parallel
+  8-bit, 16-bit, or 32-bit datapath used for higher performance or link to
+  industry-standard interfaces ideal for external data sources like
+  processors, or x8- or x16-parallel flash memory.
+
+  The process whereby the design specific data is loaded or programmed into
+  the Xilinx<tm tmtype="reg"/> FPGA is called configuration. The
+  create_hw_cfgmem command defines a flash memory device used for configuring
+  and booting the hardware device.
+
+  After the hw_cfgmem object is created, and associated with the hw_device,
+  the configuration memory can be programmed with the bitstream and other
+  data from a memory configuration file created with the write_cfgmem
+  command. The hw_cfgmem object is programmed using the program_hw_cfgmem
+  command.
+
+  The configuration memory part can be used to define the hardware
+  configuration memory in the Hardware Manager of the Vivado Design Suite, to
+  enable programming and debugging the design in the FPGA hardware. Use the
+  create_hw_cfgmem command to define the configuration memory for use with
+  the current hardware device.
+
+  This command returns a list of cfgmem_part objects that match the specified
+  search criteria, or returns an error if it fails.
+
+Arguments:
+
+  -regexp - (Optional) Specifies that the search <patterns> are written as
+  regular expressions. Both search <patterns> and -filter expressions must be
+  written as regular expressions when this argument is used. Xilinx regular
+  expression Tcl commands are always anchored to the start of the search
+  string. You can add ".*" to the beginning or end of a search string to
+  widen the search to include a substring. See
+  http://perldoc.perl.org/perlre.html for help with regular expression
+  syntax.
+
+  Note: The Tcl built-in command regexp is not anchored, and works as a
+  standard Tcl command. For more information refer to
+  http://www.tcl.tk/man/tcl8.5/TclCmd/regexp.htm.
+
+  -nocase - (Optional) Perform case-insensitive matching when a pattern has
+  been specified. This argument applies to the use of -regexp only.
+
+  -filter <args> - (Optional) Filter the results list with the specified
+  expression. The -filter argument filters the list of objects returned by
+  get_cfgmem_parts based on property values on the cfgmem_parts objects. You
+  can find the properties on an object with the report_property or
+  list_property commands. In the case of the "cfgmem_part" object,
+  "COMPATIBLE_PARTS", "DATA_WIDTH", and "MEM_DENSITY" are some of the
+  properties that can be used to filter results.
+
+  The filter search pattern should be quoted to avoid having to escape
+  special characters that may be found in net, pin, or cell names, or other
+  properties. String matching is case-sensitive and is always anchored to the
+  start and to the end of the search string. The wildcard "*" character can
+  be used at the beginning or at the end of a search string to widen the
+  search to include a substring of the property value.
+
+  Note: The filter returns an object if a specified property exists on the
+  object, and the specified pattern matches the property value on the object.
+  In the case of the "*" wildcard character, this will match a property with
+  a defined value of "".
+
+  For string comparison, the specific operators that can be used in filter
+  expressions are "equal" (==), "not-equal" (!=), "match" (=~), and
+  "not-match" (!~). Numeric comparison operators <, >, <=, and >= can also be
+  used. Multiple filter expressions can be joined by AND and OR (&& and ||).
+  The following gets input pins that do NOT contain the "RESET" substring
+  within their name:
+
+    get_pins * -filter {DIRECTION == IN && NAME !~ "*RESET*"}
+
+  Boolean (bool) type properties can be directly evaluated in filter
+  expressions as true or not true:
+
+    -filter {IS_PRIMITIVE && !IS_LOC_FIXED}
+
+  -of_objects <arg> - (Optional) Get the cfgmem_parts of the specified part
+  or hw_device objects.
+
+  Note: The Vivado Lab Edition does not support part objects, and only
+  supports hw_device objects. The part or hw_device objects must be specified
+  as objects returned by get_parts, get_hw_devices, or current_hw_device
+  commands, rather than specified by name.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <patterns> - (Optional) Match cfgmem_parts against the specified patterns.
+  The default pattern is the wildcard `*` which gets a list of all
+  cfgmem_parts currently available in the Vivado Design Suite.
+
+Example:
+
+  The following example gets the cfgmem parts compatible with the current
+  hw_device:
+
+    get_cfgmem_parts -of_objects [current_hw_device]
+
+  The following example gets the cfgmem_part compatible with the target part,
+  filtered to return only the cfgmem_parts with more than a specified amount
+  of memory:
+
+    get_cfgmem_parts -of [get_parts [get_property PART [current_hw_device]]] \ 
+    -filter {MEM_DENSITY > 128}
+
+See Also:
+
+   *  create_hw_cfgmem
+   *  current_hw_device
+   *  delete_hw_cfgmem
+   *  get_hw_device
+   *  get_parts
+   *  get_property
+   *  program_hw_cfgmem
+   *  set_property
+   *  write_cfgmem

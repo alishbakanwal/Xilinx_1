@@ -1,0 +1,244 @@
+﻿<html xml:lang="en-us" lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="reference"/>
+<meta name="DC.Title" content="Report Power"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_bqj_lqr_b5"/>
+<link rel="stylesheet" type="text/css" href="../../commonltr.css"/>
+<title>Report Power</title>
+</head>
+<body id="concept_bqj_lqr_b5">
+
+
+ <h1 class="title topictitle1">Report Power</h1>
+
+    <div class="body refbody">
+        <div class="section">
+            <p class="p">The Report Power dialog box lets you generate a report of the power consumption of
+                the design. An important consideration for accurate power estimation is that the
+                operating parameters and design switching activity must be realistically
+                characterized. </p>
+
+            <p class="p">The Report Power dialog box includes the following tabs and options for
+                characterizing the design: </p>
+
+            <ul class="ul" id="concept_bqj_lqr_b5__ul_wgf_k2p_v5">
+                <li class="li"><a class="xref" href="#concept_bqj_lqr_b5__common">Common Options</a></li>
+
+                <li class="li"><a class="xref" href="#concept_bqj_lqr_b5__environment">Environment</a></li>
+
+                <li class="li"><a class="xref" href="#concept_bqj_lqr_b5__power">Power Supply</a></li>
+
+                <li class="li"><a class="xref" href="#concept_bqj_lqr_b5__switching">Switching</a></li>
+
+            </ul>
+
+        </div>
+
+        <div class="section" id="concept_bqj_lqr_b5__common"><h2 class="title sectiontitle">Common Options</h2>
+            
+            <p class="p">The common options do not appear in a tab but are present on the dialog box at all
+                times.</p>
+
+            <ul class="ul" id="concept_bqj_lqr_b5__ul_gc5_ccp_v5">
+                <li class="li"><span Class="uicontrol">Results name</span>: Specifies the name to apply to the report
+                    in Power Results window in the Vivado<sup>®</sup> IDE.</li>
+
+                <li class="li"><span Class="uicontrol">Output text file</span>: Specifies the name of an ASCII file to
+                    write the power results. </li>
+
+                <li class="li"><span Class="uicontrol">Output XPE file</span>: Specifies the name of an XML file for
+                    importing into Xilinx<sup>®</sup> Power Estimator spreadsheet tool. Refer
+                    to <cite class="cite">Xilinx Power Estimator User Guide</cite> (<a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug440-xilinx-power-estimator.pdf" target="_blank">UG440</a>) for more information.  </li>
+
+            </ul>
+
+        </div>
+
+        <div class="section" id="concept_bqj_lqr_b5__environment"><h2 class="title sectiontitle">Environment Tab</h2>
+            
+            <p class="p">The Environment tab lets you define the operating environment of the device. These
+                settings relate to the <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xset_operating_conditions" target="_blank">set_operating_conditions</a> Tcl command.</p>
+
+            <ul class="ul" id="concept_bqj_lqr_b5__ul_hl5_5qv_v5">
+                <li class="li"><span Class="uicontrol">Device Settings</span>: Specifies the operating parameters of
+                    the target device. <ul class="ul" id="concept_bqj_lqr_b5__ul_fjz_5ck_dv">
+                        <li class="li"><span Class="uicontrol">Temp grade</span>: Specifies the temperature grade of
+                            the target device. Supported values vary by device family.</li>
+
+                        <li class="li"><span Class="uicontrol">Process</span>: Specifies the manufacturing process
+                            corner to analyze. Valid values are "typical" or "maximum".</li>
+
+                    </ul>
+</li>
+
+                <li class="li"><span Class="uicontrol">Environment Settings</span>: Specifies the various environmental
+                    settings related to the operation of the device or the system it is used in. <ul class="ul" id="concept_bqj_lqr_b5__ul_vs2_hdk_dv">
+                        <li class="li"><span Class="uicontrol">Output Load</span>: Specifies external capacitance loads
+                            driven by the design. </li>
+
+                        <li class="li"><span Class="uicontrol">Junction temperature</span>: Specifies the device
+                            junction temperature. The value is calculated automatically. Enable the
+                            checkbox to manually enter a temperature specified in degrees
+                            Celsius.</li>
+
+                        <li class="li"><span Class="uicontrol">Ambient temperature</span>: The ambient temperature of
+                            the operating environment in degrees C.</li>
+
+                        <li class="li"><span Class="uicontrol">Effective Theta-JA</span>: The Theta-JA thermal
+                            resistance used for modeling in degrees C/W. The value is calculated
+                            automatically, but you can manually enter a value as needed.</li>
+
+                        <li class="li"><span Class="uicontrol">Airflow</span>: Linear Feet Per Minute (LFM) airflow to
+                            be used for modeling cooling. The default setting varies by device
+                            family.</li>
+
+                        <li class="li"><span Class="uicontrol">Heat sink</span>: Specifies the heat sink profile to be
+                            used for modeling cooling.</li>
+
+                        <li class="li"><span Class="uicontrol">Theta-SA</span>: The Theta-SA thermal resistance used
+                            during modeling in degrees C/W. The value is determined automatically
+                            from the heat sink selected. However, you can manually specify the
+                            Theta-SA if you select the custom heat sink.</li>
+
+                        <li class="li"><span Class="uicontrol">Board selection</span>: The board size to be used for
+                            modeling cooling. The valid values are: jedec, small, medium, large,
+                            custom.</li>
+
+                        <li class="li"><span Class="uicontrol">Number of board layers</span>: Estimates the number of
+                            layers the system board has. Valid values are: "4to7" for boards with 4
+                            to 7 layers, "8to11" for boards with 8 to 11 layers, "12to15" for boards
+                            with 12 to 15 layers, and "16+" for boards with 16 or more layers.</li>
+
+                        <li class="li"><span Class="uicontrol">Theta-JB</span>: The Theta-JB thermal resistance of the
+                            board specified in degrees C/W. The value is calculated automatically,
+                            but you can manually enter a value as needed.</li>
+
+                        <li class="li"><span Class="uicontrol">Board temperature</span>: The board temperature
+                            specified in degrees Celsius.</li>
+
+                    </ul>
+</li>
+
+            </ul>
+
+        </div>
+
+        <div class="section" id="concept_bqj_lqr_b5__power"><h2 class="title sectiontitle">Power Supply Tab</h2>
+            
+            <p class="p">The Power Supply tab lists voltage supply names and their specified values. Supported
+                voltage supply names and their values vary by family. The setting of these voltage
+                supplies also relates to the <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xset_operating_conditions" target="_blank">set_operating_conditions</a> Tcl command. </p>
+
+        </div>
+
+        <div class="section" id="concept_bqj_lqr_b5__switching"><h2 class="title sectiontitle">Switching Tab</h2>
+            
+            <p class="p">The Switching tab lets you define the signal rate and switching probability of the
+                device to be used when performing power estimation on the current design, as well as
+                setting the activity associated with specific device resources. These settings
+                relate to the <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xset_switching_activity" target="_blank">set_switching_activity</a> Tcl command. </p>
+
+            <p class="p">The switching activity of a design affects both the static and dynamic power
+                consumption. The static power is often dependent on logic state transitions, and the
+                dynamic power is directly proportional to the toggle rate.</p>
+
+            <ul class="ul" id="concept_bqj_lqr_b5__ul_ymb_c3p_v5">
+                <li class="li"><span Class="uicontrol">Simulation activity file</span>: Reads a Switching Activity
+                    Interchange Format (SAIF) file for use during power analysis or power
+                    optimization. The SAIF file will annotate the design nodes with switching
+                    activity and the Vivado tool will estimate power appropriately. The Vivado
+                    simulator can write an SAIF file, as described at this <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug900-vivado-logic-simulation.pdf;a=xPowerAnalysisUsingVivadoSimulator" target="_blank">link</a> in <cite class="cite">Vivado Design Suite User
+                        Guide: Logic Simulation</cite> (UG900). </li>
+
+                <li class="li"><span Class="uicontrol">Default Activity Settings</span>: <ul class="ul" id="concept_bqj_lqr_b5__ul_c1w_4mk_dv">
+                        <li class="li"><span Class="uicontrol">Default toggle rate</span>: The default toggle rate to
+                            be used in power analysis on the primary inputs of the current design. </li>
+
+                        <li class="li"><span Class="uicontrol">Default static probability</span>: The default static
+                            probability to be used in power analysis on the current design.</li>
+
+                    </ul>
+</li>
+
+                <li class="li"><span Class="uicontrol">Enable Rate Settings</span>: <ul class="ul" id="concept_bqj_lqr_b5__ul_l44_5mk_dv">
+                        <li class="li"><span Class="uicontrol">BRAM Port Enable</span>: Specify the Static Probability
+                            and Toggle Rate for the enable pins (ENARDEN/ENBWREN) of BRAMs. </li>
+
+                        <li class="li"><span Class="uicontrol">BRAM Write Enable</span>: Specify the Static Probability
+                            and Toggle Rate for write enables (WEA/WEBWE) of BRAMs.</li>
+
+                        <li class="li"><span Class="uicontrol">Bidi Output Port Enable</span>: Specify the Static
+                            Probability and Toggle Rate for the enable pin of bidirectional ports.
+                        </li>
+
+                    </ul>
+</li>
+
+                <li class="li"><span Class="uicontrol">Toggle Rate Settings</span>: <ul class="ul" id="concept_bqj_lqr_b5__ul_jzl_fnk_dv">
+                        <li class="li"><span Class="uicontrol">Primary Outputs</span>: Specify the Static Probability
+                            and Toggle Rate for the output ports of the design. </li>
+
+                        <li class="li"><span Class="uicontrol">Logic</span>: Specify the Static Probability and Toggle
+                            Rate for registers, shift registers, distributed and Block RAMs, LUTs,
+                            and DSPs. </li>
+
+                        <li class="li"><span Class="uicontrol">GTs</span>: Specify the Static Probability and Toggle
+                            Rate for GT receivers and transmitters. </li>
+
+                    </ul>
+</li>
+
+                <li class="li"><span Class="uicontrol">Constrained Clocks</span>: Lists the clock domains considered
+                    for analysis. This is informational only. </li>
+
+            </ul>
+
+            <p class="p">Click <span Class="uicontrol">OK</span> to run the power analysis with the specified values.
+            </p>
+
+        </div>
+
+        <div class="section"><h2 class="title sectiontitle">See Also</h2>
+            
+            <table cellpadding="4" cellspacing="0" summary="" id="concept_bqj_lqr_b5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow">
+                    <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_bqj_lqr_b5__image_lf4_qvj_p5" src="../../images/book_icon.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">Vivado Design Suite User Guide: Power Analysis and
+                            Optimization</cite> (UG907), <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug907-vivado-power-analysis-optimization.pdf;a=xReviewDeviceDesignSettingsAndAdjustActivityForKnownElements" target="_blank">Review Device/Design Settings and Adjust
+                            Activity for Known Elements</a></td>
+
+                </tr>
+<tr class="strow">
+                    <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_y3g_hbj_dv" src="../../images/book_icon.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry"><cite class="cite">Vivado Design Suite Tcl Command Reference Guide</cite> (UG835),
+                            <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xreport_power" target="_blank">report_power</a></td>
+
+                </tr>
+<tr class="strow">
+                    <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_yh1_s24_v5" src="../../images/play.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry"><a class="xref" href="http://www.xilinx.com/cgi-bin/docs/ndoc?t=video;d=hardware/power-estimation-analysis-using-vivado.html" target="_blank">Vivado Design Suite QuickTake Video:
+                            Power Estimation and Analysis using Vivado</a></td>
+
+                </tr>
+<tr class="strow">
+                    <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_uky_cck_dv" src="../../images/play.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry"><a class="xref" href="http://www.xilinx.com/cgi-bin/docs/ndoc?t=video;d=hardware/power-optimization-using-vivado.html" target="_blank">Vivado Design Suite QuickTake Video:
+                            Power Optimization using Vivado</a></td>
+
+                </tr>
+</table>
+
+        </div>
+
+    </div>
+
+
+</body>
+</html>

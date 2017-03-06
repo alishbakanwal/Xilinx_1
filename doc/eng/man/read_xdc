@@ -1,0 +1,106 @@
+
+Description:
+
+  Imports physical constraints from a Xilinx Design Constraints file (XDC).
+  The XDC can be imported at the top-level, which is the default, or applied
+  to specific cells, or to instances of a specific cell. When imported at the
+  top-level, the specified XDC file is added to the active constraint
+  fileset.
+
+  Note: Constraints from the XDC file will overwrite any current constraints
+  of the same name. Therefore, exercise some caution when reading a XDC file
+  to be sure you will not overwrite important constraints.
+
+  This command is similar to the add_files command in that the XDC file is
+  added by reference rather than imported into the local project directory.
+
+  You can use this command to read the contents of source files into the
+  in-memory design, when running the Vivado tool in Non Project mode, in
+  which there is no project file to maintain and manage the various project
+  source files. Refer to the Vivado Design Suite User Guide: Design Flows
+  Overview (UG892) for more information on Non Project mode.
+
+Arguments:
+
+  -cells <args> - (Optional) Apply the constraints from the XDC file to the
+  specified instance names. The constraints will be applied ONLY to the
+  specified cell instances, and the XDC file will not be added to the active
+  constraint fileset.
+
+  Note: A design must be open when specifying the -cells option.
+
+  -ref <arg> - (Optional) Read the constraints from the XDC file and apply
+  them to ALL instances of the referenced module, wherever they happen to be
+  instantiated in the current design.
+
+  -quiet_diff_pairs - (Optional) Suppress warnings about differential pair
+  inference when importing I/O constraints.
+
+  -mode [ default | out-of-context ] - (Optional) Import the specified
+  constraint files as in-context with the top-level design, or as
+  out_of_context constraints to be used when generating output products for
+  hierarchical modules or IP cores. For more information on the
+  out-of-context design flow, refer to the Vivado Design Suite User Guide:
+  Design Flows Overview (UG892).
+
+  Note: Out-of-context constraints should be added to specified cells or cell
+  instances.
+
+  -unmanaged - (Optional) Treat the added files as unmanaged Tcl constraint
+  files. The Vivado tool will not save constraint changes back into these
+  unmanaged Tcl files. For more information on unmanaged Tcl constraints,
+  refer to the Vivado Design Suite User Guide: Using Constraints (UG903).
+
+  -no_add - (Optional) Read the constraints from the file, and integrate them
+  into the in-memory design, but do not add the XDC file to the list of files
+  in the current constraint set.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <files> - (Required) The filenames of the XDC files to be imported.
+
+  Note: If the path is not specified as part of the file name, the tool will
+  search for the specified file in the current working directory and then in
+  the directory from which the tool was launched.
+
+Examples:
+
+  The following example reads the XDC file and applies it to the current
+  design:
+
+    read_xdc file_1.xdc
+
+  The following example reads the XDC file and applies it ALL instances of
+  the referenced module found in the current design:
+
+    read_xdc -ref hex2led file_2.xdc
+
+  The following example reads the XDC file and applies it ONLY to the
+  specified instance within the referenced module:
+
+    read_xdc -ref sixty -cells lsbcount file_3.xdc
+
+  The following example reads the XDC file and applies it to the specified
+  instances in the current design, even though they are instances of
+  different modules:
+
+    read_xdc -cells {one_decode sixty/msbcount} file_4.xdc
+
+  Note: Multiple cells must be enclosed in braces, {}, or quotes, "".
+
+See Also:
+
+   *  add_files
+   *  infer_diff_pairs
+   *  write_xdc

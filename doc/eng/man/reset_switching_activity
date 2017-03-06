@@ -1,0 +1,91 @@
+
+Description:
+
+  Resets the attributes of the switching activity on specified nets, ports,
+  pins, and cells in the design.
+
+  The switching activity is defined using the set_switching_activity command.
+  The current switching activity defined for a specific port, pin, net, or
+  cell can be found by using the report_switching_activity command.
+
+  Note: The reset_switching_activity is used to reset switching activity for
+  specified objects. Use set_switching_activity -default_toggle_rate or
+  -default_static_probability to change or reset the default values for the
+  current design.
+
+  This command operates silently and does not return direct feedback of its
+  operation.
+
+Arguments:
+
+  -default - (Optional) Reset the static probability and signal rate of the
+  specified object.
+
+  -type <arg> - (Optional) Reset the switching activity for the specified
+  type of logic entity. By default, the command is applied to the top-level
+  of the current design, or to the specified <objects>. The -type option
+  applies the command to the specified type of logic objects in the top-level
+  of the current design. The -all option, or -hier option, can be used to
+  modify the scope of objects the command applies to. Valid logic types
+  include:
+
+   *  io_output - Primary outputs.
+
+   *  io_bidir_enable - Enable pin of Bidir ports.
+
+   *  register - All register outputs in the design/hierarchy specified.
+
+   *  lut - All LUT outputs in the design/hierarchy specified.
+
+   *  lut_ram - All distributed ram outputs in the design/hierarchy specified.
+
+   *  dsp - All DSP outputs in the design/hierarchy specified.
+
+   *  bram_enable - Enable pins (ENARDEN/ENBWREN) of BRAMs.
+
+   *  bram_wr_enable - Write enables of BRAMs (WEA/WEBWE).
+
+   *  gt_txdata - Output TX data pins of all GTs.
+
+   *  gt_rxdata - Output RX data pins of all GTs.
+
+  -hier - (Optional) Reset the switching activity across all levels of the
+  specified hierarchical object. Without -hier, the switching activity is
+  applied to the specified <objects> at the current level of the hierarchy.
+
+  -all - (Optional) Must be used with -type, reset the switching activity on
+  nets within all instances of the specified -type of logic object.
+
+  -no_deassert_resets - (Optional) Disables the -deassert_resets option if it
+  was previously enabled using set_switching_activity.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <objects> - (Optional) The list of objects for which to reset the switching
+  activity. If not specified, the command resets the switching activity on
+  all objects.
+
+Examples:
+
+  The following example resets the signal_rate and static probability value
+  on all output ports:
+
+    reset_switching_activity -default [all_outputs]
+
+See Also:
+
+   *  power_opt_design
+   *  report_power
+   *  report_switching_activity
+   *  set_switching_activity

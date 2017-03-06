@@ -1,0 +1,65 @@
+
+Description:
+
+  This command upgrades the specified IP cores from an older version to the
+  latest version in the IP catalog.
+
+  You can only upgrade IP that explicitly supports upgrading. The
+  UPGRADE_VERSIONS property on the ipdef object indicates if there are
+  upgrade versions for an IP core.
+
+  Note: The upgrade_ip command also accepts Block Design cell IP instances by
+  name, bd_cell objects, or file location. The command upgrades the bd_cell
+  objects within the Block Design, and does not require the diagram to be
+  open in the Vivado IP Integrator feature.
+
+Arguments:
+
+  -srcset <arg> - (Optional) Specifies the source file set to upgrade the IP
+  files in. If not specified, the default source file set is sources_1.
+
+  -vlnv <arg> - (Optional) Specify the Vendor:Library:Name:Version attribute
+  of the IP to upgrade from the IP catalog. The VLNV attribute identifies the
+  object in the IP catalog.
+
+  -log <arg> - (Optional) Specifies the name of a file to append the IP
+  upgrade information to. By default the upgrade_ip command does not log its
+  activities.
+
+  Note: If the path is not specified as part of the file name, the log file
+  will be written into the current project directory.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <objects> - (Optional) Specifies which IP cores of Block Design cells to
+  upgrade. The IP must be specified as objects returned by the get_ips
+  command.
+
+  Note: Do not use the get_ips -all option, as this can result in recursion
+  issues.
+
+Examples:
+
+  The following example upgrades all IP cores in the current project to the
+  latest version:
+
+    upgrade_ip [get_ips]
+
+See Also:
+
+   *  create_ip
+   *  get_bd_cells
+   *  get_ips
+   *  import_ip
+   *  open_bd_design

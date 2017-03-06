@@ -1,0 +1,50 @@
+
+Description:
+
+  Reset the specified DRC checks to the defaults provided by the Vivado
+  Design Suite. This will restore the DRC check to its default configuration,
+  including any changes to the IS_ENABLED or SEVERITY properties.
+
+  The IS_ENABLED property can be modified on a specific DRC check to disable
+  the rule from being checked, even when it is specified either directly in
+  the report_drc command, or as part of a ruledeck.
+
+  The SEVERITY property is a string property that can be modified to change
+  the severity associated with a specific DRC rule when a violation is found
+  during the report_drc command. The supported values are: FATAL, ERROR,
+  "CRITICAL WARNING", WARNING, ADVISORY
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <checks> - (Required) The list of one or more DRC rule checks to reset to
+  the tool defaults.
+
+Examples:
+
+  The following example modifies the IS_ENABLED property for the ROAS-1 rule,
+  modifies the SEVERITY property for the RFFC-1 rule, and then restores the
+  default settings for all checks:
+
+    set_property IS_ENABLED false [get_drc_checks ROAS-1] 
+    set_property SEVERITY "Critical Warning" [get_drc_checks RFFC-1] 
+    reset_drc_check [get_drc_checks]
+
+See Also:
+
+   *  add_drc_checks
+   *  get_drc_checks
+   *  report_drc
+   *  set_property

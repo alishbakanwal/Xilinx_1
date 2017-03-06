@@ -1,0 +1,74 @@
+
+Description:
+
+  Indicates which HDL objects to write into the Value Change Dump (VCD) file.
+  In some designs the simulation results can become quite large; the log_vcd
+  command lets you define the specific content of interest. This command
+  models the behavior of the Verilog $dumpvars system task.
+
+  HDL objects include HDL signals, variables, or constants as defined in the
+  Verilog or VHDL testbench and source files. An HDL signal includes Verilog
+  wire or reg entities, and VHDL signals. Examples of HDL variables include
+  Verilog real, realtime, time, and event.
+
+  This command specifies which HDL objects and how many levels of design
+  hierarchy to write into the VCD file. The actual values of the objects are
+  written to the VCD file when you run the checkpoint_vcd or flush_vcd
+  commands at a specific time during simulation.
+
+  Note: You must use the open_vcd command before using any other *_vcd
+  commands.
+
+  Nothing is returned by this command.
+
+Arguments:
+
+  -level <arg> - (Optional) Specifies the number of levels of design
+  hierarchy to traverse when locating HDL objects to write to the VCD file.
+  The default value of 0 causes the tool to dump all values for the specified
+  HDL objects at the level of hierarchy defined by <hdl_objects>, and all
+  levels below that. A value of 1 indicates that only the level of hierarchy
+  specified by <hdl_objects> should be written to the VCD file.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <hdl_objects> - (Optional) Specifies the HDL objects to identify and write
+  changing values into the VCD file. The level of hierarchy is also
+  represented in the hdl_objects pattern. For instance /tb/UUT/* indicates
+  all HDL objects within the /tb/UUT level of the design.
+
+Examples:
+
+  Log value changes for all the ports from the scope /tb/UUT:
+
+    log_vcd [get_objects -filter { type == port } /tb/UUT/* ]
+
+  Note: Since -levels is not specified, all levels below the specified scope
+  will be searched for ports matching the specified pattern as well.
+
+  Log VCD for all the objects in the current_scope:
+
+    log_vcd * 
+    log_vcd [ get_objects *]
+
+  Log value changes for only internal signals with names starting with C, of
+  the root scope /tb/UUT:
+
+    log_vcd [get_objects -filter { type == internal_signal }./C*]
+
+See Also:
+
+   *  checkpoint_vcd
+   *  flush_vcd
+   *  open_vcd

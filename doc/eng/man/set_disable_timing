@@ -1,0 +1,77 @@
+
+Description:
+
+  Disables timing arcs within a specified cell or cells that lead to the
+  output pins of the cell. Only the I/O paths between the clock port and the
+  outputs of the cell are disabled.
+
+  The purpose of disabling a timing arc is to prevent timing analysis through
+  the arc.
+
+  If a <cell> is specified, then all timing arcs in that cell are disabled.
+  If the optional -from and -to arguments are specified, then the timing arcs
+  are defined by the from/to pins. If only -from is speified then all timing
+  arcs from that pin are disabled. If only -to is specified then all timing
+  paths to that pin are disabled.
+
+  If a <port> is specified, then all timing paths from a specified input port
+  are disabled, or timing paths to a specified output port are disabled.
+
+  Note: This command operates silently and does not return direct feedback of
+  its operation
+
+Arguments:
+
+  -from <pin_name> - (Optional) Specifies the source pin of an object cell.
+  The pin_name is specified by name only, without the need for the
+  hierarchical cell name, which is defined by the <object>.
+
+  -to <pin_name> - (Optional) Specifies the destination pin of an object
+  cell. The pin_name is specified by name only, without the need for the
+  hierarchical cell name, which is defined by the <object>.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <objects> - (Required) A list of one or more objects on which to disable
+  the timing arcs. Must be specified as Vivado objects returned by get_cells
+  or other appropriate Tcl commands. Can be any of the following types of
+  objects: cells, ports, pins, lib-cells, lib-pins, lib-cell/cell timing
+  arcs.
+
+Examples:
+
+  The following example disable the timing check between AX to AMUX pin of
+  cell abc:
+
+    
+    set_disable_timing -from C -to R [get_cells OpMode_pad_0_o_reg[0]]
+
+  The following example disables the timing arcs between the specified input
+  pin to the specified output pin of a BRAM cell:
+
+    
+    set_disable_timing -from WEBWE[3] -to CLKMEM [get_cells \ 
+       ldpc_dout360_channel/U_AP_FIFO_ldpc_dout360_channel_ram/mem_reg_0]
+
+  The following example disables all timing arcs of the specified cell:
+
+    set arcs [get_timing_arcs -of_objects [get_cells \ 
+       ldpc_dout360_channel/U_AP_FIFO_ldpc_dout360_channel_ram/mem_reg_0]] 
+    set_disable_timing $arcs
+
+See Also:
+
+   *  get_cells
+   *  get_timing_arcs
+   *  report_timing

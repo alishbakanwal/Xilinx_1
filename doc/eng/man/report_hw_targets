@@ -1,0 +1,48 @@
+
+Description:
+
+  This command returns properties related to the configuration of all
+  hw_targets on the current_hw_server object. The information reported by
+  this command includes:
+
+   *  Server Property Information: The properties of the current_hw_server,
+      including HOST and PORT.
+
+   *  Target Property Information: Reported for each target on the hw_server,
+      including NAME, FREQUENCY, DEVICE_COUNT, and SVF.
+
+   *  Device Property Information: Reported for each device on a specific
+      hw_target, including PART, ID CODE, IR LENGTH, MASK, PROGRAMMING and
+      PROBES FILE.
+
+  This command returns the requested information if successful, or returns an
+  error if it fails.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example reports the property information for all targets on
+  the connected hw_server:
+
+    report_hw_targets
+
+See Also:
+
+   *  connect_hw_server
+   *  create_hw_target
+   *  get_hw_targets
+   *  open_hw_targets

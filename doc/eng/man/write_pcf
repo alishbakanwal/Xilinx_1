@@ -1,0 +1,45 @@
+
+Description:
+
+  Writes a PCF file from the current constraints in the design. A PCF file is
+  an ASCII file with physical constraints defined by MAP, followed by
+  physical constraints defined by the user. The MAP section is rewritten
+  during every implementation pass. The order of constraints ensures that
+  user constraints are read last, and will override MAP constraints.
+
+  The PCF file is an optional input to PAR, the FPGA Editor, TRACE, NetGen,
+  and BitGen.
+
+Arguments:
+
+  -force - Overwrite the PCF file if it already exists.
+
+  <file> - The filename of the PCF file to write.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example creates a PCF file called designOut.pcf:
+
+    write_pcf designOut.pcf
+
+See Also:
+
+   *  read_ucf
+   *  write_ucf

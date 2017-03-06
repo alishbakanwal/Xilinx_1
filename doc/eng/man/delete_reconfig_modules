@@ -1,0 +1,44 @@
+
+Description:
+
+  Delete the specified reconfigurable modules (RMs) from the current project.
+
+  This command returns nothing if successful, or returns an error if the
+  command fails.
+
+Arguments:
+
+  -merge <arg> - (Optional) Specify the name of a fileset to merge files from
+  the deleted RM. The files will be moved from the deleted RM to the
+  specified fileset.
+
+  Note: If -merge is not specified, then all files in the deleted RM are
+  removed from the project.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <rms> - (Required) Specify one or more RM objects to remove from the
+  current project. The RMs can be specified by name, or as objects returned
+  by the get_reconfigurable_modules command.
+
+Example:
+
+  The following example deletes the specified RM:
+
+    delete_reconfig_modules usbBlock
+
+See Also:
+
+   *  create_reconfig_module
+   *  get_reconfig_modules

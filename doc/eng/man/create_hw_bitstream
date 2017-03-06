@@ -1,0 +1,98 @@
+
+Description:
+
+  Read a bitstream file, created with the write_bitstream command, to create
+  a hw_bitstream object, and associate that object with a hw_device object in
+  the Hardware Manager feature of the Vivado Design Suite.
+
+  The hw_bitstream object is associated with the specified hw_device through
+  the PROGRAM.HW_BITSTREAM property on the device. This property is
+  automatically set by the create_hw_bitstream command. The PROGRAM.FILE
+  property is also set to reflect the file path of the specified bitstream
+  file.
+
+  Note: A hw_bitstream object is also automatically created and associated
+  with a hw_device object when you use the program_hw_devices command.
+
+  The mask file written with the bitstream file, using the write_bitstream
+  -mask command, is associated through the MASK property on the hw_bitstream
+  object. The encryption key file required for use with encrypted bitstreams
+  is associated through the ENCRYPTION.FILE property on the hw_bitstream
+  object. These files are associated with the hw_bitstream object using the
+  -mask and -nky options.
+
+  The created hw_bitstream object can be removed with the delete_hw_bitstream
+  command.
+
+  This command returns the name of the hw_bitstream object created, or
+  returns an error if it fails.
+
+Arguments:
+
+  -hw_device <arg> - (Required) Specify the hw_device object to associate the
+  hw_bitstream object with. The hw_device must be specified as an object as
+  returned by the get_hw_devices or current_hw_device commands.
+
+  -mask <arg> - (Optional) Specify the mask file to use with the device
+  indicating which bits in the bitstream should be compared to readback data
+  for verification purposes. The mask file is written by the write_bitstream
+  -mask_file command, and is used by the verify_hw_bitstream command to
+  verify the programmed bitstream is correct. The specified mask is defined
+  with the MASK property on the created hw_bitstream object.
+
+  -nky <arg> - (Optional) Specify the encryption key file to program into the
+  eFUSE registers or battery backed-up SRAM (BBR). The encryption key defined
+  in the NKY file is written by the write_bitstream command, and is required
+  for use with an encrypted bitstream. The specified NKY file is defined with
+  the ENCRYPTION.FILE property on the created hw_bitstream object. The
+  encryption key value is extracted from the file and defined on the
+  ENCRYPTION.KEY property.
+
+  -detect_partial - (Optional) Detects a partial bitstream file created by
+  the write_bitstream -reference_bitfile command. This enables incremental
+  programming of the hardware device with the partial bitstream file.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <file> - (Required) The name of the bitstream file to read.
+
+  Note: If the path is not specified as part of the file name, the tool will
+  search for the specified file in the current working directory and then in
+  the directory from which the tool was launched.
+
+Example:
+
+  The following example creates a hw_bitstream object from the specified
+  bitstream file, and associates it with the current hw_device object:
+
+    create_hw_bitstream -hw_device [current_hw_device] C:/Data/design1.bit
+
+  The following example creates a hw_bitstream object for the current
+  hw_device, and specifies the mask file and encryption key file (nky) to
+  associate with the bitstream:
+
+    create_hw_bitstream -hw_device [current_hw_device] \ 
+    -mask ./project_cpu_encrypt.runs/impl_1/top.msk \ 
+    -nky ./project_cpu_encrypt.runs/impl_1/top.nky \ 
+    ./project_cpu_encrypt.runs/impl_1/top.bit
+
+See Also:
+
+   *  current_hw_device
+   *  delete_hw_bitstream
+   *  get_hw_devices
+   *  program_hw_devices
+   *  set_property
+   *  verify_hw_bitstream
+   *  write_bitstream

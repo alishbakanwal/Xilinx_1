@@ -1,0 +1,43 @@
+
+Description:
+
+  Create or open a Switching Activity Interchange Format (SAIF) file for
+  storing signal switching rates in the current simulation for later use by
+  the report_power command.
+
+  The Switching Activity Interchange format (SAIF) file is an ASCII file
+  containing header information, and toggle counts for the specified signals
+  of the design. It also contains the timing attributes which specify time
+  durations for signals at level 0, 1, X, or Z.
+
+  The SAIF file is recommended for power analysis since it is smaller than
+  the VCD file.
+
+  When an SAIF file has been opened, you can write the switching activity
+  from the simulation into the SAIF file using log_saif.
+
+  Only one SAIF can be open at one time during simulation. To close the SAIF
+  file, use the close_saif command.
+
+  This command returns the object ID of the opened SAIF file, or returns an
+  error if the command failed.
+
+Arguments:
+
+  -quiet - Execute the command quietly, ignore any command line errors, and
+  return no error messages if the command fails to execute.
+
+  -verbose - Suspends message limits during command execution.
+
+  <file_name> - Specifies the name of the SAIF file to open.
+
+Examples:
+
+  The following example opens the specified simulation:
+
+    open_saif myData.saif
+
+See Also:
+
+   *  close_saif
+   *  log_saif

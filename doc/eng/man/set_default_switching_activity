@@ -1,0 +1,79 @@
+
+Description:
+
+  Sets a default activity rate for a broad class of signals when performing
+  power estimation.
+
+  Note: This command operates silently and does not return direct feedback of
+  its operation.
+
+  The switching activity of a design affects both the static and dynamic
+  power consumption. The static power is often dependent on logic state
+  transitions, and the dynamic power is directly proportional to the toggle
+  rate or switching activity.
+
+  The current default switching activity attributes can be found by using the
+  report_default_switching_activity command. The values can be set to their
+  default values by using the reset_default_switching_activity command.
+
+  Use the set_switching_activity command to define the activity of one or
+  more signals, rather than the whole class.
+
+Arguments:
+
+  -toggle_rate <rate> - (Optional) The toggle rate describes how often the
+  output switches relative to the controlling clock. Valid values are between
+  0 and 200%. An output that switches once per clock cycle toggles at 100%.
+  The toggle rate is directly used for power calculation for the specified
+  type of signals.
+
+  -static_probability <value> - (Optional) The static probability or
+  percentage of the clock period that the output is at a logic value of `1`.
+  Valid values are 0 < value < 1. A value of 0 means the output is always 0
+  and a value of 1 means that the output is always 1. A clock port with a 50%
+  duty cycle would have for example a value of 0.5. The static probability is
+  used to calculate the propagation of the known switching activity (toggle
+  rate) through all the nodes of the design and is therefore essential to
+  perform power calculation.
+
+  Note: One or both of -static_probability or -toggle_rate must be specified
+  with the set_switching_activity command.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <type> - (Required) Specify the class of signals to apply the defined
+  switching activity to. Valid values are: input, input_set, input_reset,
+  input_enable, register, dsp, bram_read_enable, bram_write_enable,
+  output_enable, clock, all.
+
+Examples:
+
+  The following example specifies a toggle rate of 85% for all DSP blocks:
+
+    set_default_switching_activity -toggle_rate 85 dsp
+
+  The following example specifies the toggle rate and switching probability
+  for all supported types:
+
+    set_default_switching_activity -toggle_rate 19 -static_probability .22 all
+
+See Also:
+
+   *  power_opt_design
+   *  report_default_switching_activity
+   *  report_power
+   *  report_switching_activity
+   *  reset_default_switching_activity
+   *  reset_switching_activity
+   *  set_switching_activity

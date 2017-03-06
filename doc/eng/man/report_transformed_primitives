@@ -1,0 +1,53 @@
+
+Description:
+
+  Report the transformed primitives in the current design.
+
+  As part of the process of opening the Synthesized design, and loading it
+  into memory, the tool will transform legacy netlist primitives to the
+  supported subset of Unisim primitives.
+
+  As a default this report will be written to the standard output. However,
+  the report can also be written to a file or returned to a Tcl string
+  variable for further processing.
+
+Arguments:
+
+  -file <arg> - (Optional) Write the transformed primitives report into the
+  specified file. The specified file will be overwritten if one already
+  exists, unless -append is also specified.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -append - (Optional) Append the output of the command to the specified file
+  rather than overwriting it.
+
+  Note: The -append option can only be used with the -file option.
+
+  -return_string - (Optional) Directs the output to a Tcl string. The Tcl
+  string can be captured by a variable definition and parsed or otherwise
+  processed.
+
+  Note: This argument cannot be used with the -file option.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example reports the transformed primitives in the current
+  design, and returns the result to the specified Tcl variable:
+
+    set transPrim [ report_transformed_primitives -return_string ]

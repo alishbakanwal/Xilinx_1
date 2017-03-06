@@ -1,0 +1,76 @@
+
+Description:
+
+  The infer_diff_pairs command can be used in an I/O Pin Planning project,
+  after importing the I/O pin information using the read_csv or read_xdc
+  command.
+
+  There are several attributes that identify differential pairs in the file:
+  Signal Name, DiffPair Signal, DiffPair Type, and I/O Standard.
+
+  The tool will identify differential pairs using the following methods:
+
+   *  Matching Diff Pair - This is a direct definition of the two signals
+      which make up a differential pair. Two port entries, each have DiffPair
+      Signal values linking to the Signal Name of the other, and have
+      complementary DiffPair Type values, one N and one P. The tool checks to
+      ensure that the other attributes such as I/O Standard are compatible
+      when forming the diff pair.
+
+   *  Unmatched Diff Pair - Two port entries, with complementary DiffPair
+      Type values (one N, one P), but only one port has a DiffPair Signal
+      linking to the other Signal Name. The tool will create the differential
+      pair if all other attributes are compatible.
+
+   *  Single Port Diff Pair - A single port entry with a differential I/O
+      Standard, a DiffPair Type value, and a DiffPair Signal that does not
+      otherwise appear in the CSV. The tool will create the opposite side of
+      the differential pair (the N or P side), with all properties matching
+      those on the original port.
+
+   *  Inferred Diff Pair - Two ports entries, with Signal Names that imply
+      the N and P side. The tool will infer a differential pair if all other
+      attributes are compatible.
+
+  After reading the port definitions from a CSV or XDC file, the tool will
+  report that some differential pairs can be inferred from the data. You can
+  run the infer_diff_pairs command to infer these differential pairs if you
+  choose.
+
+Arguments:
+
+  -file_type [ csv | xdc ] - (Optional) Specify the type of file to import
+  when inferring differential pairs. The valid file types are CSV and XDC.
+  There is no default; the -file_type must be specified.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <file> - (Optional) The name of the file previously imported.
+
+  Note: If the path is not specified as part of the file name, the tool will
+  search for the specified file in the current working directory and then in
+  the directory from which the tool was launched.
+
+Examples:
+
+  The following example imports the specified XDC file, and then infers
+  differential pairs from the file:
+
+    read_xdc C:/Vivado_Install/io_1.xdc 
+    infer_diff_pairs C:/Vivado_Install/io_1.xdc -file_type xdc
+
+See Also:
+
+   *  read_csv
+   *  read_xdc

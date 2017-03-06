@@ -1,0 +1,42 @@
+
+Description:
+
+  Specify the size limit, in bytes, of the Value Change Dump (VCD) file. This
+  command operates like the Verilog $dumplimit simulator directive.
+
+  When the specified file size limit has been reached, the dump process
+  stops, and a comment is inserted into the VCD file to indicate that the
+  file size limit has been reached.
+
+  Note: You must run the open_vcd command before using the limit_vcd command.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <filesize> - (Required) Specify the file size limit of the open VCD file in
+  bytes.
+
+Examples:
+
+  The following example limits the current VCD file:
+
+    limit_vcd 1000
+
+See Also:
+
+   *  checkpoint_vcd
+   *  flush_vcd
+   *  log_vcd
+   *  open_vcd

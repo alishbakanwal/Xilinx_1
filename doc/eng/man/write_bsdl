@@ -1,0 +1,58 @@
+
+Description:
+
+  Generate a Boundary Scan Description Language (BSDL) file (.bsd) for the
+  current design that reflects the post-configuration boundary scan
+  architecture of the target device.
+
+  The boundary scan architecture for the device is changed when the device is
+  configured because certain connections between the boundary scan registers
+  and pad may change. These changes must be communicated to the boundary scan
+  tester through a post-configuration BSDL file. Refer to the Vivado Design
+  Suite User Guide: Programming and Debugging (UG908) for more information on
+  the available configuration modes.
+
+  The write_bsdl command reads a pre-configuration BSDL file for the target
+  part from the Vivado Design Suite installation area, and combines that with
+  post-configuration data from the current design.
+
+  This command returns the name of the output BSDL file, or returns an error
+  if it fails.
+
+Arguments:
+
+  -force - (Optional) Overwrite an existing BSDL file of the same name.
+
+  -bsd <arg> - (Optional) Specify an existing BSDL file to update. Use this
+  to update a generic BSDL file from the Vivado Design Suite installation
+  with post-configuration data from the current design.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <file> - (Required) Specify the output file name. The .bsd extension is
+  optional.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+Example:
+
+  The following example writes a BSDL file at the specified location:
+
+    write_bsdl -force C:/Data/project/design1.bsd
+
+See Also:
+
+   *  write_bitstream

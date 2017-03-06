@@ -1,0 +1,59 @@
+
+Description:
+
+  Refreshes the in-memory view of the device by scanning for debug and IBERT
+  cores on the specified hw_device object, and also reads a probe file when
+  directed.
+
+  The Hardware Manager in the Vivado Design Suite creates, deletes, or
+  updates the hw_ila, hw_vio, hw_sio*, and hw_axi objects based on the core
+  information found in the device, and also what is read from the probes file
+  in the case of ILA and VIO debug cores.
+
+  Use the refresh_hw_device after the program_hw_devices to keep the
+  in-memory hardware debug objects in sync with the state of the actual cores
+  on the physical device.
+
+Arguments:
+
+  -update_hw_probes <arg> - (Optional) Update the probes file (.ltx)
+  associated with the specified device by reading the specified probes file.
+
+  Note: The probes file is associated with a hw_device object through the use
+  of the set_property command to define the PROBES.FILE property.
+
+  -disable_done_check - (Optional) Disable the DONE check to enable the
+  hardware manager to scan for debug cores on the current device, even if the
+  DONE pin status is low. A High signal on the DONE pin indicates completion
+  of the configuration sequence. The DONE check waits for the high state on
+  the DONE pin to confirm configuration is complete.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <hw_device> - (Optional) Specify the hw_device object to refresh. The
+  hw_device must be specified as an object as returned by the get_hw_devices
+  or the current_hw_device commands. If the hardware device is not specified,
+  the current_hw_device will be returned.
+
+Example:
+
+  The following example refreshes the specified hw_device:
+
+    refresh_hw_device [lindex [get_hw_devices] 0]
+
+See Also:
+
+   *  current_hw_device
+   *  get_hw_devices
+   *  program_hw_devices

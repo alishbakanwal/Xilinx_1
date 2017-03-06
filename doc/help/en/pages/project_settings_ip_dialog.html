@@ -1,0 +1,233 @@
+﻿<html xml:lang="en-us" lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="reference"/>
+<meta name="DC.Title" content="Project Settings - IP"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_bqj_lqr_b5"/>
+<link rel="stylesheet" type="text/css" href="../../commonltr.css"/>
+<title>Project Settings - IP</title>
+</head>
+<body id="concept_bqj_lqr_b5">
+
+
+    <h1 class="title topictitle1">Project Settings - IP</h1>
+
+ <div class="body refbody">
+     <div class="section">
+            <p class="p">The Project Settings dialog box allows you to specify values for various settings
+                used throughout the design flow. The settings are grouped according to the steps in
+                the design flow, such as synthesis, simulation, and implementation. </p>
+
+            <p class="p">The IP settings include the following tabs to configure the current project:</p>
+
+            <ul class="ul" id="concept_bqj_lqr_b5__ul_vbq_wsj_w5">
+                <li class="li"><a class="xref" href="#concept_bqj_lqr_b5__general">General</a></li>
+
+                <li class="li"><a class="xref" href="#concept_bqj_lqr_b5__repository">Repository
+                        Manager</a></li>
+
+                <li class="li"><a class="xref" href="#concept_bqj_lqr_b5__packager">Packager</a></li>
+
+            </ul>
+
+        </div>
+
+        <div class="section" id="concept_bqj_lqr_b5__general"><h2 class="title sectiontitle">General</h2>
+            
+            <p class="p">The General tab includes the following fields:</p>
+
+            <ul class="ul" id="concept_bqj_lqr_b5__ul_imx_ktp_w5">
+                <li class="li"><span Class="uicontrol">Use Core Containers for IP</span>: Specifies the use of the
+                    compressed core container for IP output products to create a single consolidated
+                    file for IP management. Refer to this <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=current;d=ug896-vivado-ip.pdf;a=xUsingACoreContainerForCommonFiles" target="_blank">link</a> in the <cite class="cite">Vivado Design Suite
+                        User Guide: Designing with IP</cite> (UG896) for more information. </li>
+
+                <li class="li"><span Class="uicontrol">Use Precompiled IP Simulation Libraries</span>: Uses
+                    pre-compiled simulation libraries to save time and disk space when generating
+                    output products. When this feature is disabled, static IP simulation libraries
+                    are created for each design. </li>
+
+                <li class="li"><span Class="uicontrol">Automatically Generate Simulation Scripts for IP</span>:
+                    Generates simulation scripts for individual IP when generating output products.
+                    You can disable this option if generating simulation scripts for individual IP
+                    takes too much time or you are not interested in simulating individual IP.</li>
+
+                <li class="li"><span Class="uicontrol">Generate Log File</span>: Create a log file reporting details of
+                    the IP Upgrade process. The default log file name is
+                        <span Class="filepath">ip_upgrade.log</span>. </li>
+
+                <li class="li"><span Class="uicontrol">Log File Location</span>: Specifies the location of the log file
+                    to generate when upgrading IP. The default location is inside the current
+                    project, or the last location you specified. </li>
+
+                <li class="li"><span Class="uicontrol">Default IP Location</span>: Specifies the default location to
+                    write new IP customizations added to the current project. The default location
+                    is inside the current project directory structure, but you can specify a
+                    location outside of the project structure to facilitate reuse and source
+                    management. Refer to this <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=current;d=ug896-vivado-ip.pdf;a=xCreatingAnIPCustomization" target="_blank">link</a> in the <cite class="cite">Vivado Design Suite
+                        User Guide: Designing with IP</cite> (UG896) for more information. </li>
+
+                <li class="li"><span Class="uicontrol">IP Cache</span>: The IP cache stores synthesis results for
+                    out-of-context IP and lets you leverage those results when creating IP with the
+                    same customization options. You can point multiple projects to the same IP Cache
+                    location to avoid re-running synthesis for IP customizations that are the same.
+                    See this <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=current;d=ug896-vivado-ip.pdf;a=xSettingTheIPCache" target="_blank">link</a> in the <cite class="cite">Vivado Design Suite
+                        User Guide: Designing with IP</cite> (UG896) for more information. <ul class="ul" id="concept_bqj_lqr_b5__ul_cbv_lqr_y5">
+                        <li class="li"><span Class="uicontrol">Cache scope</span>: Specifies the synthesis cache as
+                            disabled, or local to this project, or remote for use by many projects. </li>
+
+                        <li class="li"><span Class="uicontrol">Cache location</span>: Specifies the directory location
+                            for a remote cache. </li>
+
+                    </ul>
+</li>
+
+            </ul>
+
+        </div>
+
+        <div class="section" id="concept_bqj_lqr_b5__repository"><h2 class="title sectiontitle">Repository Manager</h2>
+            
+            <p class="p">The Repository Manager tab lets you specify folders to add to the Vivado IP Catalog
+                as repositories of user-defined or third-party IP. This tab includes the following
+                fields:</p>
+
+            
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="concept_bqj_lqr_b5__table_rdz_bvv_y5" class="table" frame="void" border="0" rules="none">
+                    
+                    
+                    
+                    <tbody class="tbody">
+                        <tr class="row">
+                            <td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_bqj_lqr_b5__image_etm_bhl_w5" src="../../images/add_button.png"/></td>
+
+                            <td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Add</span></td>
+
+                            <td class="entry" align="left" valign="top" width="73.4959349593496%">Opens a file browser to select folders to add as IP repositories.
+                                The Vivado tools scan selected folders and open the Add Repository
+                                dialog box to summarize the number of IP and Interfaces found.
+                            </td>
+
+                        </tr>
+
+                        <tr class="row">
+                            <td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_bqj_lqr_b5__image_wnn_dhl_w5" src="../../images/Remove1.png"/></td>
+
+                            <td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Remove</span></td>
+
+                            <td class="entry" align="left" valign="top" width="73.4959349593496%">Removes the selected folder from the repository. </td>
+
+                        </tr>
+
+                        <tr class="row">
+                            <td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_bqj_lqr_b5__image_wwn_2hl_w5" src="../../images/up.png"/></td>
+
+                            <td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Move up</span></td>
+
+                            <td class="entry" align="left" valign="top" width="73.4959349593496%">Moves the selected folder up in the displayed list. </td>
+
+                        </tr>
+
+                        <tr class="row">
+                            <td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_bqj_lqr_b5__image_xg2_3ml_w5" src="../../images/down.png"/></td>
+
+                            <td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Move down</span></td>
+
+                            <td class="entry" align="left" valign="top" width="73.4959349593496%">Moves the selected folder down in the displayed list. <div Class="note_important"><span class="importanttitle">Important:</span> The tool issues a warning if the IP
+                                    repositories contain duplicate IP. IP from the last IP
+                                    repository listed overwrites any earlier IP definitions. </div>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+</div>
+
+        </div>
+
+        <div class="section" id="concept_bqj_lqr_b5__packager"><h2 class="title sectiontitle">Packager</h2>
+            
+            <p class="p">The Packager tab lets you specify defaults to use when packaging IP. Refer to this
+                    <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=current;d=ug1118-vivado-creating-packaging-custom-ip.pdf;a=xUsingThePackagerSettings" target="_blank">link</a> in the <cite class="cite">Vivado Design Suite User
+                    Guide: Creating and Packaging IP</cite> (UG1118) for more information. </p>
+
+            <ul class="ul" id="concept_bqj_lqr_b5__ul_nsy_yhr_w5">
+                <li class="li"><span Class="uicontrol">Default Values</span>: Specifies the default values for
+                    user-defined IP.  <ul class="ul" id="concept_bqj_lqr_b5__ul_hmt_13r_w5">
+                        <li class="li"><span Class="uicontrol">Vendor</span>: Specifies the Vendor name to apply for
+                            custom-packaged IP. </li>
+
+                        <li class="li"><span Class="uicontrol">Library</span>: Specifies the Library name to assign to
+                            the IP. <div Class="note_tip"><span class="tiptitle">Tip:</span> The Vendor and Library, along with the Name and
+                                Version assigned to the specific packaged IP, define the unique VLNV
+                                identifier for the IP. </div>
+</li>
+
+                        <li class="li"><span Class="uicontrol">Category</span>: Specifies a category for the IP to be
+                            sorted into in the Vivado IP Catalog. </li>
+
+                        <li class="li"><span Class="uicontrol">IP Location</span>: Specifies the location to write
+                            packaged IP to. This location should be added to the Repository Manager. </li>
+
+                    </ul>
+</li>
+
+                <li class="li"><span Class="uicontrol">After Packaging</span>: Specifies the tool behavior after
+                    packaging the IP. <ul class="ul" id="concept_bqj_lqr_b5__ul_xsy_d3r_w5">
+                        <li class="li"><span Class="uicontrol">Create archive</span></li>
+
+                        <li class="li"><span Class="uicontrol">Add IP to the IP Catalog</span>
+                        </li>
+
+                        <li class="li"><span Class="uicontrol">Close IP Packager window</span></li>
+
+                    </ul>
+</li>
+
+                <li class="li"><span Class="uicontrol">Edit IP in IP Packager</span>: Specifies what to do with the
+                    Package IP project when finished packaging the IP. <ul class="ul" id="concept_bqj_lqr_b5__ul_vhq_j3r_w5">
+                        <li class="li"><span Class="uicontrol">Delete project after packaging</span></li>
+
+                    </ul>
+</li>
+
+                <li class="li"><span Class="uicontrol">File Extensions to Filter on Add Directory</span>: Specifies the
+                    file extensions of interest when defining IP file groups. </li>
+
+            </ul>
+
+        </div>
+
+  <div class="section"><h2 class="title sectiontitle">See Also</h2>
+   
+      <table cellpadding="4" cellspacing="0" summary="" id="concept_bqj_lqr_b5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow">
+                    <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_bqj_lqr_b5__image_ifx_flv_c5" src="../../images/book_icon.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">Vivado Design Suite User Guide: Designing with IP</cite> (UG896),
+                            <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug896-vivado-ip.pdf;a=xUsingIPProjectSettings" target="_blank">Using IP Project
+                        Settings</a></td>
+
+                </tr>
+<tr class="strow">
+                    <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_alw_vtq_w5" src="../../images/book_icon.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry"><cite class="cite">Vivado Design Suite User Guide: Using the Vivado IDE</cite>
+                        (UG893), <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug893-vivado-ide.pdf;a=xConfiguringTheEnvironment" target="_blank">Configuring Project
+                        Settings</a></td>
+
+                </tr>
+</table>
+
+  </div>
+
+ </div>
+
+
+</body>
+</html>

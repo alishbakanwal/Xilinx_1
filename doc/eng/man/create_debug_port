@@ -1,0 +1,92 @@
+
+Description:
+
+  Defines a new port to be added to an existing Vivado ILA debug core that
+  was added to the design using the create_debug_core command. The port
+  provides connection points on an ILA core to attach nets from the design
+  for debugging.
+
+  When a new debug core is created using the create_debug_core command, it
+  includes a CLK and PROBE port by default. However, you can add trigger
+  input/output port types as well. Refer to the Vivado Design Suite User
+  Guide: Programming and Debugging (UG908) for more information on port types
+  and purpose.
+
+  A port can have one or more connection points to support one or more nets
+  to debug. As a default new ports are defined as having a width of 1,
+  allowing only one net to be attached. You can change the port width of
+  PROBE ports to support multiple signals using the set_property port_width
+  command (see Examples).
+
+  Note: CLK, TRIG_IN, TRIG_IN_ACK, TRIG_OUT, and TRIG_OUT_ACK ports can only
+  have a width of 1.
+
+  You can connect signals to ports using the connect_debug_port command, and
+  disconnect signals with the disconnect_debug_port command.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <name> - (Required) The name of the ILA debug core to add the new port to.
+  The debug core must already exist in the project having been created with
+  create_debug_core.
+
+  <type> - (Required) The type of debug port to insert. The supported port
+  types are:
+
+   *  CLK - Defines the clock port for connecting the ILA debug core to a
+      clock domain. Each debug core can only have one CLK port, and each CLK
+      port can only connect to one clock domain. Therefore you must use
+      multiple ILA cores to probe signals from different clock domains.
+
+      Note: Ensure that the connected clocks are free-running clocks. Failure
+      to do so could result in an inability to communicate with the debug
+      core when the design is loaded onto the device.
+
+   *  PROBE - Provides probe points to connect to signals that are marked for
+      debugging with the MARK_DEBUG property. The ILA debug core can contain
+      multiple PROBE ports, which are automatically numbered by the Vivado
+      tool when the port is added to the core. Each PROBE port can contain
+      one or more channels, or connection points, as defined by the
+      PORT_WIDTH property.
+
+   *  TRIG_IN/TRIG_IN_ACK, and TRIG_OUT/TRIG_OUT_ACK - The ILA probe trigger
+      comparators used to detect specific comparison conditions on the PROBE
+      inputs to the ILA core. TRIG_IN and TRIG_IN_ACK, and TRIG_OUT and
+      TRIG_OUT_ACK should be added to the debug core as port pairs when used.
+      Refer to the Vivado Design Suite User Guide: Programming and Debugging
+      (UG908) for more information.
+
+Examples:
+
+  The following example creates a new debug core, and then adds an additional
+  PROBE port to the core, then sets the width of that new port to 8, and
+  connects signals to the PROBE port:
+
+    create_debug_core myCore ila 
+    create_debug_port myCore PROBE 
+    set_property PORT_WIDTH 8 myCore/PROBE1  
+    connect_debug_port -channel_start_index 1 myCore/PROBE1 \ 
+    {m1_cyc_i m1_ack_o m1_err_o m1_rty_o}
+
+  Note: Recall that the ILA core is created with a CLK and PROBE port by
+  default, so the new PROBE port is automatically numbered as PROBE1.
+
+See Also:
+
+   *  connect_debug_port
+   *  create_debug_core
+   *  disconnect_debug_port
+   *  set_property

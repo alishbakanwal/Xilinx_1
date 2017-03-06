@@ -1,0 +1,65 @@
+
+Description:
+
+  Refreshes the in-memory view of all of the properties, or specified
+  properties, of the specified hw_mig objects with values read from the
+  current hardware device.
+
+  The refresh command takes the values from the memory controller implemented
+  on the hardware device, and populates them into the appropriate properties
+  of the hw_mig debug core in the Vivado logic analyzer, or standalone Vivado
+  Lab Edition.
+
+  At least one object is required. If properties are specified that do not
+  exist in the object, that property will not be refreshed.
+
+  This command updates the properties on the hw_mig object, but otherwise
+  returns nothing if successful. The command returns an error if it fails.
+
+Arguments:
+
+  -regexp - (Optional) The list of properties to refresh is defined using
+  regular expression.
+
+  -properties <args> - (Optional) Refresh the specified property or
+  properties of the hw_mig object. As a default behavior, if no properties
+  are specified, all properties of the specified object or objects will be
+  refreshed from the current values on the hardware device.
+
+  Note: If a non-existent property is specified, that property is ignored.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <hw_objects> - (Optional) Inputs can be any hw_mig, hw_device, hw_target,
+  or hw_server object.
+
+  Note: The objects must be specified using the appropriate get_hw_xxx
+  command, for instance get_hw_migs, rather than specified by name.
+
+Example:
+
+  The following example refreshes all of the properties of the memory IP in
+  the Vivado logic analyzer with the properties from the current hw_device:
+
+    refresh_hw_mig [lindex [get_hw_migs] 0]
+
+See Also:
+
+   *  commit_hw_mig
+   *  connect_hw_server
+   *  current_hw_device
+   *  get_hw_migs
+   *  implement_mig_cores
+   *  report_hw_migs
+   *  set_property

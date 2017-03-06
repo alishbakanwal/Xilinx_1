@@ -1,0 +1,72 @@
+
+Description:
+
+  Refreshes the in-memory view of all of the properties, or specified
+  properties, of the specified hw_sio objects with values read from the
+  actual object on the hardware device.
+
+  Specified objects can include any serial I/O object such as GTs, RXs, TXs,
+  PLLs, or Commons, excluding hw_sio_scan and hw_sio_sweep objects. SIO
+  objects also include device, target, or server hardware objects.
+
+  The refresh_hw_sio command reads the values of the specified objects on the
+  hardware device, and applies the value to the associated property of the
+  IBERT core in the Hardware Manager.
+
+  This command returns no feedback of its operation if successful, or returns
+  an error if it fails.
+
+Arguments:
+
+  -regexp - (Optional) The list of properties to refresh is defined using
+  regular expression.
+
+  -properties <args> - (Optional) Refresh the specified property or
+  properties of the hw_sio objects. As a default behavior, if no properties
+  are specified, all properties of the specified object or objects will be
+  refreshed from the current values on the hardware device.
+
+  Note: If a non-existent property is specified, that property is ignored.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <hw_objects> - (Required) Specify one or more hw_sio objects to refresh.
+  The hw_sio objects must be specified as objects returned by on of the
+  get_hw_sio_* commands.
+
+Example:
+
+  The following example refreshes all properties on the specified hw_sio_gt
+  object:
+
+    refresh_hw_sio [get_hw_sio_gts *MGT_X0Y11]
+
+  The following example refreshes all of the properties on all of the hw_sio
+  objects on the current hardware device:
+
+    refresh_hw_sio [current_hw_device]
+
+See Also:
+
+   *  current_hw_device
+   *  get_hw_devices
+   *  get_hw_servers
+   *  get_hw_sio_commons
+   *  get_hw_sio_gts
+   *  get_hw_sio_iberts
+   *  get_hw_sio_sio_link
+   *  get_hw_sio_plls
+   *  get_hw_sio_txs
+   *  get_hw_targets
+   *  report_property

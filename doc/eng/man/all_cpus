@@ -1,0 +1,56 @@
+
+Description:
+
+  Returns a list of all CPU cell objects in the current design. Creates a
+  list of all the CPU cell objects that have been declared in the current
+  design.
+
+  The list of CPUs returned by all_cpus can also be limited or reduced by the
+  filter command to filter according to properties assigned to the CPU cell
+  objects. Properties of an object can be returned by the list_property or
+  report_property commands.
+
+  The all_cpus command is scoped to return the objects hierarchically, from
+  the top-level of the design or from the level of the current instance. By
+  default the current instance is defined as the top level of the design, but
+  can be changed by using the current_instance command.
+
+  Note: This command returns a list of CPU cell objects
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example returns all CPU objects in the current design:
+
+    all_cpus
+
+  The following example shows how the list returned can be passed to another
+  command:
+
+    set_false_path -from [all_cpus] -to [all_registers]
+
+See Also:
+
+   *  all_dsps
+   *  all_hsios
+   *  all_registers
+   *  current_instance
+   *  filter
+   *  get_cells
+   *  list_property
+   *  report_property
+   *  set_false_path

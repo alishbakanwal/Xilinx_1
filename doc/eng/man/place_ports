@@ -1,0 +1,85 @@
+
+Description:
+
+  Assign ports to the pins of the Xilinx FPGA package, by automatically or
+  manually placing ports.
+
+   *  Automatically places ports on an available I/O or clocking site, or
+      into the specified I/O banks.
+
+   *  Manually assigns ports to the specified package_pin when both the port
+      and pin are specified.
+
+  The place_ports command will not replace ports that are currently placed by
+  the user, or ports that are placed and fixed.
+
+  Note: This command operates silently and does not return direct feedback of
+  its operation.
+
+Arguments:
+
+  -skip_unconnected_ports - (Optional) Do not place unconnected ports.
+
+  -check_only - (Optional) Run the clock placer DRCs, which are also
+  available as PLCK checks in the report_drc command. This option does not
+  result in ports being placed, only checked for valid placement.
+
+  -iobank <args> - (Optional) Place the specified ports into the listed IO
+  bank objects. IO bank objects are returned by the get_iobanks command.
+
+  Note: Limiting port placement to specific IO banks will result in a
+  placement error if there are insufficient placement sites for the number of
+  ports being placed.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <ports> - (Optional) The names of the ports to be placed.
+
+   *  If no <ports> are specified, all unplaced ports will be placed.
+
+   *  Ports can be specified in <port_name> and <package_pin> pairs to
+      manually assign ports to the specified package_pin. Multiple port_name
+      package_pin pairs can be specified as follows:
+
+        {<port_name1> <package_pin1> 
+         <port_name2> <package_pin2>  
+        <port_name2> <package_pin2>... 
+        port_nameN> <package_pinN> }
+
+  Note: If previously placed ports are specified, or included in the list of
+  ports to place, the Vivado tool will not replace or move those ports.
+
+Examples:
+
+  The following example places the port objects returned by the get_ports
+  command, onto I/O bank 13 of the device, as returned by get_iobanks:
+
+    place_ports -iobank [get_iobanks 13] [get_ports DataOut_pad_1_o]
+
+  The follow example uses port_name package_pin pairs to manually place
+  multiple ports:
+
+    place_ports {LEDS_n[2] AA11 LEDS_n[3] AA10 LEDS_n[0] Y11 LEDS_n[1] Y10}
+
+  The following example places all input ports onto I/O banks 12, 13, 14 and
+  15 of the device:
+
+    place_ports -iobank [get_iobanks {12 13 14 15}] [all_inputs]
+
+See Also:
+
+   *  create_port
+   *  get_iobanks
+   *  make_diff_pair_ports
+   *  remove_port

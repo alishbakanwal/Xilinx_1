@@ -1,0 +1,65 @@
+
+Description:
+
+  Write the populated hw_sio_scan object after run_hw_sio_scan completes.
+
+  To analyze the margin of a given link, it is often helpful to run a scan of
+  the link using the specialized Eye Scan hardware of Xilinx UltraScale
+  devices or 7 Series FPGAs. The Vivado serial I/O analyzer feature lets you
+  to create, run, and save link scans.
+
+  This command saves the scan to disk after completing the scan run. The
+  format of the file is a CSV file of values observed while running the scan.
+
+  This command returns the filename of the file output, or returns an error
+  if the command fails.
+
+Arguments:
+
+  -force - (Optional) Overwrite the specified file if it already exists.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <file> - (Required) The filename of the scan file to write. The default
+  suffix of .csv will be assigned to the scan file if a suffix is not
+  specified.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  <hw_sio_scan> - (Required) Specify a hw_sio_scan object to write to disk.
+  The hw_sio_scan must be specified as an object as returned by the
+  get_hw_sio_scans command.
+
+Example:
+
+  The following example writes the specified hw_sio_scan object to disk, over
+  writing a file of the same name if one exists:
+
+    write_hw_sio_scan -force C:/Data/Vivado_Debug/LoopBack_1.csv \ 
+    [get_hw_sio_scans {SCAN_3}]
+
+See Also:
+
+   *  create_hw_sio_scan
+   *  create_hw_sio_sweep
+   *  get_hw_sio_scans
+   *  get_hw_sio_sweeps
+   *  run_hw_sio_scan
+   *  run_hw_sio_sweep
+   *  remove_hw_sio_scan
+   *  stop_hw_sio_scan
+   *  wait_on_hw_sio_scan
+   *  write_hw_sio_scan

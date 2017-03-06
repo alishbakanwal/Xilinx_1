@@ -1,0 +1,122 @@
+
+Description:
+
+  Returns the JTAG to AXI Master core objects, or hw_axi objects, defined on
+  the current hardware device.
+
+  The JTAG to AXI Master is a customizable IP core that works as an AXI
+  Master to drive AXI transactions and drive AXI signals that are internal to
+  the hardware device. This IP can be used in Vivado<tm tmtype="reg"/> IP
+  Integrator or can be instantiated from the Xilinx IP catalog into the HDL
+  of a Vivado project. Run-time interaction with this core requires the use
+  of the Vivado<tm tmtype="reg"/> logic analyzer feature.
+
+  The JTAG-AXI core supports all memory-mapped AXI interfaces, except
+  AXI4-Stream, and supports the AXI-Lite protocol. The AXI interface can be
+  defined as a property of the core. The width of the AXI data bus is
+  customizable. This IP can drive any AXI4-Lite or Memory Mapped Slave
+  directly, and can also be connected as the AXI Master to the interconnect.
+  Detailed documentation on the IP core can be found in the LogiCORE IP JTAG
+  to AXI Master Product Guide (PG174). A tutorial showing its use can be
+  found in the Vivado Design Suite Tutorial: Programming and Debugging
+  (UG936) .
+
+  AXI cores can be found in the synthesized or implemented design netlist
+  using the get_debug_cores command. This will return instances of the debug
+  cores in the design that are related to the hw_axi objects, and other debug
+  cores on the hw_device.
+
+  This command returns a list of AXI Master core objects, hw_axis, on the
+  hw_device, or returns an error if it fails.
+
+Arguments:
+
+  -of_objects <arg> - (Optional) Return the AXI Master cores of the specified
+  hardware devices. The devices must be specified as objects using the
+  get_hw_devices or the current_hw_device commands.
+
+  Note: The -of_objects option requires objects to be specified using the
+  get_* commands, such as get_cells or get_pins, rather than specifying
+  objects by name. In addition, -of_objects cannot be used with a search
+  <pattern>.
+
+  -regexp - (Optional) Specifies that the search <patterns> are written as
+  regular expressions. Both search <patterns> and -filter expressions must be
+  written as regular expressions when this argument is used. Xilinx regular
+  expression Tcl commands are always anchored to the start of the search
+  string. You can add ".*" to the beginning or end of a search string to
+  widen the search to include a substring. See
+  http://perldoc.perl.org/perlre.html for help with regular expression
+  syntax.
+
+  Note: The Tcl built-in command regexp is not anchored, and works as a
+  standard Tcl command. For more information refer to
+  http://www.tcl.tk/man/tcl8.5/TclCmd/regexp.htm.
+
+  -nocase - (Optional) Perform case-insensitive matching when a pattern has
+  been specified. This argument applies to the use of -regexp only.
+
+  -filter <args> - (Optional) Filter the results list with the specified
+  expression. The -filter argument filters the list of objects returned by
+  get_hw_axis based on property values on the AXI Master cores. You can find
+  the properties on an object with the report_property or list_property
+  commands. In the case of the "hw_axi" object, "NAME" and "PROTOCOL" are two
+  of the properties that can be used to filter results.
+
+  The filter search pattern should be quoted to avoid having to escape
+  special characters that may be found in net, pin, or cell names, or other
+  properties. String matching is case-sensitive and is always anchored to the
+  start and to the end of the search string. The wildcard "*" character can
+  be used at the beginning or at the end of a search string to widen the
+  search to include a substring of the property value.
+
+  Note: The filter returns an object if a specified property exists on the
+  object, and the specified pattern matches the property value on the object.
+  In the case of the "*" wildcard character, this will match a property with
+  a defined value of "".
+
+  For string comparison, the specific operators that can be used in filter
+  expressions are "equal" (==), "not-equal" (!=), "match" (=~), and
+  "not-match" (!~). Numeric comparison operators <, >, <=, and >= can also be
+  used. Multiple filter expressions can be joined by AND and OR (&& and ||).
+  The following gets input pins that do NOT contain the "RESET" substring
+  within their name:
+
+    get_pins * -filter {DIRECTION == IN && NAME !~ "*RESET*"}
+
+  Boolean (bool) type properties can be directly evaluated in filter
+  expressions as true or not true:
+
+    -filter {IS_PRIMITIVE && !IS_LOC_FIXED}
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <patterns> - (Optional) Match hw_axi objects against the specified
+  patterns. The default pattern is the wildcard `*` which gets a list of all
+  hw_axis available on the current hardware device.
+
+Example:
+
+  The following example gets the ILA debug cores defined on the current
+  hardware device:
+
+    
+    get_hw_axis -of_objects [current_hw_device]
+
+See Also:
+
+   *  connect_hw_server
+   *  current_hw_device
+   *  program_hw_devices
+   *  set_property

@@ -1,0 +1,66 @@
+﻿<html xml:lang="ja-jp" lang="ja-jp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="reference"/>
+<meta name="DC.Title" content="[Add Interfaces] ページ"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_bqj_lqr_b5"/>
+<meta name="DC.Language" content="ja-JP"/>
+<link rel="stylesheet" type="text/css" href="../commonltr-ja.css"/>
+<title>[Add Interfaces] ページ</title>
+</head>
+<body id="concept_bqj_lqr_b5">
+
+
+<h1 class="title topictitle1">[Add Interfaces] ページ</h1>
+
+<div class="body refbody">
+<div class="section">
+<p class="p">このページでは、スレーブ/マスター インターフェイス ピンおよび割り込みピンを AXI4 ペリフェラルに追加して設定できます。</p>
+
+<ul class="ul" id="concept_bqj_lqr_b5__ul_azt_c5r_b5">
+<li class="li"><span Class="uicontrol">[Enable Interrupt Support] : </span>IP に割り込みピンを追加する場合にオンにします。生成された IP では、エッジまたはレベル割り込みがサポートされます。</li>
+
+<li class="li"><span Class="uicontrol">[Add Interface]</span> : 追加するインターフェイスがリストされている中央のウィンドウ上部にある緑色のプラス記号 (<img class="image" id="concept_bqj_lqr_b5__image_z3s_qs5_c5" src="../../images/add_button.png"/>) をクリックして新しいインターフェイス ピンをペリフェラル IP に追加します。</li>
+
+<li class="li"><span Class="uicontrol">[Remove Interface]</span> : ペリフェラル IP からインターフェイス ピンを削除するには、赤色のマイナス記号 (<img class="image" id="concept_bqj_lqr_b5__image_ocp_k55_c5" src="../../images/Remove1.png"/>) をクリックします。</li>
+
+<li class="li"><span Class="uicontrol">[Name] : </span>中央ウィンドウで選択されているインターフェイスの名前を指定します。</li>
+
+<li class="li"><span Class="uicontrol">[Interface Type] : </span>AXI インターフェイスのインターフェイス タイプを指定します。サポートされているインターフェイス タイプは AXI4、AXI4-Lite、および AXI4-Stream です。詳細は、<a class="xref" href="http://japan.xilinx.com/ipcenter/axi4.htm#details" target="_blank">「AXI4 の詳細」</a>を参照してください。</li>
+
+<li class="li"><span Class="uicontrol">[Interface Mode] : </span>選択したインターフェイスのモードを <span Class="uicontrol">[Slave]</span> または <span Class="uicontrol">[Master]</span> に設定します。</li>
+
+<li class="li"><span Class="uicontrol">[Data Width (Bits)] : </span>AXI4 インターフェイスの読み出し/書き込みデータ幅を定義します。データ幅の単位はビットで、選択した AXI4 インターフェイスによって異なります。使用可能な値から適切なデータ幅を選択します。</li>
+
+<li class="li"><span Class="uicontrol">[Memory Size (Bytes)] : </span>メモリ サイズ (MEMORY_SIZE) の単位はバイトで、AXI4 スレーブ インターフェイスでのみサポートされます。使用可能な値から適切なメモリ サイズを選択します。</li>
+
+<li class="li"><span Class="uicontrol">[Numb er of Registers] : </span>レジスタ (NUM_REG) 数の指定は、AXI4-Lite スレーブ インターフェイスでのみサポートされています。</li>
+
+</ul>
+
+<p class="p">AXI4 ペリフェラル IP にインターフェイス ピンを追加し、コンフィギュレーションが完了したら、<span Class="uicontrol">[Next]</span> をクリックして <a class="xref" href="create_and_package_new_ip_create_peripheral_wizard.html">[Create Peripheral] ページ</a>に進みます。</p>
+
+</div>
+
+<div class="section"><h2 class="title sectiontitle">関連項目</h2>
+<table cellpadding="4" cellspacing="0" summary="" id="concept_bqj_lqr_b5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow"> <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_bqj_lqr_b5__image_smm_1vr_b5" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">『Vivado<sup>®</sup> Design Suite ユーザー ガイド : カスタム IP の作成およびパッケージ』</cite> (UG1118) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug1118-vivado-creating-packaging-custom-ip.pdf;a=xCreatingANewAXI4Peripheral" target="_blank">「AXI4 ペ リ フ ェ ラルの新規作成」</a></td>
+ </tr>
+<tr class="strow"> <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_pzc_mrk_35" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry"><cite class="cite">『Vivado Design Suite AXI リファレンス ガイド』</cite> (<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/ipdoc?c=axi_ref_guide;v=latest;d=ug1037-vivado-axi-reference-guide.pdf;a=xCreatingANewAXI4Peripheral" target="_blank">UG1037</a>)</td>
+ </tr>
+<tr class="strow"> <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_av4_jvr_b5" src="../../images/play.png" alt="Icon"/></td>
+ <td valign="top" class="stentry"><a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/ndoc?t=video;d=hardware/creating-an-axi-peripheral-in-vivado.html" target="_blank">Vivado Design Suite QuickTake ビデオ : Vivado での AXI ペリフェラルの作成</a></td>
+ </tr>
+</table>
+
+</div>
+
+</div>
+
+
+</body>
+</html>

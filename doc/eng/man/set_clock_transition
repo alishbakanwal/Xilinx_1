@@ -1,0 +1,58 @@
+
+Description:
+
+  Defines transition times in nanoseconds (ns) on register clock pins in the
+  fanout of the specified clocks. This command is primarily used to specify
+  the slew of the clock. Slew is the amount of time it takes for a signal to
+  change from low to high or from high to low.
+
+  This command is applicable only for ideal clocks. Once the design is
+  implemented the clock latency can be propagated using the
+  set_propagated_clock command, and the ideal clock can be ignored.
+
+  Note: This command operates silently and does not return direct feedback of
+  its operation.
+
+Arguments:
+
+  -rise - (Optional) Specify transition times for rising clock edges.
+
+  -fall - (Optional) Specify transition time for falling clock edges.
+
+  -min - (Optional) Specify clock rise and fall minimum transition times.
+
+  -max - (Optional) Specify clock rise and fall maximum transition times.
+
+  Note: The -min and -max options are mutually exclusive.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <transition> - The transition time in nanoseconds of the register pins
+  clocked by the specified clocks.
+
+  <clocks> - A list of clocks on which to apply the transition. The
+  <transition> is applied to the register pins on the specified clocks.
+
+Examples:
+
+  The following example is applied to all register clock pins in the
+  transitive fanout of the specified clock:
+
+    set_clock_transition -rise 0.5 [get_clocks CLK_A]
+
+See Also:
+
+   *  create_clock
+   *  get_clocks
+   *  set_propagated_clock

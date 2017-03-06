@@ -1,0 +1,87 @@
+
+Description:
+
+  Apply a trigger configuration file to the bitstream of a design, to support
+  ILA trigger at startup.
+
+  This command is used to configure the trigger settings of an ILA core in a
+  design bitstream (.bit) file, so that the ILA debug core is armed to
+  trigger on events immediately after device configuration and startup. This
+  allows data to be captured from the earliest stages of device activity,
+  which would not be possible through the use of the Hardware Manager feature
+  of the Vivado Design Suite, and the run_hw_ila command.
+
+  The apply_hw_ila_trigger command reads a trigger configuration file written
+  by run_hw_ila -file and applies the various trigger settings to the ILA
+  core in the implemented design. The trigger configuration for the ILA core
+  then become part of the bitstream written by write_bitstream, that is used
+  to program the Xilinx FPGA device.
+
+  The process for using the trigger at startup feature includes the following
+  steps:
+
+   *  From the Hardware Manager, use run_hw_ila -file to export the trigger
+      register map file for the ILA core.
+
+   *  Open the implemented design, or the implemented design checkpoint.
+
+   *  Use the apply_hw_ila_trigger command to apply the trigger settings to
+      the in-memory design.
+
+   *  Use the write_bitstream command to write the bitstream with the applied
+      trigger configuration file.
+
+      Note: Be sure to use the write_bitstream command, and not the Flow
+      Navigator commands in the Vivado IDE.
+
+   *  Return to the Hardware Manager, and use program_hw_device to program
+      the hw_device using the new bitstream file.
+
+  Once programmed, the new ILA core should immediately arm at startup. In the
+  Vivado logic analyzer feature, you should see the "Trigger Capture Status"
+  for the ILA core is now populated with captured data samples if trigger
+  events or capture conditions have occurred. Refer to the Vivado Design
+  Suite User Guide: Vivado Programming and Debugging (UG908) for more
+  information.
+
+Arguments:
+
+  -ila_cell <arg> - (Optional) Apply trigger settings to the specified ILA
+  cell. The cell must be specified as an object using the get_cells command.
+
+  Note: The trigger configuration file includes the instance information for
+  the ILA cell it applies to. The -ila_cell option is not required, and
+  should only be used to apply the trigger file to a different ILA cell in
+  the design.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <file> - (Optional) Specify a trigger configuration file that was created
+  by the run_hw_ila -file command.
+
+Example:
+
+  The following example applies the trigger configurations to the ILA cell
+  instance that is defined in the specified file:
+
+    apply_hw_ila_trigger C:/Data/ila1_triggers.tas
+
+See Also:
+
+   *  current_hw_device
+   *  current_hw_ila
+   *  get_hw_ilas
+   *  program_hw_device
+   *  run_hw_ila
+   *  write_bitstream

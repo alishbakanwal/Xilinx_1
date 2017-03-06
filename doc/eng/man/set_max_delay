@@ -1,0 +1,136 @@
+
+Description:
+
+  Sets the maximum delay allowed on a timing path, specified in nanoseconds
+  (ns). The specified delay value is assigned to both the rising and falling
+  edges of the defined timing paths unless the -rise or -fall arguments are
+  specified.
+
+  The maximum rising and falling delay cannot be less than the minimum rising
+  and falling delay on the same path, as defined by the set_min_delay
+  command. If this happens, the first assigned constraint is removed from the
+  timing path as a conflict, and the delay value specified by the removed
+  constraint is set to 0.
+
+  The delay value must be assigned to a timing path as defined by at least
+  one -from, -through, or -to argument. A general path delay such as -to
+  endpoint will be over written by a more specific path definition such as
+  -from/-to, or -from/-through/-to path definition.
+
+  Note: When assigned to a primary input or output port, any system-level
+  delay consumes a portion of the max delay on the timing path that includes
+  the input or output port. That is, the delay specified by set_input_delay
+  or set_output_delay is considered part of the maximum delay.
+
+  This command returns nothing if successful, or returns an error if it fails.
+
+Arguments:
+
+  -rise - (Optional) Apply the delay value to the rising edge of the timing
+  path.
+
+  -fall - (Optional) Apply the delay value to the falling edge of the timing
+  path.
+
+  Note: If neither -rise nor -fall is specified, the delay is applied as both
+  rising and falling edge path delay.
+
+  -reset_path - (Optional) Indicates that existing rising or falling edge max
+  delays should be cleared before applying the new specified path delay. If
+  only -to is specified all paths leading to the specified endpoints are
+  cleared. If only -from is specified, all paths leading from the specified
+  start points are cleared. When -from/-to or -from/-through/-to are
+  specified, the defined paths are reset.
+
+  -from <value> - (Optional) A list of path start points or clocks. A valid
+  startpoint is a primary input or inout port, or the clock pin of a
+  sequential element. If a clock is specified then all the primary input and
+  inout ports related to that clock as well as all the clock pin of the
+  registers connected to that clock are used as startpoints.
+
+  -rise_from <element_name> - (Optional) The max delay applied to paths
+  rising from the list of origins or clocks.
+
+  -fall_from <element_name> - (Optional) The max delay applied to paths
+  falling from the list of origins or clocks.
+
+  -to <element_name> - (Optional) A list of path endpoints or clocks. A valid
+  endpoint is a primary output or inout port, or the data pin of a sequential
+  element. If a clock is specified then all the primary output and inout
+  ports related to that clock as well as all the data pins of the registers
+  connected to that clock are used as endpoints.
+
+  -rise_to <element_name> - (Optional) The max delay applied to paths with
+  rise transition at the list of endpoints or clocks.
+
+  -fall_to <element_name> - (Optional) The max delay applied to paths with
+  fall transition at the list of endpoints or clocks.
+
+  -through <element_name> - (Optional) A list of through pins, cells, or nets.
+
+  -rise_through <element_name> - (Optional) The max delay applied to paths
+  rising through pins, cells or nets.
+
+  -fall_through <element_name> - (Optional) The max delay applied to paths
+  falling through pins, cells or nets.
+
+  -datapath_only - (Optional) Exclude clock skew and jitter from the delay
+  calculation for the specified path. This option is used to constrain the
+  delay between sequential elements that have different clocks, where you do
+  not want to consider clock skew and jitter in the delay calculation. Only
+  the Clock-to-Q delay of the first flop, the wire delay between the flops,
+  and the setup time of the second flop should be considered.
+
+  Note: The specification of the data path for -datapath_only must use the
+  -from option to define the startpoint for the path. The hold check for the
+  specified path is automatically defined as a false path when using the
+  -datapath_only option.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <delay> - (Required) Specifies the maximum delay value specified in
+  nanoseconds. The <delay> is specified in nanoseconds (ns) as a positive or
+  negative floating point number, with a default value of 0.
+
+Examples:
+
+  The following example defines a maximum delay of 60 ns between all the
+  input and output ports (feedthrough paths):
+
+    set_max_delay 60 -from [all_inputs] -to [all_outputs]
+
+  The following example clears the existing max delay and specifies a new >
+  maximum delay for paths to endpoints clocked by the specified clock:
+
+    set_max_delay -reset_path 50 -to [get_clocks spi_clk]
+
+  The set_max_delay command is often used to define timing constraints for
+  crossing clock domains when a simple synchronizer is used. In the following
+  example, two flops (FF1 and FF2) are clocked by different clocks, and FF1/C
+  connects directly to FF2/D through net1. To limit the delay on this
+  connection to 4.0 ns use one of the following constraints:
+
+    set_max_delay -from FF1 -to FF2 -datapath_only 4.0 
+    set_max_delay -from FF1/C -to FF2/D -datapath_only 4.0
+
+See Also:
+
+   *  get_clocks
+   *  get_nets
+   *  get_ports
+   *  report_timing
+   *  set_input_delay
+   *  set_min_delay
+   *  set_output_delay
+   *  set_units

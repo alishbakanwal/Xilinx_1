@@ -1,0 +1,54 @@
+
+Description:
+
+  Remove cells from the current netlist in either an open Synthesized or
+  Implemented design.
+
+  Note: You cannot remove cells from library macros, also called
+  macro-primitives.
+
+  Netlist editing changes the in-memory view of the netlist in the current
+  design. It does not change the files in the source fileset, or change the
+  persistent design on the disk. Changes made to the netlist may be saved to
+  a design checkpoint using the write_checkpoint command, or may be exported
+  to a netlist file such as Verilog, VHDL, or EDIF, using the appropriate
+  write_* command.
+
+  Note: Netlist editing is not allowed on the elaborated RTL design.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <cells> - (Required) List of cells to remove. The instance name can be
+  specified as a hierarchical name, from the top-level of the design. In this
+  case, you must use the hierarchy separator character in the hierarchical
+  instance name. You can determine the current hierarchy separator with the
+  get_hierarchy_separator command.
+
+Examples:
+
+  The following example removes the fftEngine from the in-memory netlist of
+  the current design:
+
+    remove_cell fftEngine 
+    remove_cell usbEngine0/usb_out
+
+See Also:
+
+   *  create_cell
+   *  write_checkpoint
+   *  write_edif
+   *  write_verilog
+   *  write_vhdl

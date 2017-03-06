@@ -1,0 +1,42 @@
+
+Description:
+
+  Analyzes the implemented configurations of a design to ensure they follow
+  rules required for partial reconfiguration.
+
+Arguments:
+
+  -file <arg> - (Optional) Output the results of this command to the
+  specified log file.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <runs> - The list of two or more implemented configuration runs to verify.
+  These specify the runs used to implement the different configurations of
+  the design.
+
+Examples:
+
+  The following example checks two runs, config_2 and config_3, for any
+  errors and writes the log into the specified log file:
+
+    verify_config -runs {config_2 config_3} -file pr_verify.log
+
+See Also:
+
+   *  create_reconfig_module

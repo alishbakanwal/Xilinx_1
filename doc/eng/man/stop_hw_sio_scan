@@ -1,0 +1,54 @@
+
+Description:
+
+  Stop the specified scan running in the Vivado serial I/O analyzer.
+
+  To analyze the margin of a given link, it is often helpful to run a scan of
+  the link using the specialized Eye Scan hardware of Xilinx UltraScale
+  devices or 7 Series FPGAs. The Vivado serial I/O analyzer feature lets you
+  to create, run, and save link scans.
+
+  This command lets you stop a scan that is in progress as started with the
+  run_hw_sio_scan command.
+
+  You can remove the created scan object using remove_hw_sio_scan.
+
+  This command returns a message if successful, or returns an error if the
+  command fails.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <hw_sio_scans> - (Required) Specify one or more hw_sio_scan objects to
+  stop. The hw_sio_scan must be specified as an object as returned by the
+  get_hw_sio_scans commands.
+
+Example:
+
+  The following example launches a scan using the run_hw_sio_scan command,
+  and then stops the specified scan:
+
+    run_hw_sio_scan [lindex [get_hw_sio_scans {SCAN_3}] 0] 
+    stop_hw_sio_scan [get_hw_sio_scans SCAN_3]
+
+See Also:
+
+   *  create_hw_sio_scan
+   *  current_hw_device
+   *  get_hw_sio_scans
+   *  remove_hw_sio_scan
+   *  run_hw_sio_scan
+   *  wait_on_hw_sio_scan
+   *  write_hw_sio_scan

@@ -1,0 +1,89 @@
+
+Description:
+
+  Set or return the current Xilinx FPGA device targeted by the Hardware
+  Manager in the Vivado Design Suite for programming and debug.
+
+  The hardware target is a system board containing a JTAG chain of one or
+  more Xilinx devices that you can program with a bitstream file, or use to
+  debug your design. Connections between hardware targets on the system board
+  and the Vivado Design Suite are managed by the hw_server application, and
+  the connect_hw_server command. Refer to Vivado Design Suite User Guide:
+  Programming and Debugging (UG908) for a list of supported JTAG download
+  cables and devices.
+
+  Each hardware target can have one or more Xilinx devices to program, or to
+  use for debugging purposes. The current device is specified or returned by
+  the current_hw_device command.
+
+  To access a Xilinx FPGA device through the Hardware Manager, you must use
+  the following Tcl command sequence:
+
+   *  open_hw - Opens the Hardware Manager in the Vivado Design Suite.
+
+   *  connect_hw_server - Makes a connection to a local or remote Xilinx
+      hardware server application.
+
+   *  current_hw_target - Defines the hardware target of the connected server.
+
+   *  open_hw_target - Opens a connection to the hardware target.
+
+   *  current_hw_device - Specifies the Xilinx FPGA device to use for
+      programming and debugging.
+
+  After connecting to the appropriate hardware device, you can program the
+  device with a bitstream file using the program_hw_device command, and debug
+  the device using any of a number of Hardware Manager Tcl commands. To
+  interactively debug the device open the Hardware Manager in the Vivado
+  Design Suite IDE.
+
+  Note: You can use the current_hw_server, current_hw_target, and
+  current_hw_device commands to set the hardware for programming and
+  debugging the design. You should exercise care when using these commands to
+  insure that the current server, target, and device are in sync. The current
+  device should be found on the current target, which should be found on the
+  current server.
+
+  This command returns the current hardware device as an object, or returns
+  an error if it fails.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <hw_device> - (Optional) Specify the hw_device object to set as the current
+  device for programming and debug. The hw_device must be specified as an
+  object as returned by the get_hw_devices command. If the hardware device is
+  not specified, the current_hw_device will be returned.
+
+Example:
+
+  The following example returns the currently targeted hw_device:
+
+    current_hw_device
+
+  This example sets the current hw_device object, then sets the PROGRAM.FILE
+  property for the device, and programs the device:
+
+    current_hw_device [lindex [get_hw_devices] 0] 
+    set_property PROGRAM.FILE {C:/Data/design.bit} [current_hw_device] 
+    program_hw_devices [current_hw_device]
+
+See Also:
+
+   *  connect_hw_server
+   *  current_hw_target
+   *  get_hw_devices
+   *  get_hw_targets
+   *  open_hw_target

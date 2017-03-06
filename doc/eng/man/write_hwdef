@@ -1,0 +1,59 @@
+
+Description:
+
+  Writes a hardware definition (.hwdef) file for use in the software
+  development tools (SDK).
+
+  The write_hwdef command is intended to simplify the movement of designs
+  from the Vivado Design Suite to software development in SDK. This command
+  is run automatically by the Vivado Design Suite when generating the output
+  products for a top-level design that includes a block design with an
+  embedded processor like MicroBlaze, or Zynq-7000 All Programmable SoC.
+  Block designs are created in the IP Integrator feature of the Vivado Design
+  Suite with the create_bd_design command.
+
+  The write_hwdef command is run after place_design and creates a hardware
+  container file with .hwdef extension. The container file includes device
+  metadata and hardware design files.
+
+  The write_hwdef command returns nothing if successful, or an error if the
+  command fails.
+
+Arguments:
+
+  -force - (Optional) Overwrite and existing hardware definition file if one
+  exists. If this option is not specified, then the Vivado Design Suite will
+  not overwrite an existing file.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <file> - (Required) Specify the name of the hardware definition file. The
+  file can include the path and file extension. The default file extension of
+  .hwdef is used if an extension is not specified.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+Examples:
+
+  The following example creates the specified hardware definition file:
+
+    write_hwdef  -force C:/Data/ug940/lab1/zynq_design.hdf
+
+See Also:
+
+   *  create_bd_design
+   *  launch_sdk
+   *  write_sysdef

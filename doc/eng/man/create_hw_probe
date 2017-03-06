@@ -1,0 +1,81 @@
+
+Description:
+
+  This command creates a new user-defined probe on the specified ILA core to
+  define triggers and view data in the Vivado Logic Analyzer. The new probe
+  can combine specific bit values of existing probes to simplify or clarify
+  the data presented in the waveform viewer. Captured data samples from the
+  user-defined probe can be reported with the list_hw_samples command.
+
+  User-defined probes can map bit values from a single physical probe on the
+  ILA core, or can combine bit values from multiple physical probes onto a
+  single user-defined probe. Probes that map bits from a single probe can be
+  used to create triggers and view data. Probes that combine bits from
+  multiple physical probes can only be used for viewing data in the Vivado
+  Logic Analyzer.
+
+  You can delete user-defined probes with the delete_hw_probes command.
+
+  The create_hw_probe command returns the user-defined probe name when
+  successful, or returns an error if it fails.
+
+Arguments:
+
+  -no_gui_update - (Optional) Do not update the GUI in the Vivado logic
+  analyzer to reflect the addition of the user-defined probe.
+
+  -map <arg> - (Optional) Specifies the physical probe port name and signal
+  bits to map into the new user-defined probe. Physical probe ports are the
+  ports on the specified hw_ila object, and are related to signals being
+  probed by the ILA core. The -map argument is specified as a list of
+  physical probe port names and bits:
+
+    -map {0011 probe3[19] probe3[6]}
+
+  Note: The map can also include constant values as indicated above.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <name> - Specifies the name to assign to the user-defined probe, as a
+  combination of name and probe width, probeName[0:3] for instance. If no
+  width is specified, the default probe width is one bit.
+
+  Note: The user-defined probe width must match the number of bits specified
+  in the -map argument.
+
+  <core> - Specifies the ILA core object. The hw_ila can be specified by name
+  or as an object returned by the get_hw_ilas command.
+
+Examples:
+
+  The following example maps bits from multiple physical probes onto a new
+  user-defined probe on the specified ILA core:
+
+    create_hw_probe -map {0011 probe5[3:0] probe8 probe9} myProbeAR[9:0] hw_ila_1
+
+  Note: The -map option combines 10 bits onto the new probe, so the probe
+  name specifies a matching port width.
+
+  The following example creates a hw_probe with copies of the
+  most-significant bit to sign-extend a 30-bit signal to align it with other
+  32-bit signed signals:
+
+    create_hw_probe -map {probe0[29] probe0[29] probe0[29:0]} \ 
+    mySignExtendedProbe[31:0] [get_hw_ilas hw_ila_1]
+
+See Also:
+
+   *  delete_hw_probes
+   *  get_hw_ilas
+   *  get_hw_probes

@@ -1,0 +1,50 @@
+
+Description:
+
+  Reports the results of the fanout driver replication and load
+  redistribution optimizations performed by the phys_opt_design command.
+
+Arguments:
+
+  -file <arg> - (Optional) Write the physical optimization report into the
+  specified file. The specified file will be overwritten if one already
+  exists, unless -append is also specified.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -append - (Optional) Append the output of the command to the specified file
+  rather than overwriting it.
+
+  Note: The -append option can only be used with the -file option.
+
+  -return_string - (Optional) Directs the output of the report to a Tcl
+  string. The Tcl string can be captured by a variable definition and parsed
+  or otherwise processed.
+
+  Note: This argument cannot be used with the -file option.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example reports the physical optimizations performed in the
+  current design by the phys_opt_design command:
+
+    report_phys_opt -file C:/Data/physOpt_Report.txt
+
+See Also:
+
+   *  phys_opt_design

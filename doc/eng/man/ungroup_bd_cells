@@ -1,0 +1,48 @@
+
+Description:
+
+  This command is intended to undo the grouping of IP Integrator cells into a
+  hierarchical module, by either the group_bd_cells or the move_bd_cells
+  commands. The command moves the cells inside a selected hierarchical module
+  up one level to the parent cell, and then removes the hierarchical module.
+
+  The connections between the selected cells are maintained. The connections
+  between these cells and other cells are maintained automatically by
+  removing unneeded subsystem ports and pins.
+
+  This command returns 0 if successful, or an error message if it fails.
+
+Arguments:
+
+  -prefix <arg> - (Optional) A prefix name to apply to any cells that are
+  moved up one level in the hierarchy.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <cells> - (Required) A hierarchical module defined by the group_bd_cells or
+  move_bd_cells commands. Only one hierarchical module can be specified for
+  the command at one time.
+
+Example:
+
+  The following example :
+
+    ungroup_bd_cells -prefix up2_ [get_bd_cells myMod2]
+
+See Also:
+
+   *  create_bd_cells
+   *  get_bd_cells
+   *  group_bd_cells
+   *  move_bd_cells

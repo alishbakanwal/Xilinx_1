@@ -1,0 +1,71 @@
+
+Description:
+
+  Removes the specified ports or buses.
+
+  To remove a bus port, you must specify the primary port name, and not
+  specify a bus index. This ensures that the entire bus port is removed, and
+  not just a portion of the bits associated with the bus. You can resize a
+  bus port, eliminating bits, using the resize_port_bus command.
+
+  The remove_port command will remove ports that have been added with the
+  create_port command, but cannot delete ports that are defined in the RTL or
+  netlist design.
+
+  Netlist editing changes the in-memory view of the netlist in the current
+  design. It does not change the files in the source fileset, or change the
+  persistent design on the disk. Changes made to the netlist may be saved to
+  a design checkpoint using the write_checkpoint command, or may be exported
+  to a netlist file such as Verilog, VHDL, or EDIF, using the appropriate
+  write_* command.
+
+  Note: Netlist editing is not allowed on the elaborated RTL design.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <ports> - One or more names of ports to remove.
+
+Examples:
+
+  The following example deletes the specified port:
+
+    remove_port PORT0
+
+  The following example deletes the two specified ports of a bus:
+
+    remove_port BUS[1] BUS[2]
+
+  The following example deletes both the N and P sides of a differential pair
+  port:
+
+    remove_port D_BUS_P[0]
+
+  Note: Deleting either the N or the P side of a differential pair will also
+  delete the other side of the pair.
+
+See Also:
+
+   *  create_cell
+   *  create_net
+   *  create_pin
+   *  create_port
+   *  create_interface
+   *  place_ports
+   *  resize_port_bus
+   *  write_checkpoint
+   *  write_edif
+   *  write_verilog
+   *  write_vhdl

@@ -1,0 +1,99 @@
+
+Description:
+
+  Report the compilation order of files in the various active filesets:
+  constraints, design sources, and simulation sources.
+
+  This command returns the order of file processing for synthesis,
+  implementation, and simulation. The report can be limited by specifying the
+  fileset of interest with -fileset, or using the -constraints option or
+  -sources option.
+
+  The -used_in option lets you report the processing order of files used in
+  Synthesis, Simulation, or one of the implementation steps, according to the
+  value of the USED_IN property.
+
+  By default the report is returned to the Tcl console, or standard output,
+  but it can also be written to a file.
+
+Arguments:
+
+  -of_objects <args> - (Optional) Report the files that are associated with
+  the specified filesets, sub-designs, or reconfiguration modules. The
+  default is to search all filesets. When -compile_order and -used_in are
+  specified, the -of_objects switch will only accept a single fileset, or a
+  single sub-design such as an IP core, Block Design, or DSP design. A
+  sub-design is also known as a composite file.
+
+  Note: The -of_objects option requires objects to be specified using the
+  get_* commands, such as get_cells or get_pins, rather than specifying
+  objects by name. In addition, -of_objects cannot be used with a search
+  <pattern>.
+
+  -fileset <arg> - (Optional) Limit the report to the specified fileset.
+
+  -missing_instances - (Optional) Return the list of cells that are missing
+  source files in the current or specified fileset.
+
+  -constraints - (Optional) Report the compilation order of the constraint
+  files in the current design, including constraints for any IP in the
+  design.
+
+  -sources - (Optional) Report the compilation order of files found in the
+  sources_1 fileset of design sources.
+
+  -used_in <arg> - (Optional) Accepts one of the enumerated values of the
+  USED_IN property for files, and returns files matching the specified value.
+  Valid values for this option include the following: synthesis, simulation,
+  or implementation. Refer to the Vivado Design Suite Properties Reference
+  Guide (UG912) for information on the USED_IN property and its supported
+  values.
+
+  -file <arg> - (Optional) Write the report into the specified file. The
+  specified file will be overwritten if one already exists, unless -append is
+  also specified.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -append - (Optional) Append the output of the command to the specified file
+  rather than overwriting it.
+
+  Note: The -append option can only be used with the -file option.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example reports the compilation order of the active filesets
+  in the current design:
+
+    report_compile_order
+
+  The following returns a list of cells with missing source files in the
+  current design, and appends the report to the specified file:
+
+    report_compile_order -missing_instances -file C:/Data/report1.txt -append
+
+  The following command lists the compile order of the files in the active
+  constraint set:
+
+    report_compile_order -constraints
+
+See Also:
+
+   *  current_fileset
+   *  get_files
+   *  update_compile_order

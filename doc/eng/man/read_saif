@@ -1,0 +1,63 @@
+
+Description:
+
+  Reads a Switching Activity Interchange Format (SAIF) file for use during
+  power analysis by the report_power command, or power optimization by
+  power_opt_design. The read_saif command will annotate the design nodes with
+  activity from the SAIF file and estimate power appropriately.
+
+  Running report_power or power_opt_design after reading the SAIF file will
+  use the activity rates from the specified file during optimization and
+  analysis.
+
+Arguments:
+
+  -strip_path <arg> - (Optional) Strip the specified instance path prefix
+  from elements in the SAIF file to allow them to be mapped properly to
+  instances in the current design.
+
+  Note: The instance path specified should not begin with a '/'. The
+  read_saif parser looks for design net names, which do not have a leading
+  '/'.
+
+  -no_strip - (Optional) Do not strip first two levels of hierarchy from the
+  SAIF file.
+
+  -out_file <arg> - (Optional) The name of an output file where unmatched
+  nets and other messages are reported. This file is created during the
+  import of the SAIF file. If the -out_file option is not specified, the
+  information is not saved to a file.
+
+  Note: If the path is not specified as part of the file name, the tool will
+  write the specified file to the current working directory, or the directory
+  from which the tool was launched.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <file> - (Required) The name of the SAIF file to read.
+
+  Note: If the path is not specified as part of the file name, the tool will
+  search for the specified file in the current working directory and then in
+  the directory from which the tool was launched.
+
+Examples:
+
+  The following example:
+
+    read_saif -strip_path design/top/F1 C:/Data/design1.saif
+
+See Also:
+
+   *  power_opt_design
+   *  report_power

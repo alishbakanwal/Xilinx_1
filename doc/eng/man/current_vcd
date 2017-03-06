@@ -1,0 +1,39 @@
+
+Description:
+
+  Defines the current Value Change Dump (VCD) object, or returns the name of
+  the current VCD object in the current simulation.
+
+  A VCD file must be opened and assigned to a VCD object using the open_vcd
+  command in order for there to be a current VCD object.
+
+  This command returns the current VCD object.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <VCDObject> - (Optional) The name of the VCD object to set as the current
+  object. If a <VCDObject> is not specified, the command returns the current
+  VCD object of the active simulation.
+
+Examples:
+
+  The following example sets the specified VCD object as current:
+
+    current_vcd vcd2
+
+See Also:
+
+   *  open_vcd

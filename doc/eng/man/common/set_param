@@ -1,0 +1,82 @@
+
+Description:
+
+  Sets the value of a user-definable configuration parameter. These
+  parameters configure and control various behaviors of the tool. Refer to
+  report_param for a description of currently defined parameters.
+
+  As an example, a specific param that can be defined is the
+  general.maxThreads parameter for the Vivado Design Suite. On multiprocessor
+  systems, the Vivado Design Suite use multi-threading to speed up certain
+  processes, including DRC reporting, static timing analysis, placement, and
+  routing. A default limit applies to all tasks and is based on the operating
+  system. For Windows systems, the default is 2; for Linux systems the
+  default is 8. The limit can be changed as follows:
+
+    set_param general.maxThreads <value>
+
+  Where <value> is an integer from 1 to 8, inclusive.
+
+  The maximum number of simultaneous threads that can be used also varies by
+  the task being run. You can change the maxThreads parameter prior to
+  running these processes. The maximum number of threads for specific Tcl
+  commands are:
+
+   *  phys_opt_design: 8
+
+   *  place_design: 8
+
+   *  report_drc: 8
+
+   *  report_timing and report_timing_summary: 8
+
+   *  route_design: 8
+
+   *  synth_design: 4
+
+  You can use the reset_param command to restore any parameter that has been
+  modified back to its default setting.
+
+  Note: Setting a specified parameter value to -1 will disable the feature.
+
+Arguments:
+
+  <name> - (Required) The name of the parameter to set the value of. You can
+  only set the value of one parameter at a time.
+
+  <value> - (Required) The value to set the specified parameter to.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example sets the parameter defining how many threads to run
+  for multi-threaded processes, including Placement, Routing, and Timing
+  Analysis:
+
+    set_param general.maxThreads 4
+
+  Note: The Vivado tool supports between 1 to 8 threads. Use get_param to
+  determine the current setting.
+
+  The following example sets a new default value for message limit:
+
+    set_param messaging.defaultLimit 1000
+
+See Also:
+
+   *  get_param
+   *  list_param
+   *  report_param
+   *  reset_param

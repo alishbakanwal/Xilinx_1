@@ -1,0 +1,66 @@
+
+Description:
+
+  Open the specified Wave Config file (.wcfg) in the current simulation.
+
+  Vivado simulator uses a simulation debug data model to allow users to debug
+  HDL source files using source code stepping, breakpoints, conditions, and
+  waveform viewing tools. The debug data model contains HDL object and scope
+  names, and maps them to memory addresses to let you examine the changing
+  values of signals, variables and constants during the simulation.
+
+  The waveform database is separate from the Wave Config file that stores the
+  waveform activity for the simulation. The Wave Config file contains just
+  the list of wave objects (signals, dividers, groups, virtual buses) to
+  display, and their display properties, plus markers. The waveform database
+  (WDB) contains the event data, values changing over time, for all traced
+  signals, whether displayed or not.
+
+  A wave configuration object is created in the current simulation with the
+  create_wave_config command. A Wave Config file is written to disk by the
+  use of the save_wave_config command, and can be opened with the
+  open_wave_config command.
+
+  The open_wave_config command opens a Wave Config file and maps it to the
+  data source in the current simulation.
+
+  Note: Any HDL objects that are specified in the Wave Config file that are
+  not found in the current simulation will be ignored.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <filename> - (Optional) Specify the path and <filename>of the Wave Config
+  file to open.
+
+  The <filename> should have a suffix of .wcfg, and the file suffix will be
+  assigned automatically if no other suffix is supplied.
+
+  Note: If the path is not specified as part of the file name, the tool will
+  search for the specified file in the current working directory and then in
+  the directory from which the tool was launched.
+
+Examples:
+
+  The following example opens the specified Wave Config file:
+
+    open_wave_config testbench.wcfg
+
+See Also:
+
+   *  close_wave_config
+   *  create_wave_config
+   *  open_wave_database
+   *  save_wave_config

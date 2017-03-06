@@ -1,0 +1,86 @@
+
+Description:
+
+  Assigns the defined property <name> and <value> to the specified <objects>.
+
+  This command can be used to define any property on an object in the design.
+  Each object has a set of predefined properties that have expected values,
+  or a range of values. The set_property command can be used to define the
+  values for these properties. To determine the defined set of properties on
+  an object, use report_property, list_property, or list_property_values.
+
+  You can also define custom properties for an object, by specifying a unique
+  <name> and <value> pair for the object. If an object has custom properties,
+  these will also be reported by the report_property and list_property
+  commands.
+
+  This command returns nothing if successful, and an error if it fails.
+
+  Note: You can use the get_property command to validate any properties that
+  have been set on an object
+
+
+Arguments:
+
+  -dict - (Optional) Use this option to specify multiple properties (<name>
+  <value> pairs) on an object with a single set_property command. Multiple
+  <name> <value> pairs must be enclosed in braces, {}, or quotes, "".
+
+    -dict "name1 value1 name2 value2 ... nameN valueN"
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <name> - (Required) Specifies the name of the property to be assigned to
+  the object or objects. The <name> argument is case sensitive and should be
+  specified appropriately.
+
+  <value> - (Required) Specifies the value to assign to the <name> on the
+  specified object or objects. The value is checked against the property type
+  to ensure that the value is valid. If the value is not appropriate for the
+  property an error will be returned.
+
+  Note: In some cases the value of a property may include special characters,
+  such as the dash character (`-`), which can cause the tool to interpret the
+  value as a new argument to the command. In this case, you must use the
+  explicit arguments (-name, -value, -objects) instead of the implied
+  positional arguments (name, value, objects) as described here. This is
+  shown in the Examples section below
+
+  <objects> - (Required) One or more objects to assign the property to.
+
+
+Examples:
+
+  Create a user-defined boolean property, TRUTH, for cell objects, and set
+  the property on a cell:
+
+    create_property -type bool truth cell
+    set_property truth false [lindex [get_cells] 1]
+
+  The following example sets the compiler and archiver property value for the
+  specified software processor:
+
+    set_property CONFIG.archiver armar [get_sw_processor]
+    set_property CONFIG.compiler armcc [get_sw_processor]
+
+See Also:
+
+   *  create_property
+   *  get_cells
+   *  get_property
+   *  list_property
+   *  list_property_value
+   *  report_property
+   *  reset_property
+

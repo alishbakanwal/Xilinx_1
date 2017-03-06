@@ -1,0 +1,67 @@
+
+Description:
+
+  Report the resources consumed by the current open design. The report is
+  returned to the standard output, unless the -file or -return_string
+  arguments are specified.
+
+  Though resource utilization can be reported early in the design process,
+  the report will be more accurate as the design progresses from synthesis
+  through implementation.
+
+Arguments:
+
+  -hierarchical - (Optional) Report the resources consumed hierarchically in
+  the design under the heading RTL Hierarchy in the report. As a default, the
+  report_resources command reports resources consumed by the whole design,
+  from the perspective of the top-level of the design.
+
+  -levels <arg> - (Optional) Provides a detailed report of resources consumed
+  at each level of the design hierarchy under the heading Report for Instance
+  <xxx>. When used with -hierarchical, this defines the levels of the design
+  hierarchy to report resources from. The value specified can be >= 1, with
+  the default of 1.
+
+  Note: This argument only applies when -hierarchical is specified. Otherwise
+  this argument is ignored.
+
+  -file <arg> - (Optional) Write the resource report into the specified file.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -return_string - (Optional) Directs the output to a Tcl string rather than
+  to the standard output. The Tcl string can be captured by a variable
+  definition and parsed or otherwise processed.
+
+  Note: This argument cannot be used with the -file option.
+
+  -format [ table | xml ] - (Optional) Specifies the format of the output as
+  either a table or XML. The default output is table.
+
+  Note: The format applies when -file is specified, but is otherwise ignored.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example reports the resources of the design hierarchy to two
+  levels, and writes the results to the specified file:
+
+    report_resources -hierarchy -levels 2 -file C:/Data/resources_2.txt
+
+See Also:
+
+   *  report_utilization

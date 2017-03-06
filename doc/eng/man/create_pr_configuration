@@ -1,0 +1,83 @@
+
+Description:
+
+  Note: You must first define the project as a Partial Reconfiguration (PR)
+  project by setting the PR_FLOW property on the project to TRUE, or by using
+  the <uicontrol>Tools > Enable Partial Reconfiguration</uicontrol> command.
+
+  The Partial Reconfiguration flow lets you create Partition Definitions
+  (partitionDefs) from hierarchical cells in a design, and to specify
+  reconfigurable modules (RMs) to be assigned to these partitionDefs to
+  create unique configurations of the design based on the combination of the
+  core design and one or more RMs. The PR design flow requires the
+  implementation of each PR configuration, resulting in partial bitstreams
+  for the RMs, but complete bitstreams for each integrated configuration.
+  Refer to the Vivado Design Suite User Guide: Partial Reconfiguration
+  (UG909) for more information.
+
+  The create_pr_configuration command defines the combination of the static
+  logic and the RM to create a unique configuration of the design. The PR
+  configuration is the design that is implemented and the bitstream is
+  generated for.
+
+  You will also need to create implementation runs for the PR configuration
+  using the create_run -pr_config command.
+
+  This command returns the name of the newly created PR configuration, or
+  returns an error if the command fails.
+
+Arguments:
+
+  -name <arg> - (Required) The name to give to the new PR configuration.
+
+  -partitions <arg> - (Optional) Specify the partition instance and
+  reconfigurable module to apply to that instance in the PR configuration.
+  The argument must be specified as <partitionInstance>:<RM>, and should be
+  specified as a list when multiple name/value pairs are defined. This format
+  lets you assign different RMs to multiple instances of a single
+  partitionDef in the design.
+
+  -greyboxes <arg> - (Optional) Indicates that the specified partition
+  instances will be defined as greyboxes, which are populated with LUT1s and
+  signal buffers. Refer to the Vivado Design Suite User Guide: Partial
+  Reconfiguration (UG909) for more information.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Example:
+
+  The following example defines a new PR configuration and assigns the
+  partitions:
+
+    create_pr_configuration -name prConfig1 -partitions fftEngine:fftTop
+
+  The following example defines three PR configurations, with two
+  partitionDefs and different RMs assigned to each partition, as well an
+  empty configuration with greyboxes:
+
+    create_pr_configuration -name cfg1 -partitions \ 
+    [list fftEngine:fftTop mgtEngine:mgtTop] 
+    create_pr_configuration -name cfg2 -partitions \ 
+    [list fftEngine:fftTop mgtEngine:mgtBottom] 
+    create_pr_configuration -name cfg3 -partitions { } \ 
+    -greyboxes [list fftEngine mgtEngine]
+
+See Also:
+
+   *  create_partition_def
+   *  create_reconfig_module
+   *  current_pr_configuration
+   *  delete_pr_configurations
+   *  get_pr_configurations
+   *  setup_pr_configurations

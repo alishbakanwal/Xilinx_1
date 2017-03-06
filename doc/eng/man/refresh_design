@@ -1,0 +1,49 @@
+
+Description:
+
+  Reloads the current design from the project data on the hard drive. This
+  overwrites the in-memory view of the design to undo any recent design
+  changes.
+
+Arguments:
+
+  -part <arg> - (Optional) The new target part for the design when it is
+  reloaded. This overrides the constraint file part specified in the project
+  data on the hard drive.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following command reloads the current design from the project data on
+  hard disk. This will overwrite the unsaved changes of the design which are
+  in memory.
+
+    refresh_design
+
+  Note: You can use the command to undo a series of changes to the design and
+  revert to the previously saved design.
+
+  The following example refreshes the current design using the specified V6
+  part as the target device. The second command is required to make the
+  selected part the target device for the active implementation run.
+
+    refresh_design -part xc6vcx75tff784-1  
+    set_property part xc6vcx75tff784-1 [get_runs impl_6]
+
+  Note: The second command is not required if the target part is not changed.
+
+See Also:
+
+   *  set_property

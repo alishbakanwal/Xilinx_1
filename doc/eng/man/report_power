@@ -1,0 +1,117 @@
+
+Description:
+
+  Run power analysis on the current design, and report details of power
+  consumption based on the current operating conditions of the device, and
+  the switching rates of the design. The operating conditions can be set
+  using the set_operating_conditions command. The switching activity can be
+  defined using the set_switching_activity command.
+
+  Switching activity can also be read in from an SAIF file with the read_saif
+  command. The Vivado tool will annotate the design nodes with activity from
+  the SAIF file and estimate power appropriately.
+
+  Power analysis requires an open synthesized design, or implemented design.
+
+  Note: By default the report is written to the Tcl console or STD output.
+  However, the results can also be written to a file or returned as a string
+  if desired.
+
+Arguments:
+
+  -no_propagation - (Optional) For all undefined nodes power analysis uses a
+  vector-less propagation engine to estimate activity. This argument disables
+  the propagation engine for a faster analysis of the design.
+
+  -hier [ power | logic | all ] - (Optional) Displays the summary power
+  consumption for each level of design hierarchy (power), or the power
+  broken-down for different logic elements of the hierarchy (logic), or both
+  the power summary and the different logic elements of the design hierarchy
+  (all). The default is power.
+
+  -vid - (Optional) Use the Voltage ID bit of the target device. Voltage
+  identification is a form of adaptive voltage scaling (AVS) that enables
+  certain devices in the Virtex<tm tmtype="reg"/>-7 family to be operated at
+  a reduced voltage of 0.9V while delivering the same specified performance
+  of a device operating at the nominal supply voltage of 1.0V. Voltage
+  identification capable devices consume approximately 30% lower worst case
+  (maximum) static power and correspondingly dissipate less heat.
+
+  -advisory - (Optional) Adds the Advisory table to the Power Report checking
+  the design for abnormal switching activity on control signals. This is the
+  same table produced by the Power Constraints Advisor feature in the Vivado
+  IDE.
+
+  -file <arg> - (Optional) Write the report into the specified file. The
+  specified file will be overwritten if one already exists, unless -append is
+  also specified.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -append - (Optional) Append the output of the command to the specified file
+  rather than overwriting it.
+
+  Note: The -append option can only be used with the -file option.
+
+  -format [ text | xml ] - (Optional) The default format of the output report
+  is text. You can also output an XML report. XML output is only valid when
+  -file is specified, and cannot be used with -append.
+
+  -name <arg> - (Optional) Specifies the name of the results set to report
+  the results to.
+
+  -xpe <arg> - (Optional) Output the results to an XML file for importing
+  into the Xilinx<tm tmtype="reg"/> Power Estimator spreadsheet tool. Refer
+  to Xilinx Power Estimator User Guide (UG440) for more information.
+
+  -l <arg> - (Optional) Maximum number of lines to report in the Detailed
+  Reports section. Valid values are greater than or equal to 0.
+
+  Note: This options also triggers additional levels of detail in the
+  Detailed Report section that are not reported when -l is not specified.
+
+  -return_string - (Optional) Directs the output to a Tcl string rather than
+  to the standard output. The Tcl string can be captured by a variable
+  definition and parsed or otherwise processed.
+
+  Note: This argument cannot be used with the -file option.
+
+  -rpx <arg> - (Optional) Specify the file name and path of an Xilinx report
+  file (RPX) to write. This is different from writing the report results to a
+  file using the -file argument. The RPX file is an interactive report that
+  contains all the report information and can be reloaded into memory in the
+  Vivado Design Suite using the open_report command. You should add a .rpx
+  file extension to the specified file name, as the Vivado tool will not
+  automatically assign a file extension.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example performs power analysis, without net propagation, and
+  writes the results to an XML file for use in XPE:
+
+    report_power -no_propagation -xpe C:/Data/design1.xpe
+
+See Also:
+
+   *  read_saif
+   *  set_switching_activity
+   *  set_operating_conditions

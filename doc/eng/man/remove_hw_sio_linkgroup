@@ -1,0 +1,53 @@
+
+Description:
+
+  Removes the specified group that associates communication links between TX
+  and RX objects on the GTs of the IBERT debug core defined on the current
+  hardware device.
+
+  Vivado Serial I/O analyzer is a link-based analyzer. The links define the
+  communication paths and protocols between transmitters and receivers of the
+  GigaBit transceivers on the device. Link groups, or hw_sio_linkgroup
+  objects, let you associate links into related groups, to collectively
+  configure properties and run scans.
+
+  Note: The remove_hw_sio_linkgroup command removes the specified
+  association, but does not remove the underlying communication links. Us the
+  remove_hw_sio_link command to remove those objects.
+
+  This command returns nothing if successful, or returns an error if it fails.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <hw_sio_linkgroups> - (Required) Specify one or more hw_sio_linkgroup
+  objects to remove. The hw_sio_linkgroup must be specified as an object as
+  returned by the create_hw_sio_linkgroup or get_hw_sio_linkgroups commands.
+
+Example:
+
+  The following example removes the specified linkgroup:
+
+    remove_hw_sio_linkgroup [get_hw_sio_linkgroups {LINKGROUP_0}]
+
+See Also:
+
+   *  create_hw_sio_link
+   *  create_hw_sio_linkgroup
+   *  current_hw_device
+   *  get_hw_sio_iberts
+   *  get_hw_sio_links
+   *  get_hw_sio_linkgroups
+   *  remove_hw_sio_links

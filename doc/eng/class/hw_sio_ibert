@@ -1,0 +1,49 @@
+HW_SIO_IBERT
+
+Description: 
+The customizable LogiCORE™ IP Integrated Bit Error Ratio Tester (IBERT) core for 
+Xilinx FPGAs is designed for evaluating and monitoring the Gigabit Transceivers 
+(GTs). The IBERT core enables in-system serial I/O validation and debug, letting 
+you measure and optimize your high-speed serial I/O links in your FPGA-based 
+system. Refer to the LogiCORE IP Integrated Bit Error Ratio Tester (IBERT) for 
+7 Series GTX Transceivers v3.0 (PG132) for more information. 
+
+The IBERT debug core lets you configure and control the major features of GTs on 
+the device, including:
+	TX pre-emphasis and post-emphasis
+	TX differential swing
+	RX equalization
+	Decision Feedback Equalizer (DFE)
+	Phase-Locked Loop (PLL) divider settings
+
+You can use  the IBERT core when you are interested in addressing a range of 
+in-system debug and validation problems; from simple clocking and connectivity 
+issues to complex margin analysis and channel optimization issues. 
+
+Related Objects:
+SIO IBERT debug cores are associated with  hw_server, hw_target, hw_device, 
+hw_sio_gt, hw_sio_common, hw_sio_pll, hw_sio_tx, hw_sio_rx, or hw_sio_link 
+objects. 
+
+You can query the IBERT debug cores of associated objects: 
+	get_hw_sio_iberts -of [get_hw_sio_plls *MGT_X0Y8/CPLL_0]
+
+You can also query the associated objects of specific IBERT cores:
+	get_hw_sio_commons -of [get_hw_sio_iberts]
+
+Properties:
+You can use the report_property command to report the actual properties assigned to a specific 
+HW_ILA. Refer to the Vivado Design Suite Tcl Command Reference (UG835) for more information. 
+The properties assigned to HW_ILA objects include the following:  
+
+Property              Type    Read-only  Visible  Value
+CLASS                 string  true       true     hw_sio_ibert
+CORE_REFRESH_RATE_MS  int     false      true     0
+DISPLAY_NAME          string  true       true     IBERT
+NAME                  string  true       true     localhost/xilinx_tcf/Digilent/210203327463A/0_1/IBERT
+USER_REGISTER         int     true       true     1
+
+To report the properties for a specific HW_SIO_IBERT, you can copy and paste the following command 
+into the Vivado Design Suite Tcl shell or Tcl console:
+
+	report_property -all [lindex [get_hw_sio_iberts] 0]

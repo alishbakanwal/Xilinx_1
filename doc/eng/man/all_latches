@@ -1,0 +1,51 @@
+
+Description:
+
+  Returns a list of all latches that have been declared in the current design.
+
+  The list of latches returned by all_latches can also be limited or reduced
+  by the filter command to filter according to properties assigned to the
+  latches. Properties of an object can be returned by the list_property or
+  report_property commands.
+
+  The all_latches command is scoped to return the objects hierarchically,
+  from the top-level of the design or from the level of the current instance.
+  By default the current instance is defined as the top level of the design,
+  but can be changed by using the current_instance command.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example returns a list of all latches in the current design:
+
+    all_latches
+
+  The following example shows how the list returned can be passed to another
+  command:
+
+    set_false_path -from [all_mults] -to [all_latches]
+
+See Also:
+
+   *  all_ffs
+   *  all_registers
+   *  current_instance
+   *  filter
+   *  get_cells
+   *  list_property
+   *  report_property
+   *  set_false_path

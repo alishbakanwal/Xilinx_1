@@ -1,0 +1,77 @@
+
+Description:
+
+  Read bitstream data from the current hardware device.
+
+  The Vivado device programmer will readback bitstream data from the Xilinx
+  device through the open target.
+
+  Note: If the bitstream on the hw_device is encrypted, readback is not
+  permitted.
+
+  This command returns the name of the readback file created, or returns an
+  error if it fails.
+
+Arguments:
+
+  -force - (Optional) Force the overwriting of the specified file if one of
+  the same name already exists.
+
+  -capture - (Optional) Enable readback capture of configuration data on
+  UltraScale devices only. Readback capture can be used to determine the
+  content of user state elements, such as CLB registers, block RAM,
+  distributed RAM, and SRL contents.
+
+  -readback_file <arg> - (Optional) Write a readback file (RDB) which is an
+  ASCII output of the bitstream read from the specified hw_device. This file
+  is similar to the ASCII file that is produced by the write_bitstream
+  -raw_bitfile command, except that it has no header.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -bin_file <arg> - (Optional) Write a binary file (BIN) containing the
+  programming data read back from the specified hw_device. This file is
+  similar to the binary file that is produced by the write_bitstream
+  -bin_file command.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <hw_device> - (Optional) The hw_device object to read the programming data
+  from. The hw_device must be specified as an object as returned by the
+  get_hw_devices or current_hw_device commands. If the hardware device is not
+  specified, the current_hw_device will be used.
+
+Example:
+
+  The following example writes an ASCII file of the bitstream data read back
+  from the current hardware device:
+
+    readback_hw_device -readback_file C:/Data/readback_1.rbd [current_hw_device]
+
+See Also:
+
+   *  connect_hw_server
+   *  create_hw_cfgmem
+   *  current_hw_device
+   *  get_property
+   *  open_hw_target
+   *  program_hw_devices
+   *  verify_hw_device
+   *  write_bitstream

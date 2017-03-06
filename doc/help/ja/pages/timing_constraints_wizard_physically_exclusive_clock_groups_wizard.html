@@ -1,0 +1,94 @@
+﻿<html xml:lang="ja-jp" lang="ja-jp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="concept"/>
+<meta name="DC.Title" content="[Physically Exclusive Clock Groups] ページ"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_aqj_x3c_d5"/>
+<meta name="DC.Language" content="ja-JP"/>
+<link rel="stylesheet" type="text/css" href="../commonltr-ja.css"/>
+<title>[Physically Exclusive Clock Groups] ページ</title>
+</head>
+<body id="concept_aqj_x3c_d5">
+
+
+<h1 class="title topictitle1">[Physically Exclusive Clock Groups] ページ</h1>
+
+<div class="body conbody">
+<div class="section"><h2 class="title sectiontitle">物理的に排他的なクロック グループの理解</h2>
+<div class="fig fignone" id="concept_aqj_x3c_d5__fig_vxf_xmc_d5"><p class="figcap"><span class="figtitleprefix">図: </span>物理的に排他的なクロック グループの例 :</p>
+<br/><img class="image" id="concept_aqj_x3c_d5__image_wxf_xmc_d5" src="../../images/physically_exclusive.png"/><br/> </div>
+
+<p class="p">この例では、clkA および clkB という 2 つのプライマリ クロックが同じ入力ポート clk に定義されています。clkA と clkB は同時にアクティブになることはできないので、これらのクロック間のタイミングが解析されないように、2 つのクロック間に物理的に排他的なクロック グループが定義されています。</p>
+
+<pre Class="codeblock">set_clock_groups -physically_exclusive -group clkA -group clkB</pre>
+
+<p class="p"> デザインに BUFG のファンアウトのクロックを修正するロジックが含まれる場合は、これらの生成クロックにもクロック グループ制約を適用した方が安全です。次はその例です。</p>
+
+<pre Class="codeblock">set_clock_groups -physically_exclusive \
+      -group [get_clocks -include_generated_clock clkA] \
+      -group [get_clocks -include_generated_clock clkB]</pre>
+
+</div>
+
+<div class="section"><h2 class="title sectiontitle">[Physically Exclusive Clock Groups] ページの理解</h2>
+
+<ul class="ul" id="concept_aqj_x3c_d5__ul_nl4_qdh_45">
+<li class="li"><span Class="uicontrol">[Recommended Constraints] : </span>タイミング制約ウィザードでは、同じソース ポイントを共有するクロックが識別され、同じクロック ツリーに伝搬され、クロック乗せ換えパスの不必要なタイミング解析がされないようにするためのクロック グループ制約が推奨されます。</li>
+
+<li class="li"><span Class="uicontrol">[Tcl Command Preview] : </span>物理的に排他的なグループを定義するのに使用される <a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xset_clock_groups" target="_blank">set_clock_groups</a> コマンドが表示されます。これらの制約がデザインに追加されます。</li>
+
+<li class="li"><span Class="uicontrol">[Existing Constraints] : </span>現在定義されている制約が表示されます。</li>
+
+</ul>
+
+<p class="p">上記のセクションにはそれぞれツールバーもあり、次のコマンドの 1 つまたは複数を実行できます</p>
+
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="concept_aqj_x3c_d5__table_rdz_bvv_y5" class="table" frame="void" border="0" rules="none">    <tbody class="tbody"> <tr class="row">
+<td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_gdk_ts3_45" src="../../images/search_button.png"/></td>
+
+<td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Search</span></td>
+
+<td class="entry" align="left" valign="top" width="73.4959349593496%">検索文字列を入力するためのテキスト入力フィールドが表示されます。</td>
+</tr>
+ <tr class="row">
+<td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_icv_zt3_45" src="../../images/select_all_button.png"/></td>
+
+<td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Select All</span></td>
+
+<td class="entry" align="left" valign="top" width="73.4959349593496%">推奨される制約すべてを選択します。</td>
+</tr>
+ <tr class="row">
+<td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_wtn_b53_45" src="../../images/clock_networks_button.png"/></td>
+
+<td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Clock Networks</span></td>
+
+<td class="entry" align="left" valign="top" width="73.4959349593496%">新しいクロック ネットワーク レポートを生成する <span Class="uicontrol">[Report Clock Networks]</span> コマンドと既存レポートを開く <span Class="uicontrol">[View Clock Networks]</span> コマンドを実行するためのサブメニューが表示されます。</td>
+</tr>
+ </tbody>
+ </table>
+</div>
+
+</div>
+
+<div class="section"><h2 class="title sectiontitle">関連項目</h2>
+<table cellpadding="4" cellspacing="0" summary="" id="concept_aqj_x3c_d5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow"> <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_aqj_x3c_d5__image_vvv_3pq_d5" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">『UltraFast™ 設計手法ガイド (Vivado<sup>®</sup> Design Suite 用)』</cite> (UG949) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?d=j_ug949-vivado-design-methodology.pdf;a=xDefiningClockGroupsAndCDCConstraints" target="_blank">「クロック グループおよび CDC 制約」</a></td>
+ </tr>
+<tr class="strow"> <td valign="top" class="stentry"><img class="image" id="concept_aqj_x3c_d5__image_smm_1vr_b5" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry"><cite class="cite">『Vivado Design Suite ユーザー ガイド : 制約の使用』</cite> (UG903) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug903-vivado-using-constraints.pdf;a=xClockGroups" target="_blank">「クロック グループ」</a></td>
+ </tr>
+<tr class="strow"> <td valign="top" class="stentry"><img class="image" id="concept_aqj_x3c_d5__image_av4_jvr_b5" src="../../images/play.png" alt="Icon"/></td>
+ <td valign="top" class="stentry"><a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/ndoc?t=video;d=hardware/timing-exception-clock-group-constraints.html" target="_blank">Vivado Design Suite QuickTake ビデオ : 高度なタイミング例外 – クロック グループ制約</a></td>
+ </tr>
+</table>
+
+</div>
+
+</div>
+
+
+</body>
+</html>

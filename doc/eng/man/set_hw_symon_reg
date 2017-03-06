@@ -1,0 +1,71 @@
+
+Description:
+
+  Set the status register of the system monitor to the hex value specified.
+  This command identifies a register on the system monitor on the current
+  device through its hex address value, and sets the specified hex data value
+  into that register.
+
+  The System Monitor (SYSMON) Analog-to-Digital Converter (ADC) is used to
+  measure die temperature and voltage on the hw_device. The Sysmon monitors
+  the physical environment via on-chip temperature and supply sensors. The
+  ADC can access up to 17 external analog input channels.
+
+  Data for the system monitor is stored in dedicated registers, called status
+  registers, accessible through the get_hw_sysmon_reg and set_hw_sysmon_reg
+  commands. Refer to the Register Interface in UltraScale Architecture System
+  Monitor User Guide (UG580), or 7 Series FPGAs and Zynq-7000 All
+  Programmable SoC XADC Dual 12-Bit 1 MSPS Analog-to-Digital Converter User
+  Guide (UG480) for more information on the addresses of specific system
+  monitor registers.
+
+  Although you can use the set_hw_sysmon_reg command to put the specified hex
+  data value into the specific registers of a system monitor, you can put all
+  updated property values of the hw_sysmon object onto the current hardware
+  device using the commit_hw_sysmon command.
+
+  This command returns the hex value of the hw_sysmon_reg object on the
+  specified hw_sysmons at the specified address, or returns an error if it
+  fails.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <hw_sysmon> - (Optional) Specify the hw_sysmon object to set the registers
+  of. The hw_sysmon object must be specified as an object returned by the
+  get_hw_sysmon command.
+
+  <hexaddress> - (Optional) Specify the hex address of the status register on
+  the system monitor to set the value of.
+
+  <hexdata> - (Optional) Specify the data, as a hex value, to populate into
+  the the register defined by the hex address.
+
+Example:
+
+  The following example sets the specified hex data value into the register
+  at the hex address of the system monitor on the current hardware device:
+
+    set_hw_sysmon_reg [current_hw_device] 00 9D28
+
+See Also:
+
+   *  commit_hw_sysmon
+   *  connect_hw_server
+   *  current_hw_device
+   *  get_hw_sysmon
+   *  get_hw_sysmon_reg
+   *  open_hw_target
+   *  refresh_hw_sysmon

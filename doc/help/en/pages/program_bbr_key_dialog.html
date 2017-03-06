@@ -1,0 +1,121 @@
+﻿<html xml:lang="en-us" lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="reference"/>
+<meta name="DC.Title" content="Program BBR Key"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_bqj_lqr_b5"/>
+<link rel="stylesheet" type="text/css" href="../../commonltr.css"/>
+<title>Program BBR Key</title>
+</head>
+<body id="concept_bqj_lqr_b5">
+
+
+ <h1 class="title topictitle1">Program BBR Key</h1>
+
+ <div class="body refbody">
+     <div class="section">
+            <p class="p">This dialog box lets you specify the encryption key file associated with an encrypted
+                bitstream. The Advanced Encryption Standard (AES) encryption key will be read from
+                the specified file, and used to decrypt the bitstream when programming the device.
+                The encryption key is written to the battery-backed SRAM (BBR) for decrypting the
+                encrypted bitstream. Unlike the eFUSE registers, the BBR can be cleared and reset as
+                needed.</p>
+
+            <p class="p">The implemented design must have encryption properties assigned prior to generating
+                the bitstream with the <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xwrite_bitstream" target="_blank">write_bitstream</a> command. You can add
+                ENCRYPTION properties to the design using the <span Class="uicontrol">Encryption</span> page
+                of the <span Class="uicontrol">Edit Device Properties</span> dialog box in the Vivado IDE. </p>
+
+            <ul class="ul" id="concept_bqj_lqr_b5__ul_gc5_ccp_v5">
+                <li class="li"><span Class="uicontrol">AES key file (.nky)</span>: Specify the file name and path of
+                    the AES encryption key file. By default, the key file is written to the
+                    implementation run directory at the time an encrypted bitstream is
+                    generated.</li>
+
+                <li class="li"><span Class="uicontrol">AES key</span>: Displays the AES encryption key value that is
+                    read from the file specified above. </li>
+
+                <li class="li"><span Class="uicontrol">Enable DPA_PROTECT</span>: The UltraScale architecture offers
+                    protection against hacking from differential power analysis (DPA) attacks by
+                    limiting the number of times the device can be configured before the BBR key is
+                    erased. <div Class="note_tip"><span class="tiptitle">Tip:</span> The DPA options are only available when the UltraScale
+                        architecture is targeted. </div>
+<ul class="ul" id="concept_bqj_lqr_b5__ul_fpx_fsk_bx">
+                        <li class="li"><span Class="uicontrol">DPA_COUNT</span>: The permitted number of times the
+                            device can be configured before the BBR key is erased.  The count is
+                            accumulated over the life of the device, and is specified as a number
+                            from 1 to 255. </li>
+
+                        <li class="li"><span Class="uicontrol">DPA_MODE</span>: Count only invalid configuration
+                            attempts, or count all configurations. </li>
+
+                    </ul>
+</li>
+
+            </ul>
+
+            <div class="p">Programming a device with an encrypted bitstream is a two-step process that requires
+                first programming the encryption key in the ENCRYPTION.FILE or ENCRYPTION.KEY0
+                properties of the bitstream into the BBR or eFUSE registers, and then programming
+                the encrypted bitstream into the device:
+                    <pre Class="codeblock">program_hw_devices -key {bbr} [current_hw_device]
+program_hw_device [current_hw_device]</pre>
+<div Class="note_important"><span class="importanttitle">Important:</span> For UltraScale architecture, you must program the BBR
+                    encryption key into the BBR register before programming a BBR encrypted
+                    bitstream into the device. Trying to program an UltraScale device with an
+                    encrypted bitstream before loading the encryption key into the BBR register
+                    causes the FPGA device to lock the BBR register. You must power-cycle the
+                    UltraScale device to unlock and reload the BBR register.</div>
+</div>
+
+            <p class="p">Click <span Class="uicontrol">OK</span> to program the encryption key and optionally set the
+                DPA properties. </p>
+
+        </div>
+
+        <div class="section"><h2 class="title sectiontitle">See Also</h2>
+            
+            <table cellpadding="4" cellspacing="0" summary="" id="concept_bqj_lqr_b5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow">
+                    <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_bqj_lqr_b5__image_smm_1vr_b5" src="../../images/book_icon.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">Vivado Design Suite User Guide: Programming and Debug</cite>
+                        (UG908), <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug908-vivado-programming-debugging.pdf;a=xAdvancedProgrammingFeatures" target="_blank">Advanced Programming
+                        Features</a></td>
+
+                </tr>
+<tr class="strow">
+                    <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_awd_gp1_cx" src="../../images/book_icon.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry">
+                        <p class="p"><cite class="cite">Xilinx Application Note: Using Encryption and Authentication to
+                                Secure an UltraScale/UltraScale+ FPGA Bitstream</cite> (<a class="xref" href="http://www.xilinx.com/cgi-bin/docs/ndoc?t=application_notes;d=xapp1267-encryp-efuse-program.pdf" target="_blank">XAPP1267</a>)</p>
+
+                    </td>
+
+                </tr>
+<tr class="strow">
+                    <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_ixy_kfs_1x" src="../../images/play.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry"><a class="xref" href="http://www.xilinx.com/video/hardware/setting-and-editing-device-properties.html" target="_blank">Vivado Design Suite QuickTake Video: Setting and Editing Device
+                            Properties</a></td>
+
+                </tr>
+<tr class="strow">
+                    <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_av4_jvr_b5" src="../../images/play.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry"><a class="xref" href="http://www.xilinx.com/video/hardware/advanced-encryption-keys-with-bbram.html" target="_blank">Vivado Design Suite QuickTake Video: Using Advanced Encryption Standard
+                            Keys with BBRAM</a></td>
+
+                </tr>
+</table>
+
+        </div>
+
+ </div>
+
+
+</body>
+</html>

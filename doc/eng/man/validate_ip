@@ -1,0 +1,41 @@
+
+Description:
+
+  Perform DRC check on IP to ensure that it is properly constructed. This
+  command returns 1 when all IPs have been validated, or 0 when there is a
+  problem.
+
+Arguments:
+
+  -save_ip - (Optional) Updates the existing IP files after validation. No
+  new files are created but the XCI and BOM files for the core are updated.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <ips> - (Optional) Specifies the set of IP cores to be validated.
+
+Examples:
+
+  The following example validates the IPs in the current project, and updates
+  the persistent representation of the IP.
+
+    validate_ip -save_ip [get_ips]
+
+See Also:
+
+   *  create_ip
+   *  generate_target
+   *  upgrade_ip
+   *  update_ip_catalog
+   *  import_ip

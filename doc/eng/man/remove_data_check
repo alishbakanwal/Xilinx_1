@@ -1,0 +1,69 @@
+
+Description:
+
+  Removes data-to-data checks between the -from object and the -to object for
+  the specified options. Data-to-data checks are defined using the
+  set_data_check command.
+
+  Note: This command returns nothing if successful, or returns an error if it
+  fails.
+
+Arguments:
+
+  -from <value> - (Optional) Remove the data-to-data check for data traveling
+  from the specified port.
+
+  -to <value> - (Optional) Remove the data-to-data check for data traveling
+  to the specified port.
+
+  -rise_from <value> - (Optional) Remove the data-to-data check for the
+  rising edge traveling from the specified port.
+
+  -rise_to <value> - (Optional) Remove the data-to-data check for the rising
+  edge traveling to the specified port.
+
+  -fall_from <value> - (Optional) Remove the data-to-data check for the
+  falling edge traveling from the specified port.
+
+  -fall_to <value> - (Optional) Remove the data-to-data check for the falling
+  edge traveling to the specified port.
+
+  -setup - (Optional) Remove setup time check.
+
+  -hold - (Optional) Remove hold time check.
+
+  -clock <value> - (Optional) The clock domain at the related pin/port of the
+  checks.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example removes a data-to-data check from and1/B to and1/A
+  with respect to the rising edge of signals at and1/B. Both setup and hold
+  checks are removed.
+
+    
+    remove_data_check -rise_from and1/B -to and1/A
+
+  The following example removes setup data-to-data check between and1/B to
+  and1/A with respect to the rising edge of signals at and1/B, coming from
+  start points triggered with clock CK1, falling edge of signals at and1/A.
+
+    remove_data_check -rise_from and1/B -fall_to and1/A -setup -clock [get_clock CK1]
+
+See Also:
+
+   *  report_timing
+   *  set_data_check

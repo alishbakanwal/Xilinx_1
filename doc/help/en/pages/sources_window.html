@@ -1,0 +1,173 @@
+﻿<html xml:lang="en-us" lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="concept"/>
+<meta name="DC.Title" content="Sources Window"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_aqj_x3c_d5"/>
+<link rel="stylesheet" type="text/css" href="../../commonltr.css"/>
+<title>Sources Window</title>
+</head>
+<body id="concept_aqj_x3c_d5">
+
+
+ <h1 class="title topictitle1">Sources Window</h1>
+
+ <div class="body conbody">
+        <div class="section">
+            <p class="p" id="concept_aqj_x3c_d5__p_ftk_rrw_25">The Sources window provides multiple views of the design sources
+                associated with the current project. The views include: </p>
+
+            <ul class="ul" id="concept_aqj_x3c_d5__ul_kw4_yk2_j5">
+                <li class="li"><span Class="uicontrol">Hierarchy</span>: Shows sources sorted from the top-level of the
+                    design down.</li>
+
+                <li class="li"><span Class="uicontrol">IP Sources</span>: Shows IP source files and generated output
+                    for designs that include IP or block designs.</li>
+
+                <li class="li"><span Class="uicontrol">Libraries</span>: Shows sources sorted by library.</li>
+
+                <li class="li"><span Class="uicontrol">Compile Order</span>: Shows sources sorted into the order they
+                    will be compiled for synthesis, implementation, or simulation, based on the
+                        <span Class="uicontrol">Used In</span> selection menu that is located just below the
+                    toolbar. <div Class="note_tip"><span class="tiptitle">Tip:</span> When the Partial Reconfiguration flow is enabled, the
+                        Sources window also displays a <span Class="uicontrol">Partition Definitions</span>
+                        tab. See the <cite class="cite">Vivado<sup>®</sup> Design Suite User Guide: Partial
+                            Reconfiguration</cite> (<a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug909-vivado-partial-reconfiguration.pdf" target="_blank">UG909</a>) for more information in the
+                        PR flow. </div>
+</li>
+
+            </ul>
+
+            <p class="p">The Sources window lets you manage the HDL design sources, IP and block design
+                sources, constraints files and constraint sets, and simulation source files, such as
+                test benches. The right-click menu in the Sources window provides access to commands
+                that let you add or remove files from the current project, change libraries and
+                compile orders, make specific filesets active, manage Partial Reconfiguration, and
+                set targets for design constraints. </p>
+
+            <p class="p">The Sources window toolbar includes the following commands: </p>
+
+            
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="concept_aqj_x3c_d5__table_rdz_bvv_y5" class="table" frame="void" border="0" rules="none">
+                    
+                    
+                    
+                    <tbody class="tbody">
+                        <tr class="row">
+                            <td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_c4l_lk2_p5" src="../../images/search_button.png"/></td>
+
+                            <td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Search</span></td>
+
+                            <td class="entry" align="left" valign="top" width="73.4959349593496%">Opens a search field to enter a search pattern.</td>
+
+                        </tr>
+
+                        <tr class="row">
+                            <td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_i32_nk2_p5" src="../../images/collapse_button.png"/></td>
+
+                            <td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Collapse all</span></td>
+
+                            <td class="entry" align="left" valign="top" width="73.4959349593496%">Collapses all source folder hierarchies. </td>
+
+                        </tr>
+
+                        <tr class="row">
+                            <td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_oll_mk2_p5" src="../../images/expand_button.png"/></td>
+
+                            <td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Expand all</span></td>
+
+                            <td class="entry" align="left" valign="top" width="73.4959349593496%">Expands all source folder hierarchies. </td>
+
+                        </tr>
+
+                        <tr class="row">
+                            <td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_om3_4k2_p5" src="../../images/open_selected_button.png"/></td>
+
+                            <td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Open Selected</span></td>
+
+                            <td class="entry" align="left" valign="top" width="73.4959349593496%">Opens the selected source files. <div Class="note_tip"><span class="tiptitle">Tip:</span> This command is
+                                    only available when source files are selected. </div>
+</td>
+
+                        </tr>
+
+                        <tr class="row">
+                            <td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_s4g_pk2_p5" src="../../images/add_sources_button.png"/></td>
+
+                            <td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Add Sources</span></td>
+
+                            <td class="entry" align="left" valign="top" width="73.4959349593496%">Opens the Add Sources wizard to let you add different types of
+                                source files to the design. </td>
+
+                        </tr>
+
+                        <tr class="row">
+                            <td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_n13_p5c_bv" src="../../images/MissingFile.png"/></td>
+
+                            <td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Show Only Missing Sources</span></td>
+
+                            <td class="entry" align="left" valign="top" width="73.4959349593496%">Available from the Hierarchy tab, this displays only the missing
+                                source files to let you see the problem more clearly. <div Class="note_tip"><span class="tiptitle">Tip:</span> This command is only available when there are missing
+                                    source files in the project. </div>
+</td>
+
+                        </tr>
+
+                        <tr class="row">
+                            <td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_n41_x1g_p5" src="../../images/SortAscending.png"/></td>
+
+                            <td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Sort</span></td>
+
+                            <td class="entry" align="left" valign="top" width="73.4959349593496%">Available from the Libraries tab, this sorts the listed folders
+                                and source files in increasing alphanumeric order.</td>
+
+                        </tr>
+
+                        <tr class="row">
+                            <td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_dgk_h52_p5" src="../../images/scroll_button.png"/></td>
+
+                            <td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Scroll</span></td>
+
+                            <td class="entry" align="left" valign="top" width="73.4959349593496%">Scrolls to the selected object in the Sources window when an
+                                object is selected in another window, such as the Device
+                                window.</td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+</div>
+
+        </div>
+
+        <div class="section"><h2 class="title sectiontitle">See Also</h2>
+            
+            <table cellpadding="4" cellspacing="0" summary="" id="concept_aqj_x3c_d5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow">
+                    <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_aqj_x3c_d5__image_smm_1vr_b5" src="../../images/book_icon.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">Vivado<sup>®</sup> Design Suite User Guide: Using the
+                            Vivado IDE</cite> (UG893), <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug893-vivado-ide.pdf;a=xUsingTheSourcesWindow" target="_blank">Using the Sources Window</a></td>
+
+                </tr>
+<tr class="strow">
+                    <td valign="top" class="stentry"><img class="image" id="concept_aqj_x3c_d5__image_tzt_vc1_j5" src="../../images/book_icon.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry"><cite class="cite">Vivado Design Suite User Guide: System-Level Design Entry</cite>
+                        (UG895), <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug893-vivado-ide.pdf;a=xWorkingWithSourceFiles" target="_blank">Working with Source
+                        Files</a></td>
+
+                </tr>
+</table>
+
+        </div>
+
+  
+ </div>
+
+
+</body>
+</html>

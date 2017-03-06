@@ -1,0 +1,37 @@
+
+Description:
+
+  Deletes an existing interface and optionally deletes all of the associated
+  ports and buses using the interface.
+
+Arguments:
+
+  -all - (Optional) Delete all ports, buses, or nested interfaces associated
+  with the specified interface.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <interfaces> - (Required) The name of interfaces to delete.
+
+Examples:
+
+  The following example deletes the specified interface and all of its
+  associated ports and buses:
+
+    delete_interface USB0
+
+See Also:
+
+   *  create_interface
+   *  create_port

@@ -1,0 +1,68 @@
+
+Description:
+
+  Create or open a Value Change Dump (VCD) file to capture simulation output.
+  This command operates like the Verilog $dumpfile simulator directive.
+
+  VCD is an ASCII file containing header information, variable definitions,
+  and value change details of a set of HDL signals. The VCD file can be used
+  to view simulation result in a VCD viewer or to estimate the power
+  consumption of the design.
+
+  When a VCD file has been opened, you can write the value changes from the
+  simulation into the VCD file using checkpoint_vcd, flush_vcd, or log_vcd.
+  In addition, you can pause and resume the collection of value change data
+  with the stop_vcd and start_vcd commands.
+
+  You can limit the size of the VCD file by using the limit_vcd command.
+
+  To close the VCD file, use the close_vcd command.
+
+  Note: You must use the open_vcd command before using any other *_vcd
+  commands. Only one VCD file can be open at any time.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <file_name> - (Optional) Is the name of the file into which to dump the
+  current VCD information. When a filename is not specified, the default
+  filename of dump.vcd is used. If the specified VCD file already exists,
+  then open_vcd resets the VCD file to a new state, overwriting the current
+  contents.
+
+Examples:
+
+  The following example opens the specified VCD file (design1.vcd) so that
+  value changes can be written to it. The log_vcd command identifies all
+  ports in the /tb/UUT scope, and only that level of the design hierarchy, to
+  be written to the VCD file. The simulation is run for a specified period of
+  time, and flush_vcd writes the current values of the HDL objects to the VCD
+  file. Then close_vcd closes the open file.
+
+    open_vcd design1.vcd 
+    log_vcd -level 1 [get_objects filter { type == port } /tb/UUT/* ] 
+    run 1000 
+    flush_vcd 
+    close_vcd
+
+See Also:
+
+   *  checkpoint_vcd
+   *  close_vcd
+   *  flush_vcd
+   *  limit_vcd
+   *  log_vcd
+   *  start_vcd
+   *  stop_vcd

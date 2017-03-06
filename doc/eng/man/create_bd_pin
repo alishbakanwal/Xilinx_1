@@ -1,0 +1,55 @@
+
+Description:
+
+  Create a new pin to add to an IP Integrator hierarchical module.
+
+  This command returns the name of the newly created pin object, or returns
+  an error message if it failed.
+
+Arguments:
+
+  -from <arg> - (Optional) The starting index of a standard bus pin. This is
+  unspecified for single bit pins.
+
+  -to <arg> - (Optional) The ending index of a standard bus pin. This is
+  unspecified for single bit pins.
+
+  -dir [ I | O | IO ] - (Required) The direction of the pin. Valid values are
+  I for input, O for output, and IO for bidirectional pins.
+
+  -type <arg> - (Optional) Defines the type of the pin as a clock pin (CLK),
+  a reset pin (RST), a clock enable pin (CE), an interrupt pin (INTR), or as
+  a data pin (DATA). If you do not define the pin type, it will be undefined
+  (UNDEF).
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <name> - (Required) The name of the subsystem pin to create. The name is
+  referenced from the hierarchical module that the pin is being added to:
+  /modName/pinname.
+
+Examples:
+
+  The following example creates a new input pin on the specified module in
+  the current IP Integrator subsystem design:
+
+    create_bd_pin -dir I -type rst /newMod1/rst 
+    /newMod1/rst
+
+See Also:
+
+   *  create_bd_cell
+   *  create_bd_intf_pin
+   *  create_bd_intf_port
+   *  create_bd_port

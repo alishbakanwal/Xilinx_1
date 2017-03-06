@@ -1,0 +1,62 @@
+
+Description:
+
+  Run the specified serial I/O analyzer link scan.
+
+  To analyze the margin of a given link, it is often helpful to run a scan of
+  the link using the specialized Eye Scan hardware of Xilinx UltraScale
+  devices or 7 Series FPGAs. The Vivado serial I/O analyzer feature lets you
+  to create, run, and save link scans.
+
+  This command creates and returns a link scan object that you can use with
+  the run_hw_sio_scan command to run analysis on the specified links, or GT
+  receivers. You can also save the scan to disk using the write_hw_sio_scan
+  command.
+
+  This command run analysis on the specified scan objects. If running in a
+  Tcl script, you can suspend the script while the scan completes using the
+  wait_on_hw_sio_scan command. You can stop a running scan using the
+  stop_hw_sio_scan command.
+
+  You can save the scan to disk using the write_hw_sio_scan command.
+
+  You can remove the created scan object using remove_hw_sio_scan.
+
+  This command returns the hw_sio_scan object, or returns an error if the
+  command fails.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <hw_sio_scans> - (Required) Specify one or more hw_sio_scan objects to run.
+  The hw_sio_scans must be specified as objects as returned by the
+  create_hw_sio_scan or get_hw_sio_scans commands.
+
+Example:
+
+  The following example runs the specified serial I/O analyzer scan:
+
+    run_hw_sio_scan [lindex [get_hw_sio_scans {SCAN_3}] 0]
+
+See Also:
+
+   *  create_hw_sio_scan
+   *  current_hw_device
+   *  get_hw_sio_scans
+   *  remove_hw_sio_scan
+   *  run_hw_sio_scan
+   *  stop_hw_sio_scan
+   *  wait_on_hw_sio_scan
+   *  write_hw_sio_scan

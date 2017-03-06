@@ -1,0 +1,88 @@
+HW_ILA
+
+Description: 
+The Integrated Logic Analyzer (ILA) debug core allows you to perform in-system 
+monitoring of signals in the implemented design through debug probes on the core. 
+You can configure the ILA core to trigger in real-time on specific hardware 
+events, and capture data on the probes at system speeds.
+
+ILA debug cores can be added to a design by instantiating an ILA core from the IP 
+catalog into the RTL design, or using the create_debug_core Tcl command to add 
+the ILA core to the synthesized netlist. Refer to Vivado Design Suite User 
+Guide: Programming and Debugging (UG908) for more information on adding ILA debug 
+cores to the design.
+
+After generating a bitstream from the design, and programming the device with the 
+program_hw_devices command, the ILA debug cores in the design are accessible from 
+the Hardware Manager using the get_hw_ilas command. The debug probes assigned to 
+the ILA debug cores in the design can be returned with the get_hw_probes command. 
+
+Related Objects:
+ILA debug cores can be added to a design in the RTL source files, or using the 
+create_debug_core Tcl command. Debug cores can be found in the synthesized netlist 
+design using the get_debug_cores command. These are not the hardware ILA debug 
+core objects, hw_ila, found in the Hardware Manager feature of the Vivado Design 
+Suite, though they are related. 
+
+The hardware ILA debug core can be found in the Hardware Manager on the programmed 
+hardware device object, hw_device. You can query the hw_ila of the hw_device as 
+follows:
+
+	get_hw_ilas -of [current_hw_device]
+
+There are also objects associated with the hardware ILA debug core, such as hardware 
+probes, and the captured data samples from the hw_ila core. You can query the 
+objects associated with the ILA debug cores as follows:
+
+	get_hw_ila_datas -of_objects [get_hw_ilas hw_ila_2]
+
+Properties:
+You can use the report_property command to report the actual properties assigned to a specific 
+HW_ILA. Refer to the Vivado Design Suite Tcl Command Reference (UG835) for more information. 
+The properties assigned to HW_ILA objects incude the following:  
+
+Property                                      Type    Read-only  Visible  Value
+CLASS                                         string  true       true     hw_ila
+CONTROL.CAPTURE_CONDITION                     enum    false      true     AND
+CONTROL.CAPTURE_MODE                          enum    false      true     ALWAYS
+CONTROL.DATA_DEPTH                            int     false      true     1024
+CONTROL.IS_ILA_TO_DRIVE_TRIG_OUT_ENABLED      bool    true       true     0
+CONTROL.IS_TRIG_IN_TO_DRIVE_TRIG_OUT_ENABLED  bool    true       true     0
+CONTROL.IS_TRIG_IN_TO_ILA_ENABLED             bool    true       true     0
+CONTROL.TRIGGER_CONDITION                     string  false      true     AND
+CONTROL.TRIGGER_MODE                          enum    false      true     BASIC_ONLY
+CONTROL.TRIGGER_POSITION                      int     false      true     0
+CONTROL.TRIG_OUT_MODE                         enum    true       true     DISABLED
+CONTROL.TSM_FILE                              string  false      true     
+CONTROL.WINDOW_COUNT                          int     false      true     1
+CORE_REFRESH_RATE_MS                          int     false      true     500
+HW_CORE                                       string  true       false    core_1
+INSTANCE_NAME                                 string  true       true     u_ila_0
+NAME                                          string  true       true     hw_ila_1
+STATIC.IS_ADVANCED_TRIGGER_MODE_SUPPORTED     bool    true       true     1
+STATIC.IS_BASIC_CAPTURE_MODE_SUPPORTED        bool    true       true     1
+STATIC.IS_TRIG_IN_SUPPORTED                   bool    true       true     0
+STATIC.IS_TRIG_OUT_SUPPORTED                  bool    true       true     0
+STATIC.MAX_DATA_DEPTH                         int     true       true     1024
+STATIC.TSM_COUNTER_0_WIDTH                    int     true       true     15
+STATIC.TSM_COUNTER_1_WIDTH                    int     true       true     15
+STATIC.TSM_COUNTER_2_WIDTH                    int     true       true     15
+STATIC.TSM_COUNTER_3_WIDTH                    int     true       true     15
+STATUS.CORE_STATUS                            string  true       true     IDLE
+STATUS.DATA_DEPTH                             int     true       true     2147483647
+STATUS.IS_TRIGGER_AT_STARTUP                  bool    true       true     0
+STATUS.SAMPLE_COUNT                           int     true       true     0
+STATUS.TRIGGER_POSITION                       int     true       true     2147483647
+STATUS.TSM_FLAG0                              bool    true       true     1
+STATUS.TSM_FLAG1                              bool    true       true     1
+STATUS.TSM_FLAG2                              bool    true       true     1
+STATUS.TSM_FLAG3                              bool    true       true     1
+STATUS.TSM_STATE                              int     true       true     0
+STATUS.WINDOW_COUNT                           int     true       true     2147483647
+TRIGGER_START_TIME_SECONDS                    string  true       true     
+TRIGGER_STOP_TIME_SECONDS                     string  true       true     
+
+To report the properties for a specific HW_ILA, you can copy and paste the following command 
+into the Vivado Design Suite Tcl shell or Tcl console:
+
+	report_property -all [lindex [get_hw_ilas] 0]

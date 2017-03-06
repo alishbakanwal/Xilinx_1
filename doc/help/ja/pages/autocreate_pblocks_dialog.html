@@ -1,0 +1,54 @@
+﻿<html xml:lang="ja-jp" lang="ja-jp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="reference"/>
+<meta name="DC.Title" content="[Auto-create Pblocks] ダイアログ ボックス"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_bqj_lqr_b5"/>
+<meta name="DC.Language" content="ja-JP"/>
+<link rel="stylesheet" type="text/css" href="../commonltr-ja.css"/>
+<title>[Auto-create Pblocks] ダイアログ ボックス</title>
+</head>
+<body id="concept_bqj_lqr_b5">
+
+
+<h1 class="title topictitle1">[Auto-create Pblocks] ダイアログ ボックス</h1>
+
+<div class="body refbody">
+<div class="section">
+<p class="p">このダイアログ ボックスでは、現在のデザインの階層モジュールのフロアプランを作成するため、Vivado ツールで Pblock が自動的に作成されるようにできます。デザインの階層が解析され、リーフ セルを最も多く含むセルが選択され、<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug912-vivado-properties.pdf;a=xPblock" target="_blank">Pblock</a> に割り当てられます。</p>
+
+<ul class="ul" id="concept_bqj_lqr_b5__ul_gc5_ccp_v5">
+<li class="li"><span Class="uicontrol">[Pblock to partition] : </span>デザインの最上位 (ROOT パーティション) の Pblock が作成されるか、既存 Pblock が入れ子のブロックにさらにパーティションされるようになります。</li>
+
+<li class="li"><span Class="uicontrol">[Maximum number of Pblocks to generate] : </span>現在のデザインから生成する Pblock 数を指定します。デフォルトは 10 です。</li>
+
+<li class="li"><span Class="uicontrol">[Process cells with leaf cell count of at least] : </span>階層セルに含める必要のあるリーフ セルの最小数を指定し、Pblock への割り当てで考慮されるようにします。</li>
+
+</ul>
+
+<p class="p"><span Class="uicontrol">[Preview]</span> 領域には、Pblock に割り当てられる階層セル インスタンスがリストされます。<span Class="uicontrol">[OK]</span> をクリックすると、Pblock が自動的に作成され、階層セルのエレメントがこれらのブロックに割り当てらるようになります。</p>
+
+</div>
+
+<div class="section"><h2 class="title sectiontitle">関連項目</h2>
+<table cellpadding="4" cellspacing="0" summary="" id="concept_bqj_lqr_b5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow"> <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_bqj_lqr_b5__image_smm_1vr_b5" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">『Vivado<sup>®</sup> Design Suite ユーザー ガイド : デザイン解析およびクロージャ テクニック』</cite> (UG906) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug906-vivado-design-analysis.pdf;a=xFloorplanning" target="_blank">「フロアプラン」</a></td>
+ </tr>
+<tr class="strow"> <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_y3g_hbj_dv" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry"><cite class="cite">『Vivado Design Suite Tcl コマンド リファレンス ガイド』</cite> (UG835) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xcreate_pblock" target="_blank">「create_pblock」</a></td>
+ </tr>
+<tr class="strow"> <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_av4_jvr_b5" src="../../images/play.png" alt="Icon"/></td>
+ <td valign="top" class="stentry"><a class="xref" href="http://japan.xilinx.com/video/hardware/design-analysis-floorplanning-with-vivado.html" target="_blank">Vivado Design Suite QuickTake ビデオ : Vivado でのデザイン解析およびフロアプラン</a></td>
+ </tr>
+</table>
+
+</div>
+
+</div>
+
+
+</body>
+</html>

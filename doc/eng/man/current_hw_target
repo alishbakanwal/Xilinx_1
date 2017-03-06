@@ -1,0 +1,80 @@
+
+Description:
+
+  After opening the Hardware Manager in the Vivado Design Suite, and
+  connecting to the Xilinx hardware server (hw_server) using the
+  connect_hw_server command, you will need to set the hardware target. This
+  command sets or returns the current hardware target.
+
+  The hardware target is a system board containing a JTAG chain of one or
+  more Xilinx devices that you can program with a bitstream file, or use to
+  debug your design. Connections between hardware targets on the system board
+  and the Vivado Design Suite are managed by the hw_server object. Refer to
+  Vivado Design Suite User Guide: Programming and Debugging (UG908) for a
+  list of supported JTAG download cables and devices.
+
+  The available hardware targets are defined when the Vivado tools Hardware
+  Manager is connected to a hw_server. You can return a list of the available
+  hardware targets using the get_hw_targets command, and define the current
+  hardware target using the current_hw_target command.
+
+  If the <hw_target> is specified as part of the current_hw_target command,
+  the specified target is defined as the current hardware target and that
+  object is returned. If no hardware target is specified, the
+  current_hw_target command returns the current hardware target object.
+
+  Each hardware target can have one or more Xilinx devices to program, or to
+  use for debugging purposes. The current device is specified or returned by
+  the current_hw_device command. After specifying the current hardware
+  target, you can open the connection through the hardware target, to the
+  Xilinx device using the open _hw_target command.
+
+  Note: You can use the current_hw_server, current_hw_target, and
+  current_hw_device commands to set the hardware for programming and
+  debugging the design. You should exercise care when using these commands to
+  insure that the current server, target, and device are in sync. The current
+  device should be found on the current target, which should be found on the
+  current server.
+
+  This command returns the current hardware target as an object, or returns
+  an error if it fails.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <hw_target> - (Optional) Specify the hw_target object to set as the
+  current_hw_target for programming and debug. The hw_target must be
+  specified as an object as returned by the get_hw_targets command. If the
+  hardware target is not specified, the current_hw_target will be returned.
+
+Example:
+
+  The following example returns the available hardware targets on the
+  connected hardware servers, and sets the current hw_target to the specified
+  target:
+
+    get_hw_targets 
+       trumpet/xilinx_tcf/Digilent/210203327985A     
+       picasso/xilinx_tcf/Digilent/210203368518A 
+    current_hw_target [lindex [get_hw_targets] 1]
+
+See Also:
+
+   *  close_hw_target
+   *  current_hw_device
+   *  get_hw_devices
+   *  get_hw_targets
+   *  open_hw_target
+   *  refresh_hw_target

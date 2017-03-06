@@ -1,0 +1,48 @@
+
+Description:
+
+  Restores the specified property to its default value on the specified
+  object or objects. If no default is defined for the property, the property
+  is unassigned on the specified object.
+
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <property_name> - (Required) The name of the property to be reset.
+
+  <objects> - (Required) One or more objects on which the property will be
+  restored to its default value.
+
+
+Examples:
+
+  The following example sets the archiver property on the specified processor,
+  and then resets the property:
+
+    set_property CONFIG.archiver armar [get_sw_processor]
+    reset_property CONFIG.archiver armar [get_sw_processor]
+
+
+See Also:
+
+   *  create_property
+   *  get_cells
+   *  get_property
+   *  list_property
+   *  list_property_value
+   *  report_property
+   *  set_property
+

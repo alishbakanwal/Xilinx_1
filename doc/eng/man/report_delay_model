@@ -1,0 +1,61 @@
+
+Description:
+
+  This command reports the configuration setting that affect delay
+  calculation for the current design. The command requires an open
+  synthesized or implemented design. Delay configuration settings include
+  delay models used for interconnect delays and cell delays.
+
+  Note: By default the report is written to the Tcl console or STD output.
+  However, the results can also be written to a file or returned as a string
+  if desired.
+
+Arguments:
+
+  -file <arg> - (Optional) Write the report into the specified file. The
+  specified file will be overwritten if one already exists, unless -append is
+  also specified.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -append - (Optional) Append the output of the command to the specified file
+  rather than overwriting it.
+
+  Note: The -append option can only be used with the -file option.
+
+  -return_string - (Optional) Directs the output to a Tcl string rather than
+  to the standard output. The Tcl string can be captured by a variable
+  definition and parsed or otherwise processed.
+
+  Note: This argument cannot be used with the -file option.
+
+  -all - (Optional) Report all configuration settings affecting the delay
+  calculation for the design. By default, only typically important settings
+  are reported.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example shows all of the delay model configuration settings
+  for the current design:
+
+    report_delay_model -all
+
+See Also:
+
+   *  report_timing
+   *  report_timing_summary

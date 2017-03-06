@@ -1,0 +1,46 @@
+
+Description:
+
+  Swaps the LOC constraints assigned to two similar logic elements. A logic
+  element is an element that can be placed onto a device resource on the
+  FPGA.
+
+  Some DRC checking is performed when the swap_locs command is executed to
+  ensure that the two selected elements can in fact be assigned to their new
+  locations. If the location of either element is invalid for any reason, the
+  swap_locs command will fail and an error will be returned.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <aloc> - (Required) The location of the first logic element to swap. This
+  can be specified as a port, a cell, or a device site.
+
+  <bloc> - (Required) The location of the second logic element to swap. This
+  can be specified as a port, a cell, or a device site. This must match the
+  type specified by the <aloc> variable.
+
+Examples:
+
+  The following example swaps the instances assigned to the two specified
+  device sites:
+
+    swap_locs [get_sites {OLOGIC_X2Y1}] [get_sites {OLOGIC_X2Y0}]
+
+See Also:
+
+   *  get_cells
+   *  get_ports
+   *  get_sites

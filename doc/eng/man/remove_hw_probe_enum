@@ -1,0 +1,61 @@
+
+Description:
+
+  Remove the enumerated name/value pairs defined on a specified hw_probe
+  object.
+
+  The enumerated names (ENUM property) are added to a hw_probe object using
+  the add_hw_probe_enum command. This command removes those defined
+  properties.
+
+  This command returns nothing if successful, or returns and error if it fails.
+
+Arguments:
+
+  -no_gui_update - (Optional) Do not update the GUI in the Vivado logic
+  analyzer to remove the enumerated values of the probe.
+
+  -list <args> - (Optional) Remove the specified list of enumerated names
+  from the specified <hw_probe> object.
+
+  Note: The list of names can be specified as a list object, or as a simple
+  list of names.
+
+  -remove_all - (Optional) Remove all of the ENUM properties defined on the
+  specified <hw_probe> object. This option cannot be used with the -list
+  option.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <hw_probe> - (Required) Specify the hw_probe objects to remove the ENUM
+  property from.
+
+Examples:
+
+  The following example removes the list of enumerated names from the
+  specified hw_probe object:
+
+    remove_hw_probe_enum -list {WHITE YELLOW GREY} \ 
+    [get_hw_probes op1 -of_objects [current_hw_ila]]
+
+See Also:
+
+   *  add_hw_probe_enum
+   *  current_hw_device
+   *  current_hw_ila
+   *  get_hw_devices
+   *  get_hw_ilas
+   *  get_hw_probes
+   *  get_hw_vios
+   *  report_property

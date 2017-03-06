@@ -1,0 +1,87 @@
+
+Description:
+
+  Create a serial I/O analyzer scan object for the specified communication
+  link on the IBERT debug core.
+
+  To analyze the margin of a given link, it is often helpful to run a scan of
+  the link using the specialized Eye Scan hardware of Xilinx UltraScale
+  devices or 7 Series FPGAs. The Vivado serial I/O analyzer feature lets you
+  to create, run, and save link scans.
+
+  This command creates and returns a link scan object that you can use with
+  the run_hw_sio_scan command to run analysis on the specified links, or GT
+  receivers. You can also save the scan to disk using the write_hw_sio_scan
+  command.
+
+  You can remove the created scan object using remove_hw_sio_scan.
+
+  This command returns the hw_sio_scan object, or returns an error if he
+  command fails.
+
+Arguments:
+
+  -description <arg> - (Optional) Provide a brief description that acts as a
+  label for the serial I/O analyzer scan. The description can be used to
+  identify the <hw_sio_scan object>. For instance, you can identify the
+  receiver port, so that when you are sweeping many ports you can keep track
+  of which port the scan plot s for.
+
+  -link_settings <arg> - (Optional) Specify a list of Link properties and
+  values to set before running the scan. If no link settings are provided,
+  the default settings are used. Refer to Vivado Design Suite User Guide:
+  Programming and Debugging (UG908) for a description of scan properties and
+  settings.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <scan_type> - (Required) Specify the scan type. Valid types include:
+
+   *  1d_bathtub - Scan all horizontal sampling points through the 0 vertical
+      axis.
+
+   *  2d_full_eye - Scan all horizontal and vertical sampling points to
+      create an "eye".
+
+  Note: The results of the bathtub scan can be saved to a file with
+  write_hw__sio_scan, but the plot cannot be displayed in the Vivado serial
+  I/O analyzer using display_hw_sio_scan.
+
+  <hw_sio_object> - (Required) Specify the IBERT debug core link,
+  hw_sio_link, or receiver, hw_sio_rx, to define the scan object for. The
+  link or receiver must be specified as objects as returned by the
+  get_hw_sio_links or get_hw_sio_rxs commands.
+
+  Note: The create_hw_sio_scan command requires the hw_sio_object to be
+  specified as a list of one object.
+
+Example:
+
+  The following example defines a scan for the specified link:
+
+    create_hw_sio_scan -description {LoopBack} 2d_full_eye \ 
+       [get_hw_sio_links Link_1]
+
+See Also:
+
+   *  create_hw_sio_scan
+   *  create_hw_sio_sweep
+   *  current_hw_device
+   *  get_hw_sio_scans
+   *  get_hw_sio_sweeps
+   *  remove_hw_sio_scan
+   *  run_hw_sio_scan
+   *  stop_hw_sio_scan
+   *  wait_on_hw_sio_scan
+   *  write_hw_sio_scan

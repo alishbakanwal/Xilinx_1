@@ -1,0 +1,74 @@
+
+Description:
+
+  Remove the specified net from the netlist of an open Synthesized or
+  Implemented Design.
+
+  Note: You cannot remove nets from library macros, also called
+  macro-primitives.
+
+  To remove a bus, you must specify the primary bus name, and not specify a
+  bus index. This ensures that the entire bus is removed, and not just a
+  portion of the bits associated with the bus. You can resize a bus,
+  eliminating bits of the bus, using the resize_net_bus command.
+
+  Netlist editing changes the in-memory view of the netlist in the current
+  design. It does not change the files in the source fileset, or change the
+  persistent design on the disk. Changes made to the netlist may be saved to
+  a design checkpoint using the write_checkpoint command, or may be exported
+  to a netlist file such as Verilog, VHDL, or EDIF, using the appropriate
+  write_* command.
+
+  Note: Netlist editing is not allowed on the elaborated RTL design.
+
+Arguments:
+
+  -prune - (Optional) Prune, or remove, any unconnected hierarchical pins,
+  ports, or nets, as a result of removing the specified net.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <nets> - (Required) The list of nets to remove from the netlist of the
+  current design.
+
+Example:
+
+  Using the following connection network:
+
+    leaf_cell1/pin1 > net1 > block1/pin1 > 
+       topnet 
+    < block2/pin1 < net2 < leaf_cell2/pin1
+
+  This example will remove block1/pin1, block2/pin1, net1, and net2, but will
+  not prune the pins on the leaf cells:
+
+    remove_net topnet -prune
+
+  The following example illustrates the warning returned when trying to
+  remove one bit of a bus net, and then removes the entire bus by specifying
+  the root name:
+
+    remove_net DataIn_pad_1_i[0] 
+    WARNING: [Coretcl-82] No nets matched `DataIn_pad_1_i[0]`. 
+    remove_net DataIn_pad_1_i
+
+See Also:
+
+   *  create_net
+   *  disconnect_net
+   *  resize_net_bus
+   *  write_checkpoint
+   *  write_edif
+   *  write_verilog
+   *  write_vhdl

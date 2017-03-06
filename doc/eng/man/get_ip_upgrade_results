@@ -1,0 +1,75 @@
+
+Description:
+
+  Returns the names of the upgrade_log files for the specified IPs.
+
+  This command is used by the Vivado IDE to populate the IP Status Report
+  window with information from the upgrade_log file. You can use the command
+  to quickly obtain the upgrade_log file name, and then use the appropriate
+  file commands, to read or display the contents.
+
+  This command returns the upgrade_log file names of the specified IP
+  objects, or returns an error if it fails.
+
+Arguments:
+
+  -srcset <arg> - (Optional) Specify an alternate source file set to examine
+  for the specified IPs. This lets you change from the default, which is the
+  sources _1 fileset.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <objects> - (Optional) Specify the IP objects to report the upgrade results
+  for. IP objects are returned by the get_ips command.
+
+Example:
+
+  The following example returns the upgrade_log filenames for all IPs in the
+  current fileset:
+
+    get_ip_upgrade_results [get_ips]
+
+  The following example prints the upgrade logs for the upgraded IP to the
+  Tcl console:
+
+    set ipDefs [get_ip_upgrade_results [get_ips]] 
+    for {set x 0} {$x<[llength $ipDefs]} {incr x} { 
+       set ipRoot [file rootname [lindex $ipDefs $x]] 
+       puts "Upgrade Log for $ipRoot" 
+       set ipDir [get_property IP_DIR [get_ips $ipRoot]] 
+       set ipLog [lindex $ipDefs $x] 
+       set catLog [concat $ipDir/$ipLog] 
+     
+       # Check for file existence, and read file contents 
+       if {[file isfile $catLog]} { 
+          # Open the file for read, save the File Handle 
+          set FH [open $catLog r] 
+          #puts "Open $FH" 
+          set content [read $FH]  
+          foreach line [split $content \n] { 
+             # The current line is saved inside $line variable 
+             puts $line 
+          } 
+          close $FH 
+          #puts "Close $FH" 
+       } 
+    }
+
+See Also:
+
+   *  current_fileset
+   *  get_ips
+   *  import_ip
+   *  report_ip_status
+   *  upgrade_ip

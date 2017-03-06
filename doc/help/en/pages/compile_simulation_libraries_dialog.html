@@ -1,0 +1,114 @@
+﻿<html xml:lang="en-us" lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="reference"/>
+<meta name="DC.Title" content="Compile Simulation Libraries"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_bqj_lqr_b5"/>
+<link rel="stylesheet" type="text/css" href="../../commonltr.css"/>
+<title>Compile Simulation Libraries</title>
+</head>
+<body id="concept_bqj_lqr_b5">
+
+
+    <h1 class="title topictitle1">Compile Simulation Libraries</h1>
+
+ <div class="body refbody">
+     <div class="section">
+  <p class="p">The Vivado<sup>®</sup> Design Suite includes a set of simulation libraries for use with
+                the Vivado simulator that support the behavioral, functional, and timing simulation
+                of a design targeting a Xilinx<sup>®</sup> device. However, you must compile
+                these libraries for use with a supported third-party simulator. </p>
+
+            <p class="p">The Compile Simulation Libraries dialog box lets you specify the simulator, language
+                preference, and installation information related to your simulator. </p>
+
+  <ul class="ul" id="concept_bqj_lqr_b5__ul_azt_c5r_b5">
+                <li class="li"><span Class="uicontrol">Simulator</span>: Specifies the third-party simulator to compile
+                    libraries for. The list of available simulators is dependant on the operating
+                    system you are running. Some simulators are only available on Linux, and will
+                    not be listed when running on Windows. </li>
+
+                <li class="li"><span Class="uicontrol">Language</span>: Specifies the simulator language to output.
+                    Some simulators are language specific, while other support both Verilog and
+                    VHDL. For multi-language simulators, both Verilog and VHDL libraries can be
+                    compiled. </li>
+
+                <li class="li"><span Class="uicontrol">Library</span>: Specifies the Xilinx simulation library to
+                    compile. Refer to this <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug900-vivado-logic-simulation.pdf;a=xUsingXilinxSimulationLibraries" target="_blank">link</a> in <cite class="cite">Vivado Design Suite User
+                        Guide: Logic Simulation</cite> (UG900) for more information. </li>
+
+                <li class="li"><span Class="uicontrol">Family</span>: Specifies the device family to compile simulation
+                    libraries for. This opens the Family Options dialog box to choose device
+                    families to target in order to restrict the size of the compiled library. </li>
+
+                <li class="li"><span Class="uicontrol">Compiled library location</span>: Directory path for saving the
+                    compiled library results. </li>
+
+                <li class="li"><span Class="uicontrol">Simulator executable path</span>: Specifies the directory to
+                    locate the simulator executable. This is required if the target simulator is not
+                    defined in the $PATH, or to override the path definition. </li>
+
+                <li class="li"><span Class="uicontrol">Miscellaneous options</span>: Use this to specify additional
+                    options for the <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xcompile_simlib" target="_blank">compile_simlib</a> Tcl command. </li>
+
+                <li class="li"><span Class="uicontrol">Overwrite the current pre-compiled libraries</span>: Replace
+                    existing libraries at the same specified location. </li>
+
+                <li class="li"><span Class="uicontrol">Compile 32-bit libraries</span>: Use this to specify 32-bit
+                    executable models. By default the libraries are compiled in 64-bit mode. </li>
+
+                <li class="li"><span Class="uicontrol">Verbose</span>: Suspend any current message limits and return
+                    all messages from the Tcl command.</li>
+
+                <li class="li"><span Class="uicontrol">Command</span>: Displays the Tcl command to compile the
+                    simulation libraries as configured in this dialog box. You can edit this command
+                    directly to change the command that will be run when you click
+                        <span Class="uicontrol">OK</span>. </li>
+
+            </ul>
+
+ </div>
+
+  <div class="section"><h2 class="title sectiontitle">See Also</h2>
+   
+      <table cellpadding="4" cellspacing="0" summary="" id="concept_bqj_lqr_b5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow">
+                    <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_bqj_lqr_b5__image_ifx_flv_c5" src="../../images/book_icon.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">Vivado Design Suite User Guide: Logic Simulation</cite> (UG900),
+                            <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug900-vivado-logic-simulation.pdf;a=xUsingThirdPartySimulators" target="_blank">Using Third-Party
+                        Simulators</a></td>
+
+                </tr>
+<tr class="strow">
+                    <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_yh1_s24_v5" src="../../images/play.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry"><a class="xref" href="http://www.xilinx.com/cgi-bin/docs/ndoc?t=video;d=hardware/simulating-mentor-questa-in-vivado.html" target="_blank">Vivado Design Suite QuickTake Video:
+                            Simulating with Mentor Questa in Vivado</a></td>
+
+                </tr>
+<tr class="strow">
+                    <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_ibw_nqp_dv" src="../../images/play.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry"><a class="xref" href="http://www.xilinx.com/cgi-bin/docs/ndoc?t=video;d=hardware/simulating-with-cadence-ies-in-vivado.html" target="_blank">Vivado Design Suite QuickTake Video:
+                            Simulating with Cadence IES in Vivado</a></td>
+
+                </tr>
+<tr class="strow">
+                    <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_chb_4qp_dv" src="../../images/play.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry"><a class="xref" href="http://www.xilinx.com/cgi-bin/docs/ndoc?t=video;d=hardware/simulating-with-synopsys-vcs-in-vivado.html" target="_blank">Vivado Design Suite QuickTake Video:
+                            Simulating with Synopsys VCS in Vivado</a></td>
+
+                </tr>
+</table>
+
+  </div>
+
+ </div>
+
+
+</body>
+</html>

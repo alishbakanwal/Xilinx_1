@@ -1,0 +1,66 @@
+
+Description:
+
+  Suspend Tcl script or Tcl command processing until the ILA debug core
+  memory is filled by captured data samples.
+
+  This command is used after the run_hw_ila command to pause Tcl processing
+  to wait for the data buffers to fill up. When the wait_on_hw_ila command
+  returns, the Tcl command or script processing can continue.
+
+  With the ILA debug core memory filed with sample data, when Tcl processing
+  resumes, you can upload the captured data samples into an ILA debug core
+  data object, or hw_ila_data object. Use the upload_ila_data command to
+  perform this action.
+
+  This command operates silently, returning nothing if successful, or
+  returning an error if it fails.
+
+Arguments:
+
+  -timeout <arg> - (Optional) Wait for this period of time for all data on
+  the ILA debug cores to be captured. If the timeout interval is reached, the
+  wait command is terminated.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <hw_ilas> - (Optional) Specify one or more hw_ila objects to wait on. The
+  hw_ila objects must be specified as an object as returned by the
+  get_hw_ilas or current_hw_ila commands. If the hardware ILA is not
+  specified, the current_hw_ila will be run.
+
+Example:
+
+  The following example waits for all data on the current hardware ILA debug
+  core to be captured:
+
+    
+    run_hw_ila hw_ila_1 -trigger_now 1 
+    INFO: [Labtools 27-1964] The ILA core `hw_ila_1` trigger was armed 
+       at 2014-Mar-02 13:20:30 
+    wait_on_hw_ila hw_ila_1 
+    display_hw_ila_data [upload_hw_ila_data hw_ila_1] 
+    INFO: [Labtools 27-1966] The ILA core `hw_ila_1` triggered  
+       at 2014-Mar-02 13:20:31
+
+See Also:
+
+   *  current_hw_device
+   *  current_hw_ila
+   *  current_hw_ila_data
+   *  display_hw_ila_data
+   *  get_hw_devices
+   *  get_hw_ilas
+   *  run_hw_ila
+   *  upload_hw_ila_data

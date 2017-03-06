@@ -1,0 +1,121 @@
+BEL
+
+Description: 
+Typically a BEL, or Basic Element, corresponds to leaf-cells in the netlist view 
+of the design. BELs are device objects on the target Xilinx FPGA on which to place, 
+or map, basic netlist objects like flip-flops, LUTs, and carry logic. 
+
+BELs are grouped together on the device in SITE objects, such as SLICEs and IO 
+Blocks (IOBs). One or more BELs can be located in a single site, and you can use 
+the bel to assign logic from the design netlist into specific locations or device 
+resources on the target device. 
+
+There are a number of different bel types available on the different Xilinx FPGAs. 
+The following are the types of bels found on the Kintex-7 part, xc7k325tffg900. The 
+different TYPEs of BELs are enumerated below: 
+
+BSCAN_BSCAN 
+BUFFER BUFGCTRL_BUFGCTRL BUFHCE_BUFHCE BUFIO_BUFIO BUFMRCE_BUFMRCE BUFR_BUFR 
+CAPTURE_CAPTURE 
+CARRY4 
+DCIRESET_DCIRESET 
+DNA_PORT_DNA_PORT 
+DSP48E1_DSP48E1 
+EFUSE_USR_EFUSE_USR 
+FF_INIT 
+FIFO18E1_FIFO18E1 
+FRAME_ECC_FRAME_ECC 
+GTXE2_CHANNEL_GTXE2_CHANNEL GTXE2_COMMON_GTXE2_COMMON 
+HARD0 HARD1 
+IBUFDS_GTE2_IBUFDS_GTE2 
+ICAP_ICAP 
+IDELAYCTRL_IDELAYCTRL IDELAYE2_FINEDELAY_IDELAYE2_FINEDELAY IDELAYE2_IDELAYE2 
+ILOGICE2_IFF ILOGICE3_IFF ILOGICE3_ZHOLD_DELAY 
+INVERTER 
+IN_FIFO_IN_FIFO 
+IOB18M_INBUF_DCIEN IOB18M_OUTBUF_DCIEN IOB18M_TERM_OVERRIDE 
+IOB18S_INBUF_DCIEN IOB18S_OUTBUF_DCIEN IOB18S_TERM_OVERRIDE 
+IOB18_INBUF_DCIEN IOB18_OUTBUF_DCIEN IOB18_TERM_OVERRIDE 
+IOB33M_INBUF_EN IOB33M_OUTBUF IOB33M_TERM_OVERRIDE 
+IOB33S_INBUF_EN IOB33S_OUTBUF IOB33S_TERM_OVERRIDE 
+IOB33_INBUF_EN IOB33_OUTBUF IOB33_TERM_OVERRIDE 
+LUT5 LUT6 LUT_OR_MEM5 LUT_OR_MEM6 
+MMCME2_ADV_MMCME2_ADV 
+ODELAYE2_ODELAYE2 
+OLOGICE2_MISR OLOGICE2_OUTFF OLOGICE2_TFF 
+OLOGICE3_MISR OLOGICE3_OUTFF OLOGICE3_TFF 
+OUT_FIFO_OUT_FIFO 
+PAD 
+PCIE_2_1_PCIE_2_1 
+PHASER_IN_PHY_PHASER_IN_PHY PHASER_OUT_PHY_PHASER_OUT_PHY PHASER_REF_PHASER_REF 
+PHY_CONTROL_PHY_CONTROL 
+PLLE2_ADV_PLLE2_ADV 
+PMV2_PMV2 
+PULL_OR_KEEP1 
+RAMB18E1_RAMB18E1 
+RAMBFIFO36E1_RAMBFIFO36E1 
+REG_INIT 
+SELMUX2_1 
+SLICEL_CARRY4_AMUX SLICEL_CARRY4_AXOR 
+SLICEL_CARRY4_BMUX SLICEL_CARRY4_BXOR 
+SLICEL_CARRY4_CMUX SLICEL_CARRY4_CXOR 
+SLICEL_CARRY4_DMUX SLICEL_CARRY4_DXOR 
+SLICEM_CARRY4_AMUX SLICEM_CARRY4_AXOR 
+SLICEM_CARRY4_BMUX SLICEM_CARRY4_BXOR 
+SLICEM_CARRY4_CMUX SLICEM_CARRY4_CXOR 
+SLICEM_CARRY4_DMUX SLICEM_CARRY4_DXOR 
+STARTUP_STARTUP 
+USR_ACCESS_USR_ACCESS 
+XADC_XADC
+
+Related Objects:
+Leaf-level cells from the netlist design can be mapped onto bels on the target 
+part. Bels are grouped in sites on the target Xilinx FPGA, and both bels and 
+sites are grouped into clock_regions. Each bel also has bel_pins that are 
+connection points to the net netlist object. 
+
+You can query the bels of sites, cells, clock_regions, and net objects. For 
+example: 
+
+	get_bels -of [get_clock_regions X1Y3]
+
+You can also query the cells, sites, tiles, and bel_pins of bel objects:
+
+	get_cells -of [get_bels SLICE_X104Y100/B6LUT]
+
+Properties:
+The properties assigned to bel objects vary by TYPE. The properties assigned to a 
+BUFIO type of bel are as follows, with example values:
+
+Properties for BUFIO_X0Y25/BUFIO
+Property                    Type    Read-only  Visible  Value
+CLASS                       string  true       true     bel
+CONFIG.DELAY_BYPASS.VALUES  string  true       true     FALSE, TRUE
+IS_RESERVED                 bool    true       true     0
+IS_TEST                     bool    true       true     0
+IS_USED                     bool    true       true     0
+NAME                        string  true       true     BUFIO_X0Y25/BUFIO
+NUM_BIDIR                   int     true       true     0
+NUM_CONFIGS                 int     true       true     1
+NUM_INPUTS                  int     true       true     1
+NUM_OUTPUTS                 int     true       true     1
+NUM_PINS                    int     true       true     2
+PROHIBIT                    bool    false      true     0
+TYPE                        string  true       true     BUFIO_BUFIO
+
+You can use the report_property command to report the actual properties assigned to a specific TYPE of BEL. Refer to the Vivado Design 
+Suite Tcl Command Reference (UG835) for more information. To report the properties for any of the BEL types listed above, you can copy and paste the 
+following command into the Vivado Design Suite Tcl shell or Tcl console:
+
+	report_property -all [lindex [get_bels -filter {TYPE == <BEL_TYPE>}] 0]
+
+Where <BEL_TYPE> should be replaced by one of the listed BEL types. For example:
+
+	report_property -all [lindex [get_bels -filter {TYPE == SLICEM_CARRY4_AXOR}] 0]
+	report_property -all [lindex [get_bels -filter {TYPE == LUT5}] 0]
+	report_property -all [lindex [get_bels -filter {TYPE == IOB33S_OUTBUF}] 0]
+
+
+
+
+

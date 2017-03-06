@@ -1,0 +1,56 @@
+
+Description:
+
+  Populates the specified objects into the Find Results window in the Vivado
+  IDE.
+
+  Note: This command is only useful when run in the Vivado IDE. When run in
+  Tcl or Batch mode the command simply returns without error or comment.
+
+Arguments:
+
+  -name <arg> - The name of the report tab to open in the Find Results
+  window. If no name is specified, the default name of find_1 is provided.
+
+  Note: If the command is run multiple times, without the -name option, each
+  occurrence of show_objects will overwrite the prior results.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <objects> - The design objects to show in the Find Results window. The
+  objects must be specified as design objects, and not just specified by
+  name. Objects can be returned by commands like get_cells, get_pins,
+  get_nets, or by all_inputs, and all_rams.
+
+Examples:
+
+  The following example shows all DSP objects in the current design in the
+  Find Results window.
+
+    show_objects -name All_DSPs [all_dsps]
+
+  The following example shows all of the cells in the design hierarchy that
+  are Clock or DSP PRIMITIVE_TYPEs:
+
+    show_objects -name find_1 [get_cells -hierarchical \ 
+    -filter { PRIMITIVE_TYPE =~ CLK.*.* || PRIMITIVE_TYPE =~ MULT.dsp.* } ]
+
+See Also:
+
+   *  all_inputs
+   *  all_rams
+   *  get_cells
+   *  get_nets
+   *  get_pins
+   *  get_ports

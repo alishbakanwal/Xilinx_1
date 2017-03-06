@@ -1,0 +1,67 @@
+
+Description:
+
+  Configure a partition prior to synthesis or implementation.
+
+  Specify the partition module as a cell or as the top module, the action to
+  take for the specific module, the path to import partition data from, and
+  the level of partition data to preserve.
+
+Arguments:
+
+  -cell - (Optional) Specify the cell name of the partition to configure.
+
+  Note: If this option is not specified, the config_partition command applies
+  to the top partition in the design.
+
+  -reconfig_module <name> - (Optional) The Reconfigurable Module variant to
+  configure.
+
+  -import - (Optional) Import data for the specified partition from the
+  -import_dir during synthesis or implementation to preserve prior results.
+
+  -implement -(Optional) Discard prior results and reimplement the specified
+  partition during synthesis or implementation. This treats the partition
+  like any other hierarchical module in the design.
+
+  Note: -implement and -import are mutually exclusive arguments.
+
+  -import_dir <name> - (Optional) The directory to import partition data from.
+
+  Note: If the path to the directory is not specified, the tool will look in
+  your home directory for the partition data:
+
+   *  For Windows: %APPDATA%/Xilinx/PlanAhead
+
+   *  For Linux: $HOME/.Xilinx/PlanAhead
+
+  -preservation <level> - (Optional) The preservation level for the imported
+  partitions. Valid values are routing, placement, and synthesis. The default
+  is to preserve routing.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <run> - - The run to be configured.
+
+Examples:
+
+  The following example creates a partition on the module sub_block_inst and
+  configures the partition to be implemented during impl_1 run:
+
+    config_partition -run synth_1 -cell usbEngine0 -import -import_dir \ 
+    C:/Data/DP_RTL/synth1 -preservation placement
+
+See Also:
+
+   *  promote_run

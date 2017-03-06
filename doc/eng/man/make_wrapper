@@ -1,0 +1,82 @@
+
+Description:
+
+  Create a Verilog or VHDL wrapper for instantiating a sub-design into the
+  project.
+
+  The make_wrapper command will create a wrapper for DSP modules from System
+  Generator or MathWorks MatLab, Embedded Processor Designs from the IP
+  Integrator feature of the Vivado Design Suite, or any IP Integrator block
+  design.
+
+  You can generate a wrapper to make the sub-design the top-level of a
+  stand-alone design, or for instantiating a sub-design into an existing
+  design. You can also generate a wrapper for a simulation test bench of the
+  sub-design.
+
+  Note: The wrapper is generated in Verilog or VHDL according to the
+  TARGET_LANGUAGE property on the project.
+
+  The command returns information related to the creation of the wrappers, or
+  returns an error if it fails.
+
+Arguments:
+
+  -top - (Optional) Create a top-level Verilog or VHDL wrapper for the
+  specified source. The wrapper instantiates the sub-design as the top-level
+  of the design hierarchy.
+
+  -testbench - (Optional) Create a simulation test bench template for the
+  specified sub-design. This includes the DUT module instantiation, but does
+  not include the stimulus for simulation.
+
+  -inst_template - (Optional) Create an instantiation template for the
+  specified source. The template will not be added to the project and will be
+  generated for reference purposes only. The instantiation template can be
+  cut and paste into another RTL file to create an instance of the module in
+  the hierarchy.
+
+  -fileset - (Optional) Specify the destination fileset for importing the
+  wrapper file into the project. By default, the wrapper will be imported
+  into sources_1.
+
+  -import - (Optional) Import the wrapper file into the project, adding it to
+  the appropriate fileset.
+
+  -force - (Optional) Overwrite an existing wrapper file.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <files> - (Required) Specify the source files to generate the wrapper from.
+  The make_wrapper command only supports the .mdl file format from System
+  Generator for DSP, the .slx format from MathWorks MATLAB, and the .bd file
+  format from the IP Integrator feature of the Vivado Design Suite.
+
+Examples:
+
+  The following example creates the instantiation template to integrate the
+  specified IP Integrator block design into the design hierarchy of the
+  current project:
+
+    make_wrapper -inst_template -fileset [get_filesets sources_1] \ 
+    -files [get_files C:/Data/design_1/design_1.bd]
+
+See Also:
+
+   *  add_files
+   *  create_bd_design
+   *  create_sysgen
+   *  generate_target
+   *  get_filesets
+   *  list_targets

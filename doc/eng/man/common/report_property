@@ -1,0 +1,115 @@
+
+Description:
+
+  Gets the property name, property type, and property value for all of the
+  properties on a specified object, or class of objects.
+
+  Note: list_property also returns a list of all properties on an object, but
+  does not include the property type or value.
+
+  You can specify objects for report_property using the get_* series of
+  commands to get a specific object. You can use the lindex command to return
+  a specific object from a list of objects:
+
+    report_property [lindex [get_cells] 0]
+
+  However, if you are looking for the properties on a class of objects, you
+  should use the -classoption instead of an actual object.
+
+  This command returns a report of properties on the object, or returns an
+  error if it fails.
+
+Arguments:
+
+  -all - (Optional) Return all of the properties for an object, even if the
+  property value is not currently defined.
+
+  -class <arg> - (Optional) Return the properties of the specified class
+  instead of a specific object. The class argument is case sensitive, and
+  most class names are lower case.
+
+  Note: -class cannot be used together with an <object>.
+
+  -return_string - (Optional) Directs the output to a Tcl string. The Tcl
+  string can be captured by a variable definition and parsed or otherwise
+  processed.
+
+  -file <arg> - (Optional) Write the report into the specified file. The
+  specified file will be overwritten if one already exists, unless -append is
+  also specified.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -append - (Optional) Append the output of the command to the specified file
+  rather than overwriting it.
+
+  Note: The -append option can only be used with the -file option.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <object> - (Optional) A single object on which to report properties.
+
+  Note: If you specify multiple objects you will get an error.
+
+  <pattern> - (Optional) Match the available properties on the <object> or
+  -class against the specified search pattern. The <pattern> applies to the
+  property name, and only properties matching the specified pattern will be
+  reported. The default pattern is the wildcard `*` which returns a list of
+  all properties on the specified object.
+
+  Note: The search pattern is case sensitive, and most properties are UPPER
+  case.
+
+Examples:
+
+  The following example returns all properties of the specified object:
+
+    report_property -all [get_cells cpuEngine]
+
+  The following example returns the properties of the specified class of
+  objects, rather than an actual object:
+
+    report_property -class bel
+
+  The following example returns properties on the current hw_device that
+  match the specified pattern, specified as a regular expression:
+
+    report_property [current_hw_device] -regexp .*PROG.*
+
+  To determine which properties are available for the different design
+  objects supported by the tool, you can use multiple report_property
+  commands in sequence. The following example returns all properties of the
+  specified current objects:
+
+    report_property -all [current_project] 
+    report_property -all [current_fileset]  
+    report_property -all [current_design] 
+    report_property -all [current_run]
+
+See Also:
+
+   *  create_property
+   *  current_design
+   *  current_fileset
+   *  current_hw_device
+   *  current_project
+   *  current_run
+   *  get_cells
+   *  get_property
+   *  list_property
+   *  list_property_value
+   *  reset_property
+   *  set_property

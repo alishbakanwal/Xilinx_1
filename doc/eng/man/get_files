@@ -1,0 +1,163 @@
+
+Description:
+
+  Gets a list of files in the current project that match a specified search
+  pattern. The default command gets a list of all files in the project.
+
+  The get_files command returns a machine readable list of files in the
+  project, in a design, or in a sub-design such as an IP core or block
+  design. You can filter the results returned by get_files using one of the
+  command arguments such as -of_objects, -compile_order, -used_in, and
+  -filter.
+
+  The -compile_order and -used_in options must be used together to return a
+  list of files from the sources or constraints filesets used in synthesis,
+  simulation, OR implementation, sorted according to the order of evaluation
+  by the Vivado tools. The -compile_order and -used_in options use complex
+  file ordering rules that can change based on header files, include files,
+  or other language options. You can also filter files returned by get_files
+  according to the USED_IN property, using the -filter option instead of the
+  -used_in option.
+
+  You can use the report_compile_order command to generate a report of all
+  files in the sources or constraints filesets, used in synthesis,
+  simulation, AND implementation, sorted into different sections.
+
+  Note: To improve memory and performance, the get_* commands return a
+  container list of a single type of objects (e.g. cells, nets, pins, or
+  ports). You can add new objects to the list (using lappend for instance),
+  but you can only add the same type of object that is currently in the list.
+  Adding a different type of object, or string, to the list is not permitted
+  and will result in a Tcl error.
+
+Arguments:
+
+  -regexp - (Optional) Specifies that the search <patterns> are written as
+  regular expressions. Both search <patterns> and -filter expressions must be
+  written as regular expressions when this argument is used. Xilinx regular
+  expression Tcl commands are always anchored to the start of the search
+  string. You can add ".*" to the beginning or end of a search string to
+  widen the search to include a substring. See
+  http://perldoc.perl.org/perlre.html for help with regular expression
+  syntax.
+
+  Note: The Tcl built-in command regexp is not anchored, and works as a
+  standard Tcl command. For more information refer to
+  http://www.tcl.tk/man/tcl8.5/TclCmd/regexp.htm.
+
+  -nocase - (Optional) Perform case-insensitive matching when a pattern has
+  been specified. This argument applies to the use of -regexp only.
+
+  -filter <args> - (Optional) Filter the results list with the specified
+  expression. The -filter argument filters the list of objects returned by
+  get_files based on property values on the files. You can find the
+  properties on an object with the report_property or list_property commands.
+  Any property/value pair can be used as a filter. In the case of the "file"
+  object, "FILE_TYPE", and "IS_ENABLED" are some of the properties that can
+  be used to filter results.
+
+  The filter search pattern should be quoted to avoid having to escape
+  special characters that may be found in net, pin, or cell names, or other
+  properties. String matching is case-sensitive and is always anchored to the
+  start and to the end of the search string. The wildcard "*" character can
+  be used at the beginning or at the end of a search string to widen the
+  search to include a substring of the property value.
+
+  Note: The filter returns an object if a specified property exists on the
+  object, and the specified pattern matches the property value on the object.
+  In the case of the "*" wildcard character, this will match a property with
+  a defined value of "".
+
+  For string comparison, the specific operators that can be used in filter
+  expressions are "equal" (==), "not-equal" (!=), "match" (=~), and
+  "not-match" (!~). Numeric comparison operators <, >, <=, and >= can also be
+  used. Multiple filter expressions can be joined by AND and OR (&& and ||).
+  The following gets input pins that do NOT contain the "RESET" substring
+  within their name:
+
+    get_pins * -filter {DIRECTION == IN && NAME !~ "*RESET*"}
+
+  Boolean (bool) type properties can be directly evaluated in filter
+  expressions as true or not true:
+
+    -filter {IS_PRIMITIVE && !IS_LOC_FIXED}
+
+  -of_objects <args> - (Optional) Get the files that are associated with the
+  specified file, fileset, IP, or reconfigmodule objects. The default is to
+  search all filesets. When -compile_order and -used_in are specified, the
+  -of_objects switch will only accept a single fileset, or a single
+  sub-design such as an IP core, Block Design, or DSP design. A sub-design is
+  also known as a composite file.
+
+  Note: The -of_objects option requires objects to be specified using the
+  get_* commands, such as get_cells or get_pins, rather than specifying
+  objects by name. In addition, -of_objects cannot be used with a search
+  <pattern>.
+
+  -compile_order [ sources | constraints ] - (Optional) Returns the source
+  design files, or the constraint files sorted according to the order of
+  compilation by the Vivado Design Suite.
+
+  Note: This option must be used with the -used_in option. When specified,
+  the -of_objects switch will only accept a single fileset or sub-design.
+
+  -used_in <arg> - (Optional) Accepts one of the enumerated values of the
+  USED_IN property for files, and returns files matching the specified value.
+  Valid values for this option include the following: synthesis, simulation,
+  or implementation. Refer to the Vivado Design Suite Properties Reference
+  Guide (UG912) for information on the USED_IN property and its supported
+  values.
+
+  Note: This option must be used with the -compile_order option. When
+  specified, the -of_objects switch will only accept a single fileset or
+  sub-design.
+
+  -all - (Optional) Returns all of the files in the design, including
+  internal files in support of IP and other objects.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <patterns> - (Optional) Match files against the specified patterns. The
+  default pattern is the wildcard `*` which gets all files in the project or
+  of_objects. More than one pattern can be specified to find multiple files
+  based on different search criteria.
+
+Examples:
+
+  The following example returns the VHDL files in the design that are used in
+  simulation:
+
+    get_files -filter {FILE_TYPE == VHDL && USED_IN =~ simulation*}
+
+  This example returns the design source files that are used in simulation:
+
+    get_files -compile_order sources -used_in simulation
+
+  This example gets a list of files associated with the specified IP core
+  composite file (ip.xci), from the sources_1 fileset that are used in
+  synthesis:
+
+    get_files -compile_order sources -used_in synthesis -of [get_files ip.xci]
+
+  The following example gets a list of the files found in the sources_1 and
+  constrs_1 filesets:
+
+    get_files -of [get_filesets {sources_1 constrs_1}]
+
+  Note: If there are no files matching the pattern you will get a warning.
+
+See Also:
+
+   *  report_compile_order
+   *  report_property

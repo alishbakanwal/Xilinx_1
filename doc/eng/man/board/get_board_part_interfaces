@@ -1,0 +1,128 @@
+
+Description:
+
+  Gets a list of interfaces defined on the Xilinx device, or current board
+  part as defined by the BOARD_PART property, on the board in use by the
+  current project or open design.
+
+  The board file, board.xml located in the data/boards folder of the Vivado
+  Design Suite installation area, stores information regarding board
+  attributes. The board provides a representation of the overall system that
+  the Xilinx device is a part of, and can help define key aspects of the
+  design, such as clock constraints, I/O port assignments, and supported
+  interfaces. You can create custom boards by defining a custom Board
+  Interface file, as described in the Vivado Design Suite User Guide:
+  System-Level Design Entry (UG895).
+
+  The board part provides a representation of the Xilinx device in the
+  context of the board-level system, and is represented by the part0
+  component in the Board Interface file. The current_board_part command
+  returns the board part in use by the current project.
+
+  The interfaces defined on the current board part define related groups of
+  signals that can be used to quickly connect the elements of a block design
+  in Vivado IP integrator, or configure IP from the Xilinx IP catalog. The
+  interfaces available on the current_board_part can be used to define the
+  interfaces required in an IP subsystem design, using
+  create_bd_interface_port or create_bd_port. It can also be used to define
+  the interfaces available in the overall FPGA design using create_interface
+  and create_port.
+
+  This command returns a list of available interfaces on the current board
+  part, or returns an error if it fails.
+
+Arguments:
+
+  -regexp - (Optional) Specifies that the search <patterns> are written as
+  regular expressions. Both search <patterns> and -filter expressions must be
+  written as regular expressions when this argument is used. Xilinx regular
+  expression Tcl commands are always anchored to the start of the search
+  string. You can add ".*" to the beginning or end of a search string to
+  widen the search to include a substring. See
+  http://perldoc.perl.org/perlre.html for help with regular expression
+  syntax.
+
+  Note: The Tcl built-in command regexp is not anchored, and works as a
+  standard Tcl command. For more information refer to
+  http://www.tcl.tk/man/tcl8.5/TclCmd/regexp.htm.
+
+  -nocase - (Optional) Perform case-insensitive matching when a pattern has
+  been specified. This argument applies to the use of -regexp only.
+
+  -filter <args> - (Optional) Filter the results list with the specified
+  expression. The -filter argument filters the list of objects returned by
+  get_board_part_interfaces based on property values on the interfaces. You
+  can find the properties on an object with the report_property or
+  list_property commands. For example:
+
+    report_property -all [get_board_part_interfaces ddr3*]
+
+  The filter search pattern should be quoted to avoid having to escape
+  special characters that may be found in net, pin, or cell names, or other
+  properties. String matching is case-sensitive and is always anchored to the
+  start and to the end of the search string. The wildcard "*" character can
+  be used at the beginning or at the end of a search string to widen the
+  search to include a substring of the property value.
+
+  Note: The filter returns an object if a specified property exists on the
+  object, and the specified pattern matches the property value on the object.
+  In the case of the "*" wildcard character, this will match a property with
+  a defined value of "".
+
+  For string comparison, the specific operators that can be used in filter
+  expressions are "equal" (==), "not-equal" (!=), "match" (=~), and
+  "not-match" (!~). Numeric comparison operators <, >, <=, and >= can also be
+  used. Multiple filter expressions can be joined by AND and OR (&& and ||).
+  The following gets input pins that do NOT contain the "RESET" substring
+  within their name:
+
+    get_pins * -filter {DIRECTION == IN && NAME !~ "*RESET*"}
+
+  Boolean (bool) type properties can be directly evaluated in filter
+  expressions as true or not true:
+
+    -filter {IS_PRIMITIVE && !IS_LOC_FIXED}
+
+  -of_objects <args> - (Optional) Get the interfaces of the specified board
+  objects, as returned by the get_boards command, or board components as
+  returned by get_board_components.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <patterns> - (Optional) Match available board part interfaces against the
+  specified search patterns. The default pattern is the wildcard `*` which
+  gets a list of all interfaces available for use in the current project or
+  design. More than one pattern can be specified to find multiple interfaces
+  based on different search criteria.
+
+  Note: You must enclose multiple search patterns in braces, {}, or quotes,
+  "", to present the list as a single element.
+
+Examples:
+
+  The following example gets a list of all interfaces defined on the current
+  board part:
+
+    join [get_board_part_interfaces] \n
+
+See Also:
+
+   *  create_bd_interface_port
+   *  create_interface
+   *  current_board_part
+   *  current_project
+   *  get_boards
+   *  get_board_components
+   *  get_board_part_pins
+   *  get_board_parts

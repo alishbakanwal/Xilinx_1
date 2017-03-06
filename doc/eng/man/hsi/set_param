@@ -1,0 +1,46 @@
+
+Description:
+
+  Sets the value of a user-definable configuration parameter. These
+  parameters configure and control various behaviors of the tool. Refer to
+  report_param for a description of currently defined parameters.
+
+  You can use the reset_param command to restore any parameter that has been
+  modified back to its default setting.
+
+  Note: Setting a specified parameter value to -1 will disable the feature.
+
+
+Arguments:
+
+  <name> - (Required) The name of the parameter to set the value of. You can
+  only set the value of one parameter at a time.
+
+  <value> - (Required) The value to set the specified parameter to.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+
+Examples:
+
+    set_param messaging.defaultLimit 1000
+
+
+See Also:
+
+   *  get_param
+   *  list_param
+   *  report_param
+   *  reset_param
+

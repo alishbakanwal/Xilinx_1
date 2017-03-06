@@ -1,0 +1,151 @@
+﻿<html xml:lang="en-us" lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="reference"/>
+<meta name="DC.Title" content="Find Timing Paths"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_bqj_lqr_b5"/>
+<link rel="stylesheet" type="text/css" href="../../commonltr.css"/>
+<title>Find Timing Paths</title>
+</head>
+<body id="concept_bqj_lqr_b5">
+
+
+ <h1 class="title topictitle1">Find Timing Paths</h1>
+
+    <div class="body refbody">
+        <div class="section">
+            <p class="p">The Find Timing Paths dialog box lets you specify timing paths to analyze. The dialog
+                box includes the following tabs and common options: </p>
+
+            <ul class="ul" id="concept_bqj_lqr_b5__ul_wgf_k2p_v5">
+                <li class="li"><a class="xref" href="#concept_bqj_lqr_b5__targets">Targets</a></li>
+
+                <li class="li"><a class="xref" href="#concept_bqj_lqr_b5__options">Options</a></li>
+
+            </ul>
+
+        </div>
+
+        <div class="section" id="concept_bqj_lqr_b5__targets"><h2 class="title sectiontitle">Targets Tab</h2>
+            
+            <p class="p">The Targets tab lets you define the timing paths of interest by specifying the
+                following fields:</p>
+
+            <ul class="ul" id="concept_bqj_lqr_b5__ul_hl5_5qv_v5">
+                <li class="li"><span Class="uicontrol">Start Points</span>: Specifies the From objects, or start
+                    points, for the timing path. Click the <span Class="uicontrol">Choose start
+                        points</span> button (<img class="image" id="concept_bqj_lqr_b5__image_tct_5gw_v5" src="../../images/browse_button.png"/>) to open the <a class="xref" href="specify_start_points_dialog.html">Specify Start
+                        Points</a> dialog box, or enter a Tcl command directly in the text field.
+                        <ul class="ul" id="concept_bqj_lqr_b5__ul_jcd_qgw_v5">
+                        <li class="li"><span Class="uicontrol">Transition</span>: Specifies the edge of signals at the
+                            start points to be considered for timing analysis. You can specify the
+                            rising, falling, or both the rising and falling edges. If a clock object
+                            is specified, only the paths launched by the specified edge of the clock
+                            are considered as start points. </li>
+
+                    </ul>
+</li>
+
+                <li class="li"><span Class="uicontrol">Through Points:</span> Specifies the Through objects, or through
+                    points, for the timing path. Click the <span Class="uicontrol">Choose through
+                        points</span> button (<img class="image" id="concept_bqj_lqr_b5__image_rdb_43w_v5" src="../../images/browse_button.png"/>) to open the <a class="xref" href="specify_through_points_dialog.html">Specify Through
+                        Points</a> dialog box, or enter a Tcl command directly in the text field.
+                        <ul class="ul" id="concept_bqj_lqr_b5__ul_sdb_43w_v5">
+                        <li class="li"><span Class="uicontrol">Transition</span>: Specifies the edge of signals at the
+                            through points to be considered for timing analysis. You can specify the
+                            rising, falling, or both the rising and falling edges. </li>
+
+                        <li class="li"><img class="image" id="concept_bqj_lqr_b5__image_htr_kkw_v5" src="../../images/add_button.png"/>
+                            <span Class="uicontrol">Add through points</span>: Adds a Through field to enter
+                            additional through points for the timing path. You can specify
+                            individual through points in sequence to define a specific path through
+                            the design for analysis. </li>
+
+                    </ul>
+</li>
+
+                <li class="li"><span Class="uicontrol">End Points</span>: Specifies the endpoints, or To objects, for
+                    the timing path. Click the <span Class="uicontrol">Choose end points</span> button
+                        (<img class="image" id="concept_bqj_lqr_b5__image_p2h_43w_v5" src="../../images/browse_button.png"/>) to
+                    open the <a class="xref" href="specify_end_points_dialog.html">Specify End
+                        Points</a> dialog box, or enter a Tcl command directly in the text field.
+                        <ul class="ul" id="concept_bqj_lqr_b5__ul_q2h_43w_v5">
+                        <li class="li"><span Class="uicontrol">Transition</span>: Specifies the edge of signals at the
+                            endpoints to be considered for timing analysis. You can specify the
+                            rising, falling, or both the rising and falling edges. If a clock object
+                            is specified, only the paths launched by the specified edge of the clock
+                            are considered as endpoints. </li>
+
+                    </ul>
+</li>
+
+            </ul>
+
+        </div>
+
+        <div class="section" id="concept_bqj_lqr_b5__options"><h2 class="title sectiontitle">Options Tab</h2>
+            
+            <p class="p">The Options tab provides the following fields to configure the output of the report: </p>
+
+            <ul class="ul" id="concept_bqj_lqr_b5__ul_qnz_bhp_v5">
+                <li class="li"><span Class="uicontrol">Path delay type</span>: Specifies the type of delay to analyze
+                    when running the timing report. Max delay is for setup analysis of timing paths
+                    only. Min delay is for hold analysis only. Choose min_max delay for both setup
+                    and hold analysis. </li>
+
+                <li class="li"><span Class="uicontrol">Path Limits</span>: Limits the number of paths and groups to
+                    report. <ul class="ul" id="concept_bqj_lqr_b5__ul_azt_fgw_vw">
+                        <li class="li"><span Class="uicontrol">Number of paths per group</span>: Specifies the number
+                            of paths returned by the report. By default, the report includes the 10
+                            worst timing paths or the worst paths per path group. </li>
+
+                        <li class="li"><span Class="uicontrol">Number of paths per endpoint</span>: Specifies the
+                            number of timing paths to report per endpoint. This number is limited by
+                            the number of paths per clock or group. </li>
+
+                        <li class="li"><span Class="uicontrol">Limit paths to group</span>: Specifies the path groups
+                            to evaluate for timing analysis. Any paths that are not in the specified
+                            path groups are not analyzed. Click the <span Class="uicontrol">Browse</span>
+                            button (<img class="image" id="concept_bqj_lqr_b5__image_ywb_zdx_v5" src="../../images/browse_button.png"/>) to open the <a class="xref" href="specify_path_groups_dialog.html">Specify Path
+                                Groups</a> dialog box, or enter a Tcl command directly in the
+                            text field. </li>
+
+                    </ul>
+</li>
+
+                <li class="li"><span Class="uicontrol">Path Display</span>: Controls the way paths are displayed in the
+                    resulting report. <ul class="ul" id="concept_bqj_lqr_b5__ul_arg_lgw_vw">
+                        <li class="li"><span Class="uicontrol">Display paths with slack greater than</span>: Eliminates
+                            paths from the report that are not of interest to you. This setting does
+                            not affect the summary report, only the paths listed in the details. </li>
+
+                        <li class="li"><span Class="uicontrol">Display paths with slack less than</span>: Eliminates
+                            paths from the report that are not of interest to you. </li>
+
+                        <li class="li"><span Class="uicontrol">Sort paths by</span>: Sorts the paths in the Timing
+                            report by path group or by slack values. </li>
+
+                    </ul>
+</li>
+
+            </ul>
+
+        </div>
+
+        <div class="section" id="concept_bqj_lqr_b5__common">
+            <p class="p"><span Class="uicontrol">Command</span>: Displays the Tcl command which is used to find timing
+                paths. </p>
+
+            <p class="p">Click <span Class="uicontrol">OK</span> to return the displayed Tcl command to the Report
+                Design Analysis dialog. </p>
+
+        </div>
+
+    </div>
+
+
+</body>
+</html>

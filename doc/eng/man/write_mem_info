@@ -1,0 +1,63 @@
+
+Description:
+
+  This command writes a memory information (MMI) file defining the BRAM
+  placement and address ranges to create a memory map of the design.
+
+  Note: write_mem_info requires an open implemented design so that the memory
+  information includes the BRAM placement data, as well as the address
+  ranges, required for proper programming.
+
+  The memory map information (MMI) file, written by the write_mem_info
+  command, is a text file that describes how individual Block RAMs on the
+  Xilinx device are grouped together to form a contiguous address space
+  called an Address Block.
+
+  The mem info file (MMI) contains memory mapping information similar to the
+  Block Memory Map (BMM) file, but in a format that can be read by the
+  updatemem command to merge with a bitstream (BIT) file. The updatemem
+  command uses the MMI file to identify the physical BRAM resource that maps
+  to a specific address range. Refer to the Vivado Design Suite User Guide:
+  Embedded Processor Hardware Design (UG898) for more information on running
+  updatemem.
+
+  This command returns the name of the file created, or returns an error if
+  it fails.
+
+Arguments:
+
+  -force - (Optional) Overwrite an existing memory info file if one exists.
+  If this option is not specified, then the Vivado Design Suite will not
+  overwrite an existing file.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <file> - (Required) Specify the name of the memory info file to write. The
+  file can include the path and file extension. The default file extension of
+  .mmi is used if an extension is not specified.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+Example:
+
+  The following example creates the memory mapping file from the open design:
+
+    write_mem_info C:/Data/design1.mmi
+
+See Also:
+
+   *  write_bmm
+   *  write_sysdef

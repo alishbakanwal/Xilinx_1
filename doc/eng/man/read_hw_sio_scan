@@ -1,0 +1,61 @@
+
+Description:
+
+  Read a hardware SIO scan data file and create a hw_sio_scan object in the
+  Hardware Manager feature of the Vivado Design Suite.
+
+  The SIO scan data can be written to disk using the write_hw_sio_scan
+  command, after running the scan using the run_hw_sio_scan command. This
+  command reads that data file.
+
+  If no hw_sio_scan object is specified, a new hw_sio_scan object is created
+  and is named sequentially following any existing hw_sio_scan objects. After
+  being read from disk, the SIO scan data can be plotted and viewed in the
+  Vivado serial I/O analyzer by using the display_hw_sio_scan command.
+
+  This command returns a hw_sio_scan object, or returns an error if it fails.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <file> - (Required) The name of SIO scan data file to read. If the file
+  extension is not specified, the Vivado tool assumes an extension of .csv.
+
+  Note: If the path is not specified as part of the file name, the tool will
+  search for the specified file in the current working directory and then in
+  the directory from which the tool was launched.
+
+  <hw_sio_scan> - (Optional) Specify an existing hw_sio_scan object to read
+  the scan data file into. The hw_sio_scan object can be specified by name,
+  or as an object returned by the get_hw_sio_scans command.
+
+Example:
+
+  The following example reads the specified SIO scan data file into an
+  existing hw_sio_scan object:
+
+    read_hw_sio_scan C:/Data/LoopBack1.csv SCAN_0
+
+See Also:
+
+   *  create_hw_sio_scan
+   *  current_hw_device
+   *  display_hw_sio_scan
+   *  get_hw_sio_scans
+   *  remove_hw_sio_scan
+   *  run_hw_sio_scan
+   *  stop_hw_sio_scan
+   *  wait_on_hw_sio_scan
+   *  write_hw_sio_scan

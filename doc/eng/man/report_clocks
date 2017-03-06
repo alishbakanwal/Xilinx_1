@@ -1,0 +1,67 @@
+
+Description:
+
+  Returns a table showing all the clocks in a design, including propagated
+  clocks, generated and auto-generated clocks, virtual clocks, and inverted
+  clocks in the current synthesized or implemented design. More detailed
+  information about each clock net can be obtained with the
+  report_clock_utilization command.
+
+  Note: By default the report is written to the Tcl console or STD output.
+  However, the results can also be written to a file or returned as a string
+  if desired.
+
+Arguments:
+
+  -file <arg> - (Optional) Write the report into the specified file. The
+  specified file will be overwritten if one already exists, unless -append is
+  also specified.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -append - (Optional) Append the output of the command to the specified file
+  rather than overwriting it.
+
+  Note: The -append option can only be used with the -file option.
+
+  -return_string - (Optional) Directs the output to a Tcl string rather than
+  to the standard output. The Tcl string can be captured by a variable
+  definition and parsed or otherwise processed.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <clocks> - (Optional) The clocks to match against the specified patterns.
+  The default pattern is the wildcard `*` which returns all clocks in the
+  design. More than one pattern can be specified to find multiple clocks
+  based on different search criteria.
+
+Examples:
+
+  The following example returns the name, period, waveform, and sources of
+  the clocks in the current design:
+
+    report_clocks -file C:/Data/FPGA_Design/clock_out.txt
+
+  The following example reports the clocks in the design with "Clock" in the
+  name:
+
+    report_clocks *Clock*
+
+See Also:
+
+   *  create_clock
+   *  create_generated_clock
+   *  report_clock_utilization

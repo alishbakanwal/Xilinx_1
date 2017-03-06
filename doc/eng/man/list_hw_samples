@@ -1,0 +1,69 @@
+
+Description:
+
+  Writes data samples from the specified hw_probe object on the current hw_ila.
+
+  The number of captured samples returned from the specified probe is equal
+  to the DATA_DEPTH property of the ILA core. The default data depth is 1024
+  samples. Data values are returned in the radix specified for the hw_probe,
+  as determined by the DISPLAY_RADIX property.
+
+  Note: For any samples to be returned, data must have been captured by the
+  specified port.
+
+  The values are listed to the standard output, or can be captured to a Tcl
+  variable for post-processing, or output to a file.
+
+  The following is an example Tcl script that lists the data samples from
+  hw_probes of interest:
+
+    # Define a list of probes to get the data samples from 
+    set probeList [get_hw_probes *AR*] 
+    #Specify the radix for the return values 
+    set_property DISPLAY_RADIX BINARY [get_hw_probes *AR*] 
+    # Define a filename to write data to 
+    set fileName C:/Data/probeData1.txt 
+    # Open the specified file in write mode 
+    set FH [open $fileName w] 
+    # Write probe data for each probe 
+    foreach x $probeList {  
+       puts $FH "$x:" 
+       puts $FH [list_hw_samples $x]  
+    }  
+    # Close the output file 
+    close $FH 
+    puts "Probe data written to $fileName\n"
+
+  This command returns the requested output, or returns an error if it fails.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <hw_probe> - List the data samples for the specified hw_probe on the
+  current hw_ila. The probe must be specified as an object returned by the
+  get_hw_probes command.
+
+Examples:
+
+  The following example returns the data samples for the specified probe:
+
+    list_hw_samples [get_hw_probes *probe18]
+
+See Also:
+
+   *  current_hw_ila
+   *  get_hw_ilas
+   *  get_hw_probes
+   *  create_hw_probe

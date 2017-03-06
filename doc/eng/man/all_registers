@@ -1,0 +1,103 @@
+
+Description:
+
+  Returns a list of sequential register cells or register pins in the current
+  design.
+
+  Note: Returned objects includes DSPs and BRAMs as they contain internal
+  registers.
+
+  The list of returned objects can be limited by the use of the arguments
+  described below. You can limit the list of registers returned to a specific
+  clock or clocks, or to registers triggered by the rising or falling edge of
+  a specified clock.
+
+  The list of registers returned by all_registers can also be limited or
+  reduced by the filter command to filter according to properties assigned to
+  the registers. Properties of an object can be returned by the list_property
+  or report_property commands.
+
+  You can also get a list of the pins of collected registers instead of the
+  register objects by specifying one or more of the pin arguments.
+
+Arguments:
+
+  -clock <args> - (Optional) Return a list of all registers whose clock pins
+  are in the fanout of the specified clock.
+
+  -rise_clock <args> - (Optional) Return a list of registers triggered by the
+  rising edge of the specified clocks.
+
+  -fall_clock <args> - (Optional) Return a list of registers triggered by the
+  falling edge of the specified clocks.
+
+  Note: Do not combine -clock , -rise_clock, and -fall_clock in the same
+  command.
+
+  -cells - (Optional) Return a list of register cell objects as opposed to a
+  list of pin objects. This is the default behavior of the command.
+
+  -data_pins - (Optional) Return a list of data pins of all registers in the
+  design, or of the registers that meet the search requirement.
+
+  -clock_pins - (Optional) Return a list of clock pins of the registers that
+  meet the search requirement.
+
+  -async_pins - (Optional) Limit the search to asynchronous pins of the
+  registers that meet the search requirement.
+
+  -output_pins - (Optional) Return a list of output pins of the registers
+  that meet the search requirement.
+
+  Note: Use the *_pins arguments separately. If you specify multiple
+  arguments, only one argument is applied in the following order of
+  precedence: -data_pins, -clock_pins, -async_pins, -output_pins.
+
+  -level_sensitive - (Optional) Return a list of the level-sensitive
+  registers or latches.
+
+  -edge_triggered - (Optional) Return a list of the edge-triggered registers
+  or flip-flops.
+
+  -no_hierarchy - (Optional) Do not search the hierarchy of the design. Only
+  search in the level of the current_instance .
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example returns a list of registers that are triggered by the
+  falling edge of any clock in the design:
+
+    all_registers -fall_clock [all_clocks]
+
+  The following example sets the minimum delay:
+
+    
+    set_min_delay 2.0 -to [all_registers -clock CCLK -data_pins]
+
+  The following example extracts all registers on clk_A with *meta* in the
+  name:
+
+    filter [all_registers -clock clk_A] {name =~ *meta*}
+
+See Also:
+
+   *  all_clocks
+   *  current_instance
+   *  filter
+   *  list_property
+   *  report_property
+   *  set_msg_limit
+   *  set_min_delay
