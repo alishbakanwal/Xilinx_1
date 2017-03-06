@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<PAStrategies>
+
+<Strategy Version="1" Minor="2">
+	<StratHandle Name="PlanAhead Defaults" Flow="XST12">
+		<Desc>PlanAhead Defaults (XST defaults with hierarchy)</Desc>
+	</StratHandle>
+	<Step Id="xst"></Step>
+</Strategy>
+
+<Strategy Version="1" Minor="2">
+	<StratHandle Name="TimingWithIOBPacking" Flow="XST12">
+		<Desc>Timing Performance with IOB Packing</Desc>
+	</StratHandle>
+	<Step Id="xst">
+		<Option Id="OptLevelInt">2</Option>
+		<Option Id="RegBalEnum">0</Option>
+		<Option Id="PackIOBEnum">0</Option>
+	</Step>
+</Strategy>
+
+<Strategy Version="1" Minor="2">
+	<StratHandle Name="TimingWithoutIOBPacking" Flow="XST12">
+		<Desc>Timing Performance without IOB Packing</Desc>
+	</StratHandle>
+	<Step Id="xst">
+		<Option Id="OptLevelInt">2</Option>
+		<Option Id="RegBalEnum">0</Option>
+		<Option Id="PackIOBEnum">1</Option>
+	</Step>
+</Strategy>
+
+<Strategy Version="1" Minor="2">
+	<StratHandle Name="AreaReduction" Flow="XST12">
+		<Desc>Area Reduction</Desc>
+	</StratHandle>
+	<Step Id="xst">
+		<Option Id="OptModeEnum">0</Option>
+		<Option Id="LCEnum">0</Option>
+		<Option Id="PackIOBEnum">0</Option>
+		<Option Id="AutoBRAMEnum">0</Option>
+	</Step>
+</Strategy>
+
+<Strategy Version="1" Minor="2">
+	<StratHandle Name="PowerOptimization" Flow="XST12">
+		<Desc>Power Optimization</Desc>
+	</StratHandle>
+	<Step Id="xst">
+		<Option Id="OptModeEnum">0</Option>
+		<Option Id="PowerEnum">0</Option>
+		<Option Id="FSMEnum">2</Option>
+		<Option Id="LCEnum">0</Option>
+		<Option Id="PackIOBEnum">1</Option>
+		<Option Id="AutoBRAMEnum">0</Option>
+	</Step>
+</Strategy>
+
+<Strategy Version="1" Minor="2">
+	<StratHandle Name="XST Defaults" Flow="XST12">
+		<Desc>XST Defaults (no hierarchy)</Desc>
+	</StratHandle>
+	<Step Id="xst">
+		<Option Id="NetHierEnum">0</Option>
+	</Step>
+</Strategy>
+
+</PAStrategies>

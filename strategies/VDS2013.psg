@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PAStrategies>
+
+<Strategy Version="1" Minor="2">
+  <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2013">
+    <Desc>Vivado Synthesis Defaults</Desc>
+	</StratHandle>
+  <Step Id="synth_design">
+  </Step>
+</Strategy>
+
+
+<Strategy Version="1" Minor="2">
+  <StratHandle Name="Flow_RuntimeOptimized" Flow="Vivado Synthesis 2013">
+    <Desc>Trades off Performance and Area for better Runtime.</Desc>
+  </StratHandle>
+  <Step Id="synth_design">
+    <Option Id="FlattenHierarchy">1</Option>
+    <Option Id="Directive">0</Option>
+    <Option Id="FsmExtraction">0</Option>
+  </Step>
+</Strategy>
+
+</PAStrategies>

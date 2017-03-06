@@ -1,0 +1,194 @@
+<?xml version="1.0"?>
+<PAStrategies>
+
+<Strategy Version="1" Minor="2">
+	<StratHandle Name="ISE Defaults" Flow="ISE14">
+		<Desc>ISE Defaults, including packing registers in IOs off</Desc>
+	</StratHandle>
+	<Step Id="ngdbuild" isEnabled="true" tcl_pre="fdf.tcl" tcl_post="bar.tcl">
+	</Step>
+	<Step Id="map">
+		<Option Id="FFPackEnum">3</Option>
+	</Step>
+	<Step Id="par">
+	</Step>
+	<Step Id="trce">
+	</Step>
+	<Step Id="xdl">
+	</Step>
+	<Step Id="bitgen">
+  </Step>
+	
+</Strategy>
+<Strategy Version="1" Minor="2">
+	<StratHandle Name="MapTiming" Flow="ISE14">
+		<Desc>MAP Timing Driven High Effort Normal Extra Effort, PAR High Effort Normal Extra Effort</Desc>
+	</StratHandle>
+	<Step Id="ngdbuild">
+	</Step>
+	<Step Id="map">
+		<Option Id="ExtraEffEnum">0</Option>
+		<Option Id="TimingBool">1</Option>
+		<Option Id="EffortLvl11Enum">1</Option>
+	</Step>
+	<Step Id="par">
+		<Option Id="OverallEff11Enum">1</Option>
+		<Option Id="ExtraEffEnum">0</Option>
+	</Step>
+	<Step Id="trce">
+	</Step>
+	<Step Id="xdl">
+	</Step>
+	<Step Id="bitgen">
+  </Step>
+</Strategy>
+<Strategy Version="1" Minor="2">
+	<StratHandle Name="MapGlobalOptParHigh" Flow="ISE14">
+		<Desc>MAP Timing Driven Global Optimization for Speed Normal Extra Effort, PAR High Effort</Desc>
+	</StratHandle>
+	<Step Id="ngdbuild">
+	</Step>
+	<Step Id="map">
+		<Option Id="TimingBool">1</Option>
+		<Option Id="GlobalOptEnum">1</Option>
+		<Option Id="EffortLvl11Enum">1</Option>
+	</Step>
+	<Step Id="par">
+		<Option Id="OverallEff11Enum">1</Option>
+	</Step>
+	<Step Id="trce">
+	</Step>
+	<Step Id="xdl">
+	</Step>
+	<Step Id="bitgen">
+  </Step>
+</Strategy>
+<Strategy Version="1" Minor="2">
+	<StratHandle Name="MapLogicOptParHighExtra" Flow="ISE14">
+		<Desc>MAP Timing Driven Logic Optimization Register Duplication High Effort Normal Extra Effort, PAR High Effort Normal Extra Effort</Desc>
+	</StratHandle>
+	<Step Id="ngdbuild">
+	</Step>
+	<Step Id="map">
+		<Option Id="LogicOptBool">0</Option>
+		<Option Id="RegDupBool">1</Option>
+		<Option Id="TimingBool">1</Option>
+		<Option Id="ExtraEffEnum">0</Option>
+		<Option Id="EffortLvl11Enum">1</Option>
+	</Step>
+	<Step Id="par">
+		<Option Id="ExtraEffEnum">0</Option>
+		<Option Id="OverallEff11Enum">1</Option>
+	</Step>
+	<Step Id="trce">
+	</Step>
+	<Step Id="xdl">
+	</Step>
+	<Step Id="bitgen">
+  </Step>
+</Strategy>
+<Strategy Version="1" Minor="2">
+	<StratHandle Name="MapGlobalOptLogicOptRetimingDupParHigh" Flow="ISE14">
+		<Desc>MAP Timing Driven Global Optimization for Speed Logic Optimization Retiming Register Duplication High Effort Normal Extra Effort, PAR High Effort</Desc>
+	</StratHandle>
+	<Step Id="ngdbuild">
+	</Step>
+	<Step Id="map">
+		<Option Id="LogicOptBool">0</Option>
+		<Option Id="RegDupBool">1</Option>
+		<Option Id="RetimingBool">0</Option>
+		<Option Id="TimingBool">1</Option>
+		<Option Id="GlobalOptEnum">1</Option>
+		<Option Id="ExtraEffEnum">0</Option>
+		<Option Id="EffortLvl11Enum">1</Option>
+	</Step>
+	<Step Id="par">
+		<Option Id="OverallEff11Enum">1</Option>
+	</Step>
+	<Step Id="trce">
+	</Step>
+	<Step Id="xdl">
+	</Step>
+	<Step Id="bitgen">
+  </Step>
+</Strategy>
+<Strategy Version="1" Minor="2">
+	<StratHandle Name="MapTimingIgnoreKeepHierarchy" Flow="ISE14">
+		<Desc>MAP Timing Driven Ignore Keep Hierarchy High Effort Normal Extra Effort, PAR High Effort Normal Extra Effort</Desc>
+	</StratHandle>
+	<Step Id="ngdbuild">
+	</Step>
+	<Step Id="map">
+		<Option Id="IgnoreKeepHierBool">1</Option>
+		<Option Id="TimingBool">1</Option>
+		<Option Id="EffortLvl11Enum">1</Option>
+		<Option Id="ExtraEffEnum">0</Option>
+	</Step>
+	<Step Id="par">
+		<Option Id="OverallEff11Enum">1</Option>
+		<Option Id="ExtraEffEnum">0</Option>
+	</Step>
+	<Step Id="trce">
+	</Step>
+	<Step Id="xdl">
+	</Step>
+	<Step Id="bitgen">
+  </Step>
+</Strategy>
+<Strategy Version="1" Minor="2">
+	<StratHandle Name="MapCoverBalanced" Flow="ISE14">
+		<Desc>MAP Balanced Cover Mode, PAR High Effort</Desc>
+	</StratHandle>
+	<Step Id="ngdbuild">
+	</Step>
+	<Step Id="map">
+		<Option Id="CoverModeEnum">2</Option>
+	</Step>
+	<Step Id="par">
+		<Option Id="OverallEff11Enum">1</Option>
+	</Step>
+	<Step Id="trce">
+	</Step>
+	<Step Id="xdl">
+	</Step>
+	<Step Id="bitgen">
+  </Step>
+</Strategy>
+<Strategy Version="1" Minor="2">
+	<StratHandle Name="MapCoverArea" Flow="ISE14">
+		<Desc>MAP Area Cover Mode, PAR High Effort</Desc>
+	</StratHandle>
+	<Step Id="ngdbuild">
+	</Step>
+	<Step Id="map">
+	</Step>
+	<Step Id="par">
+		<Option Id="OverallEff11Enum">1</Option>
+	</Step>
+	<Step Id="trce">
+	</Step>
+	<Step Id="xdl">
+	</Step>
+</Strategy>
+<Strategy Version="1" Minor="2">
+	<StratHandle Name="ParHighEffort" Flow="ISE14">
+		<Desc>PAR High Effort Normal Extra Effort</Desc>
+	</StratHandle>
+	<Step Id="ngdbuild">
+	</Step>
+	<Step Id="map">
+	</Step>
+	<Step Id="par">
+		<Option Id="OverallEff11Enum">1</Option>
+		<Option Id="ExtraEffEnum">0</Option>
+	</Step>
+	<Step Id="trce">
+	</Step>
+	<Step Id="xdl">
+	</Step>
+	<Step Id="bitgen">
+  </Step>
+</Strategy>
+
+</PAStrategies>
+

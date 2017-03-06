@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<PAStrategies>
+
+<Strategy Version="1" Minor="2">
+	<StratHandle Name="XST Defaults" Flow="XST10">
+		<Desc>XST Defaults</Desc>
+	</StratHandle>
+	<Step Id="xst"></Step>
+</Strategy>
+
+
+</PAStrategies>

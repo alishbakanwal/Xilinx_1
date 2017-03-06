@@ -1,0 +1,246 @@
+##################################################
+# VIRTEX 5/6 DELAY ESTIMATION RULES
+##################################################
+# Auto-generated variables:
+# C1: Cell name for driver
+# C2: Cell name for receiver
+# P1: Pin name for driver
+# P2: Pin name for receiver
+# B1: Block name for driver
+# B2: Block name for receiver
+# FO: Fanout
+##################################################
+
+C1_IS_ALL = C1 == "*";
+C2_IS_ALL = C2 == "*";
+
+C1_IS_INV = C1 == "INV";
+C2_IS_INV = C2 == "INV";
+
+C1_IS_LUT = C1 == "LUT*";
+C2_IS_LUT = C2 == "LUT*";
+
+C1_IS_GATE = 
+	C1 == "GATE_2_*" || C1 == "MUX1";
+C2_IS_GATE = 
+	C2 == "GATE_2_*" || C2 == "MUX1";
+
+C1_IS_CARRY = 
+	C1 == "CARRY8" || C1 == "CARRY4" || C1 == "MUXCY*" || C1 == "XORCY*";
+C1_IS_MUXCY = C1 == "MUXCY*";
+C1_IS_XORCY = C1 == "XORCY*";
+
+C2_IS_CARRY = 
+	C2 == "CARRY8" || C2 == "CARRY4" || C2 == "MUXCY*" || C2 == "XORCY*";
+C2_IS_MUXCY = C2 == "MUXCY*";
+C2_IS_XORCY = C2 == "XORCY*";
+
+C1_IS_MUXF = C1 == "MUXF*";
+C1_IS_MUXF7 = C1 == "MUXF7*";
+C1_IS_MUXF8 = C1 == "MUXF8*";
+C1_IS_MUXF9 = C1 == "MUXF9*";
+
+C2_IS_MUXF = C2 == "MUXF*";
+C2_IS_MUXF7 = C2 == "MUXF7*";
+C2_IS_MUXF8 = C2 == "MUXF8*";
+C2_IS_MUXF9 = C2 == "MUXF9*";
+
+C1_IS_FDLD =
+	C1 == "FD*" || C1 == "LD*";
+
+C2_IS_FDLD =
+	C2 == "FD*" || C2 == "LD*";
+
+C1_IS_RAM = C1 == "RAM*";
+C2_IS_RAM = C2 == "RAM*";
+
+C1_IS_RAMB = C1 == "RAMB*";
+C2_IS_RAMB = C2 == "RAMB*";
+
+C1_IS_URAM = C1 == "URAM*";
+C2_IS_URAM = C2 == "URAM*";
+	
+C1_IS_SRL = C1 == "SRL*";
+C2_IS_SRL = C2 == "SRL*";
+
+C1_IS_ROM = C1 == "ROM*";
+C2_IS_ROM = C2 == "ROM*";
+##################################################
+# DATAPATH RULES
+##################################################
+
+DP_P2_IS_D = P2 == "D";
+P2_IS_MUX_SEL = (P2 == "S");
+P2_IS_CYINIT = (P2 == "CYINIT");
+P2_IS_CI = (P2 == "CI");
+P2_IS_CAS = (P2 == "CAS*");
+
+# Capture all rules in this one.
+DP_IS_DEDICATED =
+	(C2_IS_FDLD && DP_P2_IS_D && FO == 1 &&
+	 	(C1_IS_LUT || 
+		 C1_IS_GATE || 
+		 C1_IS_INV || 
+		 C1_IS_CARRY ||
+		 C1_IS_MUXF ||
+		 (C1_IS_RAM && !C1_IS_RAMB) ||
+		 C1_IS_SRL ||
+		 C1_IS_ROM)) ||
+	(C2_IS_MUXF && !P2_IS_MUX_SEL &&
+	 	(C1_IS_LUT || 
+		 C1_IS_GATE || 
+		 C1_IS_INV || 
+		 C1_IS_MUXF ||
+		 (C1_IS_RAM && !C1_IS_RAMB) ||
+		 C1_IS_SRL ||
+		 C1_IS_ROM)) ||
+	(C2_IS_CARRY && 
+		(((C1_IS_LUT || C1_IS_GATE || C1_IS_INV) && !P2_IS_CYINIT) ||
+		 (C1_IS_CARRY && P2_IS_CI))) ||
+	(C1_IS_RAMB && C2_IS_RAMB && P2_IS_CAS) ||
+	(C1_IS_URAM && C2_IS_URAM && P2_IS_CAS) : v56_dedicatedDatapathDelay;
+
+DP_IS_SLICE =
+	((C1_IS_LUT || C1_IS_XORCY || C1_IS_MUXCY || C1_IS_CARRY) && C2_IS_FDLD && P2 == "D" && FO == 1) ||
+	(C1_IS_MUXCY && C2_IS_MUXCY) ||
+	(C1_IS_CARRY && C2_IS_CARRY && P2 == "CI") ||
+	(C1_IS_LUT && C2_IS_CARRY && !(P2 == "CYINIT")) ||
+	(C1_IS_LUT && C2_IS_MUXCY && !(P2 == "CI")) ||
+	(C1_IS_LUT && C2_IS_XORCY && P2 == "LI") ||
+	(C1_IS_MUXCY && C2_IS_XORCY) ||
+	(
+	 ( C1_IS_LUT || C1 == "RAMROMSRL" ) && 
+		(
+		 C2 == "XORCY" ||
+		 ( C2_IS_MUXCY && P2_IS_MUX_SEL ) ||
+	   	 ( C2_IS_MUXF7 && !P2_IS_MUX_SEL ) ||
+		 ( C2_IS_MUXF8 && !P2_IS_MUX_SEL )
+		)
+	) ||
+       ( C1 == "MULT_AND" && C2_IS_MUXCY ) ||
+       ( C1 == "RAMROMSRL" && C2 == "WSGEN" ) ||
+       ( C1 == "WSGEN" && C2 == "RAMROMSRL" ) ||
+       ( C1_IS_MUXCY && C2_IS_MUXCY ) : v56_sameSliceDatapathDelay;
+
+DP_IS_FF_TO_INV_SLOW = 
+	( C1_IS_FDLD && C2_IS_INV && P1 == "Q") || 
+	( C1_IS_INV && C2_IS_FDLD && P2 == "D") : v56_dedicatedDatapathDelay;
+
+
+##################################################
+# DATAPATH RULES (PART 2)
+##################################################
+
+DP_P2_IS_CE = P2 == "CE";
+
+DP_IS_SAME_TILE =  
+       ( C1_IS_MUXF7 && C2_IS_MUXF8 ) ||
+       ( C1_IS_MUXF8 && C2_IS_MUXF9 ) ||
+       ( C1_IS_XORCY && C2_IS_FDLD ) ||
+       ( C1_IS_LUT && C2_IS_FDLD && !DP_P2_IS_CE ) ||
+       ( C1_IS_MUXF7 && C2_IS_FDLD ) ||
+       ( C1_IS_MUXF8 && C2_IS_FDLD ) ||
+       ( C1_IS_MUXF9 && C2_IS_FDLD ) ||
+       ( ( C1_IS_LUT || C1 == "RAMROMSRL" ) && ( C2_IS_MUXF7 || C2_IS_MUXF8 ) ) ||	 
+       ( C1 == "RAMROMSRL" && C2 == "RAMROMSRL" ) ||
+       ( C1 == "RAMROMSRL" && C2_IS_FDLD ) ||
+       ( C1 == "WSGEN" && C2 == "WSGEN" ) : v56_sameTileDatapathDelay;
+
+##################################################
+# "FLAT" DELAY
+##################################################
+# Currently assume utilization factor always equals 1.0
+
+FLAT_IS_INV_TO_ALL =
+	C1_IS_INV && C2_IS_ALL : 0.0;
+
+FLAT_IS_ALL_TO_INV =
+	C1_IS_ALL && C2_IS_INV : 0.0;
+
+FLAT_LUT_TO_LUT_FO7 =
+	C1_IS_LUT && C2_IS_LUT && FO < 7 : v56_adjacentSliceRouteDelay;
+
+C1_IS_RAMB = C1 == "RAMB*";
+C2_IS_RAMB = C2 == "RAMB*";
+
+FLAT_RAMB_TO_FDLD =
+	C1_IS_RAMB && C2_IS_FDLD : v56_2xHexRouteDelay;
+
+FLAT_RAMB_TO_RAMB =
+	C1_IS_RAMB && C2_IS_RAMB : v56_2xHexRouteDelay;
+
+FLAT_RAMB_TO_GATE =
+	C1_IS_RAMB && (C2_IS_GATE || C2_IS_LUT || C2_IS_CARRY) : v56_2xHexRouteDelay;
+
+FLAT_FDLD_TO_RAMB =
+	C1_IS_FDLD && C2_IS_RAMB : v56_2xHexRouteDelay;
+
+FLAT_GATE_TO_RAMB =
+	(C1_IS_GATE || C1_IS_LUT || C1_IS_CARRY) && C2_IS_RAMB : v56_2xHexRouteDelay;
+
+#FLAT_FDLD_TO_FDLD =
+#	C1_IS_FDLD && C2_IS_FDLD : v56_adjacentSliceRouteDelay;
+
+C1_IS_MULT18X18 = C1 == "MULT18X18*";
+C2_IS_MULT18X18 = C2 == "MULT18X18*";
+
+FLAT_RAMB_TO_MULT18X18 =
+	C1_IS_RAMB && C2_IS_MULT18X18 : v56_2xHexRouteDelay;
+
+FLAT_MULT18X18_TO_RAMB =
+	C1_IS_MULT18X18 && C2_IS_RAMB : v56_2xHexRouteDelay;
+  
+FLAT_MULT18X18_TO_MULT18X18 =
+	C1_IS_MULT18X18 && C2_IS_MULT18X18 : v56_hexRouteDelay;
+
+C1_IS_SUB_DSP = C1 == "DSP_*";
+C2_IS_SUB_DSP = C2 == "DSP_*";
+C1_C2_SAME_BLOCK = (B1 == B2);
+
+FLAT_SAME_DSP =
+        ( C1_IS_SUB_DSP ) &&  
+        ( C2_IS_SUB_DSP ) && 
+        ( C1_C2_SAME_BLOCK ) : v56_sameDspRouteDelay;
+
+C1_IS_DSP = C1 == "DSP*";
+C2_IS_DSP = C2 == "DSP*";
+
+FLAT_RAMB_TO_DSP =
+	C1_IS_RAMB && C2_IS_DSP : v56_2xHexRouteDelay;
+
+FLAT_DSP_TO_RAMB =
+	C1_IS_DSP && C2_IS_RAMB : v56_2xHexRouteDelay;
+  
+FLAT_DSP_TO_DSP =
+	C1_IS_DSP && C2_IS_DSP : v56_hexRouteDelay;
+
+FLAT_GATE_TO_DSP =
+	(C1_IS_GATE || C1_IS_LUT || C1_IS_CARRY) && C2_IS_DSP : v56_2xHexRouteDelay;
+
+FLAT_DSP_TO_GATE =
+	C1_IS_DSP && (C2_IS_GATE || C2_IS_LUT || C2_IS_CARRY) : v56_2xHexRouteDelay;
+
+FLAT_FDLD_TO_DSP =
+	C1_IS_FDLD && C2_IS_DSP : v56_2xHexRouteDelay;
+
+FLAT_DSP_TO_FDLD =
+	C1_IS_DSP && C2_IS_FDLD : v56_2xHexRouteDelay;
+
+GATE_FO26 =
+	C1_IS_GATE && C2_IS_GATE && FO <= 6000 : 0.15;
+
+
+GATE_FO71 =
+	C1_IS_GATE && C2_IS_GATE && FO > 6000 : 2.0;
+
+FLAT_FO1 =
+	FO == 1 : v56_flatFO1Delay;
+
+FLAT_FO25 =
+        C1_IS_GATE && C2_IS_FDLD && FO <= 127 : 0.15;
+
+FLAT_FO26 =
+	FO <= 6000 : v56_flatFO26Delay;
+
+FLAT_FO71 =
+	FO > 6000 : v56_flatFO71Delay;
