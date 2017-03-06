@@ -1,0 +1,154 @@
+﻿<html xml:lang="en-us" lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="concept"/>
+<meta name="DC.Title" content="ILA Capture Setup"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_aqj_x3c_d5"/>
+<link rel="stylesheet" type="text/css" href="../../commonltr.css"/>
+<title>ILA Capture Setup</title>
+</head>
+<body id="concept_aqj_x3c_d5">
+
+
+ <h1 class="title topictitle1">ILA Capture Setup</h1>
+
+    <div class="body conbody">
+        <div class="section">
+            <p class="p">This window is one of five windows displayed in the <a class="xref" href="hw_ila_window.html#concept_aqj_x3c_d5">Hardware ILA</a>
+                dashboard by default. The content of the ILA Capture Setup window is determined by
+                the <span Class="uicontrol">Capture Mode</span> defined in the <a class="xref" href="ila_settings_window.html#concept_aqj_x3c_d5">ILA
+                    Settings</a> window. When the Capture Mode is set to ALWAYS, there are no
+                capture conditions to define, so the ILA Capture window is blank. When the Capture
+                Mode is set to BASIC, the window has the following features:</p>
+
+        </div>
+
+        <div class="section"><h2 class="title sectiontitle">Basic Capture</h2>
+            
+            <div class="p">The basic capture condition is a boolean expression that evaluates the values on each
+                debug probe included in the capture condition, and triggers the ILA data capture
+                sequence when the expression evaluates to TRUE. The first step in defining the
+                capture condition for the ILA debug core is to decide what debug probes to include.
+                The ILA Capture Setup window lists the probes assigned to the capture condition in a
+                table that displays the following information: <ul class="ul" id="concept_aqj_x3c_d5__ul_qb1_4nv_cx">
+                    <li class="li"><span Class="uicontrol">Name</span>: Specifies the name of the probe on the ILA
+                        debug core. </li>
+
+                    <li class="li"><span Class="uicontrol">Operator</span>: Specifies the operator used to evaluate the
+                        capture condition on the probe. The operator can be changed by clicking in
+                        the field and selecting an operator from the drop down menu. The list of
+                        available operators depends upon the radix and possible values on the
+                        probe.</li>
+
+                    <li class="li"><span Class="uicontrol">Radix</span>: Specifies the radix for the value on the
+                        probe. You can specify the radix by clicking in the field and selecting the
+                        radix from the drop down menu.</li>
+
+                    <li class="li"><span Class="uicontrol">Value</span>: Specifies the probe value to use in the
+                        capture condition. The boolean expression defined by the Value and the
+                        Operator determine if the capture condition for the probe evaluates to true
+                        or false.</li>
+
+                    <li class="li"><span Class="uicontrol">Port</span>: Reports the port in the design that the probe
+                        is assigned to.</li>
+
+                </ul>
+</div>
+
+            <div class="p">The boolean expression for each probe is evaluated according to the specified
+                operator and value to determine if the expression is true or false. The capture
+                condition of the ILA debug core is the result of a global boolean "AND", "OR",
+                "NAND", or "NOR" expression applied to all of the ILA probe capture comparator
+                results, as defined by the <span Class="uicontrol">Set capture condition</span> command of
+                the toolbar menu. <div Class="note_important"><span class="importanttitle">Important:</span> Only probes that are added to the ILA
+                    Capture Setup window participate in the capture condition. Any probes that are
+                    not in the window are not considered as part of the capture
+                condition.</div>
+</div>
+
+            <p class="p">The toolbar for the ILA Capture Setup window includes the following commands: </p>
+
+            
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="concept_aqj_x3c_d5__table_rdz_bvv_y5" class="table" frame="void" border="0" rules="none">
+                    
+                    
+                    
+                    <tbody class="tbody">
+                        <tr class="row">
+                            <td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_kd5_2rv_cx" src="../../images/search_button.png"/></td>
+
+                            <td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Search</span></td>
+
+                            <td class="entry" align="left" valign="top" width="73.4959349593496%">Opens a text field to enter a search pattern to display specific
+                                probes of interest.</td>
+
+                        </tr>
+
+                        <tr class="row">
+                            <td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_kxd_grv_cx" src="../../images/add_button.png"/></td>
+
+                            <td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Add probes</span></td>
+
+                            <td class="entry" align="left" valign="top" width="73.4959349593496%">Opens the <span Class="uicontrol">Add Probes</span> dialog box, which
+                                lists the probes associated with the ILA debug core. Select probes
+                                and click <span Class="uicontrol">OK</span> to add the probes to the capture
+                                condition.</td>
+
+                        </tr>
+
+                        <tr class="row">
+                            <td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_vhk_hrv_cx" src="../../images/Remove1.png"/></td>
+
+                            <td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Remove selected probes</span></td>
+
+                            <td class="entry" align="left" valign="top" width="73.4959349593496%">Removes selected probes from the ILA Capture Setup
+                                window.</td>
+
+                        </tr>
+
+                        <tr class="row">
+                            <td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_fxp_3rv_cx" src="../../images/OR1.png"/></td>
+
+                            <td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Set capture condition</span></td>
+
+                            <td class="entry" align="left" valign="top" width="73.4959349593496%">Lets you define the global capture condition for all
+                                probes.</td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+</div>
+
+        </div>
+
+        <div class="section"><h2 class="title sectiontitle">See Also</h2>
+            
+            <table cellpadding="4" cellspacing="0" summary="" id="concept_aqj_x3c_d5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow">
+                    <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_aqj_x3c_d5__image_exb_qcg_cx" src="../../images/book_icon.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">Vivado Design Suite User Guide: Programming and Debug</cite>
+                        (UG908), <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug908-vivado-programming-debugging.pdf;a=xConfiguringCaptureModeSettings" target="_blank">Configuring Capture Mode
+                        Settings</a></td>
+
+                </tr>
+<tr class="strow">
+                    <td valign="top" class="stentry"><img class="image" id="concept_aqj_x3c_d5__image_av4_jvr_b5" src="../../images/play.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry"><a class="xref" href="http://www.xilinx.com/video/hardware/logic-debug-in-vivado.html" target="_blank">Vivado Design Suite QuickTake Video: Logic Debug in
+                        Vivado</a></td>
+
+                </tr>
+</table>
+
+        </div>
+
+    </div>
+
+
+</body>
+</html>

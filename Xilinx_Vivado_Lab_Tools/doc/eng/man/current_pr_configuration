@@ -1,0 +1,55 @@
+
+Description:
+
+  Get or set the current PR configuration.
+
+  In the Partial Reconfiguration (PR) design flow, the PR configuration lets
+  you specify a reconfigurable module (RM) to assign to a specific instance
+  of a Partition Definition (partitionDef). This flow lets you create unique
+  configurations of the design based on the combination of the core design
+  and one or more RMs. The PR design flow requires the implementation of each
+  PR configuration, resulting in partial bitstreams for the RMs, but complete
+  bitstreams for each integrated configuration. Refer to the Vivado Design
+  Suite User Guide: Partial Reconfiguration (UG909) for more information.
+
+  The current_pr_configuration either returns the PR configuration that is
+  the current or active configfuration in the design, or lets you specify a
+  PR configuration to make active.
+
+  This command returns the name of the current PR configuration, or returns
+  an error if the command fails.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <config> - (Optional) Specify a PR configuration to make current. The
+  configuration can be specified by name or returned as an object by
+  get_pr_configurations. If the configuration is not specified, the current
+  PR configuration is returned.
+
+Example:
+
+  The following example sets the current PR configuration as specified:
+
+    current_pr_configuration clockHigh
+
+See Also:
+
+   *  create_partition_def
+   *  create_pr_configuration
+   *  create_reconfig_module
+   *  delete_pr_configurations
+   *  get_pr_configurations
+   *  setup_pr_configurations

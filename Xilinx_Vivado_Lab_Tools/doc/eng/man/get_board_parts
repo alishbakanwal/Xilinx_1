@@ -1,0 +1,132 @@
+
+Description:
+
+  Gets a list of available board parts in the board repository, as defined by
+  the Board Interface files available for use by the current project or
+  design.
+
+  The board file, board.xml located in the data/boards folder of the Vivado
+  Design Suite installation area, stores information regarding board
+  attributes. The board provides a representation of the overall system that
+  the Xilinx device is a part of, and can help define key aspects of the
+  design, such as clock constraints, I/O port assignments, and supported
+  interfaces. You can create custom boards by defining a custom Board
+  Interface file, as described in the Vivado Design Suite User Guide:
+  System-Level Design Entry (UG895).
+
+  The board part provides a representation of the Xilinx device in the
+  context of the board-level system, and is represented by the part0
+  component in the Board Interface file. The current_board_part command
+  returns the board part in use by the current project. Refer to the
+  current_board_part command for the different methods of defining the board
+  in use.
+
+  This command returns the list of available Xilinx devices (part0) in the
+  Board Interface files defined in the current board repository, or returns
+  an error if it fails.
+
+Arguments:
+
+  -regexp - (Optional) Specifies that the search <patterns> are written as
+  regular expressions. Both search <patterns> and -filter expressions must be
+  written as regular expressions when this argument is used. Xilinx regular
+  expression Tcl commands are always anchored to the start of the search
+  string. You can add ".*" to the beginning or end of a search string to
+  widen the search to include a substring. See
+  http://perldoc.perl.org/perlre.html for help with regular expression
+  syntax.
+
+  Note: The Tcl built-in command regexp is not anchored, and works as a
+  standard Tcl command. For more information refer to
+  http://www.tcl.tk/man/tcl8.5/TclCmd/regexp.htm.
+
+  -nocase - (Optional) Perform case-insensitive matching when a pattern has
+  been specified. This argument applies to the use of -regexp only.
+
+  -latest_file_version - (Optional) Return the board parts defined in the
+  latest version of the Board Interface file. There can be multiple versions
+  of the Board Interface file. This option returns the board parts in the
+  latest version only. Refer to the Vivado Design Suite User Guide:
+  System-Level Design Entry (UG895) for more information on the Board
+  Interface file.
+
+  -latest_hw_revision - (Optional) Return the board parts defined in the
+  latest compatible hardware revision of the board represented in the Board
+  Interface file. The board Interface file can represent multiple compatible
+  revisions of boards. This option only returns the latest revision.
+
+  -filter - (Optional) Filter the results list with the specified expression.
+  The -filter argument filters the list of objects returned by
+  get_board_parts based on property values on the board parts. You can find
+  the properties on an object with the report_property or list_property
+  commands. Any property/value pair can be used as a filter. In the case of
+  the board part object, "NAME", "PART_NAME", and "BOARD_NAME" are some of
+  the properties that can be used to filter results.
+
+  The filter search pattern should be quoted to avoid having to escape
+  special characters that may be found in net, pin, or cell names, or other
+  properties. String matching is case-sensitive and is always anchored to the
+  start and to the end of the search string. The wildcard "*" character can
+  be used at the beginning or at the end of a search string to widen the
+  search to include a substring of the property value.
+
+  Note: The filter returns an object if a specified property exists on the
+  object, and the specified pattern matches the property value on the object.
+  In the case of the "*" wildcard character, this will match a property with
+  a defined value of "".
+
+  For string comparison, the specific operators that can be used in filter
+  expressions are "equal" (==), "not-equal" (!=), "match" (=~), and
+  "not-match" (!~). Numeric comparison operators <, >, <=, and >= can also be
+  used. Multiple filter expressions can be joined by AND and OR (&& and ||).
+  The following gets input pins that do NOT contain the "RESET" substring
+  within their name:
+
+    get_pins * -filter {DIRECTION == IN && NAME !~ "*RESET*"}
+
+  Boolean (bool) type properties can be directly evaluated in filter
+  expressions as true or not true:
+
+    -filter {IS_PRIMITIVE && !IS_LOC_FIXED}
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <patterns> - (Optional) Match board parts against the specified search
+  patterns. The default pattern is the wildcard `*` which gets a list of all
+  board parts available for use in the project. More than one pattern can be
+  specified to find multiple boards based on different search criteria.
+
+  Note: You must enclose multiple search patterns in braces, {}, or quotes,
+  "", to present the list as a single element.
+
+Examples:
+
+  The following example returns the board parts matching the specified filter
+  search pattern:
+
+    get_board_parts -filter {BOARD_NAME=~z*}
+
+  The following example returns all board parts matching the specified search
+  patterns:
+
+    get_board_parts {*av* *kc*}
+
+See Also:
+
+   *  current_board_part
+   *  get_board_part_interfaces
+   *  get_board_part_pins
+   *  list_property
+   *  report_property
+   *  set_property

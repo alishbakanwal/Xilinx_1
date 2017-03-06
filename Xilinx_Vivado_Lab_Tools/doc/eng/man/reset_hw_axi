@@ -1,0 +1,59 @@
+
+Description:
+
+  Reset the STATUS properties of the specified hw_axi objects, or the current
+  device.
+
+  The reset_hw_axi restores the hw_axi core on the current device to a known
+  state from which to begin running AXI transactions. The STATUS properties
+  include:
+
+   *  STATUS.AXI_READ_BUSY
+
+   *  STATUS.AXI_READ_DONE
+
+   *  STATUS.AXI_WRITE_BUSY
+
+   *  STATUS.AXI_WRITE_DONE
+
+   *  STATUS.BRESP - Write Response Channel Response. Indicates results of
+      the write transfer.
+
+   *  STATUS.RRESP - Read Response Channel Response. Indicates results of the
+      read transfer.
+
+  The command returns nothing if successful, and returns an error if it fails.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <hw_axis> - (Required) The hw_axi objects to reset. The hw_axi must be
+  specified as an object returned by the get_hw_axis command.
+
+Example:
+
+  The following example resets the hw_axis on the current device, restoring
+  initial settings:
+
+    reset_hw_axis [get_hw_axis]
+
+See Also:
+
+   *  create_hw_axi_txns
+   *  delete_hw_axi_txn
+   *  get_hw_axis
+   *  get_hw_axi_txns
+   *  refresh_hw_axi
+   *  reset_hw_axi

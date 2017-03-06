@@ -1,0 +1,54 @@
+BD_INTF_PORT
+
+Description: 
+An interface is a grouping of signals that share a common function, containing 
+both individual signals and multiple buses. An AXI4-Lite master, for example, 
+contains a large number of individual signals plus multiple buses, which are all 
+required to make a connection. By grouping these signals and buses into an 
+interface, the Vivado IP integrator can identify common interfaces and 
+automatically make multiple connections in a single step. 
+
+An interface is defined using the IP-XACT standard. Standard interfaces provided 
+by Xilinx can be found in the Vivado installation directory at data/ip/interfaces. 
+See the Vivado Design Suite User Guide: Designing IP Subsystems Using IP Integrator
+(UG994) for more information on interface nets, pins, and ports. 
+
+A block design interface port is a special type of hierarchical pin, a pin on the 
+top-level of the block diagram. In block designs, ports and interface are primary 
+ports communicating the external connection of the block design or diagram from or 
+to the overall FPGA design, or system level design. 
+
+Related Objects:
+The block design interface port, bd_intf_port object, occurs in a block design, or 
+diagram. It is connected by block design interface nets (bd_intf_net) to the pins 
+of block design cells (bd_cell). You can query the bd_intf_ports of the diagram, or 
+those connected to block design interface nets. 
+
+	get_bd_intf_ports -of_objects [get_bd_intf_nets]
+
+You can also query the interface nets connected to bd_intf_port objects:
+
+	get_bd_intf_nets -of_objects [get_bd_intf_ports CLK*]
+
+Properties:
+The specific properties on a block design interface port object can vary depending 
+on the type of the port. The following table lists some of the properties assigned 
+to a clock bd_intf_port object, with example values:
+
+Property        Type    Read-only  Visible  Value
+CLASS           string  true       true     bd_intf_port
+CONFIG.FREQ_HZ  string  false      true     100000000
+LOCATION        string  false      true     130 460
+MODE            string  true       true     Slave
+NAME            string  false      true     CLK_IN1_D
+PATH            string  true       true     /CLK_IN1_D
+VLNV            string  true       true     xilinx.com:interface:diff_clock_rtl:1.0
+
+To report the properties for a bd_intf_port object, you can copy and paste the 
+following command into the Vivado Design Suite Tcl shell or Tcl console:
+
+	report_property -all [lindex [get_bd_ports] 0]
+
+
+
+

@@ -1,0 +1,91 @@
+﻿<html xml:lang="ja-jp" lang="ja-jp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="concept"/>
+<meta name="DC.Title" content="Timing Constraints ウィザード"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_aqj_x3c_d5"/>
+<meta name="DC.Language" content="ja-JP"/>
+<link rel="stylesheet" type="text/css" href="../commonltr-ja.css"/>
+<title>Timing Constraints ウィザード</title>
+</head>
+<body id="concept_aqj_x3c_d5">
+
+
+<h1 class="title topictitle1">Timing Constraints ウィザード</h1>
+
+<div class="body conbody">
+<div class="section">
+<p class="p" id="concept_aqj_x3c_d5__p_ftk_rrw_25">Timing Constraints ウィザードを使用すると、推奨される設計手法を使用してタイミング制約を作成できます。このウィザードでは、デザインが解析され、足りない制約や推奨事項が表示されます。Timing Constraints ウィザードのすべての推奨事項を確認して理解しておくことは重要です。</p>
+
+<p class="p" id="concept_aqj_x3c_d5__p_vyh_qrw_25">Timing Constraints ウィザードのページ順は、タイミング制約を定義するためのさまざまな依存度を反映しています。たとえば、クロックを最初に定義して制約を付けてから、入力および出力遅延、最後にクロック乗せ換えを指定するようになっています。</p>
+
+<ul class="ul" id="concept_aqj_x3c_d5__ul_ykm_2ms_d5">
+<li class="li">クロック<ul class="ul" id="concept_aqj_x3c_d5__ul_svw_jms_d5">
+<li class="li"><a class="xref" href="timing_constraints_wizard_primary_clocks_wizard.html">[Primary Clocks]</a> : プライマリ クロックは通常入力ポートを介してデザインに入力されます。クロック定義には、周期、名前 (オプション)、デューティ サイクルがデフォルト値の 50% でない場合は波形 (立ち上がりエッジと立ち下がりエッジの時間) が必要です。</li>
+
+<li class="li"><a class="xref" href="timing_constraints_wizard_generated_clocks_wizard.html">[Generated Clocks] : </a>生成クロックは、マスター クロックから派生し、クロック ツリーのダウンストリームに含まれます。Vivado<sup>®</sup> Design Suite ソフトウェアでは、MMCM/PLL、ドライバー付きの専用クロック バッファー、および UltraScale™ GT ブロックなどのすべてのクロック調整ブロックの生成クロックが自動的に派生されます。このセクションでは、生成クロックのみが識別されます。</li>
+
+<li class="li"><a class="xref" href="timing_constraints_wizard_forwarded_clocks_wizard.html">[Forwarded Clocks] : </a>フォワード クロックは、内部クロックを複製する出力ポートで定義された生成クロックです。フォワード クロックは、通常ソース同期インターフェイスを形成するためのその他の出力ポートの時間の基準です。</li>
+
+<li class="li"><a class="xref" href="timing_constraints_wizard_external_feedback_delays_wizard.html">[External Feedback Delays] : </a>外部フィードバック遅延は、MMCM または PLL フィードバック ループで使用されるデバイスの入力と出力ポートのペア間のボード遅延です。最小および最大遅延値のどちらも指定する必要があります。</li>
+
+</ul>
+</li>
+
+<li class="li">入力および出力ファイル<ul class="ul" id="concept_aqj_x3c_d5__ul_wl1_mms_d5">
+<li class="li"><a class="xref" href="timing_constraints_wizard_input_delays_wizard.html">[Input Delays] : </a>基準クロック (通常ボード クロック) とデバイスのバウンダリの入力信号間の相対的な位相を記述する入力遅延制約です。指定した入力遅延値が正しくない場合は、I/O タイミング エラーになり、インプリメンテーションの結果の質に悪影響があります。</li>
+
+<li class="li"><a class="xref" href="timing_constraints_wizard_output_delays_wizard.html">[Output Delays] : </a>基準クロック (通常ボード クロックまたはフォワード クロック) とデバイスのバウンダリの出力信号間の相対的な位相を記述する出力遅延制約です。指定した出力遅延値が正しくない場合は、I/O タイミング エラーになり、インプリメンテーションの結果の質に悪影響があります。</li>
+
+<li class="li"><a class="xref" href="timing_constraints_wizard_combinational_delays_wizard.html">[Combinational Constraints] : </a>組み合わせ制約は、シーケンシャル エレメントにキャプチャされずにデバイスを横切るパスのタイミング制約です。基準ボード クロックを定義するのに仮想クロックが使用され、入力/出力遅延制約は組み合わせパスのデバイス外の遅延を記述します。</li>
+
+</ul>
+</li>
+
+<li class="li">クロック乗せ換え<ul class="ul" id="concept_aqj_x3c_d5__ul_q4q_4ms_d5">
+<li class="li"><a class="xref" href="timing_constraints_wizard_physically_exclusive_clock_groups_wizard.html">[Physically Exclusive Clocks] : </a>物理的に排他的なクロックは、デザインに同時に存在しないクロックです。</li>
+
+<li class="li"><a class="xref" href="timing_constraints_wizard_logically_exclusive_clock_groups_with_no_interaction_wizard.html">[Logically Exclusive Clocks with No Interaction] : </a>論理的に排他的なクロックは、クロック マルチプレクサーの後など共有クロック ツリー セクション以外では、デザインで同時にアクティブになります。これらのクロック間に共有セクション外に論理的なパスがなければ、これらのクロックは関連性はなく論理的に排他です。</li>
+
+<li class="li"><a class="xref" href="timing_constraints_wizard_logically_exclusive_clock_groups_with_interaction_wizard.html">[Logically Exclusive Clocks with Interaction] : </a>論理的に排他的なクロックは、クロック マルチプレクサーの後など共有クロック ツリー セクション以外では、デザインで同時にアクティブになります。これらのクロック間に共有セクション外に論理的なパスがある場合、またはこれらのクロックと共有セクションとの間に論理的なパスがある場合、共有クロック ツリー セクションに制限されるクロックのみが論理的に排他的になります。</li>
+
+<li class="li"><a class="xref" href="timing_constraints_wizard_asynchronous_clock_domain_crossings_wizard.html">[Asynchronous Clock Domain Crossings] : </a>非同期クロック乗せ換えは、既知の位相関係がないため、スタティック タイミング解析で安全だとレポートできない 2 つのクロック間をデータが転送される際に発生します。通常、これらの乗せ換えが安全に機能するためには、ASYNC_REG プロパティが TRUE になったシンクロナイザーが必要です。このダイアログ ボックスは、クロック グループ、<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xset_false_path" target="_blank">set_false_path</a> または <a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xset_max_delay" target="_blank">set_max_delay</a> -datapath_only 制約が設定されていない非同期クロック ペアを示します。</li>
+
+</ul>
+</li>
+
+</ul>
+
+</div>
+
+<div class="section"><h2 class="title sectiontitle">不足しているタイミング制約の識別と推奨</h2>
+
+<p class="p" id="concept_aqj_x3c_d5__p_cqy_4rw_25">ページで <span Class="uicontrol">[Next]</span> をクリックすると、現在定義されている制約がインメモリ デザインに適用されるので、次のページで足りない制約が識別されます。デザインによっては、足りない制約を見つけるため、ページの移動にかなりの時間がかかることもあります。</p>
+
+<p class="p" id="concept_aqj_x3c_d5__p_dqy_4rw_25">制約の確認を簡潔にするため、ウィザードからはクロック ネットワーク レポートが使用できます。回路図およびタイミング パス レポートは、<a class="xref" href="timing_constraints_wizard_asynchronous_clock_domain_crossings_wizard.html">[Asynchronous Clock Domain Crossings] ページ</a>からも入手できます。</p>
+
+<p class="p" id="concept_aqj_x3c_d5__p_eqy_4rw_25">新しく定義された制約を削除せずにタイミング制約ウィザードを終了するには、<span Class="uicontrol">[Skip to Finish]</span> をクリックします。</p>
+
+<p class="p" id="concept_aqj_x3c_d5__p_gqy_4rw_25"><span Class="uicontrol">[Next]</span> をクリックして続行します。</p>
+
+</div>
+
+<div class="section"><h2 class="title sectiontitle">関連項目</h2>
+<table cellpadding="4" cellspacing="0" summary="" id="concept_aqj_x3c_d5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow"> <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_aqj_x3c_d5__image_smm_1vr_b5" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">『Vivado Design Suite ユーザー ガイド : 制約の使用』</cite> (UG903) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug903-vivado-using-constraints.pdf;a=xTimingConstraintsWizard" target="_blank">「タイミング制約ウィザード」</a></td>
+ </tr>
+<tr class="strow"> <td valign="top" class="stentry"><img class="image" id="concept_aqj_x3c_d5__image_av4_jvr_b5" src="../../images/play.png" alt="Icon"/></td>
+ <td valign="top" class="stentry"><a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/ndoc?t=video;d=hardware/using-vivado-timing-constraint-wizard.html" target="_blank">Vivado Design Suite QuickTake ビデオ : Vivado タイミング制約ウィザードの使用</a></td>
+ </tr>
+</table>
+
+</div>
+
+</div>
+
+
+</body>
+</html>

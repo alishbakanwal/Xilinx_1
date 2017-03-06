@@ -1,0 +1,41 @@
+
+Description:
+
+  Remove the specified serial I/O analyzer scan object.
+
+  This command returns nothing if successful, or returns an error if the
+  command fails.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <hw_sio_scans> - (Required) Specify one or more hw_sio_scan objects to
+  remove. The hw_sio_scan must be specified as an object as returned by the
+  create_hw_sio_scan or get_hw_sio_scans commands.
+
+Example:
+
+  The following example removes the specified SIO scan:
+
+    remove_hw_sio_scan [get_hw_sio_scans {SCAN_2}]
+
+See Also:
+
+   *  create_hw_sio_scan
+   *  get_hw_sio_scans
+   *  run_hw_sio_scan
+   *  stop_hw_sio_scan
+   *  wait_on_hw_sio_scan
+   *  write_hw_sio_scan

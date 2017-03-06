@@ -1,0 +1,168 @@
+﻿<html xml:lang="ja-jp" lang="ja-jp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="reference"/>
+<meta name="DC.Title" content="[Report Power] ダイアログ ボックス"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_bqj_lqr_b5"/>
+<meta name="DC.Language" content="ja-JP"/>
+<link rel="stylesheet" type="text/css" href="../commonltr-ja.css"/>
+<title>[Report Power] ダイアログ ボックス</title>
+</head>
+<body id="concept_bqj_lqr_b5">
+
+
+<h1 class="title topictitle1">[Report Power] ダイアログ ボックス</h1>
+
+<div class="body refbody">
+<div class="section">
+<p class="p">[Report Power] ダイアログ ボックスでは、デザインの消費電力のレポートを生成できます。正確な消費電力の見積もりには、動作パラメーターとデザインのスイッチング アクティビティが現実的に設定されている必要があります。</p>
+
+<p class="p">[Report Power] ダイアログ ボックスには、デザインを設定するための次のタブとオプションが含まれます。</p>
+
+<ul class="ul" id="concept_bqj_lqr_b5__ul_wgf_k2p_v5">
+<li class="li"><a class="xref" href="#concept_bqj_lqr_b5__common">共通オプション</a></li>
+
+<li class="li"><a class="xref" href="#concept_bqj_lqr_b5__environment">[Environment] タブ</a></li>
+
+<li class="li"><a class="xref" href="#concept_bqj_lqr_b5__power">[Power Supply] タブ</a></li>
+
+<li class="li"><a class="xref" href="#concept_bqj_lqr_b5__switching">[Switching] タブ</a></li>
+
+</ul>
+
+</div>
+
+<div class="section" id="concept_bqj_lqr_b5__common"><h2 class="title sectiontitle">共通オプション</h2>
+
+<p class="p">共通オプションのタブはありませんが、次はダイアログ ボックス内に常に表示されます。</p>
+
+<ul class="ul" id="concept_bqj_lqr_b5__ul_gc5_ccp_v5">
+<li class="li"><span Class="uicontrol">[Results name] : </span>Vivado<sup>®</sup> IDE の [Power Results] ウィンドウのレポートに適用する名前を指定します。</li>
+
+<li class="li"><span Class="uicontrol">[Output text file] : </span>消費電力結果を書き出す ASCII ファイル名を指定します。</li>
+
+<li class="li"><span Class="uicontrol">[Output XPE file] : </span>Xilinx<sup>®</sup> Power Estimator スプレッドシート ツールにインポートするための XML ファイル名を指定します。詳細は、<cite class="cite">『Xilinx Power Estimator ユーザー ガイド』</cite> (<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug440-xilinx-power-estimator.pdf" target="_blank">UG440</a>) を参照してください。</li>
+
+</ul>
+
+</div>
+
+<div class="section" id="concept_bqj_lqr_b5__environment"><h2 class="title sectiontitle">[Environment] タブ</h2>
+
+<p class="p">[Environment] タブでは、デバイスの動作環境を定義できます。これらの設定は、Tcl コマンドの <a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xset_operating_conditions" target="_blank">set_operating_conditions</a> に関連しています。</p>
+
+<ul class="ul" id="concept_bqj_lqr_b5__ul_hl5_5qv_v5">
+<li class="li"><span Class="uicontrol">[Device Settings] : </span>ターゲット デバイスの動作パラメーターを指定します。<ul class="ul" id="concept_bqj_lqr_b5__ul_fjz_5ck_dv">
+<li class="li"><span Class="uicontrol">[Temp grade] : </span>ターゲット デバイスの温度グレード動作を指定します。サポートされる値は、デバイス ファミリによって異なります。</li>
+
+<li class="li"><span Class="uicontrol">[Process] : </span>解析する製造プロセス コーナーを指定します。有効な値は、typical または maximum です。</li>
+
+</ul>
+</li>
+
+<li class="li"><span Class="uicontrol">[Environment Settings] : </span>それが使用されるデバイスまたはシステムの動作に関連するさまざまな環境設定を指定できます。<ul class="ul" id="concept_bqj_lqr_b5__ul_vs2_hdk_dv">
+<li class="li"><span Class="uicontrol">[Output Load] : </span>デザインで駆動される外部負荷容量を指定します。</li>
+
+<li class="li"><span Class="uicontrol">[Junction temperature] : </span>デバイスのジャンクション温度を指定します。値は、自動的に計算されます。チェック ボックスをオンにすると、温度 (摂氏) を手動で入力できます。</li>
+
+<li class="li"><span Class="uicontrol">[Ambient temperature] : </span>動作環境の周囲温度 (摂氏) を指定します。</li>
+
+<li class="li"><span Class="uicontrol">[Effective Theta-JA] : </span>モデリングに使用する Theta-JA 熱抵抗を C/W で指定します。値は自動的に計算されますが、必要に応じて手動で入力することもできます。</li>
+
+<li class="li"><span Class="uicontrol">[Airflow] : </span>冷却モデリングに使用するエアフローを LFM (リニア フィート/分) で指定します。デフォルト値はデバイス ファミリによって異なります。</li>
+
+<li class="li"><span Class="uicontrol">[Heat sink] : </span>冷却モデリングに使用するヒートシンク プロファイルを指定します。</li>
+
+<li class="li"><span Class="uicontrol">[Theta-SA] : </span>モデリングに使用する Theta-SA 熱抵抗を C/W で指定します。値は、選択したヒート シンクから自動的に決定されますが、カスタム ヒート シンクを選択した場合は手動で Theta-SA を指定できます。</li>
+
+<li class="li"><span Class="uicontrol">[Board selection] : </span>冷却モデリングに使用するボード サイズを指定します。有効な値は jedec、small、medium、large、custom です。</li>
+
+<li class="li"><span Class="uicontrol">[Number of board layers] : </span>システム ボードに含まれるレイヤー数を見積もります。有効な値は、4 ～ 7 層のボードでは [4to7]、8 ～ 11 層のボードでは [8to11]、12 ～ 15 層のボードでは [12to15]、16 層以上のボードでは 16+ です。</li>
+
+<li class="li"><span Class="uicontrol">[Theta-JB] : </span>ボードの Theta-JB 熱抵抗を C/W で指定します。値は自動的に計算されますが、必要に応じて手動で入力することもできます。</li>
+
+<li class="li"><span Class="uicontrol">[Board temperature] : </span>ボード温度を摂氏 (C) で指定します。</li>
+
+</ul>
+</li>
+
+</ul>
+
+</div>
+
+<div class="section" id="concept_bqj_lqr_b5__power"><h2 class="title sectiontitle">[Power Supply] タブ</h2>
+
+<p class="p">[Power Supply] タブには、電圧電源の名前とそれに指定した値がリストされます。サポートされる電源名およびその値は、デバイス ファミリによって異なります。これらの電圧電源の設定は、Tcl コマンドの <a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xset_operating_conditions" target="_blank">set_operating_conditions</a> にも関連しています。</p>
+
+</div>
+
+<div class="section" id="concept_bqj_lqr_b5__switching"><h2 class="title sectiontitle">[Switching] タブ</h2>
+
+<p class="p">[Switching] タブでは、現在のデザインの消費電力の見積もりを実行する際に使用されるデバイスの信号レートとスイッチング確立を定義できます。これらの設定は、Tcl コマンドの <a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xset_switching_activity" target="_blank">set_switching_activity</a> に関連しています。</p>
+
+<p class="p">デザインのスイッチング アクティビティは、静的および動的消費電力の両方に影響します。静的消費電力はロジック ステートの遷移によって異なり、動的消費電力はトグル レートに正比例します。</p>
+
+<ul class="ul" id="concept_bqj_lqr_b5__ul_ymb_c3p_v5">
+<li class="li"><span Class="uicontrol">[Simulation activity file] : </span>消費電力解析または消費電力最適化に使用する SAIF (Switching Activity Interchange Format) ファイルを読み込みます。SAIF ファイルではスイッチング アクティビティを使用してデザイン ノードがアノテートされているので、Vivado ツールで消費電力を正しく見積もることができるようになります。Vivado シミュレータでは SAIF ファイルが出力されます。 詳細は、<cite class="cite">『Vivado Design Suite ユーザー ガイド : ロジック シミュレーション』</cite> (UG900) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug900-vivado-logic-simulation.pdf;a=xPowerAnalysisUsingVivadoSimulator" target="_blank">このセクション</a>を参照してください。</li>
+
+<li class="li"><span Class="uicontrol">[Default Activity Settings] : </span><ul class="ul" id="concept_bqj_lqr_b5__ul_c1w_4mk_dv">
+<li class="li"><span Class="uicontrol">[Default toggle rate] : </span>消費電力解析で現在デザインのプライマリ入力に使用するデフォルトのトグル レートを指定します。</li>
+
+<li class="li"><span Class="uicontrol">[Default static probability] : </span>現在のデザインの消費電力解析で使用するデフォルトのスタティック確率を指定します。</li>
+
+</ul>
+</li>
+
+<li class="li"><span Class="uicontrol">[Enable Rate Settings] : </span><ul class="ul" id="concept_bqj_lqr_b5__ul_l44_5mk_dv">
+<li class="li"><span Class="uicontrol">[BRAM Port Enable] : </span>BRAM のイネーブル ピン (ENARDEN/ENBWREN) のスタティック確率とトグル レートを指定します。</li>
+
+<li class="li"><span Class="uicontrol">[BRAM Write Enable] : </span>BRAM の書き込みイネーブル (WEA/WEBWE) のスタティック確率とトグル レートを指定します。</li>
+
+<li class="li"><span Class="uicontrol">[Bidi Output Port Enable] : </span>双方向ポートのイネーブル ピンのスタティック確率とトグル レートを指定します。</li>
+
+</ul>
+</li>
+
+<li class="li"><span Class="uicontrol">[Toggle Rate Settings] : </span><ul class="ul" id="concept_bqj_lqr_b5__ul_jzl_fnk_dv">
+<li class="li"><span Class="uicontrol">[Primary Outputs] : </span>デザインの出力ポートのスタティック確率とトグル レートを指定します。</li>
+
+<li class="li"><span Class="uicontrol">[Logic] : </span>レジスタ、シフト レジスタ、分散およびブロック RAM、DSP のスタティック確率とトグル レートを指定します。</li>
+
+<li class="li"><span Class="uicontrol">[GTs] : </span>GT レシーバーとトランスミッターのスタティック確率とトグル レートを指定します。</li>
+
+</ul>
+</li>
+
+<li class="li"><span Class="uicontrol">[Constrained Clocks] : </span>解析で考慮されるクロック ドメインがリストされます。これは、情報提供のみを目的に表示されます。</li>
+
+</ul>
+
+<p class="p"><span Class="uicontrol">[OK]</span> をクリックすると、指定した値で消費電力解析が実行されます。</p>
+
+</div>
+
+<div class="section"><h2 class="title sectiontitle">関連項目</h2>
+<table cellpadding="4" cellspacing="0" summary="" id="concept_bqj_lqr_b5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow"> <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_bqj_lqr_b5__image_lf4_qvj_p5" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">『Vivado Design Suite ユーザー ガイド : 消費電力解析および最適化』</cite> (UG907) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug907-vivado-power-analysis-optimization.pdf;a=xReviewDeviceDesignSettingsAndAdjustActivityForKnownElements" target="_blank">「デバイス/デザイン設定を確認して既知のエレメントのアクティビティを調整」</a></td>
+ </tr>
+<tr class="strow"> <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_y3g_hbj_dv" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry"><cite class="cite">『Vivado Design Suite Tcl コマンド リファレンス ガイド』</cite> (UG835) の <a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xreport_power" target="_blank">「report_power」</a></td>
+ </tr>
+<tr class="strow"> <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_yh1_s24_v5" src="../../images/play.png" alt="Icon"/></td>
+ <td valign="top" class="stentry"><a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/ndoc?t=video;d=hardware/power-estimation-analysis-using-vivado.html" target="_blank">Vivado Design Suite QuickTake ビデオ : Vivado での消費電力の予測および解析</a></td>
+ </tr>
+<tr class="strow"> <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_uky_cck_dv" src="../../images/play.png" alt="Icon"/></td>
+ <td valign="top" class="stentry"><a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/ndoc?t=video;d=hardware/power-optimization-using-vivado.html" target="_blank">Vivado Design Suite QuickTake ビデオ : Vivado を使用した消費電力最適化</a></td>
+ </tr>
+</table>
+
+</div>
+
+</div>
+
+
+</body>
+</html>

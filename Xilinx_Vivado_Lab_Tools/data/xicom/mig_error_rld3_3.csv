@@ -1,0 +1,66 @@
+STAGE_NAME,STAGE,CODE,CAL_ERROR_1,CAL_ERROR_0,ERROR
+Read Clock Alignment,1,1,byte,nibble,Read clock stuck low
+Read Clock Alignment,1,2,byte,nibble,Read clock stuck high
+Read Clock Alignment,1,3,byte,nibble,Positive edge transition not detected on read clock
+Read Clock Alignment,1,4,byte,nibble,Read clock left edge detect fail with fine delay
+Read Clock Alignment,1,5,byte,nibble,Read clock right edge detect fail with fine delay
+Read DQ Deskew,2,1,byte,nibble,PQTR/ NQTR tap value reached max limit
+Read DQ Deskew,2,2,nibble,bit,DQ IDELAY tap value reached max limit
+Read DQ Deskew,2,3,byte,na,QVLD not detected during initial read sequence
+Read DQ Deskew,2,4,byte,na,QVLD not detected during read sequence while incrementing PQTR/ NQTR taps
+Read DQ Deskew,2,5,byte,bit,QVLD not detected during read sequence while incrementing DQ IDELAY taps
+Read DQ Deskew,2,6,byte,na,Stuck at bits detected during initial read sequence
+Read DQ Training (Simple),3,1,nibble,bit,DQ IDELAY tap value reached max limit
+Read DQ Training (Simple),3,2,nibble,na,Left edge detect fail. PQTR tap value reached max limit
+Read DQ Training (Simple),3,3,nibble,na,Left edge detect fail. NQTR tap value reached max limit
+Read DQ Training (Simple),3,4,nibble,na,NQTR minimum window size error
+Read DQ Training (Simple),3,5,nibble,na,PQTR minimum window size error
+Read DQ Training (Simple),3,6,nibble,na,Right edge NQTR tap value smaller than left edge tap value
+Read DQ Training (Simple),3,7,nibble,na,Right edge PQTR tap value smaller than left edge tap value
+Read DQ Training (Simple),3,8,byte,na,Stuck at bits detected during initial read sequence
+Read DQ Training (Simple),3,9,nibble,na,QVLD not detected during initial read sequence
+Read DQ Training (Simple),3,10,nibble,na,QVLD not detected for DQ tap increment while finding left edge
+Read DQ Training (Simple),3,11,nibble,na,QVLD not detected for PQTR/ NQTR tap increment while finding left edge
+Read DQ Training (Simple),3,12,nibble,na,Stuck at bits detected while finding right edge
+Read DQ Training (Simple),3,13,nibble,na,QVLD not detected for PQTR/ NQTR tap increment while finding right edge
+Read DQ Training (Simple),3,14,nibble,na,PQTR/ NQTR taps failed to achieve assigned center value
+Read QVLD Training,4,1,qvld_cnt,na,QVLD IDELAY tap value reached max limit
+Write Training,5,1,dk_cnt,na,DK ODELAY tap value reached max limit
+Write Training,5,2,byte,bit,DQ ODELAY tap value reached max limit
+Write Training,5,3,dm_cnt,na,DM ODELAY tap value reached max limit
+Write Training,5,4,dk_cnt,na,DK ODELAY tap value does not match value stored in RIU register
+Write Training,5,5,dk_cnt,na,Sanity check failed after DQ deskew routine
+Write Training,5,6,dm_cnt,na,Sanity check failed after DM deskew routine
+Write Training,5,7,dm_cnt,na,Initial check failed at the beginning of DM deskew routine
+Write Training,5,8,dm_cnt,na,QVLD not detected during initial check of DM deskew routine
+Write Training,5,9,dk_cnt,na,QVLD not detected during DK deskew routine
+Write Training,5,10,byte,bit,QVLD not detected during DQ deskew routine
+Write Training,5,11,dk_cnt,na,QVLD not detected during DM deskew routine
+Write Training,5,12,dk_cnt,na,QVLD not detected during sanity check after DQ deskew routine
+Write Training,5,13,dm_cnt,na,QVLD not detected during sanity check after DM deskew routine
+Write Read Sanity Check,6,1,na,na,Data mismatch found
+Write Read Sanity Check,6,2,na,na,QVLD not detected during read sequence
+Byte Slip Training,7,1,byte,na,Mismatch on first data beat found
+Byte Slip Training,7,2,byte,na,Data mismatch found
+Byte Slip Training,7,3,byte,na,QVLD not detected during read sequence
+QVLD Slip Training,8,1,qvld_cnt,na,QVLD expect pattern match error
+Write Read Sanity Check,9,1,byte,na,Data mismatch found
+Write Read Sanity Check,9,2,byte,na,QVLD not detected during read sequence
+QVLD Align Training,10,1,qvld_cnt,na,QVLD expect pattern match error
+Byte Align Training,11,1,byte,na,Mismatch on first data beat found
+Byte Align Training,11,2,na,na,More than one fabric cycle delay between bytes
+Byte Align Training,11,3,byte,na,Data mismatch found
+Byte Align Training,11,4,na,na,More than one fabric cycle delay between QVLD and Data byte lanes
+Byte Align Training,11,5,byte,na,QVLD not detected during read sequence
+Write Read Sanity Check,12,1,byte,na,Data mismatch found
+Write Read Sanity Check,12,2,byte,na,QVLD not detected during read sequence
+Read DQ Training (Complex),13,1,nibble,na,Sanity check failed after find left/ right edge
+Read DQ Training (Complex),13,2,nibble,na,QVLD not detected during sanity check after find left/ right edge
+Read DQ Training (Complex),13,3,nibble,na,QVLD not detected during find left/ right edge
+Read DQ Training (Complex),13,4,nibble,na,PQTR/ NQTR taps failed to return to start location at end of find left/ right edge
+Read DQ Training (Complex),13,5,nibble,na,PQTR minimum window size error
+Read DQ Training (Complex),13,6,nibble,na,NQTR minimum window size error
+Read DQ Training (Complex),13,7,nibble,na,PQTR/ NQTR taps failed to achieve assigned center value
+Read DQ Training (Complex),13,8,na,na,Timeout error while waiting for complex pattern to finish
+Write Read Sanity Check,14,1,byte,na,QVLD not detected during read sequence
+Write Read Sanity Check,14,2,byte,na,Data mismatch found

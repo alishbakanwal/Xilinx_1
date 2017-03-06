@@ -1,0 +1,45 @@
+
+Description:
+
+  Closes the specified IP subsystem design in the IP Integrator feature of
+  the Vivado Design Suite.
+
+  If the design has been modified, you will not be prompted to save the
+  design prior to closing. You will need to run save_bd_design to save any
+  changes made to the design before using the close_bd_design command.
+
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <name> - The name of the IP subsystem design object to close.
+
+
+Example:
+
+  The following example closes the current IP subsystem design in the current
+  project:
+
+    close_bd_design [current_bd_design]
+
+
+See Also:
+
+   *  create_bd_design
+   *  current_bd_design
+   *  get_bd_designs
+   *  open_bd_design
+   *  save_bd_design
+

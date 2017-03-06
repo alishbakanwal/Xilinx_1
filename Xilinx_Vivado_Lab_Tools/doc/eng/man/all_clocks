@@ -1,0 +1,46 @@
+
+Description:
+
+  Returns a list of all clocks that have been declared in the current design.
+
+  To get a list of specific clocks in the design, use the get_clocks command,
+  or use the filter command to filter the results returned by all_clocks.
+
+  Clocks can be defined by using the create_clock or create_generated_clock
+  commands.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example shows all clocks in the sample CPU netlist project:
+
+    % all_clocks 
+    cpuClk wbClk usbClk phy_clk_pad_0_i phy_clk_pad_1_i fftClk
+
+  The following example applies the set_propagated_clock command to all
+  clocks, and also demonstrates how the returned list (all_clocks) can be
+  passed to another command:
+
+    % set_propagated_clock [all_clocks]
+
+See Also:
+
+   *  create_clock
+   *  create_generated_clock
+   *  filter
+   *  get_clocks
+   *  set_propagated_clock

@@ -1,0 +1,51 @@
+
+Description:
+
+  For embedded processor based designs, with associated Executable Linkable
+  Files (ELF) from the Software Development Kit (SDK), this command merges
+  the Block Memory Map (BMM) for the design with the program data in the ELF
+  file to generate memory (MEM) files for use during simulation.
+
+  The MEM file is a text file that describes how individual Block RAMs on the
+  Xilinx device are grouped together to form a contiguous address space
+  called an Address Block, with the ELF data mapped into the memory.
+
+  The file names and the number of MEM files generated is determined by the
+  memory map data specified by the processor system IP cores, or IP
+  Integrator block designs.
+
+  This command returns the directory where the MEM files are written, or
+  returns an error if it fails.
+
+Arguments:
+
+  -force - (Optional) Overwrite the specified output directory if it already
+  exists.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <directory> - (Required) The name of the directory to write the memory
+  files into.
+
+Example:
+
+  The following example merges the block RAM map with the ELF file data and
+  generates MEM files in the specified directory for use during simulation:
+
+    generate_mem_files C:/Data/gen_mem
+
+See Also:
+
+   *  write_bmm
+   *  write_mem_info

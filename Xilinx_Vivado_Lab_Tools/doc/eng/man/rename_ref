@@ -1,0 +1,60 @@
+
+Description:
+
+  Rename the reference name of a single non-primitive cell, or apply a
+  reference prefix to all non-primitive cells in the current synthesized or
+  implemented design.
+
+  This command provides a mechanism to change the non-primitive reference
+  names in the current design so that they do not collide with the reference
+  names in another design. This lets two modules or designs be synthesized or
+  simulated together, while avoiding any name collisions between the two
+  designs.
+
+  This command returns nothing when renaming the reference a single cell, and
+  returns the number of cells renamed when used with -prefix_all. If the
+  command fails, an error is returned.
+
+Arguments:
+
+  -ref <arg> - (Optional) Specify the current reference name of a
+  non-primitive cell.
+
+  -to <arg> - (Optional) Change the reference name to the specified value.
+
+  -prefix_all <arg> - (Optional) Apply the specified prefix to the reference
+  names of all non-primitive cells in the current design, except the top
+  module.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example changes the specified reference name to the value
+  indicated:
+
+    rename_ref -ref usbf_top -to MOD1_usbf_top
+
+  The following example applies the specified reference name prefix to all
+  non-primitive cells in the current design:
+
+    rename_ref -prefix_all MOD1_
+
+See Also:
+
+   *  launch_xsim
+   *  synth_design
+   *  write_edif
+   *  write_verilog
+   *  write_vhdl

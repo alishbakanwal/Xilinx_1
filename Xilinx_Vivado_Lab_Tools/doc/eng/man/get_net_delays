@@ -1,0 +1,135 @@
+
+Description:
+
+  Get delay objects for the specified nets in the current design, from the
+  driver to each load pin, or to specified load pins, through specific pins.
+
+  The delay object contains properties defining the maximum and minimum
+  delays for the fast and slow process corners. Use the get_property command
+  to extract the property of interest from the delay object. Delay property
+  values on the delay object are specified in picoseconds.
+
+  Note: In most cases the Vivado tools return delay values specified in
+  nanoseconds, but the delay object uses picoseconds.
+
+  The values returned are calculated or estimated depending upon whether the
+  net is routed. Delay values can include the actual delay of routed
+  interconnect, or estimated net delays for unrouted nets. The net delay can
+  also include delay through logic elements or device sites, or just include
+  the interconnect delay.
+
+  Note: To improve memory and performance, the get_* commands return a
+  container list of a single type of objects (e.g. cells, nets, pins, or
+  ports). You can add new objects to the list (using lappend for instance),
+  but you can only add the same type of object that is currently in the list.
+  Adding a different type of object, or string, to the list is not permitted
+  and will result in a Tcl error.
+
+  The get_net_delays command returns the delay objects for the specified
+  nets, or returns an error if it fails.
+
+Arguments:
+
+  -of_objects <arg> - (Required) Get the net delays of the specified net
+  objects. This option can be used to reduce the amount of data returned by
+  the get_net_delays command.
+
+  Note: The -of_objects option requires objects to be specified using the
+  get_* commands, such as get_nets in the case of the get_net_delays command.
+
+  -regexp - (Optional) Specifies that the search <patterns> are written as
+  regular expressions. Both search <patterns> and -filter expressions must be
+  written as regular expressions when this argument is used. Xilinx regular
+  expression Tcl commands are always anchored to the start of the search
+  string. You can add ".*" to the beginning or end of a search string to
+  widen the search to include a substring. See
+  http://perldoc.perl.org/perlre.html for help with regular expression
+  syntax.
+
+  Note: The Tcl built-in command regexp is not anchored, and works as a
+  standard Tcl command. For more information refer to
+  http://www.tcl.tk/man/tcl8.5/TclCmd/regexp.htm.
+
+  -nocase - (Optional) Perform case-insensitive matching when a pattern has
+  been specified. This argument applies to the use of -regexp only.
+
+  -patterns <arg> - (Optional) Match net_delays against the specified
+  patterns. The default pattern is the wildcard `*` which gets a list of all
+  net_delays in the project. More than one pattern can be specified to find
+  multiple pins based on different search criteria.
+
+  Note: You must enclose multiple search patterns in braces, {}, or quotes,
+  "", to present the list as a single element.
+
+  -filter <args> - (Optional) Filter the results list with the specified
+  expression. The -filter argument filters the list of objects returned by
+  get_net_delays based on property values on the delay objects. You can find
+  the properties on an object with the report_property or list_property
+  commands. In the case of the delay object, "NET", "FAST_MAX" and "FAST_MIN"
+  are some of the properties that can be used to filter results.
+
+  The filter search pattern should be quoted to avoid having to escape
+  special characters that may be found in net, pin, or cell names, or other
+  properties. String matching is case-sensitive and is always anchored to the
+  start and to the end of the search string. The wildcard "*" character can
+  be used at the beginning or at the end of a search string to widen the
+  search to include a substring of the property value.
+
+  Note: The filter returns an object if a specified property exists on the
+  object, and the specified pattern matches the property value on the object.
+  In the case of the "*" wildcard character, this will match a property with
+  a defined value of "".
+
+  For string comparison, the specific operators that can be used in filter
+  expressions are "equal" (==), "not-equal" (!=), "match" (=~), and
+  "not-match" (!~). Numeric comparison operators <, >, <=, and >= can also be
+  used. Multiple filter expressions can be joined by AND and OR (&& and ||).
+  The following gets input pins that do NOT contain the "RESET" substring
+  within their name:
+
+    get_pins * -filter {DIRECTION == IN && NAME !~ "*RESET*"}
+
+  Boolean (bool) type properties can be directly evaluated in filter
+  expressions as true or not true:
+
+    -filter {IS_PRIMITIVE && !IS_LOC_FIXED}
+
+  -to <args> - (Optional) Specifies the endpoints of nets for delay
+  calculation. Pin, port, and pip objects can be specified as endpoints.
+
+  -interconnect_only - (Optional) Include only interconnect delays to
+  determine the delay on the net due to routing. The default is to also
+  include the intra-site delay into the delay calculation.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example gets the interconnect delay values for the specified
+  net, and returns it in the form of a delay object:
+
+    report_property -all [lindex [get_net_delays -interconnect_only \ 
+    -of_objects [get_nets control_reg[*]]] 16 ]
+
+  Note: The FAST_MAX, FAST_MIN, SLOW_MAX, and SLOW_MIN properties on the
+  delay object are reported in picoseconds.
+
+See Also:
+
+   *  get_pins
+   *  get_pips
+   *  get_ports
+   *  get_property
+   *  list_property
+   *  report_property

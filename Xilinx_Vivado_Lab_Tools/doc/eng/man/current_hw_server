@@ -1,0 +1,74 @@
+
+Description:
+
+  Defines the current hardware server from the list of hardware servers that
+  are connected to the Vivado Design Suite, or returns the currently
+  connected hardware server object.
+
+  Hardware servers are instances of the Xilinx hardware server (hw_server)
+  application running remotely, or on the local machine. The hardware server
+  manages connections to a hardware target, such as a hardware board
+  containing a JTAG chain of one or more Xilinx devices to be used for
+  programming and debugging your FPGA design.
+
+  Hardware servers are connected to the Vivado Design Suite with the
+  connect_hw_server command. The current hardware server, and the current
+  hardware target and device are the focus of most Hardware Manager Tcl
+  commands. The current target and device can be defined using the
+  current_hw_target and current_hw_device commands.
+
+  Note: There is usually a current hw_server defined, either the last
+  connected hardware server, or one you have defined with this command.
+  However, if you disconnect the current hardware server, you will need to
+  define a new current hw_server object.
+
+  You can get a list of connected hardware servers using the get_hw_servers
+  command. You can get a list of available hardware targets and devices using
+  the get_hw_targets and get_hw_devices commands respectively.
+
+  This command returns a hw_server object. If the <hw_server> is specified as
+  part of the current_hw_server command, the specified server is defined as
+  the current hardware server and that object is returned. If no server is
+  specified, the current_hw_server command returns the current hardware
+  server object.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <hw_server> - (Optional) The hw_server to set as the current hardware
+  server. If the server is not specified, the command will return the
+  currently defined hw_server. The hardware server can be specified by name,
+  or specified as a hw_server object returned by the get_hw_servers command.
+
+Example:
+
+  The following example sets the current hardware server to the specified name:
+
+    current_hw_server picasso
+
+  The following returns the current hardware server:
+
+    current_hw_server
+
+See Also:
+
+   *  connect_hw_server
+   *  current_hw_device
+   *  current_hw_target
+   *  disconnect_hw_server
+   *  get_hardware_devices
+   *  get_hw_servers
+   *  get_hw_targets
+   *  refresh_hw_server

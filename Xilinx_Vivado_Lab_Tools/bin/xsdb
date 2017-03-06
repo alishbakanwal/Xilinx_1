@@ -1,0 +1,73 @@
+#!/bin/bash
+#
+# COPYRIGHT NOTICE
+# Copyright 1986-1999, 2001-2014 Xilinx, Inc. All Rights Reserved.
+#
+
+##
+# Setup default environmental variables
+##
+# RDI_BINROOT - Directory *this* script exists in
+#  E.x. 
+#    /usr/Test/Install/bin/example
+#    RDI_BINROOT=/usr/Test/Install/bin
+#
+# RDI_APPROOT - One directory above RDI_BINROOT
+#  E.x. 
+#    /usr/Test/Install/bin/example
+#    RDI_APPROOT=/usr/Test/Install
+#
+# RDI_BASEROOT - One directory above RDI_APPROOT
+#  E.x. 
+#    /usr/Test/Install/bin/example
+#    RDI_BINROOT=/usr/Test
+##
+. "`dirname \"$0\"`/setupEnv.sh"
+
+##
+# Launch the loader and specify the executable to launch
+##
+#
+# Loader arguments:
+#   -exec   -- Name of executable to launch
+##
+#RDI_PROG=`basename "$0"`
+RDI_NO_JRE=yes
+export RDI_NO_JRE
+
+RDI_PLATFORM=lnx32
+case `uname -m` in
+  x86_64) 
+    RDI_PLATFORM=lnx64
+    ;;
+esac
+
+RDI_OPT_EXT=.o
+argSize=0
+RDI_ARGS=()
+while [ $# -gt 0 ]; do
+  case "$1" in
+    -dbg)
+      RDI_OPT_EXT=.g
+      RDI_ARGS[$argSize]="$1"
+      argSize=$(($argSize + 1))
+      shift
+      ;;
+    -history)
+      # Do not pass -history to loader, i.e., don't add it to RDI_ARGS
+      echo ""
+      echo "WARNING: \"-history\" option is deprecated and no longer used."
+      echo "XSDB commandline history and line editing are enabled by default."
+      shift
+      ;;
+    *)
+      RDI_ARGS[$argSize]="$1"
+      argSize=$(($argSize + 1))
+      shift
+      ;;
+   esac
+done
+
+# Use rlwrap to invoke XSDB
+"$RDI_BINROOT"/unwrapped/"$RDI_PLATFORM$RDI_OPT_EXT"/rlwrap -rc -f "$RDI_APPROOT"/scripts/xsdb/xsdb/cmdlist -H "$HOME"/.xsdbcmdhistory "$RDI_BINROOT"/loader -exec rdi_xsdb "${RDI_ARGS[@]}"
+

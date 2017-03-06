@@ -1,0 +1,51 @@
+
+Description:
+
+  Creates a wave marker at the specified time and of the specified name in
+  the current waveform configuration.
+
+  This command returns nothing.
+
+  Note: This command can only be used when running a simulation.
+
+Arguments:
+
+  -into <wcfg> - (Optional) Specifies the WCFG object into which the new wave
+  marker is inserted. If -into is not specified, the wave marker is added to
+  the current wave configuration.
+
+  -name <arg> - (Optional) Creates a marker with the specified name. The
+  default name is new_marker.
+
+  <time> - (Optional) Is the simulation runtime within the waveform at which
+  to set the marker. The default is time 0.
+
+  <unit> - (Optional) Is the time unit. Allowable units are s, ms, us, ns,
+  and ps. The default is the time unit used in the specified waveform
+  configuration.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  Add a marker to the existing waveform configuration at 500ns:
+
+    add_wave_marker 500 ns
+
+See Also:
+
+   *  add_wave
+   *  add_wave_divider
+   *  add_wave_group
+   *  add_wave_virtual_bus

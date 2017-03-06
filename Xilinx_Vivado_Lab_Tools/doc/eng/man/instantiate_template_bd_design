@@ -1,0 +1,50 @@
+
+Description:
+
+  This command creates an example design from a template Block Design in the
+  IP integrator feature of the Vivado Design Suite.
+
+  The template diagram is created in an existing and open block design. In
+  addition, the target part specified by the current project or in-memory
+  project must be compatible with the template design or an error is
+  returned.
+
+  The command returns a transcript of its process, or returns an error if it
+  fails.
+
+Arguments:
+
+  -design <arg> - (Required) Specifies the name of the block design to
+  instantiate the template diagram into. The specified block design must
+  exist and be open in the IP integrator, or an error is returned.
+
+  -hier - (Optional) Hierarchy Block
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <template> - Specifies the template diagram to be instantiated into the
+  specified design. The template can be specified by name, or as an object
+  specified by the get_template_db_designs command.
+
+Examples:
+
+  The following example builds the specified template block design in the
+  specified design:
+
+    instantiate_template_bd_design -design myFirstZynq \ 
+    [lindex [get_template_bd_designs] 1]
+
+See Also:
+
+   *  get_template_bd_designs

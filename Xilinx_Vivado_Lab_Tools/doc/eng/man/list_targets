@@ -1,0 +1,48 @@
+
+Description:
+
+  List the targets that are available for a specified IP core, DSP module, or
+  IP Subsystem. The following file types are accepted: .xci, .xco, .mdl, .bd,
+  .bxml.
+
+  Use the generate_targets command to generate the listed targets.
+
+  The command returns the list of available targets. If no targets are
+  available for the specified file objects, nothing is returned.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <files> - (Required) A files object that contains the list of source files
+  to evaluate.
+
+  Note: Use get_files to specify a files object, rather than specifying a
+  file name.
+
+Examples:
+
+  The following example lists the available targets for any DSP modules in
+  the design:
+
+    list_targets [get_files *.mdl]
+
+See Also:
+
+   *  create_bd_design
+   *  create_sysgen
+   *  generate_target
+   *  get_files
+   *  import_ip
+   *  read_ip

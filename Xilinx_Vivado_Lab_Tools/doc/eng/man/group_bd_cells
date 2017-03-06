@@ -1,0 +1,59 @@
+
+Description:
+
+  Create a new hierarchical module in the current IP Integrator subsystem
+  design, and move the specified cells into that module.
+
+  You can also optionally move a group of specified cells into the
+  hierarchical module. The connections between the specified cells are
+  maintained. The connections between the cells being moved are maintained;
+  connections between these cells and other cells that are not being moved
+  are maintained automatically by IP Integrator adding pins and ports to
+  cross the hierarchical boundary.
+
+  You can also move cells into the hierarchical module by using the
+  move_bd_cells command after the hierarchical module has been created using
+  the create_bd_cells command.
+
+  The command returns the name of the created hierarchical module if
+  successful, or an error message if it fails.
+
+Arguments:
+
+  -prefix <arg> - (Optional) A prefix name to apply to any cells that are
+  moved into the hierarchical module.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <target_cell_name> - (Required) The name to assign to the hierarchical
+  module that is created.
+
+  <cells> - (Required) The list of cells, specified by the get_bd_cells
+  command, to move from the current IP subsystem design into the hierarchical
+  module.
+
+Example:
+
+  The following example creates a hierarchical block in the current IP
+  Integrator subsystem design, and moves the three specified cells into the
+  block assigning them a name prefix as indicated:
+
+    group_bd_cells -prefix M1_ module1 [get_bd_cells /microblaze_1_xlconcat] \ 
+    [get_bd_cells /microblaze_1_axi_intc] [get_bd_cells /proc_sys_reset_1]
+
+See Also:
+
+   *  create_bd_cells
+   *  get_bd_cells
+   *  move_bd_cells

@@ -1,0 +1,67 @@
+
+Description:
+
+  Provides a utility to manage user defined DRC rules. This command allows
+  you to enable or disable previously registered rules for a specific DRC
+  abbreviation. Enabled rules will be checked for violations when report_drc
+  is run. Disabled rules will not be checked for violations.
+
+  You can also use the -list_rules argument to list the currently registered
+  rules available to enable or disable for the specified DRC abbreviation.
+
+Arguments:
+
+  -action [ register | unregister ] - Select register to enable, or
+  unregister to disable a user-defined DRC rule that has been previously
+  registered using the register_drc_rule command.
+
+  -abbrev <arg> - The unique abbrev for the user-defined rule in the
+  violation library. This should match the name of the rule specified in the
+  register_drc_rule command.
+
+  -rules <args> - The list of rules to enable or disable. The -rules argument
+  is used with the -action argument to specify the rules to enable or disable
+  for the specified abbreviation. The specified rules must be associated with
+  the abbreviation, or an error will be returned. Rules are associated with
+  abbreviations using the register_drc_rule command.
+
+  -list_rules [ all | enabled ] - List the rules associated with the
+  specified abbreviation. List all rules, or only those that are currently
+  enabled. Use -list_rules in place of the -action and -rules arguments to
+  list the rules currently registered with the specified DRC abbreviation.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example lists all rules currently registered with the
+  specified abbreviation:
+
+    manage_user_drc_rule -abbrev ABCD -list_rules all
+
+  The following example disables both rule1 and rule2 for the specified
+  abbreviation:
+
+    manage_user_drc_rule -abbrev ABCD -enable unregister -rules {rule1 rule2}
+
+  The following example enables rule1 for the specified abbreviation:
+
+    manage_user_drc_rule -abbrev ABCD -enable register -rules {rule1}
+
+See Also:
+
+   *  create_violation
+   *  register_drc_rule
+   *  report_drc
+   *  reset_drc

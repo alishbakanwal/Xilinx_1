@@ -1,0 +1,101 @@
+
+Description:
+
+  Export the current IP Integrator subsystem design as a Tcl script file to
+  the disk.
+
+  Note: Any directory in the path specified by the <name> option must already
+  exist, or the script will not be created.
+
+  The Tcl script file lets you recreate, reuse, and customize IP Integrator
+  subsystem designs without having to archive the original subsystem design.
+
+  When working with a new software release, you must use the output script
+  from the write_bd_tcl command to create a block design in the same software
+  release as the Tcl script was generated. This ensures the availability of
+  the needed versions of any IP used in the script. You can then migrate the
+  created block design into a new software release.
+
+  This command returns TCL_OK if successful, or TCL_ERROR if it fails, unless
+  -quiet is specified.
+
+Arguments:
+
+  -force - (Optional) Overwrite an existing bd_tcl file of the same name if
+  it already exists.
+
+  -bd_name <arg> - (Optional) Specify the name to assign to the block diagram
+  in the bd_tcl file. When the Tcl script is run, the new block diagram will
+  be created with the specified name. By default, the current name of the
+  block diagram will be used.
+
+  -no_mig_contents - (Optional) Do not include memory IP PRJ contents into
+  the generated Tcl script. By default this content will be included in the
+  Tcl script.
+
+  -no_ip_version - (Optional) Do not include the Version in the
+  Vendor:Library:Name:Version (VLNV) value that specifies the IP for
+  create_bd_cell commands in the write_bd_tcl file. This allows a bd_tcl
+  script to create a new block diagram using the latest version of the IP
+  from the Vivado IP catalog.
+
+  Note: This can have significant design implications when IP used in a block
+  design have undergone major version changes from when the bd_tcl file was
+  written to when it is used.
+
+  -bd_folder <arg> - (Optional) Specify the directory where the block diagram
+  will be generated when the bd_tcl script is run. This lets you specify the
+  block design to be created outside of the directory structure of a project
+  where the bd_tcl script is being run.
+
+  -exclude_layout - (Optional) Do not include the graphical layout data of
+  the block design in the output Tcl script. This will create a smaller Tcl
+  script containing the necessary design elements, but the layout of the
+  block design in the Vivado IP integrator design canvas will need to be
+  recreated by the tool.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <tcl_filename> - Specify the name of the Tcl file to write. A suffix of
+  .tcl will be supplied if no file suffix is specified.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+Example:
+
+  The following example creates a Tcl script from the current IP Integrator
+  subsystem design:
+
+    
+    write_bd_tcl C:/Data/myDesign.tcl
+
+  This example creates a Tcl script from the current IP Integrator subsystem
+  design, specifies a new name for the block diagram, specifies that IP
+  versions should not be included, and also indicates a folder to write the
+  block diagram to when it is created by running the output bd_tcl script:
+
+    
+    write_bd_tcl -bd_name newMB1 -no_ip_version \ 
+       -bd_folder C:/Block_Designs projMB1
+
+  Note: The file suffix of .tcl will be appended to the specified file name,
+  resulting in a file name of projMB1.tcl .
+
+See Also:
+
+   *  create_bd_design
+   *  open_bd_design
+   *  save_bd_design

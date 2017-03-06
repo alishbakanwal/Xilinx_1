@@ -1,0 +1,40 @@
+
+Description:
+
+  Deletes the power analysis results for the specified results set.
+
+  Note: This command operates silently and does not return direct feedback of
+  its operation
+
+Arguments:
+
+  -name <arg> - (Required) The name of the results set to delete. This name
+  was either explicitly defined, or was automatically defined when the
+  report_power command was run.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example runs power analysis, and then clears the results:
+
+    report_power -name my_set 
+    delete_power_results -name my_set
+
+See Also:
+
+   *  power_opt_design
+   *  report_power
+   *  reset_switching_activity
+   *  set_switching_activity

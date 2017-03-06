@@ -1,0 +1,62 @@
+
+Description:
+
+  This command is used in the non-project flow to create a synthesized design
+  checkpoint file (DCP) to support the out-of-context (OOC) IP flow, or to
+  synthesize and implement an IP module in the OOC hierarchical design flow.
+  IP objects are specified by the get_ips command, or for the specified IP
+  core file (XCI) as specified by the get_files command.
+
+  Note: To enable this functionality, the IP core must be marked for OOC
+  generation by setting the GENERATE_SYNTH_CHECKPOINT property to true (or 1)
+  using the set_property command on the XCI file.
+
+  For project-based designs you would use the create_ip_run and launch_runs
+  commands. Refer to the Vivado Design Suite User Guide: Design Flows
+  Overview (UG892) for more information on Project and Non-Project Modes in
+  Vivado.
+
+  The synth_ip command will automatically generate any required target files
+  prior to synthesizing the IP core. The source files required to synthesize
+  the IP are copied into the IP run directory. Upon completion, any newly
+  generated OOC target files (dcp, stub files, funcsim netlists...) are
+  registered with the associated IP core.
+
+Arguments:
+
+  -force - (Optional) Force re-synthesis of the specified IP objects, even if
+  the generated output products for the specified IP are all current.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <objects> - (Required) One or more IP objects to synthesize. The objects
+  can be specified as IP cores by the get_ips command, or as XCI files using
+  the get_files command.
+
+Examples:
+
+  The following example synthesizes the specified IP object, regenerating the
+  netlist if the synthesized core is up-to-date:
+
+    synth_ip [get_ips char_fifo] -force
+
+See Also:
+
+   *  create_ip_run
+   *  generate_targets
+   *  get_files
+   *  get_ips
+   *  launch_runs
+   *  synth_design
+   *  read_checkpoint

@@ -1,0 +1,108 @@
+﻿<html xml:lang="en-us" lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="reference"/>
+<meta name="DC.Title" content="Edit Reconfigurable Module"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="ref_tcl_wizard_add_sources"/>
+<meta name="DC.Language" content="en-us"/>
+<link rel="stylesheet" type="text/css" href="../../commonltr.css"/>
+<title>Edit Reconfigurable Module</title>
+</head>
+<body id="ref_tcl_wizard_add_sources">
+
+
+ 
+ <h1 class="title topictitle1">Edit Reconfigurable Module</h1>
+
+ <div class="body refbody">
+  <div class="section">
+   <p class="p">This dialog box lets you edit an existing Reconfigurable Module (RM) by specifying the name,
+        type,  and top-level hierarchy of the module:</p>
+
+   <ul class="ul" id="ref_tcl_wizard_add_sources__ul_hmn_4p4_c5">
+        <li class="li"><span Class="uicontrol">Partition Definition</span>: Edit the partitionDef the RM is associated
+          with. <div Class="note_tip"><span class="tiptitle">Tip:</span> If there is only one partitionDef in the current project, this
+            field will only display and not edit the partitionDef. You can use the <a class="xref" href="create_partition_definition_dialog.html#ref_tcl_wizard_add_sources">Create Partition Definition</a> dialog box to define a new partitionDef.
+          </div>
+</li>
+
+    <li class="li"><span Class="uicontrol">Reconfigurable Module</span>: Edit the name of the RM. </li>
+
+        <li class="li"><span Class="uicontrol">Top Module Name</span>: Specify the hierarchical cell associated with the
+          RM. </li>
+
+        <li class="li"><span Class="uicontrol">Sources have been synthesized</span>: Specify that the RM has a
+          post-synthesis netlist as the design source, either a DCP or EDIF netlist. </li>
+
+   </ul>
+
+   <p class="p">This dialog box also displays a table of files associated with the RM, and lets you add and
+        remove files to the module:</p>
+
+      <ul class="ul" id="ref_tcl_wizard_add_sources__ul_hmn_4p4_c3">
+        <li class="li"><span Class="uicontrol">Add Files</span> (<img class="image" id="ref_tcl_wizard_add_sources__image_z3s_qs5_c5" src="../../images/add_button.png"/>): Opens a file browser letting you select one or more design
+          source files to include in the module. Selecting multiple files will add the files in the
+          specified order to the page.</li>
+
+        <li class="li"><span Class="uicontrol">Add Directories</span> (<img class="image" id="ref_tcl_wizard_add_sources__image_pgm_lzz_yw" src="../../images/add_button.png"/>): Opens a file browser letting you select one or more
+          directories to search for design source files. Specified directories will be searched and
+          any design source files found will be added to the module.</li>
+
+        <li class="li">
+          <span Class="uicontrol">Remove</span> (<img class="image" id="ref_tcl_wizard_add_sources__image_zvd_y4l_s5" src="../../images/Remove1.png"/>): Removes selected files from the module.</li>
+
+        <li class="li"><span Class="uicontrol">Scan and add RTL include files into project</span>: This checkbox scans
+          the added RTL files and adds any referenced Verilog 'include files into the module as
+          well. </li>
+
+        <li class="li"><span Class="uicontrol">Copy sources into project</span>: This checkbox lets you copy the
+          specified design source files under the sources folder of the local project directory.
+          Refer to this <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug895-vivado-system-level-design-entry.pdf;a=xUsingRemoteSourcesOrCopyingSourcesIntoProject" target="_blank">link</a> in <cite class="cite">Vivado<sup>®</sup> Design
+            Suite User Guide: System-Level Design Entry</cite> (UG895) for more information on using
+          local and remote sources. </li>
+
+        <li class="li"><span Class="uicontrol">Add sources from subdirectories</span>: This checkbox adds source files
+          from the subdirectories under the directories specified using the Add Directories option.
+        </li>
+
+      </ul>
+
+      <p class="p">Click <span Class="uicontrol">OK</span> to commit the changes to the Reconfigurable Module. Click
+          <span Class="uicontrol">Cancel</span> to close the dialog box without making changes. </p>
+
+  </div>
+
+  <div class="section"><h2 class="title sectiontitle">See Also</h2>
+   
+   <table cellpadding="4" cellspacing="0" summary="" id="ref_tcl_wizard_add_sources__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow">
+     <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="ref_tcl_wizard_add_sources__image_smm_1vr_b5" src="../../images/book_icon.png" alt="Icon"/></td>
+
+     <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">Vivado Design Suite User Guide: Partial Reconfiguration</cite> (UG909), <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug909-vivado-partial-reconfiguration.pdf;a=xVivadoProjectFlow" target="_blank">Vivado Project Flow</a></td>
+
+    </tr>
+<tr class="strow">
+     <td valign="top" class="stentry"><img class="image" id="ref_tcl_wizard_add_sources__image_av4_jvr_b5" src="../../images/play.png" alt="Icon"/></td>
+
+     <td valign="top" class="stentry"><a class="xref" href="http://www.xilinx.com/video/hardware/partial-reconfiguration-in-vivado.html" target="_blank">Vivado Design Suite QuickTake Video: Partial Reconfiguration in
+            Vivado</a></td>
+
+    </tr>
+<tr class="strow">
+          <td valign="top" class="stentry"><img class="image" id="ref_tcl_wizard_add_sources__image_hhp_bts_yw" src="../../images/play.png" alt="Icon"/></td>
+
+          <td valign="top" class="stentry"><a class="xref" href="http://www.xilinx.com/video/hardware/partial-reconfiguration-for-ultrascale.html" target="_blank">Vivado Design Suite QuickTake Video: Partial Reconfiguration for
+            UltraScale</a></td>
+
+        </tr>
+</table>
+
+  </div>
+
+ </div>
+
+
+</body>
+</html>

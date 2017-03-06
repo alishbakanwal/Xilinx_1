@@ -1,0 +1,40 @@
+
+Description:
+
+  The stop command pauses the current simulation. This command can be used
+  within a condition, defined by add_condition, to pause the simulation when
+  the condition is true.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example defines a condition named resetLow, that becomes true
+  when the reset signal is low, and then puts a message to the standard
+  output, and stops the current simulation:
+
+    add_condition -name resetLow {/testbench/reset == 0 } { 
+    puts "Condition Reset was encountered at [current_time]. \ 
+       Stopping simulation." 
+    stop }
+
+See Also:
+
+   *  add_condition
+   *  report_conditions
+   *  restart
+   *  run
+   *  step

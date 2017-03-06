@@ -1,0 +1,52 @@
+
+Description:
+
+  Sets the interconnect delay model for timing analysis. There are three
+  settings for the interconnect delay model: "actual", "estimated", or
+  "none".
+
+   *  If "actual" is selected, the actual delay from the routed interconnect
+      will be used in timing analysis. If the design is only partially
+      routed, then the actual delay from the routed portion will be used,
+      along with estimated delay for the unrouted portion. The timing report
+      will provide details regarding the source of the calculated delay.
+
+   *  If "estimated" delays are selected, the timing analysis will include an
+      estimate of the interconnect delays based on the placement and
+      connectivity of the design onto the device prior to implementation.
+      Estimated delay can be specified even if the design is fully routed.
+
+   *  If "none" is selected, then no interconnect delay is included in the
+      timing analysis, and only the logic delay is applied.
+
+  Note: This command operates silently and does not return direct feedback of
+  its operation.
+
+Arguments:
+
+  -interconnect [ actual | estimated | none ] - (Optional) Delay model to be
+  used. The default setting is actual.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following command will use a timing delay model which is an estimated
+  value.
+
+    set_delay_model -interconnect estimated
+
+See Also:
+
+   *  report_timing

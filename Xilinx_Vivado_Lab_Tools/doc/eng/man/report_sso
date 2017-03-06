@@ -1,0 +1,110 @@
+
+Description:
+
+  Performs a weighted average simultaneous switching outputs (WASSO) analysis
+  of the current synthesized or implemented design to validate signal
+  integrity based on the I/O pin and bank assignments in the design.
+
+  The report_sso command is for Spartan-3, Virtex-4, and Virtex-5 devices,
+  and provides an approximation of switching noises for these devices. For
+  Spartan-6, Virtex-6, Virtex-7, Kintex-7, and Artix-7 devices the tool
+  supports a more detailed SSN analysis using the report_ssn command.
+
+  The WASSO analysis is performed with the FPGA device in the context of the
+  system-level design. The details of the printed circuit board that the FPGA
+  device will be mounted to is considered as part of the operating
+  environment during analysis. The attributes of the PCB can be defined with
+  the various arguments of the report_sso command, or left with the default
+  values.
+
+Arguments:
+
+  -name <arg> - Specifies the name of the result set to output.
+
+  -return_string - Directs the output to a Tcl string. The Tcl string can be
+  captured by a variable definition and parsed or otherwise processed.
+
+  Note: This argument cannot be used with the -file option.
+
+  -file <arg> - (Optional) Write the SSO report into the specified file. The
+  specified file will be overwritten if one already exists, unless -append is
+  also specified.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -append - Append the output of the command to the specified file rather
+  than overwriting it.
+
+  Note: The -append option can only be used with the -file option.
+
+  Specify the following parameters to define the Printed Circuit Board (PCB)
+  that the FPGA is mounted to:
+
+   *  -board_thickness <arg> - (Optional) Specifies the thickness in mils of
+      the PCB that the FPGA device is mounted onto. The default value is 62
+      mils.
+
+   *  -via_diameter <arg> - (Optional) Specifies the diameter in mils of
+      breakout vias in the PCB. The default value is 12 mils.
+
+   *  -pad_to_via_breakout_length <arg> - (Optional) Specifies the length in
+      mils of the breakout wire (or trace) from the pad on the FPGA package
+      or socket to the breakout via on the PCB. The default value is 33 mils.
+
+   *  -breakout_width <arg> - (Optional) Specifies the width in mils of the
+      breakout wire on the PCB. The default value is 12 mils.
+
+   *  -socket_inductance <arg> - (Optional) Specifies the inductance in
+      nanohenries (nH) of the mounting socket between the FPGA and the PCB if
+      one is used. The default value is 0 nH.
+
+   *  -other_pcb_inductance <arg> - (Optional) Specifies the inductance of
+      the PCB in nanohenries (nH). The default is 0 nH.
+
+  Specify the following FPGA device parameters to describe the target device:
+
+   *  -ground_bounce <arg> - (Optional) Specifies the allowed undershoot or
+      overshoot voltage of the signal on the PCB in milliVolts (mV). The
+      lowest permitted value should be used to provide a conservative WASSO
+      analysis. The default value is 600 mW.
+
+   *  -output_cap <arg> - (Optional) Specifies the capacitance in picoFarads
+      (pF) on the output pins of the FPGA device. The default value is 15 pF.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example performs an SSO analysis on the current synthesis or
+  implemented design, using the default settings for board and device, and
+  writes the output to the specified file:
+
+    report_sso -file C:/Data/devSSO.txt
+
+  The following example performs an SSO analysis on the current synthesis or
+  implemented design, using the specified values to define the system-level
+  PCB:
+
+    report_sso -name sso_1 -file C:/Data/mySSO1.txt \ 
+       -board_thickness 55 -via_diameter 9 -pad_to_via_breakout_length 75 \ 
+       -breakout_width 9 -other_pcb_inductance 37 -socket_inductance 19 \ 
+       -ground_bounce 537 -output_cap 12
+
+See Also:
+
+   *  report_ssn
+   *  reset_ssn
+   *  reset_sso

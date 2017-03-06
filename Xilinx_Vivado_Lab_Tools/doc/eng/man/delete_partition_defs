@@ -1,0 +1,48 @@
+
+Description:
+
+  Delete the specified Partition Definition (partitionDef) objects from the
+  current project.
+
+  This command returns a transcript of the file merge process, returns
+  nothing without file merge, or returns an error if the command fails.
+
+Arguments:
+
+  -merge <arg> - (Optional) Specify the name of a fileset to merge files from
+  the default Reconfigurable Module (DEFAULT_RM) of a deleted partitionDef
+  object. The files will be moved from the default RM to the specified
+  fileset.
+
+  Note: If -merge is not specified, then all files in the default RM are
+  removed from the project.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <partition_defs> - (Required) Specify one or more partitionDef objects to
+  remove from the current project. The partitionDef objects can be specified
+  by name, or as objects returned by the get_partition_defs command.
+
+Example:
+
+  The following example deletes all the partitionDefs from the current
+  design, merging files from the default RMs of each partition into the
+  source fileset for the design:
+
+    delete_partition_defs -merge sources_1 [get_partition_defs]
+
+See Also:
+
+   *  create_partition_def
+   *  get_partition_defs

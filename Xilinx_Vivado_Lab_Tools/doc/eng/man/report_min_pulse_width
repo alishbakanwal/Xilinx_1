@@ -1,0 +1,94 @@
+
+Description:
+
+  Reports the pulse width of the specified clock signals in the clock network
+  and upon reaching the flip-flop. This command also performs high pulse
+  width checking, using maximum delay for the rising edge and minimum delay
+  for the falling edge of the clock. Performs low pulse width checking using
+  minimum delay for the rising edge, and maximum delay for the falling edge.
+  This results in a worst case analysis for the current Synthesis or
+  Implemented Design because it assumes worst-case delays for both rising and
+  falling edges.
+
+  The report includes minimum pulse width, low pulse width, and high pulse
+  width checks by default. However, selecting a specific check will disable
+  the other checks unless they are also specified.
+
+  The default report is returned to the standard output, but can be
+  redirected to a file, or to a Tcl string variable for further processing.
+  The report is returned to the standard output by default, unless the -file,
+  -return_string, or -name arguments are specified.
+
+Arguments:
+
+  -file <arg> - (Optional) Write the report into the specified file.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -append - (Optional) Append the output of the command to the specified file
+  rather than overwriting it.
+
+  Note: The -append option can only be used with the -file option.
+
+  -name <arg> - (Optional) Specifies the name of the results set for the GUI.
+  Minimum Pulse Width reports in the GUI can b deleted by the
+  delete_timing_results command.
+
+  -return_string - (Optional) Directs the output to a Tcl string rather than
+  to the standard output. The Tcl string can be captured by a variable
+  definition and parsed or otherwise processed.
+
+  Note: This argument cannot be used with the -file option.
+
+  -all_violators - (Optional) Report only the <objects> where violations are
+  found.
+
+  -significant_digits <arg> - (Optional) The number of significant digits in
+  the output results. The valid range is 0 to 3. The default setting is 2
+  significant digits.
+
+  -limit <arg> - (Optional) The number of checks of a particular type to
+  report per clock. This is a value >= 1, and the default is 1.
+
+  -min_period - (Optional) Report minimum period checks.
+
+  -low_pulse - (Optional) Report minimum low pulse width checks.
+
+  -high_pulse - (Optional) Report minimum high pulse width checks.
+
+  Note: The default of the report_min_pulse_width command is to report
+  min_period, low_pulse and high_pulse. Specifying one of these options
+  configures the command to only report the specified checks.
+
+  -clocks <arg> - (Optional) Clocks to report minimum pulse width and minimum
+  period checks. All clocks are checked if the -clocks option is not
+  specified.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <objects> - (Optional) The pin objects to report the min pulse from. All
+  pins are checked if no <objects> are specified.
+
+Examples:
+
+  The following example performs the minimum period and low pulse width
+  check, returning the results to a named results set in the GUI :
+
+    report_min_pulse_width -min_period -low_pulse -name timing_1
+
+See Also:
+
+   *  delete_timing_results

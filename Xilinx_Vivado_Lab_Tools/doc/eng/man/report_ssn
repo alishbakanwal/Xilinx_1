@@ -1,0 +1,117 @@
+
+Description:
+
+  Perform a simultaneous switching noise (SSN) analysis of the current
+  design. The SSN analysis is an accurate method for predicting how output
+  switching affects interface noise margins. The calculation and estimates
+  are based on a range of variables intended to identify potential
+  noise-related issues in your design and should not be used as final design
+  "sign off" criteria.
+
+  SSN analysis provides estimates of the disruption that simultaneously
+  switching outputs can cause on other output ports in the I/O bank. The SSN
+  predictor incorporates I/O bank-specific electrical characteristics into
+  the prediction to better model package effects on SSN.
+
+  The report_ssn command can be affected by the temperature grade of the
+  selected device as defined by the -grade option of the
+  set_operating_condition command. Setting the temperature grade prior to
+  running noise analysis lets you see how noisy signals can be on Commercial,
+  Extended, Industrial, Q-Grade, or Military grade devices.
+
+  By default, report_ssn assumes that every port toggles asynchronously. This
+  results in a worst-case noise analysis, which may be overly pessimistic.
+  The -phase option lets you consider clocking information available in the
+  design to more accurately report SSN noise. Clocks must be defined using
+  the create_clock and create_generated_clock commands. The period, phase
+  shift and duty cycle of the generated clocks have significant impact on SSN
+  analysis.
+
+  The report_ssn command provides a detailed SSN analysis for Xilinx
+  UltraScale architecture devices, Virtex-7, Kintex-7, and Artix-7 devices.
+  The report is returned to the standard output, unless the -file,
+  -return_string, or -name arguments are specified.
+
+  Note: Not all parts support the report_ssn command. The Vivado Design Suite
+  will return an error if you run report_ssn on a target part that does not
+  support SSN analysis. You can query the SSN_REPORT property of a part to
+  see if it supports the command. Refer to the Examples for more information.
+
+Arguments:
+
+  -name <arg> - (Optional) Specifies the name of the results to output to the
+  GUI.
+
+  -return_string - (Optional) Directs the output to a Tcl string. The Tcl
+  string can be captured by a variable definition and parsed or otherwise
+  processed.
+
+  Note: This argument cannot be used with the -file option.
+
+  -format [ CSV | HTML | TXT ] - (Optional) Specifies the format of the
+  output as either comma-separated values (CSV), HTML, or an ASCII (TXT)
+  file. The default output is CSV.
+
+  Note: The format applies when -file is specified, but is otherwise ignored.
+
+  -file <arg> - (Optional) Write the SSN report into the specified file. The
+  specified file will be overwritten if one already exists, unless -append is
+  also specified.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -append - Append the output of the command to the specified file rather
+  than overwriting it.
+
+  Note: The -append option can only be used with the -file option.
+
+  -phase - (Optional) Consider clock switching cycles in SSN analysis to
+  provide a more accurate result.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example performs an SSN analysis on the current design,
+  formats the output as HTML, and writes the output to the specified file:
+
+    report_ssn -format html -file C:/Data/devSSN.html
+
+  The following example performs an SSN analysis, with phase analysis, and
+  returns the output to a string which is stored in the specified variable:
+
+    set devSSN [report_ssn -phase -format html -return_string]
+
+  Note: The -format argument in the preceding example is ignored in the
+  absence of -file.
+
+  The following example queries the part in the current project to see if it
+  supports the report_ssn command, and then gets a list of parts from the
+  same part family that support the command:
+
+    get_property SSN_REPORT [get_property PART [current_project]] 
+    get_parts -filter "FAMILY == [get_property FAMILY [get_property PART \ 
+    [current_project]]] && SSN_REPORT"
+
+See Also:
+
+   *  create_clock
+   *  create_generated_clock
+   *  get_parts
+   *  get_property
+   *  reset_ssn
+   *  report_property
+   *  set_operating_condition

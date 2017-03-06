@@ -1,0 +1,19 @@
+#
+# Xilinx Public Data Mapping File
+# Copyright 2015-2016
+#
+ibs-file-mapping {
+  spartan7	In_Development
+}
+
+pkg-file-mapping {
+  xc7s25_csga324_1	In_Development
+  xc7s25_csga324_1IL	In_Development
+  xc7s25_csga324_2	In_Development
+  xc7s50_csga324_1	xc7s50_csga324_grp1.pkg
+  xc7s50_csga324_1IL	xc7s50_csga324_grp1.pkg
+  xc7s50_csga324_2	xc7s50_csga324_grp1.pkg
+  xc7s50_fgga484_1	In_Development
+  xc7s50_fgga484_1IL	In_Development
+  xc7s50_fgga484_2	In_Development
+}

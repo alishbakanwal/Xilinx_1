@@ -1,0 +1,36 @@
+
+Description:
+
+  Closes the open SAIF file.
+
+  Only one SAIF file can be open in the Vivado simulator at one time, using
+  open_saif. You must close the currently opened SAIF file before opening
+  another file.
+
+  This command returns nothing if it is successful, or an error if it fails.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following is an example:
+
+    close_saif
+
+See Also:
+
+   *  log_saif
+   *  open_saif

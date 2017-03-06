@@ -1,0 +1,45 @@
+
+Description:
+
+  Adds library to the active software design.The software design must 
+  previously have been created using the create_sw_design command.
+
+  This command returns a message with the name of the library, or returns an 
+  error if the command fails.
+
+
+Arguments:
+
+  -sw - (Optional) Name of the software design to which library to the added.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <name> - Name of the library.
+
+  <version> - (Optional) Version of the library name. Version less library will 
+  be picked if version is not specified.
+
+Examples:
+
+  The following adds specified Library to the current software design:
+
+    add_library xilffs
+    
+    add_library xilrsa 1.0	
+
+
+See Also:
+
+   *  current_sw_design
+

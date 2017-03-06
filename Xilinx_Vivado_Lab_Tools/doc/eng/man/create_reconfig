@@ -1,0 +1,47 @@
+
+Description:
+
+  Create and add a new Reconfigurable Module to a cell. The cell will be
+  marked as a Reconfigurable Partition if it is not already.
+
+Arguments:
+
+  -force - (Optional) Run the command, even if there are pending constraint
+  changes, which will be lost
+
+  -blackbox - (Optional) Create a Black Box Reconfigurable Module. Source and
+  constraint files may not be added to a Black Box RM.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <name> - (Required) - The name of the new reconfigurable module.
+
+  <cell> - (Required) - The cell to receive the new reconfigurable module.
+
+Examples:
+
+  The example below creates a reconfigurable module with a name BramFirst on
+  an instance U1_RP_Bram:
+
+    
+    create_reconfig_module -name BramFirst -cell U1_RP_Bram
+
+  The example below creates a Blackbox reconfigurable module named Bram_BB:
+
+    create_reconfig_module -name Bram_BB -cell U1_RP_Bram -blackbox
+
+See Also:
+
+   *  config_partition
+   *  delete_reconfig_module

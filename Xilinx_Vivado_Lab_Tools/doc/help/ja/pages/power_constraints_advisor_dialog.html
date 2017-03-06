@@ -1,0 +1,104 @@
+﻿<html xml:lang="ja-jp" lang="ja-jp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="reference"/>
+<meta name="DC.Title" content="[Power Constraints Advisor] ダイアログ ボックス"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_bqj_lqr_b5"/>
+<meta name="DC.Language" content="ja-JP"/>
+<link rel="stylesheet" type="text/css" href="../commonltr-ja.css"/>
+<title>[Power Constraints Advisor] ダイアログ ボックス</title>
+</head>
+<body id="concept_bqj_lqr_b5">
+
+
+<h1 class="title topictitle1">[Power Constraints Advisor] ダイアログ ボックス</h1>
+
+<div class="body refbody">
+<div class="section">
+<p class="p">消費電力制約アドバイザー (Power Constraint Advisor) からは、ツールで計算されたデザイン内のすべての制御信号のスイッチング アクティビティがレポートされます。制御信号には、イネーブルおよびリセット (リセット、セット、クリア、プリセット) が含まれます。スイッチング アクティビティが妥当であれば、消費電力解析が最も正確になります。</p>
+
+<p class="p">レポートの表を確認し、余分な時間アサートされる非アクティブなイネーブルおよびリセット信号といったクリティカルな制御信号に不正確なスイッチング アクティビティがあれば、修正します。レポートには、各制御信号のファンアウト (駆動されるリーフ レベルのプリミティブの数) も含まれます。ファンアウトが多い信号は、確認して修正する必要性が最も高くなります。 このような信号があると、デザインの大部分のダウンストリーム スイッチングがディスエーブルになってしまう可能性があり、消費電力のレポートがかなり不足な状態になってしまうからです。不正確なスイッチングを持つファンアウトの少ない信号の方が影響は少ないので、重要度は低くなります。[Deassert] ボタンを使用すると、簡単にすべてのリセットのスイッチング アクティビティを非アクティブに設定できます。</p>
+
+<p class="p">リストされているネットの横のチェック ボックスをオンにすると、そのネットを編集できます。フィールドが編集できる場合は、鉛筆マーク <img class="image" id="concept_bqj_lqr_b5__image_xmn_4qs_55" src="../../images/edit_selected_button.png"/> が表示されます。 これをクリックすると、選択したネットの [Static Probability] および [Toggle Rate] フィールドを変更できます。<span Class="uicontrol">[OK]</span> をクリックすると、Tcl コマンドの <a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xset_switching_activity" target="_blank">set_switching_activity</a> を使用して選択したネットに変更した値が適用されます。[Power Constraint Advisor] は、次のように使用することをお勧めします。</p>
+
+<ol class="ol" id="concept_bqj_lqr_b5__ol_nbz_s1t_2v">
+<li class="li">[Confidence] 列をクリックして LOW が一番上になるように並べ替えます。</li>
+
+<li class="li">Ctrl キーを押しながら [Fanout] 列を 2 回クリックして、高い値から低い値の順に並べ替えます。</li>
+
+<li class="li">信頼度 LOW でファンアウト 200 を超える制御ネットすべてを確認して、新しい [Static Probability] と [Toggle Rate] を定義します。</li>
+
+<li class="li"><span Class="uicontrol">[OK]</span> をクリックすると、デザインに制約が適用され、<a class="xref" href="report_power_dialog.html">[Report Power]</a> コマンドが再実行できます。</li>
+
+</ol>
+
+<p class="p">ツールバー メニューからは、次のコマンドを実行できます。</p>
+
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="concept_bqj_lqr_b5__table_rdz_bvv_y5" class="table" frame="void" border="0" rules="none">    <tbody class="tbody"> <tr class="row">
+<td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_bqj_lqr_b5__image_c4l_lk2_p5" src="../../images/search_button.png"/></td>
+
+<td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Search</span></td>
+
+<td class="entry" align="left" valign="top" width="73.4959349593496%">検索パターンを入力する検索フィールドが開きます。検索パターンと一致するネットまたは値が表示されます。</td>
+</tr>
+ <tr class="row">
+<td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_bqj_lqr_b5__image_ayb_4ks_55" src="../../images/deassert_control_signal.png"/></td>
+
+<td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Deassert Control Signal</span></td>
+
+<td class="entry" align="left" valign="top" width="73.4959349593496%">すべての制御信号の [Static Probability] と [Toggle Rate] を設定します。[Static Probability] は、アクティブ High 信号の場合は 0 に、アクティブ Low 信号の場合は 1 に変更されます。[Toggle Rate] は、すべての制御信号に対して 0 に変更されます。<div Class="note_tip"><span class="tiptitle">ヒント:</span> これは、BRAM イネーブル信号には適用されません。</div>
+</td>
+</tr>
+ <tr class="row">
+<td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_bqj_lqr_b5__image_yyb_33s_55" src="../../images/reset.png"/></td>
+
+<td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Reset constraints to default</span></td>
+
+<td class="entry" align="left" valign="top" width="73.4959349593496%">変更した値をリセットして、ダイアログ ボックスを元の値に戻します。</td>
+</tr>
+ <tr class="row">
+<td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_bqj_lqr_b5__image_tpz_vmd_55" src="../../images/schematic_button.png"/></td>
+
+<td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Schematic</span></td>
+
+<td class="entry" align="left" valign="top" width="73.4959349593496%">選択したネットを含む回路図が開きます。</td>
+</tr>
+ </tbody>
+ </table>
+</div>
+
+<p class="p"><span Class="uicontrol">例 : </span></p>
+
+<ul class="ul" id="concept_bqj_lqr_b5__ul_f32_cgt_2v">
+<li class="li"><span Class="uicontrol">[Active high reset with Static Probability 0.9]</span> : リセット が 90% の時間 High であること、つまりロード セルが 90% の時間リセットされ、多すぎることを意味します。スイッチング アクティビティを変更して、リセットがアクティブでないこと (より現実的な条件) を示します。リセットがアクティブ High の場合は [Static Probability] を 0、[Toggle Rate] を 0 に設定し、リセットがアクティブ Low の場合は [Static Probability] を 1、[Toggle Rate] を 0 に設定します。</li>
+
+<li class="li"><span Class="uicontrol">[BRAM Enable with Static Probability 0 and Toggle Rate of 0]</span> : BRAM が絶対にイネーブルにならないことを示します (BRAM の消費電力のレポートが不足します)。[Static Probability] を 0.25 に、[Toggle Rate] を 12.5 に設定して、25% のイネーブル レートなど、より合理的なスイッチング アクティビティを BRAM イネーブルに割り当ててください。</li>
+
+</ul>
+
+<p class="p"><span Class="uicontrol">[OK]</span> をクリックすると、デザインに制約が適用されます。</p>
+
+</div>
+
+<div class="section"><h2 class="title sectiontitle">関連項目</h2>
+<table cellpadding="4" cellspacing="0" summary="" id="concept_bqj_lqr_b5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow"> <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_bqj_lqr_b5__image_smm_1vr_b15" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">『Vivado Design Suite ユーザー ガイド : 消費電力解析と最適化』</cite> (<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug907-vivado-power-analysis-optimization.pdf" target="_blank">UG907</a>)</td>
+ </tr>
+<tr class="strow"> <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_obz_1v2_2v" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry"><cite class="cite">『Vivado<sup>®</sup> Design Suite ユーザー ガイド : Vivado IDE の使用』</cite> (UG893) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug893-vivado-ide.pdf;a=xUsingDataTableWindows" target="_blank">「データ表ウィンドウの使用」</a></td>
+ </tr>
+<tr class="strow"> <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_av4_jvr_b5" src="../../images/play.png" alt="Icon"/></td>
+ <td valign="top" class="stentry"><a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/ndoc?t=video;d=hardware/power-estimation-analysis-using-vivado.html" target="_blank">Vivado Design Suite QuickTake ビデオ : Vivado での消費電力の予測および解析</a></td>
+ </tr>
+</table>
+
+</div>
+
+</div>
+
+
+</body>
+</html>

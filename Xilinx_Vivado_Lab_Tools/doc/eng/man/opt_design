@@ -1,0 +1,188 @@
+
+Description:
+
+  Optimizes a design netlist for the target part. Optimization can provide
+  improvements to synthesized netlists from third-party tools, or for
+  netlists that may not have been optimized during synthesis.
+
+  Run this command prior to implementation to optimize the design and
+  simplify the netlist before placing and routing the design.
+
+  The opt_design command performs the following optimizations by default:
+
+   *  Retarget
+
+   *  Constant Propagation
+
+   *  Sweep
+
+   *  Global Buffer (BUFG) optimizations
+
+   *  Block RAM Power optimizations
+
+  Note: Using command-line options for specific optimizations results in
+  opt_design performing only the specified optimizations and disabling all
+  others, even the ones that are usually performed by default.
+
+  To perform LUT Remapping, you must specify -remap.
+
+  To perform area-based re-synthesis, you must specify -resynth_area, or
+  -directive ExploreArea.
+
+  To perform sequential area-based re-synthesis, you must specify
+  -resynth_seq_area , or -directive ExploreSequentialArea.
+
+Arguments:
+
+  -retarget - (Optional) Retarget one type of block to another when
+  retargetting the design from one device family to another. For example,
+  retarget instantiated MUXCY or XORCY components into a CARRY4 block; or
+  retarget DCM to MMCM. The retarget optimization also absorbs inverters into
+  downstream logic where possible.
+
+  Note: The -retarget argument is optional, as are the other optimizations.
+  However this optimization is run by default unless explicitly overridden by
+  another optimization.
+
+  -propconst - (Optional) Propagate constant inputs through the circuit,
+  resulting in a simplified netlist. Propagation of constants can eliminate
+  redundant combinational logic from the netlist.
+
+  -sweep - (Optional) Remove unnecessary logic, removing loadless cells and
+  nets.
+
+  -bram_power_opt - (Optional) Enables power optimization on Block RAM cells.
+  Changes the WRITE_MODE on unread ports of true dual-port RAMs to NO_CHANGE,
+  and applies intelligent clock gating to Block RAM outputs.
+
+  Note: Specific BRAM cells can be excluded from this optimization using the
+  set_power_opt command.
+
+  -remap - (Optional) Remap the design to combine multiple LUTs into a single
+  LUT to reduce the depth of the logic.
+
+  -resynth_area - (Optional) Perform re-synthesis in area mode to reduce the
+  number of LUTs.
+
+  -resynth_seq_area - (Optional) Perform re-synthesis to reduce both
+  combinational and sequential logic. Performs a superset of the optimization
+  provided by -resynth_area .
+
+  -directive <arg> - (Optional) Direct the mode of optimization with specific
+  design objectives. Only one directive can be specified for a single
+  opt_design command, and values are case-sensitive. Supported values
+  include:
+
+   *  Explore - Run multiple passes of optimization to improve results.
+
+   *  ExploreArea - Run multiple passes of optimization, with an emphasis on
+      reducing area.
+
+   *  ExploreWithRemap - Similar to ExploreArea but adds the remap
+      optimization to compress logic levels.
+
+   *  ExploreSequentialArea - Run multiple passes of optimization, with an
+      emphasis on reducing registers and related combinational logic.
+
+   *  AddRemap - Run the default optimization, and include LUT remapping to
+      reduce logic levels.
+
+   *  NoBramPowerOpt - Runs opt_design without the default BRAM power
+      optimization.
+
+   *  RuntimeOptimized - Run the fewest iterations, trading optimization
+      results for faster runtime.
+
+   *  Default - Run the default optimization.
+
+  Refer to the Vivado Design Suite User Guide: Implementation (UG904) for
+  more information on the effects of each directive.
+
+  Note: The -directive option controls the overall optimization strategy, and
+  is not compatible with any specific optimization options. It can only be
+  used with -quiet and -verbose.
+
+  -muxf_remap - (Optional) Convert MUXFs to LUT3s to potentially improve
+  route-ability of the design.
+
+  -hier_fanout_limit <arg> - (Optional) Net drivers with fanout greater than
+  the specified limit (<arg>) will be replicated according to the logical
+  hierarchy. For each hierarchical instance driven by the high-fanout net, if
+  the fanout within the hierarchy is greater than the specified limit, then
+  the net within the hierarchy is driven by a replica of the driver of the
+  high-fanout net.
+
+  -bufg_opt - (Optional) Perform various optimizations related to global
+  buffers (BUFG/BUFGCE). Insert a buffer on unbuffered clock nets (fanout >
+  30), insert BUFGs on high fanout nets (fanout > 25k), and perform
+  load-splitting when a high-fanout net drives both combinational and
+  sequential logic: the combinational portion bypasses the BUFG because the
+  added delay is too large.
+
+  Note: The phys_opt_design command can be used to optimize the combinational
+  portion, while the sequential portion can be driven by BUFG.
+
+  -control_set_merge - (Optional) Reduce the drivers of logically-equivalent
+  control signals to a single driver. This is like a reverse fanout
+  replication, and results in nets that are better suited for module-based
+  replication.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command. This option displays detailed information
+  about the logic that is affected by each optimization.
+
+Examples:
+
+  The following example performs all four default optimizations: retarget,
+  constant propagation, sweep, and BRAM power optimization. The command
+  returns detailed results with the -verbose switch:
+
+    opt_design -verbose
+
+  This example excludes specific BRAM cells from power optimization using the
+  set_power_opt command, and then runs opt_design with the four default
+  optimizations:
+
+    
+    set_power_opt -exclude_cells [get_cells \ 
+       -filter {PRIMITIVE_TYPE =~ BMEM.*.*} \ 
+       -of_objects [get_pins -leaf -filter {DIRECTION == IN} \ 
+       -of_objects [get_nets -of_objects [get_pins clock/bufgctrl_clk_mld/O]]]] 
+    opt_design
+
+  The following example performs the sweep and retarget optimizations:
+
+    
+    opt_design -sweep -retarget
+
+  Note: Because -sweep and -retarget are expressly enabled in the prior
+  example, -propconst optimization and -bram_power_opt are implicitly
+  disabled.
+
+  The following example directs the opt_design command to use various
+  algorithms to achieve potentially better results:
+
+    opt_design -directive Explore
+
+  The following example directs the opt_design command to use various
+  algorithms to achieve potentially better results, while focusing on area
+  reduction:
+
+    opt_design -directive ExploreArea
+
+See Also:
+
+   *  phys_opt_design
+   *  place_design
+   *  power_opt_design
+   *  route_design
+   *  set_power_opt
+   *  synth_design

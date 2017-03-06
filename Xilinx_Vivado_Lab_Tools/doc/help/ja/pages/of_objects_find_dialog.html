@@ -1,0 +1,71 @@
+﻿<html xml:lang="ja-jp" lang="ja-jp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="reference"/>
+<meta name="DC.Title" content="[Of Objects - Find] ダイアログ ボックス"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_bqj_lqr_b5"/>
+<meta name="DC.Language" content="ja-JP"/>
+<link rel="stylesheet" type="text/css" href="../commonltr-ja.css"/>
+<title>[Of Objects - Find] ダイアログ ボックス</title>
+</head>
+<body id="concept_bqj_lqr_b5">
+
+
+<h1 class="title topictitle1">[Of Objects - Find] ダイアログ ボックス</h1>
+
+<div class="body refbody">
+<div class="section">
+<div class="p">このダイアログ ボックスでは、そのオブジェクトに指定されたプロパティを使用して、ネットリストおよびデバイス オブジェクトを見つけるための条件を定義できます。この検索条件の結果で <a class="xref" href="find_dialog.html">[Find]</a> ダイアログ ボックスの <span class="keyword cmdname">-of_objects</span> オプションが定義されます。<div Class="note_tip"><span class="tiptitle">ヒント:</span> このダイアログ ボックスでは、入れ子条件を付けてほかのオブジェクトに関連するオブジェクトを見つけることができます。たとえば、特定の I/O バンクの特定の I/O ポートのパッケージ ピンを検出できます。</div>
+</div>
+
+<ul class="ul" id="concept_bqj_lqr_b5__ul_azt_c5r_b5">
+<li class="li"><span Class="uicontrol">[Find] : </span>現在のデザインで検出するファースト クラスのオブジェクトのタイプを指定します。オブジェクトは、[Netlist] オブジェクトおよび [Device] オブジェクトとしてリストされます。使用可能なオブジェクトのリストは、その親ダイアログ ボックスで減らすことができます。</li>
+
+<li class="li"><span Class="uicontrol">[Criteria] : </span>ドロップダウン リストからプロパティ、演算子、および値を選択し、現在のデザイン内のオブジェクトを検索します。<ul class="ul" id="concept_bqj_lqr_b5__ul_nzq_hf5_s5">
+<li class="li"><span Class="uicontrol">[Property] : </span>リストされる演算子は、指定したプロパティによって異なり、文字列演算子、ブール関数、または数値演算子のいずれかを選択できます。</li>
+
+<li class="li"><span Class="uicontrol">[Operator] : </span>リストされる演算子は、指定したプロパティによって異なり、文字列演算子、ブール関数、または数値演算子のいずれかを選択できます。</li>
+
+<li class="li"><span Class="uicontrol">[Value] : </span>指定したプロパティ用にドロップダウン リストに表示される既知の値または使用可能な値から選択するか、文字列または値を直接入力できます。このフィールドには、ワイルドカードとしてクエスチョン マーク (?) およびアスタリスク (*) 文字を使用できます。</li>
+
+<li class="li"> <span Class="uicontrol">[Add a new criterion]</span> (<img class="image" id="concept_bqj_lqr_b5__image_z3s_qs5_c5" src="../../images/add_button.png"/>) : [Criteria] セクションに新しい行が追加されます。</li>
+
+<li class="li"><span Class="uicontrol"> </span>[Remove this criterion]<span Class="uicontrol"/> (<img class="image" id="concept_bqj_lqr_b5__image_zvd_y4l_s5" src="../../images/Remove1.png"/>) : [Criteria] セクションから選択した行が削除されます。</li>
+
+</ul>
+
+<div Class="note_tip"><span class="tiptitle">ヒント:</span> [Criteria] セクションに複数の行がある場合は、条件間の論理関係を AND または OR のいずれかとして指定する必要もあります。AND の場合は指定した条件すべてに一致するオブジェクトが戻され、OR の場合は指定した条件のいずれかに一致するオブジェクトが戻されます。</div>
+</li>
+
+<li class="li"><span Class="uicontrol">[Regular Expressions] : </span>[Value] フィールドを正規表現 (regexp) 検索パターンとして定義します。正規表現構文の詳細については、<a class="xref" href="http://www.tcl.tk/man/tcl8.5/TclCmd/re_syntax.htm" target="_blank">このリンク</a>を参照してください。</li>
+
+<li class="li"><span Class="uicontrol">[Ignore case] : </span>正規表現の検索にのみ適用され、大文字と小文字を区別しません。通常、検索パターンの大文字/小文字は区別されます。</li>
+
+<li class="li"><span Class="uicontrol">[Search hierarchically] : </span>デザイン階層の各レベルを検索します。デフォルトでは、現在のインスタンス <a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xcurrent_instance" target="_blank">current_instance</a>、またはデザイン階層の最上位が検索されます。このオプションは、[Find] フィールドに指定したオブジェクトのタイプによって異なります。</li>
+
+<li class="li"><span Class="uicontrol">[Of objects] : </span>選択したオブジェクトのリストに検索を制限します。たとえば、特定の I/O ポートのパッケージ ピンを見つけたり、特定のセル ピンのネットを見つけたりできます。参照ボタン (<img class="image" id="concept_bqj_lqr_b5__image_jnt_c3v_s5" src="../../images/browse_button.png"/>) を開いて検索するか、該当する Tcl コマンドを手動で入力します。</li>
+
+<li class="li"><span Class="uicontrol">[Command] : </span><span Class="uicontrol">[OK]</span> をクリックすると、親ダイアログ ボックスに渡された Tcl コマンドが表示されます。</li>
+
+</ul>
+
+<p class="p"><span Class="uicontrol">[OK]</span> をクリックすると、親ダイアログ ボックスに Tcl コマンドが渡されます。</p>
+
+</div>
+
+<div class="section"><h2 class="title sectiontitle">関連項目</h2>
+<table cellpadding="4" cellspacing="0" summary="" id="concept_bqj_lqr_b5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow"> <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_bqj_lqr_b5__image_lf4_qvj_p5" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">『Vivado<sup>®</sup> Design Suite ユーザー ガイド : Vivado IDE の使用』</cite> (UG893) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug893-vivado-ide.pdf;a=xUsingTheMessagesWindow" target="_blank">「デザインまたはデバイス オブジェクトの検索」</a></td>
+ </tr>
+</table>
+
+</div>
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+
+Description:
+
+  Removes a disabled timing constraint by specifying the start and end points
+  of the timing arc. The command contains "from" and "to" arguments. The from
+  argument determines the start point. The to argument is the end point.
+
+  Note: This command returns nothing if successful, or returns an error if it
+  fails.
+
+Arguments:
+
+  -from <value> - (Optional) From Pin on Cell
+
+  -to <value> - (Optional) To Pin on Cell
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <objects> - (Optional) List of cells or pins, ports, lib-cells, lib-pins,
+  libcell/cell timing-arcs
+
+Examples:
+
+  The following command removes a disabled timing constraint in between the
+  start point EN_A to D_IN:
+
+    
+    remove_disable_timing -from EN_A -to D_IN
+
+See Also:
+
+   *  report_timing

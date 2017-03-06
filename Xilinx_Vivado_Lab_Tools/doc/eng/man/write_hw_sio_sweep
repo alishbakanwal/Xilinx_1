@@ -1,0 +1,61 @@
+
+Description:
+
+  Write the populated hw_sio_sweep object after run_hw_sio_sweep completes.
+
+  To analyze the margin of a given link, it is often helpful to run a scan of
+  the link using the specialized features of Xilinx UltraScale devices or 7
+  Series FPGAs. It can also be helpful to run multiple scans on a the link
+  with different configuration settings for the GTs. This can help you
+  determine which settings are best for your design. The Vivado serial I/O
+  analyzer feature enables you to define, run, and save link sweeps, or
+  collections of link scans run across a range of values.
+
+  This command saves the specified link sweep object to disk after it has
+  been populated by the run_hw_sio_sweep command.
+
+  This command returns the name of the directory created, or returns an error
+  if the command fails.
+
+Arguments:
+
+  -force - (Optional) Overwrite the specified directory if it already exists.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <directory> - (Required) The name of a directory to write multiple scan
+  files as a result of the run_hw_sio_sweep command.
+
+  <hw_sio_sweep> - (Required) Specify a hw_sio_sweep object to write to disk.
+  The hw_sio_sweep must be specified as an object as returned by the
+  get_hw_sio_sweeps command.
+
+Example:
+
+  The following example writes the specified hw_sio_sweep object to disk:
+
+    write_hw_sio_sweep sweep_results [get_hw_sio_sweeps {SWEEP_1}]
+
+See Also:
+
+   *  create_hw_sio_scan
+   *  create_hw_sio_sweep
+   *  current_hw_device
+   *  get_hw_sio_scans
+   *  get_hw_sio_sweeps
+   *  remove_hw_sio_sweep
+   *  run_hw_sio_sweep
+   *  stop_hw_sio_sweep
+   *  wait_on_hw_sio_sweep
+   *  write_hw_sio_sweep

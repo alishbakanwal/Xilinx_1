@@ -1,0 +1,93 @@
+
+Description:
+
+  Reports the state of routing in the current design.
+
+  The route status report can include a wide range of information, from a
+  simple 1 if the design has routing, to a complete route tree for each net
+  in the design.
+
+Arguments:
+
+  -return_string - (Optional) Directs the output to a Tcl string rather than
+  to the standard output. The Tcl string can be captured by a variable
+  definition and parsed or otherwise processed.
+
+  Note: This argument cannot be used with the -file option.
+
+  -file <arg> - (Optional) Write the report into the specified file. The
+  specified file will be overwritten if one already exists, unless -append is
+  also specified.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -append - (Optional) Append the output of the command to the specified file
+  rather than overwriting it.
+
+  Note: The -append option can only be used with the -file option.
+
+  -of_objects <args> - (Optional) Report the full routing tree for the
+  specified route, net, or xdef_net objects.
+
+  Note: The -of_objects option requires objects to be specified using the
+  get_* commands, such as get_cells or get_pins, rather than specifying
+  objects by name. In addition, -of_objects cannot be used with a search
+  <pattern>.
+
+  -route_type <arg> - (Optional) Only show routes with the specified route
+  status. Valid route states are: UNPLACED, NOLOADS, NODRIVER, UNROUTED,
+  ANTENNAS, CONFLICTS, PARTIAL, INTRASITE, HIERPORT, ROUTED.
+
+  Note: This option is ignored if -of_objects is specified.
+
+  -list_all_nets - (Optional) Report summary route status for every net in
+  the design.
+
+  Note: This option is ignored if -of_objects is specified.
+
+  -show_all - (Optional) Report all relevant pins for routes marked as
+  UNPLACED or PARTIAL routes and list all relevant nodes for routes marked as
+  ANTENNAS or CONFLICTS routes. As a default only the first 15 pins or nodes
+  are listed for a given route.
+
+  -dump_routes - (Optional) Report the full routing tree for every routed net
+  in the design.
+
+  Note: This is a very long report, and can take some time to generate.
+
+  -has_routing - (Optional) Returns false (0) if the design is unrouted, and
+  returns true (1) if the design has routing. All other options are ignored
+  when -has_routing is specified.
+
+  Note: Has routing does not mean fully routed.
+
+  -ignore_cache - (Optional) By default the report_route_status command is
+  iterative, and only updates the route information for new nets and routes
+  as the design is implemented. This argument will cause the command to
+  ignore the cached information and regenerate the report for the entire
+  design.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example reports the route status for the specified nets:
+
+    report_route_status -of_objects [get_nets u4*]
+
+See Also:
+
+   *  route_design

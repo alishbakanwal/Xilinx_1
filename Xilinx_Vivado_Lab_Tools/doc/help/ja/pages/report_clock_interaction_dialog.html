@@ -1,0 +1,106 @@
+﻿<html xml:lang="ja-jp" lang="ja-jp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="reference"/>
+<meta name="DC.Title" content="[Report Clock Interaction] ダイアログ ボックス"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_bqj_lqr_b7"/>
+<meta name="DC.Language" content="ja-JP"/>
+<link rel="stylesheet" type="text/css" href="../commonltr-ja.css"/>
+<title>[Report Clock Interaction] ダイアログ ボックス</title>
+</head>
+<body id="concept_bqj_lqr_b7">
+
+
+<h1 class="title topictitle1">[Report Clock Interaction] ダイアログ ボックス</h1>
+
+<div class="body refbody">
+<div class="section">
+<p class="p">このダイアログ ボックスでは、デザインのクロック間の関連性がレポートできます。</p>
+
+<div class="p">このダイアログ ボックスには、クロック関連性レポートを設定するための次のタブが含まれます。<ul class="ul" id="concept_bqj_lqr_b7__ul_olx_ybm_p5">
+<li class="li"><a class="xref" href="#concept_bqj_lqr_b7__options">[Options] タブ</a></li>
+
+<li class="li"><a class="xref" href="#concept_bqj_lqr_b7__settings">[Timer Settings] タブ</a></li>
+
+</ul>
+</div>
+
+</div>
+
+<div class="section" id="concept_bqj_lqr_b7__options"><h2 class="title sectiontitle">[Options] タブ</h2>
+
+<p class="p">[Options] タブには、レポートの出力を設定するための次のフィールドが含まれます。</p>
+
+<ul class="ul" id="concept_bqj_lqr_b7__ul_qnz_bhp_v5">
+<li class="li"><span Class="uicontrol">[Path delay type] : </span>クロック関連性レポートを実行する際に解析する遅延のタイプを指定します。最大遅延はタイミング パスのセットアップ解析で、最小遅延はホールド解析です。セットアップおよびホールド解析両方の min_max 遅延を選択します。</li>
+
+<li class="li"><span Class="uicontrol">[Significant digits] : </span>クロック関連性レポートでレポートされる値の有効桁数を指定します。デフォルトは 3 です。</li>
+
+<li class="li"><span Class="uicontrol">[Write results to file] : </span>クロック関連性レポートの結果が指定ファイルに書き込まれます。デフォルトは [Overwrite]<span Class="uicontrol"/> で、同じ名前の既存ファイルが上書きされます。[Append]<span Class="uicontrol"/> をクリックすると、指定ファイルに新しいレポートが追加されます。</li>
+
+</ul>
+
+</div>
+
+<div class="section" id="concept_bqj_lqr_b7__settings"><h2 class="title sectiontitle">[Timer Settings] タブ</h2>
+
+<p class="p">[Timer Settings] タブには、レポートを生成する前にタイミング エンジンを設定するための次のフィールドが含まれます。</p>
+
+<ul class="ul" id="concept_bqj_lqr_b7__ul_ww4_b3p_v5">
+<li class="li"><span Class="uicontrol">[Interconnect] : </span>タイミング解析で使用するインターコネクト遅延を指定します。インプリメント済みデザインからすべての配線済み遅延を使用したり、合成またはインプリメント済みデザインで見積もり遅延を使用したり、インターコネクト遅延を使用しないようにして、ロジック遅延のみを検証できます。</li>
+
+<li class="li"><span Class="uicontrol">[Speed grade] : </span>実際にターゲット パーツを変更することなく、解析中にデバイスのスピード グレードを変更できます。</li>
+
+<li class="li"><span Class="uicontrol">[Multi-corner configuration] : </span>現在のデザインの Slow および Fast タイミング コーナーを設定できます。製造プロセス、電圧、および温度 (PVT) の変数により、デバイスの遅延が決定され、まとめられてタイミング コーナーが定義されます。これは、Tcl コマンドの <a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xconfig_timing_corners" target="_blank">config_timing_corners</a> に関連します。<ul class="ul" id="concept_bqj_lqr_b7__ul_ivx_fkp_v5">
+<li class="li"><span Class="uicontrol">[Slow] : </span>Slow コーナーに対して解析する遅延のタイプを指定します。セットアップ解析に max 遅延、ホールド解析に min 遅延、セットアップおよびホールド解析両方に min_max 遅延を使用します。タイミング解析からこのコーナーを除外するには、none を使用します。</li>
+
+<li class="li"><span Class="uicontrol">[Fast] : </span>Fast コーナーに対して解析する遅延のタイプを指定します。セットアップ解析に max 遅延、ホールド解析に min 遅延、セットアップおよびホールド解析両方に min_max 遅延を使用します。タイミング解析からこのコーナーを除外するには、none を使用します。</li>
+
+</ul>
+</li>
+
+<li class="li"><span Class="uicontrol">[Disable flight delays] : </span>I/O 遅延の算出でパッケージ遅延が無視されます。フライト遅延は、パッケージ ピンとダイ パッド間で発生するパッケージ遅延です。これは、Tcl コマンドの <a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xconfig_timing_analysis" target="_blank">config_timing_analysis</a> に関連しています。</li>
+
+</ul>
+
+</div>
+
+<div class="section" id="concept_bqj_lqr_b7__common"><h2 class="title sectiontitle">共通オプション</h2>
+
+<p class="p">共通オプションのタブはありませんが、次はダイアログ ボックス内に常に表示されます。</p>
+
+<ul class="ul" id="concept_bqj_lqr_b7__ul_gc5_ccp_v5">
+<li class="li"><span Class="uicontrol">[Results name] : </span>Vivado<sup>®</sup> IDE の <a class="xref" href="clock_interaction_window.html">[Clock Interaction]</a> ウィンドウのレポートに適用する名前を指定します。</li>
+
+<li class="li"><span Class="uicontrol">[Command] : </span>レポートを生成するために使用した Tcl コマンドと指定したオプションすべてが表示されます。</li>
+
+<li class="li"><span Class="uicontrol">[Open in a new tab] : </span>Vivado IDE の [Clock Interaction] ウィンドウに新しいタブでレポートを開きます。オフの場合は、新しいレポートで最後に開いたレポートが上書きされます。</li>
+
+</ul>
+
+<p class="p"><span Class="uicontrol">[OK]</span> をクリックすると、表示された Tcl コマンドを実行してレポートが生成されます。</p>
+
+</div>
+
+<div class="section"><h2 class="title sectiontitle">関連項目</h2>
+<table cellpadding="4" cellspacing="0" summary="" id="concept_bqj_lqr_b7__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow"> <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_bqj_lqr_b7__image_lf4_qvj_p5" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">『Vivado Design Suite ユーザー ガイド : デザイン解析およびクロージャ テクニック』</cite> (UG906) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug906-vivado-design-analysis.pdf;a=xReportClockInteraction" target="_blank">「クロック関連性レポート」</a></td>
+ </tr>
+<tr class="strow"> <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b7__image_ctd_m1j_dv" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry"><cite class="cite">『Vivado Design Suite Tcl コマンド リファレンス ガイド』</cite> (UG835) の <a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xreport_clock_interaction" target="_blank">「report_clock_interaction」</a></td>
+ </tr>
+<tr class="strow"> <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b7__image_av4_jvr_b5" src="../../images/play.png" alt="Icon"/></td>
+ <td valign="top" class="stentry"><a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/ndoc?t=video;d=hardware/cross-clock-domain-checking-cdc-analysis.html" target="_blank">Vivado Design Suite QuickTake ビデオ : クロスクロック ドメイン チェック (CDC) 解析</a></td>
+ </tr>
+</table>
+
+</div>
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+STAGE_NAME,GUI_DISPLAY_NAME,READ_SIMPLE,READ_COMPLEX,WRITE_SIMPLE,WRITE_COMPLEX,WRITE_DM
+01_read_clock_alignment,1 - Read Clock Alignment,0,0,0,0,0
+02_read_dq_deskew,2 - Read DQ Deskew,0,0,0,0,0
+03_read_dq_training_simple,3 - Read DQ Training (Simple),1,0,0,0,0
+04_read_qvld_training,4 - Read QVLD Training,0,0,0,0,0
+05_write_dq_dm_deskew,5 - Write DQ/DM Deskew,0,0,0,0,0
+06_write_read_sanity_check,6 - Write Read Sanity Check,0,0,0,0,0
+07_byte_slip_training,7 - Byte Slip Training,0,0,0,0,0
+08_qvld_slip_training,8 - QVLD Slip Training,0,0,0,0,0
+09_write_read_sanity_check,9 - Write Read Sanity Check,0,0,0,0,0
+10_qvld_align_training,10 - QVLD Align Training,0,0,0,0,0
+11_byte_align_training,11 - Byte Align Training,0,0,0,0,0
+12_write_read_sanity_check,12 - Write Read Sanity Check,0,0,0,0,0
+13_read_dq_training_complex,13 - Read DQ Training (Complex),0,1,0,0,0
+14_write_read_sanity_check,14 - Write Read Sanity Check,0,0,0,0,0

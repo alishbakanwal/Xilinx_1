@@ -1,0 +1,53 @@
+
+Description:
+
+  Sets the latency of ideal networks for the specified ports or pins. Latency
+  is specified in nanoseconds.
+
+  Note: This command operates silently and does not return direct feedback of
+  its operation.
+
+  Ideal networks are used for timing analysis before the clock network is
+  propagated.
+
+Arguments:
+
+  -rise - (Optional) Apply the latency value to rising edges.
+
+  -fall - (Optional) Apply the latency value to falling edges.
+
+  Note: When neither -rise or -fall is specified, both are assumed.
+
+  -min - (Optional) Use the latency value as the minimum ideal latency.
+
+  -max - (Optional) Use the latency value as the maximum ideal latency.
+
+  Note: When neither -min or -max is specified, both are assumed.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <value> - The latency value for ideal networks. Latency is specified in
+  nanoseconds (ns), as a floating point delay value >= 0.
+
+  <objects> - The list of ports or pins on which to apply the latency.
+
+Examples:
+
+  The following example defines the ideal latency for all inputs ports:
+
+    set_ideal_latency 1.5 [all_inputs]
+
+See Also:
+
+   *  set_ideal_network

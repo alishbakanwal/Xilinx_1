@@ -1,0 +1,89 @@
+
+Description:
+
+  This command creates an example design from a predefined template in an
+  open project. The target part specified by the open project must be
+  compatible with the example design, as defined in the SUPPORTED_PARTS
+  property of the example, or an error is returned.
+
+  For the embedded processor example designs, base_microblaze and base_zynq,
+  the example design must be created in an open block design in the Vivado IP
+  integrator. Embedded processor example designs require the use of a board
+  as defined by the BOARD_PART property, rather than a target part. Refer to
+  the current_board_part command for more information.
+
+  The command returns the name of the example design used and a transcript of
+  commands; or it returns an error if it fails.
+
+Arguments:
+
+  -design <arg> - (Optional) For embedded processor example designs, this
+  option specifies the name of the open and current block design to
+  instantiate the example design into. This option is required for embedded
+  processor example designs. If -design is not specified, an error is
+  returned.
+
+  -hier - (Optional) Hierarchy Block
+
+  -options <args> - (Optional) Specify the values of configurable properties
+  of the example design.
+
+  Note: The configurable properties (CONFIG.*) of an example design can be
+  returned by the report_property or get_property commands.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <template> - Specifies the template design to be instantiated into the
+  specified design. The template can be specified by name, or as an object
+  returned by the get_example_designs command.
+
+Examples:
+
+  The following example creates a new project as specified, overwriting an
+  existing project of the same name if one is found, specifies the BOARD_PART
+  property for the project, creates a new empty block design in the Vivado IP
+  integrator, and then instantiates the Zynq embedded processor example
+  design:
+
+    create_project zynq1 -force 
+    set_property BOARD_PART em.avnet.com:zed:1.3 [current_project] 
+    create_bd_design myFirstZynq 
+    instantiate_example_design -design myFirstZynq \ 
+    [lindex [get_example_designs] 1]
+
+  This example reports the configurable properties of the specified example
+  design:
+
+    
+    report_property [lindex [get_example_designs] 3] CONFIG.*
+
+  This example creates a new empty project as specified, sets a target BOARD
+  for the project, creates and opens a new empty block design, and then
+  instantiates the configurable example design:
+
+    
+    create_project mb1 C:/Data/Vivado_Tutorial/Tutorial_Created_Data/mb1  
+    set_property board_part xilinx.com:kcu105:part0:1.1 [current_project] 
+    create_bd_design design_1 
+    instantiate_example_design -design design_1 \ 
+       -options { Data_Cache.VALUE 8K Include_DDR4.VALUE true \ 
+       Local_memory.VALUE 128K }\ 
+    xilinx.com:design:config_mb:1.0
+
+See Also:
+
+   *  create_bd_design
+   *  create_project
+   *  get_example_designs
+   *  set_property

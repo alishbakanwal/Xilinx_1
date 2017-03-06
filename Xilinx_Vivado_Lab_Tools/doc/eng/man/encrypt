@@ -1,0 +1,65 @@
+
+Description:
+
+  Note: The encrypt command is provided with limited access, and requires a
+  special license to use.
+
+  Allows anyone with an encryption license to encrypt Verilog or VHDL files
+  using the IEEE 1735 encryption standard.
+
+  Encrypted files can be provided by third-party IP providers to protect
+  their intellectual property, while still enabling the Vivado Design Suite
+  to read the encrypted files for synthesis and simulation. The data is in
+  plain text prior to encryption.
+
+  Note: Unless the -ext option is used, the specified files are encrypted in
+  place, overwriting the input files with the encrypted files.
+
+Arguments:
+
+  -key <arg> - (Optional) Specifies an RSA key file that includes the Xilinx
+  public key. If the -key is not specified, the Vivado tool looks for keys
+  embedded within the specified files. These are 1735 supported pragmas, or
+  directives embedded into the specified files, that provide the encryption
+  key and indicate where the protected data begins and ends.
+
+  Note: The Xilinx public key can be obtained by members from the IEEE P1735
+  working group, or by contacting an appropriate Xilinx representative.
+
+  -lang [ vhdl | verilog ] - (Required) Specify the HDL language of the
+  source files to be encrypted. Supported values are VHDL or verilog.
+
+  -ext <arg> - (Optional) Specify an extension to use for the output
+  encrypted files. The original source files will be preserved.
+
+  Note: If this option is not specified, the original source files will be
+  overwritten with the encrypted output.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <files> - (Required) The names of Verilog or VHDL files to encrypt.
+
+Example:
+
+  The following example encrypts the specified Verilog file, using the
+  specified key file:
+
+    encrypt -lang verilog C:/Data/xilinx_rsa_key.txt C:/Data/design_1.v
+
+  Note: The specified source file is overwritten by the encrypted output file.
+
+See Also:
+
+   *  write_verilog
+   *  write_vdhl

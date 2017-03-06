@@ -1,0 +1,108 @@
+
+Description:
+
+  Specify a wait operation for the hw_jtag object state machine which defines:
+
+   *  Which TAP stable state to go to perform the wait operation.
+
+   *  A wait time expressed as:
+
+       -  `n` TCK cycles, where `n` is a 32-bit unsigned decimal number.
+
+       -  A minimum and optionally maximum time in seconds to stay in the
+          wait state, with min/max times specified as unsigned integers or
+          real numbers.
+
+   *  The TAP stable state to go after the wait operation has completed.
+
+  The default values for -wait_state and -end_state are IDLE. If a non-IDLE
+  wait_state or end_state are defined, then the hw_jtag object will first
+  transition to the specified wait_state before starting the wait operation.
+  Once the wait time has elapsed, the hw_jtag object transitions to the
+  specified end_state. When the wait_state and/or end_state are specified by
+  the runtest_hw_jtag command, subsequent commands will use the same
+  wait_state/end_state unless they are changed.
+
+  This command returns the end stable state, or returns an error if it fails.
+
+  Note: If the command cannot meet the wait time specification, then it will
+  raise an exception that can be trapped by the Tcl catch command.
+
+Arguments:
+
+  -wait_state <arg> - (optional) Specify the state to to go to while in the
+  wait state. Can be specified as one of the following TAP stable states:
+  IDLE, RESET, IRPAUSE, or DRPAUSE. The default is IDLE.
+
+  -end_state <arg> - (optional) Specify the state to transition into after
+  the wait operation has completed. Can be specified as one of the following
+  TAP stable states: IDLE, RESET, IRPAUSE, or DRPAUSE. The default is IDLE.
+
+  -sec <arg> - (Optional) 32-bit decimal integer specifying the minimum
+  number of seconds to wait.
+
+  -max_wait <arg> - (Optional) Maximum number of seconds to wait in wait_state.
+
+  -tck <arg> - (Optional) 32-bit decimal integer specifying the number of
+  JTAG clock cycles to wait.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Example:
+
+  The following example walks through a series of runtest_hw_jtag commands
+  with various wait_states and end_states specified:
+
+    // Wait in default IDLE state for 1000 TCKs,  
+    // then go to end_state DRPAUSE 
+    runtest_hw_jtag -tck 1000 -end_state DRPAUSE  
+     
+    // Go from DRPAUSE (end_state defined in previous  
+    // runtest_hw_jtag command) to IDLE and wait for 
+    // 500 TCK clock cycles before going to DRPAUSE again 
+    runtest_hw_jtag -tck 500  
+     
+    // Go from DRPAUSE to IDLE and wait for  
+     //1,000,000 TCKs or at least 
+    // 5 seconds before transitioning to DRPAUSE 
+    runtest_hw_jtag -tck 1000000 -sec 5  
+     
+    // Go from DRPAUSE to IDLE and wait for  
+    // at least 1 millisecond and at most 50 milliseconds 
+    // before remaining in IDLE state 
+    runtest_hw_jtag -sec 1.0E-3 -max_wait 50.0E-3 -end_state IDLE  
+     
+    // Go from IDLE to DRPAUSE and wait for at least 
+    // 85 milliseconds before returning to IDLE state 
+    runtest_hw_jtag -wait_state DRPAUSE -sec 85E-3  
+     
+    // Go from IDLE to DRPAUSE state and wait for 
+    // at least 1 second before returning to IDLE state 
+    runtest_hw_jtag -sec 1  
+     
+    // Go to wait_state IDLE (note: current end_state is IDLE), 
+    // wait for at least 10 milliseconds, then stay in IDLE state. 
+    runtest_hw_jtag -wait_state IDLE -sec 1E-2
+
+  Note: The wait_state or end_state from the first runtest_hw_jtag command
+  will be used in subsequent commands unless specifically changed.
+
+See Also:
+
+   *  connect_hw_server
+   *  current_hw_target
+   *  open_hw_target
+   *  run_state_hw_jtag
+   *  scan_dr_hw_jtag
+   *  scan_ir_hw_jtag

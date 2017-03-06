@@ -1,0 +1,57 @@
+
+Description:
+
+  During implementation of secure encrypted UltraScale architecture designs,
+  bitstream-level verification must be performed on the final bitstream
+  against the "golden" bitstream of the Xilinx tested Security Monitor
+  (SecMon) IP.
+
+  The decrypt bitstream command takes an AES-GCM encrypted bitstream file
+  (.bit or .rbt) from an implemented design that incorporates the SecMon IP,
+  and an encryption key file (.nky), and returns an unencrypted bitstream
+  file. The decrypted bitstream can then be used to complete the bitstream
+  verification process.
+
+  This command returns the requested file if successful, or returns an error
+  if it fails.
+
+Arguments:
+
+  -encrypted_file <arg> - (Required) Specifies the AES-GCM encrypted
+  bitstream (.bit or .rbt) to be decrypted.
+
+  -keyfile <arg> - (Required) Specifies the name of the encryption key file
+  (.nky). This is necessary for decrypting the encrypted bitstream.
+
+  -force - (Optional) Overwrite an existing file of the same name.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <file> - (Required) Write the decrypted bitstream in standard format (.bit)
+  or without header information (.bin).
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+Example:
+
+  The following example decrypts the specified encrypted bitstream:
+
+    decrypt_bitstream -encrypted_file C:/Data/myDesign.bit \ 
+       -keyfile C:/Data/key.nky -force C:/Data/myDesign_decrypted.bit
+
+See Also:
+
+   *  write_bitstream

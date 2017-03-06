@@ -1,0 +1,102 @@
+
+Description:
+
+  Defines the number of messages that will be returned by the tool during a
+  design session, or single invocation. You can specify the limit for a
+  specific message ID, such as "Common 17-54", or specify a limit for all
+  messages of a specific severity, such as "CRITICAL WARNING".
+
+  Every message delivered by the tool has a unique global message ID that
+  consists of an application sub-system code and a message identifier. This
+  results in a message ID that looks like the following:
+
+    "Common 17-54" 
+    "Netlist 29-28" 
+    "Synth 8-3295"
+
+  You can report the current message limit of a message severity or ID with
+  the get_msg_limit command. You can restore the default message limit using
+  the reset_msg_limit command.
+
+  If you do not specify either a message ID or a message severity as a
+  qualifier for the set_msg_limit command, an error is returned.
+
+  The default message limit for each message ID is defined by the parameter
+  messaging.defaultLimit. This is the limit applied to each separate message
+  returned by the tool. You can report the current value of this parameter
+  with the get_param command, and change it as needed using the set_param
+  command.
+
+  You can change the severity of messages, limit the count of messages, and
+  suppress messages altogether using the set_msg_config command.
+
+Arguments:
+
+  -id <value> - (Optional) The message ID, which is included in all returned
+  messages. For example,"Common 17-54" and "Netlist 29-28".
+
+  -severity <value> - (Optional) The severity of the message. There are five
+  message severities:
+
+   *  ERROR - An ERROR condition implies an issue has been encountered which
+      will render design results unusable and cannot be resolved without user
+      intervention.
+
+   *  {CRITICAL WARNING} - A CRITICAL WARNING message indicates that certain
+      input/constraints will either not be applied or are outside the best
+      practices for a FPGA family. User action is strongly recommended.
+
+      Note: Since this is a two word value, it must be enclosed in {}.
+
+   *  WARNING - A WARNING message indicates that design results may be
+      sub-optimal because constraints or specifications may not be applied as
+      intended. User action may be taken or may be reserved.
+
+   *  INFO - An INFO message is the same as a STATUS message, but includes a
+      severity and message ID tag. An INFO message includes a message ID to
+      allow further investigation through answer records if needed.
+
+   *  STATUS - A STATUS message communicates general status of the process
+      and feedback to the user regarding design processing. A STATUS message
+      does not include a message ID.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  <count> - (Required) The message limit specified as a value >= 1. You can
+  restore the message limit to the messaging.defaultLimit by specifying a
+  count of -1.
+
+Examples:
+
+  The following example sets the message limit of the specified message ID:
+
+    set_msg_limit -id "Netlist 29-28" 10000
+
+  The following example sets the limit of the specified message severity:
+
+    set_msg_limit -severity WARNING 50000
+
+  The following example gets the current default message limit, specifies a
+  new default value, then overrides the default for the specified message id:
+
+    get_param messaging.defaultLimit 
+       100 
+    set_param messaging.defaultLimit 1000 
+    set_msg_limit -id "common 17-81" 1500
+
+See Also:
+
+   *  get_msg_config
+   *  get_param
+   *  reset_msg_limit
+   *  set_msg_config
+   *  set_param

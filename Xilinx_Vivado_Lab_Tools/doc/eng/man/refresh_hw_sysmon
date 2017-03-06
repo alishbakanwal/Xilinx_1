@@ -1,0 +1,65 @@
+
+Description:
+
+  Refresh the properties of the hw_sysmon object with the values on the
+  system monitor (XADC) from the current hw_device.
+
+  The refresh command takes the values from the status registers of the
+  system monitor on the hardware device, and populates them into the
+  appropriate properties of the hw_sysmon object in the hardware manager.
+
+  Note: The hw_sysmon object is automatically refreshed at the rate specified
+  by the SYSMON_REFRESH_RATE_MS on the object.
+
+  This command updates the properties on the hw_sysmon object, but otherwise
+  returns nothing if successful. The command returns an error if it fails.
+
+Arguments:
+
+  -regexp - (Optional) The list of properties to refresh is defined using
+  regular expression.
+
+  -properties <args> - (Optional) Refresh the specified property or
+  properties of the hw_sysmon object. As a default behavior, if no properties
+  are specified, all properties of the specified object or objects will be
+  refreshed from the current values on the hardware device.
+
+  Note: If a non-existent property is specified, that property is ignored.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <hw_objects> - (Optional) Specify the system monitor to refresh the
+  properties of, with values from the hw_device. The system monitor object
+  can be specified as the hw_sysmon object, or as the system monitor through
+  the associated hw_device, hw_target, or hw_server objects.
+
+  Note: The objects must be specified using the appropriate get_hw_xxx
+  command, for instance get_hw_sysmon, rather than specified by name.
+
+Example:
+
+  The following example refreshes the TEMPERATURE property of the hardware
+  system monitor object with the actual temperature on the current device:
+
+    refresh_hw_sysmon -properties {TEMPERATURE} [lindex [get_hw_sysmons] 0]
+
+See Also:
+
+   *  commit_hw_sysmon
+   *  connect_hw_server
+   *  current_hw_device
+   *  get_hw_sysmons
+   *  refresh_hw_sysmon
+   *  set_hw_sysmon_reg
+   *  set_property

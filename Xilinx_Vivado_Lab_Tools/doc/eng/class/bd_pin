@@ -1,0 +1,49 @@
+BD_PIN
+
+Description: 
+A block design pin, or a bd_pin object, is a point of logical connectivity on a 
+block design cell. A block design pin allows the internals of a cell to be 
+abstracted away and simplified for ease-of-use. Pins can be scalar or bus pins, 
+and can appear on hierarchical block design cells, or leaf-level cells. 
+
+Related Objects:
+A block design pin is attached to a block design cell (bd_cell), and can be 
+connected to other pins or block design ports (bd_port) by a net (bd_net) in the 
+block design, or diagram. 
+
+You can query the bd_pins of bd_cell and bd_net objects:
+
+	get_bd_pins -of_objects [get_bd_cells clk_wiz_1]
+
+In addition, you can query the bd_cell, or the bd_net, of a specific bd_pin:
+
+	get_bd_cells -of [get_bd_pins */Reset]
+
+Properties:
+The specific properties on a block design pin object can vary depending on the 
+type of the pin. The following table lists some of the properties assigned to a 
+CLK type bd_pin object in the Vivado Design Suite, with example values:
+
+Property                 Type    Read-only  Visible  Value
+CLASS                    string  true       true     bd_pin
+CONFIG.ASSOCIATED_BUSIF  string  true       true     
+CONFIG.ASSOCIATED_RESET  string  true       true     
+CONFIG.CLK_DOMAIN        string  true       true     design_1_clk_wiz_1_0_clk_out1
+CONFIG.FREQ_HZ           string  true       true     100000000
+CONFIG.PHASE             string  true       true     0.0
+DIR                      string  true       true     O
+INTF                     string  true       true     FALSE
+LEFT                     string  true       true     
+LOCATION                 string  false      true     
+NAME                     string  false      true     clk_out1
+PATH                     string  true       true     /clk_wiz_1/clk_out1
+RIGHT                    string  true       true     
+TYPE                     string  true       true     clk
+
+To report the properties for the bd_pin object, you can copy and paste the 
+following command into the Vivado Design Suite Tcl shell or Tcl console:
+
+	report_property -all [lindex [get_bd_pins */*] 0]
+
+
+

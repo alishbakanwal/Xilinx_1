@@ -1,0 +1,64 @@
+﻿<html xml:lang="ja-jp" lang="ja-jp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="reference"/>
+<meta name="DC.Title" content="[Force Clock] ダイアログ ボックス"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_bqj_lqr_b5"/>
+<meta name="DC.Language" content="ja-JP"/>
+<link rel="stylesheet" type="text/css" href="../commonltr-ja.css"/>
+<title>[Force Clock] ダイアログ ボックス</title>
+</head>
+<body id="concept_bqj_lqr_b5">
+
+
+<h1 class="title topictitle1">[Force Clock] ダイアログ ボックス</h1>
+
+<div class="body refbody">
+<div class="section">
+<div class="p">このダイアログ ボックスでは、選択した信号、ワイヤ、またはレジスタの変数値を作成して、定義した周期およびデューティ サイクルでクロックなどの一般的な間隔で適用されるようにします。この値は、特定の基数形式で指定でき、指定したシミュレーション ランタイムの後に指定した時間分オブジェクトに適用できます。[Force Clock] コマンドの期限が切れると、オブジェクトは HDL デザインで定義したように通常動作に戻ります。<div Class="note_tip"><span class="tiptitle">ヒント:</span> 決まった値をオブジェクトに適用するには、<a class="xref" href="force_constant_dialog.html#concept_bqj_lqr_b5">[Force Constant] コマンド</a>を使用します。</div>
+</div>
+
+<ul class="ul" id="concept_bqj_lqr_b5__ul_gc5_ccp_v5">
+<li class="li"><span Class="uicontrol">[Signal name] : </span>選択した HDL オブジェクトの名前が表示されます。</li>
+
+<li class="li"><span Class="uicontrol">[Value radix] : </span>値を指定する基数形式を選択します。</li>
+
+<li class="li"><span Class="uicontrol">[Leading edge value] : </span>信号遷移の立ち上がりエッジに割り当てる値を定義します。</li>
+
+<li class="li"><span Class="uicontrol">[Trailing edge value] : </span>信号遷移の立ち下がりエッジに割り当てる値を定義します。</li>
+
+<li class="li"><span Class="uicontrol">[Starting after time offset] : </span>定数値を割り当てる前のタイム オフセットを指定します。オフセットはナノ秒で指定する必要があります。デフォルトのオフセットは ０ です。<div Class="note_important"><span class="importanttitle">重要:</span> 開始およびキャンセルのタイム オフセット値は、[Force Constant] コマンドが実行されたときに現在のシミュレーション ランタイム (<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xcurrent_time" target="_blank">current_time</a>) から適用されます。</div>
+</li>
+
+<li class="li"><span Class="uicontrol">[Cancel after time offset] : </span>定数値をキャンセルするタイム オフセットを指定します。[Force Clock] コマンドは、オフセットの期限が切れるまで、シミュレーション中にオブジェクトに適用されます。<span Class="uicontrol">[Cancel]</span> 値を指定しない場合、定数がシミュレーション ランタイム期間中に使用されます。</li>
+
+<li class="li"><span Class="uicontrol">[Duty Cycle] : </span>指定した [Period] (周期) で、信号に <span Class="uicontrol">[Leading edge value]</span> があるか、信号がアクティブである場合の割合 (%) です。</li>
+
+<li class="li"><span Class="uicontrol">[Period] : </span>クロック パルスの長さ、または <span Class="uicontrol">[Leading edge value]</span> から <span Class="uicontrol">[Leading edge value]</span> までの 1 サイクル期間です。</li>
+
+</ul>
+
+</div>
+
+<div class="section"><h2 class="title sectiontitle">関連項目</h2>
+<table cellpadding="4" cellspacing="0" summary="" id="concept_bqj_lqr_b5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow"> <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_bqj_lqr_b5__image_smm_1vr_b5" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">『Vivado<sup>®</sup> Design Suite ユーザー ガイド : ロジック シミュレーション』</cite> (UG900) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug900-vivado-logic-simulation.pdf;a=xForceClock" target="_blank">「[Force Clock] オプション」</a></td>
+ </tr>
+<tr class="strow"> <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_y3g_hbj_dv" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry"><cite class="cite">『Vivado Design Suite Tcl コマンド リファレンス ガイド』</cite> (UG835) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xadd_force" target="_blank">「add_force」</a></td>
+ </tr>
+<tr class="strow"> <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_av4_jvr_b5" src="../../images/play.png" alt="Icon"/></td>
+ <td valign="top" class="stentry"><a class="xref" href="http://japan.xilinx.com/video/hardware/logic-simulation.html" target="_blank">Vivado Design Suite QuickTake ビデオ : ロジック シミュレーション</a></td>
+ </tr>
+</table>
+
+</div>
+
+</div>
+
+
+</body>
+</html>

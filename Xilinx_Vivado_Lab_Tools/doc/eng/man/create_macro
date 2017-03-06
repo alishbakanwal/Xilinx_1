@@ -1,0 +1,52 @@
+
+Description:
+
+  Create a macro for the relative placement of cells.
+
+  Macros are primarily used to place small groups of associated cells
+  together to improve resource efficiency and enable faster interconnections.
+  The create_macro command lets you define macros in an open synthesized or
+  implemented design for relative placement by place_design, like RPMs
+  defined by the RLOC constraint in RTL source files. Refer to the Vivado
+  Design Suite User Guide: Implementation (UG904) for more information on
+  defining relatively placed macros.
+
+  After creating the macro, specific cells can be assigned to the macro using
+  the update_macro command. To change a currently defined macro, you must
+  delete the macro with delete_macro, recreate the macro, and update the
+  macro with the new contents. You cannot simply overwrite an existing macro.
+
+  Use delete_macro to delete a defined macro. Use get_macros to return a list
+  of currently defined macros in the design.
+
+  This command operates silently and does not return anything.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <name> - (Required) Specify the name of the macro to create.
+
+Examples:
+
+  The following example creates a macro called :
+
+    create_macro usbMacro1
+
+See Also:
+
+   *  delete_macros
+   *  get_macros
+   *  place_design
+   *  update_macro

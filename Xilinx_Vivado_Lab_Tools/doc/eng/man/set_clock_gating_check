@@ -1,0 +1,54 @@
+
+Description:
+
+  Defines setup and hold times, specified in nanoseconds, for gated clocks.
+  Clock gating is a power saving technique used in many synchronous circuits.
+  Gated clocks increase clock skew and add timing delay which must be
+  accounted for during timing analysis.
+
+  Note: This command operates silently and does not return direct feedback of
+  its operation.
+
+Arguments:
+
+  -setup <value> - (Optional) Clock-gating setup time, specified in
+  nanoseconds. Valid values are floating point numbers >= 0. The default is
+  0.
+
+  -hold <value> - (Optional) Clock-gating hold time. Valid values are
+  floating point numbers >= 0. The default is 0.
+
+  -rise - (Optional) Specifies only rising value for the defined checks.
+
+  -fall - (Optional) Specifies only falling value for the defined checks.
+
+  -high - (Optional) Specifies check against high of clock waveform.
+
+  -low - (Optional) Specifies check against low of clock waveform.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <objects> - (Optional) A list of clocks, ports, pins, or cells on which to
+  aplply the setup and hold times.
+
+Examples:
+
+  The following example will apply a setup requirement of 0.5 and a hold
+  requirement of 0.5 on all gates in the specified clock:
+
+    set_clock_gating_check -setup 0.5 -hold 0.5 cpuClk
+
+See Also:
+
+   *  report_timing

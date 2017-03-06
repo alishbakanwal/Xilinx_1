@@ -1,0 +1,103 @@
+
+Description:
+
+  Get a list of all supported primitives for the specified device. This
+  command can be used on an open elaborated, synthesized, or implemented
+  design, in which case it will get the PART from the current design. You can
+  also specify the -part option to return the primitives for any device.
+
+  By default the command always returns native primitives that can be placed
+  on the target part without modification. The -retarget, -macro, and
+  -hierarchy options add additional primitives to the list returned.
+
+Arguments:
+
+  -regexp - (Optional) Specifies that the search <patterns> are written as
+  regular expressions. Both search <patterns> and -filter expressions must be
+  written as regular expressions when this argument is used. Xilinx regular
+  expression Tcl commands are always anchored to the start of the search
+  string. You can add ".*" to the beginning or end of a search string to
+  widen the search to include a substring. See
+  http://perldoc.perl.org/perlre.html for help with regular expression
+  syntax.
+
+  Note: The Tcl built-in command regexp is not anchored, and works as a
+  standard Tcl command. For more information refer to
+  http://www.tcl.tk/man/tcl8.5/TclCmd/regexp.htm.
+
+  -nocase - (Optional) Perform case-insensitive matching when a pattern has
+  been specified. This argument applies to the use of -regexp only.
+
+  -filter <args> - (Optional) Filter the results list with the specified
+  expression. The -filter argument filters the list of objects returned by
+  get_primitives based on property values on the object. You can find the
+  properties on an object with the report_property or list_property commands.
+
+  The filter search pattern should be quoted to avoid having to escape
+  special characters that may be found in net, pin, or cell names, or other
+  properties. String matching is case-sensitive and is always anchored to the
+  start and to the end of the search string. The wildcard "*" character can
+  be used at the beginning or at the end of a search string to widen the
+  search to include a substring of the property value.
+
+  Note: The filter returns an object if a specified property exists on the
+  object, and the specified pattern matches the property value on the object.
+  In the case of the "*" wildcard character, this will match a property with
+  a defined value of "".
+
+  For string comparison, the specific operators that can be used in filter
+  expressions are "equal" (==), "not-equal" (!=), "match" (=~), and
+  "not-match" (!~). Numeric comparison operators <, >, <=, and >= can also be
+  used. Multiple filter expressions can be joined by AND and OR (&& and ||).
+  The following gets input pins that do NOT contain the "RESET" substring
+  within their name:
+
+    get_pins * -filter {DIRECTION == IN && NAME !~ "*RESET*"}
+
+  Boolean (bool) type properties can be directly evaluated in filter
+  expressions as true or not true:
+
+    -filter {IS_PRIMITIVE && !IS_LOC_FIXED}
+
+  -part <arg> - (Optional) Get a list of primitives for the specified part.
+
+  -retarget - (Optional) Include primitives that are automatically
+  re-targeted to the current or specified part.
+
+  -macro - (Optional) Include macro primitives that convert into more basic
+  primitives, such as logic gates.
+
+  -hierarchy - (Optional) Include primitives that will be automatically
+  expanded into a hierarchy of leaf cells during implementation.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <patterns> - (Required) Match primitives against the specified patterns.
+
+Examples:
+
+  The following example gets the native primitives for the current part, and
+  includes macro primitives:
+
+    get_primitives -macro
+
+See Also:
+
+   *  get_cells
+   *  get_libs
+   *  get_lib_pins
+   *  get_lib_cells
+   *  get_parts
+   *  list_property
+   *  report_property

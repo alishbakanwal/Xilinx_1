@@ -1,0 +1,55 @@
+
+Description:
+
+  Specifies that a pin or port is in a steady state of 1, 0, rising or falling.
+
+  This command is usually used to force values onto the ports to help reduce
+  the analysis space, runtime and memory consumption. It is important to let
+  the Vivado timing engine know about signals that have a constant value.
+  This is also critical to ensure that non-functional and irrelevant paths
+  are not reported.
+
+  Setting a case value on a pin results in disabling timing analysis through
+  that pin. This means that timing paths through that pin are not reported.
+
+  Note: This command returns nothing if successful, or returns an error if it
+  fails.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <value> - (Required) The value to use on the port or pin for timing
+  analysis. The valid values are 0 or zero, 1 or one, rise or rising, fall or
+  falling. When the values ris(e)(ing) or fall(ing) are specified, the given
+  pins or ports are only considered for timing analysis with the specified
+  transition. The other transition is disabled. The default setting is 1.
+
+  <objects> - (Required) One or more ports or pins on which to apply the
+  <value>.
+
+Examples:
+
+  In the example below, two clocks are created on the input pins of the
+  BUFGMUX, clock_sel, but only clk_B is propagated through the output pin
+  after setting the constant value 1 on the selection pin S:
+
+    create_clock -name clk_A -period 10.0 [get_pins clock_sel/I0] 
+    create_clock -name clk_B -period 15.0 [get_pins clock_sel/I1] 
+    set_case_analysis 1 [get_pins clock_sel/S]
+
+See Also:
+
+   *  create_clock
+   *  report_timing

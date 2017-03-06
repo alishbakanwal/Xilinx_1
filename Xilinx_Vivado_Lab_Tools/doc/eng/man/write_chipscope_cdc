@@ -1,0 +1,54 @@
+
+Description:
+
+  Writes a ChipScope<tm tmtype="tm"/> Definition and Connection (CDC) file
+  containing the legacy ICON 1.x and ILA 1.x debug cores, ports, and signals
+  defined in the current project. The CDC file stores information about
+  source files, destination files, core parameters, and core settings for the
+  ChipScope Pro Analyzer.
+
+  Note: The write_chipscope_cdc command only works with ICON 1.x and ILA 1.x
+  cores. It does not work with newer ILA 2.x or VIO 2.x (or later) Vivado Lab
+  Edition debug cores.
+
+  Legacy ChipScope debug cores can be added to a project through the
+  instantiation of ICON 1.x and ILA 1.x cores in a HDL design, and inclusion
+  of the corresponding netlist and constraint files to the project.
+
+  You can import this CDC file into the ChipScope Analyzer to automatically
+  set up the net names on the ILA core data and trigger ports.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <file> - (Required) The CDC file name to be written.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+Examples:
+
+  The following example writes a CDC file called bft.cdc:
+
+    write_chipscope_cdc bft.cdc
+
+  The written CDC file will include signals to be debugged by ChipScope as
+  well as the clock domain for the signals, and other settings appropriate
+  for use in ChipScope.
+
+See Also:
+
+   *  create_debug_core

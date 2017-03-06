@@ -1,0 +1,36 @@
+HW_ILA_DATA
+
+Description: 
+The hardware ILA data object is a repository for data captured on the ILA debug 
+core programmed onto the current hardware device. The upload_hw_ila_data command 
+creates a hw_ila_data object in the process of moving the captured data from the 
+ILA debug core, hw_ila, on the physical FPGA device, hw_device. 
+
+The read_hw_ila_data command can also create a hw_ila_data object when reading an 
+ILA data file from disk. 
+
+The  hw_ila_data object can be viewed in the waveform viewer of the Vivado logic 
+analyzer by using the display_hw_ila_data command, and can be written to disk 
+using the write_hw_ila_data command.
+
+Related Objects:
+Hardware ILA data objects are associated with the ILA debug cores programmed on 
+the hardware device. You can query the data objects as follows:
+
+	get_hw_ila_datas -of_objects [get_hw_ilas]
+
+Properties:
+You can use the report_property command to report the properties assigned to a 
+hw_ila_data object. Refer to the Vivado Design Suite Tcl Command Reference (UG835) 
+for more information. The properties are as follows:
+
+Property   Type    Read-only  Visible  Value
+CLASS      string  true       true     hw_ila_data
+HW_ILA     string  true       true     hw_ila_1
+NAME       string  true       true     hw_ila_data_1
+TIMESTAMP  string  true       true     Sat Mar 08 11:05:49 2014
+
+To report the properties for the hw_ila_data object, you can copy and paste the 
+following command into the Vivado Design Suite Tcl shell or Tcl console:
+
+	report_property  -all [lindex [get_hw_ila_datas] 0]

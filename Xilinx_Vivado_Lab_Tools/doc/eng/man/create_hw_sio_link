@@ -1,0 +1,76 @@
+
+Description:
+
+  Define a communication links between transmitter (TX) and receiver (RX)
+  objects on the GTs of the IBERT debug core implemented on the current
+  hardware device.
+
+  Vivado Serial I/O analyzer is a link-based analyzer, which lets you link
+  between any transmitter and receiver within the IBERT design. The links
+  define the communication paths and protocols between transmitters and
+  receivers of the GigaBit transceivers on the device. You can configure the
+  links by using the set_property command to specify property values on the
+  link object. Refer to the Vivado Design Suite User Guide: Programming and
+  Debugging (UG908) for more information on configuring links.
+
+  This command returns the created hw_sio_link object, or returns an error if
+  it fails.
+
+Arguments:
+
+  -description <arg> - (Optional) Provide a brief description that acts as a
+  label for the link. This description is stored on the DESCRIPTION property
+  of the hw_sio_link object.
+
+  Note: The NAME property of the hw_sio_link objects is a full path
+  designation of the link from the transmitter (TX) to receiver (RX) GTs on
+  the IBERT debug core, including the hw_server, hw_target, hw_device, and
+  hw_sio_ibert objects. Any description you provide here can be used as a
+  shortcut to help locate the link.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <hw_sio_rx> - (Optional) Specify the receiver element of the GT to include
+  in the communication link. The receiver must be specified as an object as
+  returned by the get_hw_rxs command.
+
+  <hw_sio_tx> - (Optional) Specify the transmitter element of the GT to
+  include in the communication link. The transmitter must be specified as an
+  object as returned by the get_hw_txs command.
+
+  Note: Although the receiver and transmitter are marked as optional, at
+  least one must be provided to create a link. A link with only a transmitter
+  or receiver is considered an open-ended link.
+
+Example:
+
+  The following example creates a communication link between the specifed RX
+  and TX
+
+    create_hw_sio_link -description Link_12  [get_hw_sio_txs *MGT_X0Y12*] \ 
+    [get_hw_sio_rxs *MGT_X0Y12*]
+
+  Note: In the example above the TX precedes the RX. The order of these
+  objects is not significant.
+
+See Also:
+
+   *  create_hw_sio_link
+   *  create_hw_sio_linkgroup
+   *  current_hw_device
+   *  get_hw_sio_iberts
+   *  get_hw_sio_links
+   *  get_hw_sio_linkgroups
+   *  remove_hw_sio_links
+   *  remove_hw_sio_linkgroups

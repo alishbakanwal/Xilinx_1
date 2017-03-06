@@ -1,0 +1,47 @@
+
+Description:
+
+  Imports a partition XML file into the current design. The PXML file
+  contains partition information related to hierarchical design. A PXML file
+  is created by the tool during synthesis or implementation. You can also
+  create one by hand or by using an XML template provided in the tool
+  installation directory. Refer to the Hierarchical Design Methodology Guide
+  (UG748) for more information on partitioning designs and creating a PXML
+  file.
+
+  A partition must be defined to implement, or to import in the RTL design in
+  order to be properly handled in synthesis and implementation. Therefore
+  read_pxml must be used on an open RTL design.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <file> - The name of the PXML file. The file must be named xpartition.pxml,
+  or you will get an error when trying to read the file.
+
+  Note: If the path is not specified as part of the file name, the tool will
+  search for the specified file in the current working directory and then in
+  the directory from which the tool was launched.
+
+Examples:
+
+  The following example reads the specified PXML file for partition
+  information related to the hierarchy of the design:
+
+    read_pxml C:/Data/FPGA_Design/pxmlTest.pxml
+
+See Also:
+
+   *  config_partition

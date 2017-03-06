@@ -1,0 +1,94 @@
+
+Description:
+
+  Reports the network fanout of each clock net in the open synthesized or
+  implemented design. The graphical form of the report, returned when the
+  -name argument is specified, provides a hierarchical tree view of the clock
+  network.
+
+  The default report simply specifies the clock net names and the instance
+  pins that are the startpoint of the clock.
+
+  The report is returned to the standard output unless the -file,
+  -return_string, or -name arguments are specified.
+
+Arguments:
+
+  -file <arg> - (Optional) Write the clock network report into the specified
+  file. The specified file will be overwritten if one already exists, unless
+  -append is also specified.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -append - (Optional) Append the output of the command to the specified file
+  rather than overwriting it.
+
+  Note: The -append option can only be used with the -file option.
+
+  -name <arg> - (Optional) Specifies the name of the results to output to the
+  GUI.
+
+  -return_string - (Optional) Directs the output to a Tcl string. The Tcl
+  string can be captured by a variable definition and parsed or otherwise
+  processed.
+
+  Note: This argument cannot be used with the -file option.
+
+  -endpoints_only - (Optional) Report the clock network endpoints; bucketed
+  by cell type, and sorted by clock pins and non-clock pins. This option
+  cannot be specified with the -levels option.
+
+  -levels <arg> - (Optional) Expands the clock network through the specified
+  levels of instances. The default value is 0. The specified value can be
+  greater than 0. This reports the clock path to the path endpoints if enough
+  levels are specified. Path endpoints are bucketed by cell type, and sorted
+  by clock pins and non-clock pins. This option cannot be used with the
+  -endpoints_only option.
+
+  -expand_buckets - (Optional) Expand the clock network report to expand all
+  of the endpoints buckets returned by the -endpoints_only or -levels
+  options, to report all of the clock endpoints.
+
+  -suppress_endpoints [ clock | nonclock ] - (Optional) Suppress reported
+  paths from clock root to clock pins or non-clock endpoint pins. This option
+  eliminates either clock or non-clock pins from the clock network report.
+
+  -clocks <args> - (Optional) Specify the clock objects to include in the
+  clock network report. When not specified, the report includes all clocks.
+
+  -unconstrained_roots <args> - (Optional) For UltraScale devices, and device
+  architectures with clock roots, specify the list of unconstrained clock
+  root pins or ports to include in the clock network report. If this option
+  is not specified, all unconstrained clock roots are reported.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example reports the clock network names and startpoints to
+  the specified file:
+
+    report_clock_networks -file C:/Data/ClkNets.txt
+
+  The following example reports the endpoints of the specified clock:
+
+    report_clock_networks -endpoints_only -clocks wbClk
+
+See Also:
+
+   *  create_clock
+   *  delete_clock_network_results
+   *  get_clocks

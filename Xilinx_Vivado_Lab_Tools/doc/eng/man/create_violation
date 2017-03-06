@@ -1,0 +1,92 @@
+
+Description:
+
+  Create a violation object and manage the list of design objects associated
+  with the violation for reporting purposes.
+
+  The create_violation command should be specified as part of the Tcl checker
+  that defines and implements the DRC rule checking functionality. A
+  violation object is created by the Tcl checker procedure when violations of
+  the defined rule are encountered.
+
+  The Tcl checker is specified as part of the registration of a user-defined
+  DRC rule as defined in the register_drc_rule command. The DRC rule should
+  be registered first using register drc_rule, prior to using the rule with
+  report_drc, or creating violations in the Tcl checker procedure of a
+  user-defined DRC rule.
+
+Arguments:
+
+  -name <arg> - The unique abbreviation for the rule in the violation
+  library. This is the same name given to the violation in the
+  register_drc_rule command.
+
+  -severity <arg> - (Optional) The severity of the violation. The default
+  severity level for user-defined DRCs is WARNING. The supported values are:
+
+   *  FATAL
+
+   *  ERROR
+
+   *  "CRITICAL WARNING"
+
+   *  WARNING
+
+   *  ADVISORY
+
+  -msg <arg> - (Optional) This is the string substituted for the $STR in the
+  message specified in the register_drc_rule if one is defined.
+
+  Note: This must match the -msg specification from the register_drc_rule.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <objects> - (Optional) Cell, port, pin, net, clock region, site, and IO
+  bank objects to check for violations. These are the netlist elements
+  (%NETLIST_ELEMENT), device sites (%SITE_GROUP), clock regions
+  (%CLOCK_REGION), and package IO blocks (%BANK) that are substituted into
+  the rule for the specified DRC abbreviation as defined in the
+  register_drc_rule command.
+
+Examples:
+
+  The following example creates a violation object named RIPO, which is an
+  ERROR when found, returning the specified message string, and checking the
+  cells stored in the two Tcl variables:
+
+    create_violation -name RIPO -msg "RIPO Error Found:" \ 
+       -severity ERROR $mycell1 $mycell2
+
+  The following is a sample Tcl checker proc definition, incorporating the
+  create_violation command:
+
+    proc cell_check {} { 
+       puts "Executing DRC rule cell_check." 
+       set mycell3 [lindex [get_cells] 3] 
+       set mycell5 [lindex [get_cells] 5] 
+       puts $mycell3 
+       set vio_1 [create_violation -name CLCHK -msg "Rule 1: failed." \ 
+          -severity "CRITICAL WARNING" $mycell3 $mycell5] 
+       set vio_2 [create_violation -name CLCHK -msg "Rule 1: failed again." \ 
+          -severity "CRITICAL WARNING" $mycell5 $mycell3] 
+       set x [list $vio_1 $vio_2] 
+       return -code error $x 
+    }
+
+See Also:
+
+   *  manage_user_drc_rule
+   *  register_drc_rule
+   *  report_drc
+   *  reset_drc

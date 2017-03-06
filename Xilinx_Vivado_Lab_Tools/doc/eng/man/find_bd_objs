@@ -1,0 +1,89 @@
+
+Description:
+
+  Find a list of pins, ports or interfaces with a given relationship to the
+  specified objects.
+
+  This command returns a list of pins, ports or interface objects if
+  successful, or returns an error if it fails.
+
+  find_bd_objs -relation <arg> [-boundary_type <arg>] [-thru_hier]
+  [-stop_at_interconnect] [-end_type <arg>] [-quiet] [-verbose] <objects>...
+
+Arguments:
+
+  -relation <arg> - (Required) Specifies the relationship of the objects to
+  find with the objects specified to seed the search. Valid values are:
+
+   *  connected_to - Find corresponding pins, ports or interfaces that are
+      connected to the given source objects. The search occurs within the
+      same level of hierarchy as the specified objects. Use the -thru_hier
+      option to search across hierarchical boundaries.
+
+   *  addressable_slave - Find pins, ports, or interfaces, that can be
+      addressed as slaves by the specified search objects.
+
+   *  addressing_master - Find pins, ports, or interfaces, that address the
+      specified search objects as masters.
+
+  -boundary_type [ upper | lower | all ] - (Optional) Used when the specified
+  source objects include a pin or interface pin on a hierarchical module. The
+  default behavior is "upper", which searches for related objects within the
+  same level as the hierarchical module that the pin is found on. If "lower",
+  the search occurs inside the hierarchical module that the pin is on. If
+  "all", then both the level of the hierarchical module, and inside the
+  hierarchical module are searched for related objects.
+
+  Note: This option must be used with -relation connected_to.
+
+  -thru_hier - (Optional) Ignore the boundary of hierarchical blocks when
+  performing the search for objects. If used used with -boundary_type lower,
+  the search for related objects will start inside the hierarchical module
+  the pin is on, and continue searching downward through the hierarchy.
+
+  -stop_at_interconnect - (Optional) Specifies to stop searching at the
+  boundary of the AXI Interconnect IP when -thru_hier is specified. Other
+  hierarchical blocks are searched as usual.
+
+  -end_type all - (Optional) This option can be specified for bd_pin and
+  bd_port type <objects>. The default search for related objects returns all
+  of the sink pins attached to a specified source object, and to return the
+  source object for a given sink. When -end_type all is specified for a sink
+  object, the tool will return the source pin or port of the specified sink
+  object, as well as other sink objects that are connected to the source
+  object.
+
+  Note: This option must be used with -relation connected_to.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <objects> - (Required) One or more objects to use to find related objects.
+
+Example:
+
+  The following example gets pins, ports, and interfaces connected to the
+  specified object, across all levels of the block design hierarchy:
+
+    find_bd_objs -relation connected_to -thru_hier \ 
+    [get_bd_pins /proc_sys_reset_1/peripheral_aresetn]
+
+See Also:
+
+   *  create_bd_cell
+   *  create_bd_intf_net
+   *  create_bd_intf_pin
+   *  create_bd_intf_port
+   *  create_bd_net
+   *  create_bd_pin
+   *  create_bd_port

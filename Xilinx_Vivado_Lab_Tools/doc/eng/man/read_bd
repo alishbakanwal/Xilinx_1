@@ -1,0 +1,57 @@
+
+Description:
+
+  Read the specified IP subsystem design files, or block designs, into the
+  current project or the in-memory design. This command is similar to the
+  add_files command. The block design file is added to the source fileset as
+  it is read.
+
+  Note: Files are read and referenced from their current location, and are
+  not moved into the local project directories. To bring the file into the
+  local project, use the import_files command instead.
+
+  You can use this command to read block designs into the in-memory design,
+  when running the Vivado tool in Non Project mode, in which there is no
+  project file to maintain and manage the various project source files. Refer
+  to the Vivado Design Suite User Guide: Design Flows Overview (UG892) for
+  more information on Non Project mode.
+
+  This command returns the name of the IP subsystem design files read, or
+  returns an error if it fails.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <files> - Specify the name of the IP subsystem files to read into the
+  current project or in-memory design.
+
+  Note: If the path is not specified as part of the file name, the tool will
+  search for the specified file in the current working directory and then in
+  the directory from which the tool was launched.
+
+Examples:
+
+  The following example reads the specified IP subsystem design into the
+  current project:
+
+    
+    read_bd C:/Data/block_designs/design1.bd
+
+See Also:
+
+   *  add_files
+   *  import_files
+   *  open_bd_design
+   *  save_bd_design

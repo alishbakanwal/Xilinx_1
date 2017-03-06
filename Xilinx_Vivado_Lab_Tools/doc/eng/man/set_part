@@ -1,0 +1,62 @@
+
+Description:
+
+  Change the part used by the current project for subsequent elaboration,
+  synthesis, implementation, and analysis.
+
+  Note: The part is changed for the current project only, and not for the
+  in-memory design. You can change the speed grade of the device in the
+  in-memory design for timing analysis using the set_speed_grade command. You
+  can change the part used when opening an existing design checkpoint using
+  the -part option of the open_checkpoint or read_checkpoint commands.
+
+  This command is provided to let you change the part for the in-memory
+  project of non-project based designs, and does not support project-based
+  designs. For a project-based design set the PART property on the project as
+  follows:
+
+    set_property PART xc7vx485tffg1158-2 [current_project]
+
+  Use the get_parts command to get a list of the available parts.
+
+  The set_part command creates an in-memory project for a non-project based
+  design, or assigns the part to the existing in-memory project.
+
+  Note: For a discussion of Project Mode and Non-Project Mode refer to the
+  Vivado Design Suite User Guide: Design Flows Overview (UG892).
+
+  This command returns the part that the in-memory project is set to use, or
+  returns an error if it fails.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <part> - (Required) Specifies the part to change to, or use in the current
+  project or in-memory design.
+
+Example:
+
+  The following example changes the part of the current in-memory project:
+
+    set_part xc7vx485tffg1158-2
+
+See Also:
+
+   *  create_project
+   *  get_parts
+   *  open_checkpoint
+   *  read_checkpoint
+   *  set_property
+   *  set_speed_grade

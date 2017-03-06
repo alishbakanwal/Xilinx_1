@@ -1,0 +1,49 @@
+BD_ADDR_SPACE
+
+Description: 
+An address space, or bd_addr_space object, is an assigned logically addressable 
+space of memory on a master interface, or on AXI interface ports connected to an 
+AXI master external to the block design. 
+
+The IP integrator feature of the Vivado Design Suite follows the industry 
+standard IP-XACT data format for capturing memory requirements and capabilities. 
+Some blocks may have one address space associated with multiple master 
+interfaces, for example a processor with a system bus and fast memory bus. 
+Other components may have multiple address spaces associated with multiple 
+master interfaces, one for instruction and the other for data.
+
+Master interfaces reference address spaces, or bd_addr_space objects. When an AXI 
+slave is mapped to a master address space, a master address segment (bd_addr_seg) 
+object is created, mapping the address segments of the slave to the master. 
+
+Related Objects:
+The master address segment, bd_addr_seg, is associated with the address spaces 
+in AXI master interfaces, found on a block design. The address space is referenced 
+by the interface pins, bd_intf_pin, on the cell, bd_cell. External AXI masters are
+associated with interface ports, bd_intf_port. 
+
+You can query the bd_addr_space objects of these associated objects:
+
+get_bd_addr_spaces -of_objects [get_bd_cells /microblaze_0]
+get_bd_addr_segs -of_objects [get_bd_addr_spaces -of_objects [get_bd_cells /microblaze_0]]
+
+You can also query the objects associated with the block design address spaces:
+
+get_bd_intf_pins -of_objects [get_bd_addr_spaces *SLMB]
+
+Properties:
+The properties on a block design address space object, bd_addr_space, include the 
+following, with example values:
+
+Property  Type    Read-only  Visible  Value
+CLASS     string  true       true     bd_addr_space
+NAME      string  false      true     S_AXI_CTRL
+OFFSET    string  false      true     
+PATH      string  true       true     /microblaze_0_local_memory/dlmb_bram_if_cntlr/S_AXI_CTRL
+RANGE     string  false      true     4096
+TYPE      string  false      true     
+
+To report the properties for a bd_addr_space object, you can copy and paste the 
+following command into the Vivado Design Suite Tcl shell or Tcl console:
+
+	report_property -all [lindex [get_bd_addr_spaces] 0]

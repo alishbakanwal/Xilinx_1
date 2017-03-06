@@ -1,0 +1,54 @@
+
+Description:
+
+  Deletes the out-of-context (OOC) synthesis and implementation runs for the
+  specified IP module.
+
+  The contents of the run directory are deleted from the project as well as
+  the run. However, the output products created by the run and copied to the
+  IP sources folder, the DCP file and Verilog and VHDL structural netlists,
+  are not deleted from the project. You must use the reset_target or
+  generate_target command to update the IP output products.
+
+  Note: The command requires an IP object as specified by the get_ips or
+  get_files command, and will not delete a run based on either the name of
+  the run, or a run object as returned by get_runs.
+
+Arguments:
+
+  -force - Force the deletion of the run.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <objects> - (Required) The IP object or file to delete the run from. An IP
+  can be specified as an object using the get_ips command, or as a file (XCI)
+  using the get_files command.
+
+Examples:
+
+  The following example deletes the OOC synthesis and implementation runs
+  from the specified IP module:
+
+    delete_ip_run [get_ips add1]
+
+  Note: In this example, all run results will also be removed from the run
+  directory on the hard drive.
+
+See Also:
+
+   *  create_ip_run
+   *  generate_target
+   *  get_files
+   *  get_ips
+   *  reset_target

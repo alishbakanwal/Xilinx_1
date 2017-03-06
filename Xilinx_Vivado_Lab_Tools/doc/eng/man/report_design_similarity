@@ -1,0 +1,60 @@
+
+Description:
+
+  Compare the specified Design Checkpoint file (DCP) with the current design
+  to determine the amount of overlap in the designs. This is intended to
+  report the suitability of the DCP file as a reference design for
+  incremental placement and routing using the -incremental options of the
+  place_design and route_design commands.
+
+  The reference checkpoint is usually an earlier iteration of the current
+  design which is created by using the write_checkpoint command. The
+  reference design should be significantly similar to the current design in
+  order to provide any benefit from incremental placement and routing.
+
+  This command requires an open design. The results of the report can be
+  written to a file with the -file option, or returned to the standard output
+  by default.
+
+Arguments:
+
+  -file <arg> - (Optional) Write the report into the specified file.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -append - (Optional) Append the output of the command to the specified file
+  rather than overwriting it.
+
+  Note: The -append option can only be used with the -file option.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <dcp_file> - Specifies the name of a Design Checkpoint file to use as a
+  reference design for incremental placement and routing of the current
+  design.
+
+Examples:
+
+  The following example reports the amount of overlap between the
+  firstPass.dcp file and the current design:
+
+    report_design_similarity C:/Data/firstPass.dcp
+
+See Also:
+
+   *  place_design
+   *  route_design
+   *  write_checkpoint

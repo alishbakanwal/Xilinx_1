@@ -1,0 +1,61 @@
+
+Description:
+
+  Set or return the current ILA debug core data object.
+
+  The ILA data object is created in the Vivado logic analyzer using the
+  upload_hw_ila_data command, or the read_hw_ila_data command. By default,
+  the current hw_ila_data object is the latest one created by the Vivado
+  logic analyzer. The current_hw_ila_data command can be used to change that
+  object.
+
+  The ILA debug core captures sample data in real-time as the hardware device
+  runs, based on the event triggers or capture conditions defined on the
+  hw_ila object. The hw_ila object triggers on the hw_device are armed by the
+  run_hw_ila command.
+
+  The ILA data object can be displayed in the waveform window of the Vivado
+  tools logic analyzer using the display_hw_ila_data command. You can also
+  write the ILA data to disk with the write_hw_ila_data command to save the
+  ILA debug information for later user and analysis.
+
+  This command returns the captured hardware ILA debug core data as an
+  object, or returns an error if it fails.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <hw_ila_data> - (Optional) Specify the hw_ila_data object to set as the
+  current data object for programming and debug. The hw_ila_data object must
+  be specified as an object as returned by the get_hw_ila_datas command. If
+  the hardware ILA data is not specified, the current_hw_ila_data object will
+  be returned.
+
+Example:
+
+  The following example returns the current data object for the hardware ILA
+  debug core:
+
+    current_hw_ila_data
+
+See Also:
+
+   *  current_hw_ila
+   *  display_hw_ila_data
+   *  get_hw_ilas
+   *  get_hw_ila_datas
+   *  read_hw_ila_data
+   *  run_hw_ila
+   *  write_hw_ila_data

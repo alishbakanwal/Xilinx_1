@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="template.xsl"?>
+<RootFolder label="Debug" treetype="folder" language="TSM">
+  <Folder label="Trigger State Machine" treetype="folder">
+    <Template label="Info" treetype="template">
+########################################################################
+#
+# The trigger state machine language has the following features:
+#  o Up to 16 states
+#
+#    - User defined state names, such as "this_is_the_init_state":
+#
+#        state this_is_the_init_state:
+#
+#    - The "goto" action to perform any state transition
+#
+#        goto my_state1;
+#
+#  o  One-way, Two-way, or Three-way conditional branching
+#
+#    - One-way branch: no if/elseif/else conditions, just straight 
+#      "goto" actions.  
+#
+#      For example, to always transition from state "my_state0" to 
+#      "my_state1", you can use the following:
+#
+#        state my_state0:
+#          goto my_state1;
+#
+#    - Two-way branch: if/else conditional.
+#
+#      For example, to transition from state "my_state0" to 
+#      "my_state1" only when probe "abc" equals '1' you can use 
+#      the following:
+#
+#        state my_state0:
+#          if (abc == 1'b1) then
+#            goto my_state1;
+#          else
+#            goto my_state0;
+#          endif
+#
+#    - Three-way branch: if/elseif/else conditional
+#
+#      For example, to transition from state "my_state0" to 
+#      "my_state1" only when probe "abc" equals '1', or to transition
+#      from state "my_state0" to "my_state2" only when probe "xyz" 
+#      equals '1' you can use the following:
+#
+#        state my_state0:
+#          if (abc == 1'b1) then
+#            goto my_state1;
+#          elseif (xyz == 1'b1) then
+#            goto my_state2;
+#          else
+#            goto my_state0;
+#          endif
+#
+#  o Four 16-bit counters ($counter0, $counter1, $counter2, and 
+#    $counter3) used to count events, implement timers, etc.
+#
+#    - Increment counter action:
+#
+#      For example,to increment $counter0, use the following:
+#
+#        increment_counter $counter0;
+#
+#    - Reset counter action:
+#
+#      For example,to reset $counter3, use the following:
+#
+#        reset_counter $counter3;
+#
+#    - Test counter value in conditional:
+#
+#      For example, to test for $counter2 equal to 100, use the 
+#      following:
+#
+#        state my_state0:
+#          if ($counter2 == 16'u100) then
+#
+#  o Four built-in flags ($flag0, $flag1, $flag2, and $flag3) used for 
+#    debugging the trigger state machine during execution
+#
+#    - Set a flag
+#
+#      For example, to set $flag0 to a 1, use the following:
+#
+#        set_flag $flag0;
+#
+#    - Clear a flag
+#
+#      For example, to clear $flag3 to a 0, use the following:
+#
+#        clear_flag $flag3;
+#
+#  o The "trigger" action causes the trigger to occur
+#
+#      trigger;
+#
+########################################################################
+#
+# Simple state machine
+state my_state0:
+  trigger;
+    </Template>
+    <Template label="Trigger State Machine Language Grammar" treetype="template">
+#
+# &lt;program&gt; ::= &lt;state_list&gt;
+#   
+# &lt;state_list&gt; ::= &lt;state_list&gt; &lt;state&gt; | &lt;state&gt;
+#   
+# &lt;state&gt; ::= 'STATE' &lt;state_label&gt; ':' &lt;if_condition&gt; | &lt;action_block&gt;
+#   
+# &lt;action_block&gt; ::= &lt;action_list&gt; 'GOTO' &lt;state_label&gt; ';'
+#                   | &lt;action_list&gt; 'TRIGGER' ';'
+#                   | 'GOTO' &lt;state_label&gt; ';'
+#                   | 'TRIGGER' ';'
+#  
+# &lt;action_list&gt; ::= &lt;action_statement&gt; | &lt;action_list&gt; &lt;action_statement&gt;
+#  
+# &lt;action_statement&gt; ::= 'SET_FLAG' &lt;flag_name&gt; ';'
+#                      | 'CLEAR_FLAG' &lt;flag_name&gt; ';'
+#                      | 'INCREMENT_COUNTER' &lt;counter_name&gt; ';'
+#                      | 'RESET_COUNTER' &lt;counter_name&gt; ';'
+#  
+# &lt;if_condition&gt; ::= 'IF' '(' &lt;condition&gt; ')' 'THEN' &lt;action_block&gt;
+#                    ['ELSEIF' '(' &lt;condition&gt; ')' 'THEN' &lt;action_block&gt;] 
+#                    'ELSE' &lt;action_block&gt;
+#                    'ENDIF'
+#  
+# &lt;condition&gt; ::= &lt;probe_match_list&gt;
+#               | &lt;counter_match&gt;
+#               | &lt;probe_counter_match&gt;
+#  
+# &lt;probe_counter_match&gt; ::= '(' &lt;probe_counter_match&gt; ')'
+#                         | &lt;probe_match_list&gt; &lt;boolean_logic_op&gt; &lt;counter_match&gt;
+#                         | &lt;counter_match&gt; &lt;boolean_logic_op&gt; &lt;probe_match_list&gt;
+#  
+# &lt;probe_match_list&gt; ::= '(' &lt;probe_match&gt; ')'
+#                      | &lt;probe_match&gt;
+#  
+# &lt;probe_match&gt; ::= &lt;probe_match_list&gt; &lt;boolean_logic_op&gt; &lt;probe_match_list&gt;
+#                 | &lt;probe_name&gt; &lt;compare_op&gt; &lt;constant&gt;
+#                 | &lt;constant&gt; &lt;compare_op&gt; &lt;probe_name&gt;
+#  
+# &lt;counter_match&gt; ::= '(' &lt;counter_match&gt; ')'
+#                   | &lt;counter_name&gt; &lt;counter_compare_op&gt; &lt;constant&gt;
+#                   | &lt;constant&gt; &lt;counter_compare_op&gt; &lt;counter_name&gt;
+#  
+# &lt;constant&gt; ::= &lt;integer_constant&gt;
+#              | &lt;hex_constant&gt;
+#              | &lt;binary_constant&gt;
+#  
+# &lt;compare_op&gt; ::= '==' | '!=' | '&gt;' | '&gt;=' | '&lt;' | '&lt;='
+#  
+# &lt;counter_compare_op&gt; ::= '==' | '!='
+#  
+# &lt;boolean_logic_op&gt; ::= '&amp;&amp;' | '||'
+#  
+# --- The following are in regular expression format to simplify expressions ---
+# --- [A-Z0-9] means match any single character in AB...Z,0..9
+# --- [AB]+ means match [AB] one or more times like A, AB, ABAB, AAA, etc
+# --- [AB]* means match [AB] zero or more times
+# &lt;probe_name&gt; ::= [A-Z_\[\]&lt;&gt;/\.][A-Z_0-9\[\]&lt;&gt;/\.]+
+# &lt;state_label&gt; ::= [A-Z_][A-Z_0-9]+
+# &lt;flag_name&gt; ::= \$FLAG[0-3]
+# &lt;counter_name&gt; ::= \$COUNTER[0-3]
+# &lt;hex_constant&gt;     ::= &lt;integer&gt;*'h&lt;hex_digit&gt;+
+# &lt;binary_constant&gt;  ::= &lt;integer&gt;*'b&lt;binary_digit&gt;+
+# &lt;integer_constant&gt; ::= &lt;integer&gt;*'u&lt;integer_digit&gt;+
+# &lt;integer&gt;       ::= &lt;digit&gt;+
+# &lt;hex_digit&gt;     ::= [0-9ABCDEFBN_]
+# &lt;binary_digit&gt;  ::= [01XRFBN_]
+# &lt;digit&gt;         ::= [0-9]
+# 
+# NOTES:
+# 1) The language is case insensitive
+# 2) Comment character is hash '#' character. Anything including and after a # character is ignored
+#
+    </Template>
+    <SubFolder label="Trigger State Machine Examples" treetype="folder">
+	    <Template label="Simple Trigger Immediate State Machine" treetype="template">
+#
+# Simple "trigger immediate" state machine
+#
+state state0:
+  trigger;
+	    </Template>
+	    <Template label="Trigger on 4th Rising Edge of Debug Probe" treetype="template">
+#
+# Trigger on the 4th rising edge of debug probe called "abc"
+#
+state wait_for_4th_rising_edge_of_abc:
+  if ((abc == 1'bR) &amp;&amp; ($counter0 == 16'h0003)) then
+    reset_counter $counter0;
+    trigger;
+  elseif (abc == 1'bR) then
+    increment_counter $counter0;
+    goto wait_for_4th_rising_edge_of_abc;
+  else
+    goto wait_for_4th_rising_edge_of_abc;
+  endif
+	    </Template>		
+    </SubFolder>
+    <SubFolder label="States" treetype="folder">
+	    <Template label="State declaration" treetype="template">
+state &lt;state_name&gt;:
+  &lt;statements&gt;
+	    </Template>
+    </SubFolder>
+    <SubFolder label="Conditional Branching" treetype="folder">
+	    <Template label="One-way Conditional Branching" treetype="template">
+  goto &lt;state_name&gt;;
+	    </Template>
+	    <Template label="Two-way Conditional Branching (if-else)" treetype="template">
+  if (&lt;condition&gt;) then
+    goto &lt;state_name&gt;;
+  else
+    goto &lt;state_name&gt;;
+  endif
+	    </Template>
+	    <Template label="Three-way Conditional Branching (if-elseif-else)" treetype="template">
+  if (&lt;condition&gt;) then
+    goto &lt;state_name&gt;;
+  elseif (&lt;condition&gt;) then
+    goto &lt;state_name&gt;;
+  else
+    goto &lt;state_name&gt;;
+  endif
+	    </Template>
+    </SubFolder>
+    <SubFolder label="Conditions" treetype="folder">
+      <Template label="Info (Debug Probe Conditions)" treetype="template">
+#
+# Debug probe conditions can be used in two-way and three-way branching 
+# conditional statements.  Each debug probe condition consumes one trigger 
+# comparator on the PROBE port of the ILA to which the debug probe is attached.
+#
+#   NOTE: each PROBE port can have from 1 to 4 trigger comparators as
+#   configured at compile time. This means that you can only use a 
+#   particular debug probe in a debug probe condition up from 1 to 4 
+#   times in the entire trigger state machine program, depending on the
+#   number of comparators on the PROBE port.  Also, if the debug probe 
+#   shares a PROBE port of the ILA core with other debug probes, each debug
+#   probe condition will count towards the use of one PROBE comparator.
+#
+# The debug probe conditions consist of a comparison operator and a value.
+# The valid debug probe condition comparison operators are:
+#
+#   == ..... equals
+#   != ..... not equals
+#   &gt; ...... greater than
+#   &lt; ...... less than
+#   &gt;= ..... greater than or equal to
+#   &lt;= ..... less than or equal to
+#
+# Examples of valid debug probe condition values are:
+#
+#   1'b0 ..... 1-bit binary value of 0
+#   12'h07A .. 12-bit hex value of 7A
+#   9'u123 ... 9-bit integer value of 123
+#
+# Examples of debug probe condition statements
+#
+#   (abc == 1'b0) ........... Single-bit debug probe "abc" equals 0
+#   (xyz >= 23'u456) ........ 23-bit debug probe "xyz" equals 456
+#   (xyz != 23'h0000A5) ..... 23-bit debug probe "xyz" does not equal hex A5
+#   
+      </Template>
+      <Template label="Info (Counter Conditions)" treetype="template">
+#
+# Counter conditions can be used in two-way and three-way branching 
+# conditional statements.  Each counter condition consumes one counter 
+# comparator.
+#
+#   NOTE: each counter has only one counter comparator.  This means that
+#   you can only use a particular counter in a counter condition once in
+#   the entire trigger state machine program.
+#
+# The probe port conditions consist of a comparison operator and a value.
+# The valid probe condition comparison operators are:
+#
+#   == ..... equals
+#   != ..... not equals
+#
+# Examples of valid probe condition values are:
+#
+#   1'b0 ..... 1-bit binary value of 0
+#   12'h07A .. 12-bit hex value of 7A
+#   9'u123 ... 9-bit integer value of 123
+#
+#   NOTE: each counter is 16 bits wide
+#
+# Examples of counter condition statements:
+#
+#   ($counter0 == 16'b0000000000000000) ..... Counter $counter0 equals binary 0
+#   ($counter2 != 16'u23) ................... Counter $counter2 does not equal decimal 23
+#   
+      </Template>
+      <Template label="Single-Scalar-Probe Condition" treetype="template">
+  if (&lt;probe_name&gt; == 1'b1) then
+      </Template>
+      <Template label="Single-Vector-Probe Condition" treetype="template">
+  if (&lt;probe_name&gt; == 16'h89AB) then
+      </Template>
+      <Template label="Two-Probe AND Condition" treetype="template">
+  if ((&lt;probe_name&gt; == 1'b1) &amp;&amp; (&lt;probe_name&gt; != 16'h89AB)) then
+      </Template>
+      <Template label="Three-Probe AND Condition" treetype="template">
+  if ((&lt;probe_name&gt; == 1'b1) &amp;&amp; (&lt;probe_name&gt; != 16'h89AB) &amp;&amp; (&lt;probe_name&gt; > 22'u42)) then
+      </Template>
+      <Template label="Two-Probe OR Condition" treetype="template">
+  if ((&lt;probe_name&gt; == 1'b1) || (&lt;probe_name&gt; != 16'h89AB)) then
+      </Template>
+      <Template label="Three-Probe OR Condition" treetype="template">
+  if ((&lt;probe_name&gt; == 1'b1) || (&lt;probe_name&gt; != 16'h89AB) || (&lt;probe_name&gt; &gt;= 22'u42)) then
+      </Template>
+      <Template label="Counter Condition using $counter0" treetype="template">
+  if ($counter0 == 16'u20) then
+      </Template>
+      <Template label="Counter Condition using $counter1" treetype="template">
+  if ($counter1 == 16'u20) then
+      </Template>
+      <Template label="Counter Condition using $counter2" treetype="template">
+  if ($counter2 == 16'u20) then
+      </Template>
+      <Template label="Counter Condition using $counter3" treetype="template">
+  if ($counter3 == 16'u20) then
+      </Template>
+      <Template label="Single-Scalar-Probe Condition with Counter AND Condition" treetype="template">
+  if ((&lt;probe_name&gt; == 1'b1) &amp;&amp; (&lt;counter_name&gt; == 16'u23)) then
+      </Template>
+      <Template label="Single-Vector-Probe Condition with Counter AND Condition" treetype="template">
+  if ((&lt;probe_name&gt; == 16'h89AB) &amp;&amp; (&lt;counter_name&gt; == 16'u23)) then
+      </Template>
+      <Template label="Single-Scalar-Probe Condition with Counter OR Condition" treetype="template">
+  if ((&lt;probe_name&gt; == 1'b1) || (&lt;counter_name&gt; == 16'u23)) then
+      </Template>
+      <Template label="Single-Vector-Probe Condition with Counter OR Condition" treetype="template">
+  if ((&lt;probe_name&gt; == 16'h89AB) || (&lt;counter_name&gt; == 16'u23)) then
+      </Template>
+      <Template label="Two-Probe AND Condition with Counter AND Condition" treetype="template">
+  if (((&lt;probe_name&gt; == 1'b1) &amp;&amp; (&lt;probe_name&gt; != 16'h89AB)) &amp;&amp; (&lt;counter_name&gt; == 16'u23)) then
+      </Template>
+      <Template label="Three-Probe AND Condition with Counter AND Condition" treetype="template">
+  if (((&lt;probe_name&gt; == 1'b1) &amp;&amp; (&lt;probe_name&gt; != 16'h89AB) &amp;&amp; (&lt;probe_name&gt; > 22'u42)) &amp;&amp; (&lt;counter_name&gt; == 16'u23)) then
+      </Template>
+      <Template label="Two-Probe OR Condition with Counter AND Condition" treetype="template">
+  if (((&lt;probe_name&gt; == 1'b1) || (&lt;probe_name&gt; != 16'h89AB)) &amp;&amp; (&lt;counter_name&gt; == 16'u23)) then
+      </Template>
+      <Template label="Three-Probe OR Condition with Counter AND Condition" treetype="template">
+  if (((&lt;probe_name&gt; == 1'b1) || (&lt;probe_name&gt; != 16'h89AB) || (&lt;probe_name&gt; &gt;= 22'u42)) &amp;&amp; (&lt;counter_name&gt; == 16'u23)) then
+      </Template>
+      <Template label="Two-Probe AND Condition with Counter OR Condition" treetype="template">
+  if (((&lt;probe_name&gt; == 1'b1) &amp;&amp; (&lt;probe_name&gt; != 16'h89AB)) || (&lt;counter_name&gt; == 16'u23)) then
+      </Template>
+      <Template label="Three-Probe AND Condition with Counter OR Condition" treetype="template">
+  if (((&lt;probe_name&gt; == 1'b1) &amp;&amp; (&lt;probe_name&gt; != 16'h89AB) &amp;&amp; (&lt;probe_name&gt; > 22'u42)) || (&lt;counter_name&gt; == 16'u23)) then
+      </Template>
+      <Template label="Two-Probe OR Condition with Counter OR Condition" treetype="template">
+  if (((&lt;probe_name&gt; == 1'b1) || (&lt;probe_name&gt; != 16'h89AB)) || (&lt;counter_name&gt; == 16'u23)) then
+      </Template>
+      <Template label="Three-Probe OR Condition with Counter OR Condition" treetype="template">
+  if (((&lt;probe_name&gt; == 1'b1) || (&lt;probe_name&gt; != 16'h89AB) || (&lt;probe_name&gt; &gt;= 22'u42)) || (&lt;counter_name&gt; == 16'u23)) then
+      </Template>
+    </SubFolder>
+    <SubFolder label="Trigger Action" treetype="folder">
+      <Template label="Trigger" treetype="template">
+  trigger;
+      </Template>
+    </SubFolder>
+    <SubFolder label="Counter Actions" treetype="folder">
+      <Template label="Increment $counter0" treetype="template">
+  increment_counter $counter0;
+      </Template>
+      <Template label="Increment $counter1" treetype="template">
+  increment_counter $counter1;
+      </Template>
+      <Template label="Increment $counter2" treetype="template">
+  increment_counter $counter2;
+      </Template>
+      <Template label="Increment $counter3" treetype="template">
+  increment_counter $counter3;
+      </Template>
+      <Template label="Reset $counter0" treetype="template">
+  reset_counter $counter0;
+      </Template>
+      <Template label="Reset $counter1" treetype="template">
+  reset_counter $counter1;
+      </Template>
+      <Template label="Reset $counter2" treetype="template">
+  reset_counter $counter2;
+      </Template>
+      <Template label="Reset $counter3" treetype="template">
+  reset_counter $counter3;
+      </Template>
+    </SubFolder>
+    <SubFolder label="Flag Actions" treetype="folder">
+      <Template label="Set $flag0" treetype="template">
+  set_flag $flag0;
+      </Template>
+      <Template label="Set $flag1" treetype="template">
+  set_flag $flag1;
+      </Template>
+      <Template label="Set $flag2" treetype="template">
+  set_flag $flag2;
+      </Template>
+      <Template label="Set $flag3" treetype="template">
+  set_flag $flag3;
+      </Template>
+      <Template label="Clear $flag0" treetype="template">
+  clear_flag $flag0;
+      </Template>
+      <Template label="Clear $flag1" treetype="template">
+  clear_flag $flag1;
+      </Template>
+      <Template label="Clear $flag2" treetype="template">
+  clear_flag $flag2;
+      </Template>
+      <Template label="Clear $flag3" treetype="template">
+  clear_flag $flag3;
+      </Template>
+    </SubFolder>
+  </Folder>
+</RootFolder>

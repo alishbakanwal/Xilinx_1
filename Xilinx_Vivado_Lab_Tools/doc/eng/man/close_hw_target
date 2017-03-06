@@ -1,0 +1,47 @@
+
+Description:
+
+  Close the connection to the current or specified hardware target that was
+  previously opened using the open_hw_target command.
+
+  The hardware target is a system board containing a JTAG chain of one or
+  more Xilinx devices that you can program with a bitstream file, or use to
+  debug your design. Connections between hardware targets on the system board
+  and the Vivado Design Suite are managed by the hw_server application. Refer
+  to Vivado Design Suite User Guide: Programming and Debugging (UG908) for a
+  list of supported JTAG download cables and devices.
+
+  This command returns connection messages from the hardware server, or
+  returns an error if it fails.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <hw_target> - (Optional) Specify the hw_target object to close the
+  connection to. The hw_target must be specified as an object as returned by
+  the get_hw_targets or current_hw_target commands. If no target is
+  specified, the open connection to the current_hw_target will be closed.
+
+Example:
+
+  The following example closes the current hardware target:
+
+    close_hw_target
+
+See Also:
+
+   *  get_hw_targets
+   *  open_hw_target
+   *  refresh_hw_target

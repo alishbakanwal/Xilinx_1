@@ -1,0 +1,38 @@
+
+Description:
+
+  Unplace the specified cells from their current placement site.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <cell_list> - (Required) Specifies a list of one or more cells to be
+  unplaced from the device.
+
+Examples:
+
+  The following example unplaces the specified cell:
+
+    unplace_cell {fftEngine/fftInst/ingressLoop[6].ingressFifo/buffer_fifo/i_4773_12897}
+
+  The following example unplaces multiple cells:
+
+    unplace_cell {div_cntr_reg_inferredi_4810_15889  div_cntr_reg[0] div_cntr_reg[1]}
+
+See Also:
+
+   *  create_cell
+   *  place_cell
+   *  remove_cell

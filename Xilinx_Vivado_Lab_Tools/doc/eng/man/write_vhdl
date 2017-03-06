@@ -1,0 +1,108 @@
+
+Description:
+
+  Write a VHDL netlist of the current design or from a specific cell of the
+  design to the specified file or directory.
+
+  The output of this command is a VHDL IEEE 1076.4 VITAL-2000 compliant VHDL
+  file that contains netlist information obtained from the input design
+  files. You can output a complete netlist of the design or specific cell, or
+  output a port list for the design.
+
+Arguments:
+
+  -cell <arg> - (Optional) Write the VHDL netlist from a specified cell or
+  block level of the design hierarchy. The output VHDL file or files will
+  only include information contained within the specified cell or module.
+
+  -mode <arg> - (Optional) The mode to use when writing the VHDL file. By
+  default, the simulation netlist is written for the whole design. Valid mode
+  values are:
+
+   *  funcsim - Output the VHDL netlist to be used as a functional simulation
+      model. The output netlist is not suitable for synthesis. This is the
+      default setting.
+
+   *  pin_planning - Output only the I/O ports in the entity declaration for
+      the top module.
+
+   *  synth_stub - Output the ports from the top-level of the design for use
+      as a synthesis stub.
+
+  -lib - (Optional) Create a separate VHDL file for each library used by the
+  design.
+
+  Note: This option is the opposite of, and replaces the -nolib option from
+  prior releases. Previously the default behavior of write_vhdl was to output
+  a separate VHDL file for each library used in the design, unless -nolib was
+  specified. Now you must specify the -lib option to output separate files
+  for each library.
+
+  -port_diff_buffers - (Optional) Add the differential pair buffers and
+  internal wires associated with those buffers into the output ports list.
+  This argument is only valid when -mode pin_planning or -mode synth_stub is
+  specified.
+
+  -write_all_overrides [ true | false ] - (Optional) Write parameter
+  overrides in the design to the VHDL output even if the value of the
+  parameter is the same as the defined primitive default value. If the option
+  is false then parameter values which are equivalent to the primitive
+  defaults are not output to the VHDL file. Setting this option to true will
+  not change the result but makes the output netlist more verbose.
+
+  -keep_vcc_gnd - (Optional) By default, when writing a nelist for
+  simulation, or from an IP Integrator block design, the Vivado Design Suite
+  replaces VCC and GND primitives, and the nets they drive, with literal
+  constants on each of the loads on the net. The -keep_vcc_gnd option
+  disables this default behavior and preserves the VCC or GND primitives.
+
+  -rename_top <arg> - (Optional) Rename the top module in the output as
+  specified. This option only works with -mode funcsim to allow the VHDL
+  netlist to plug into top-level simulation test benches.
+
+  -arch_only - (Optional) Suppress the entity definition of the top module,
+  and outputs the architecture only. This simplifies the use of the output
+  VHDL netlist with a separate test bench.
+
+  -force - (Optional) Overwrite the VHDL files if they already exists.
+
+  -include_xilinx_libs - (Optional) Write the simulation models directly in
+  the output netlist file rather than pointing to the libraries by reference.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <file> - (Required) The filename of the VHDL file to write. If the file
+  name does not have either a .vhd or .vhdl file extension then the name is
+  assumed to be a directory, and the VHDL file is named after the top module,
+  and is output to the specified directory.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+Examples:
+
+  The following example writes a VHDL simulation netlist file for the whole
+  design to the specified file and path:
+
+    write_vhdl C:/Data/bft_top.vhd
+
+  In the following example the entity definition of the top-level module is
+  not output to the VHDL netlist:
+
+    write_vhdl C:/Data/vhdl_arch_only.vhd -arch_only
+
+See Also:
+
+   *  write_verilog

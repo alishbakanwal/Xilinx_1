@@ -1,0 +1,54 @@
+﻿<html xml:lang="ja-jp" lang="ja-jp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="reference"/>
+<meta name="DC.Title" content="[Primary Clock Constraints] ダイアログ ボックス"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_bqj_lqr_b5"/>
+<meta name="DC.Language" content="ja-JP"/>
+<link rel="stylesheet" type="text/css" href="../commonltr-ja.css"/>
+<title>[Primary Clock Constraints] ダイアログ ボックス</title>
+</head>
+<body id="concept_bqj_lqr_b5">
+
+
+<h1 class="title topictitle1">[Primary Clock Constraints] ダイアログ ボックス</h1>
+
+<div class="body refbody">
+<div class="section">
+<p class="p">このダイアログ ボックスでは、現在選択しているプライマリ クロックまたはクロックの属性を定義できます。クロックの属性は、<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xcreate_clock" target="_blank">create_clock</a> コマンドのオプションと関連しています。</p>
+
+<ul class="ul" id="concept_bqj_lqr_b5__ul_azt_c5r_b5">
+<li class="li"><span Class="uicontrol">[Frequency] : </span>クロックの演算周波数を MHz で指定します。</li>
+
+<li class="li"><span Class="uicontrol">[Period] : </span>クロック周期をナノ秒 (ns) で指定します。<div Class="note_tip"><span class="tiptitle">ヒント:</span> [Frequency] または [Period] のいずれかが必ず必要です。指定のない属性は、指定した属性から自動的に派生されます。</div>
+</li>
+
+<li class="li"><span Class="uicontrol">[Rise at] : </span>波形を定義するため、クロックの立ち上がりエッジの時間を指定します。</li>
+
+<li class="li"><span Class="uicontrol">[Fall at] : </span>波形を定義するため、クロックの立ち下がりエッジの時間を指定します。<div Class="note_tip"><span class="tiptitle">ヒント:</span> クロックの波形は、自動的に周期の 50% と定義されます。デフォルトの波形を変更するには、<span Class="uicontrol">[Rise at]/[Fall at]</span> 値を使用してください。</div>
+</li>
+
+<li class="li"><span Class="uicontrol">[Jitter] : </span>選択したプライマリ クロックに関連する入力ジッターを指定します (オプション)。ジッター値は <a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xset_input_jitter" target="_blank">set_input_jitter</a> コマンドを使用してクロックと関連付けます。</li>
+
+</ul>
+
+<p class="p"><span Class="uicontrol">[OK]</span> をクリックすると、現在選択しているクロックまたはタイミング制約ウィザードのクロックへのクロックの属性が追加されます。</p>
+
+</div>
+
+<div class="section"><h2 class="title sectiontitle">関連項目</h2>
+<table cellpadding="4" cellspacing="0" summary="" id="concept_bqj_lqr_b5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow"> <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_bqj_lqr_b5__image_smm_1vr_b5" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">『Vivado<sup>®</sup> Design Suite ユーザー ガイド : 制約の使用』</cite> (UG903) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug903-vivado-using-constraints.pdf;a=xPrimaryClocks" target="_blank">「プライマリ クロック」</a></td>
+ </tr>
+</table>
+
+</div>
+
+</div>
+
+
+</body>
+</html>

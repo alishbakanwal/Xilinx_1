@@ -1,0 +1,107 @@
+
+Description:
+
+  For embedded processor based designs the update_mem command merges CPU
+  software images into bitstream files, to initialize the block RAM memory
+  within the target Xilinx device. The update_mem command also provides a
+  simple method of initializing BRAMs for non-CPU designs.
+
+  The update_mem command takes the following inputs:
+
+   *  A bitstream (BIT) file created by the write_bitstream command. A BIT
+      file is a binary data file that contains a bit image to be downloaded
+      into a Xilinx device. The update_mem command reads a BIT file as an
+      input, and writes a BIT file as its output.
+
+   *  The memory map information (MMI) file, written by the write_mem_info
+      command, is a text file that describes how individual Block RAMs on the
+      Xilinx device are grouped together to form a contiguous address space
+      called an Address Block. The update_mem command uses the MMI file to
+      identify the physical BRAM resource that maps to a specific address
+      range.
+
+   *  An Executable and Linkable Format (ELF) file, which is a product of the
+      software development kit (SDK), is a binary data file that contains an
+      executable program image ready for running on an embedded processor.
+      The ELF file contains the data to be mapped by update_mem into the
+      address ranges of the BRAMs
+
+   *  Optionally, a memory (MEM) file is a manually created text file that
+      describes contiguous blocks of data to initialize or populate a
+      specified address space. The update_mem command can use the MEM file in
+      place of an ELF file.
+
+   *  The instance ID of the embedded processor in the design, to associate
+      the ELF or MEM file with the processor.
+
+  The update_mem command populates contiguous blocks of data defined in ELF
+  or MEM files, across multiple block RAMs of a Xilinx device mapped by the
+  MMI file. The update_mem command merges the memory information into a
+  bitstream file for configuring and programming the target Xilinx device.
+
+  The update_mem command also lets you merge multiple data files for multiple
+  processors in designs that have more than one embedded processor. In this
+  case, the -data and -proc options must be specified in pairs, with the
+  first -data file providing the software image or memory content for the
+  first -proc specified. The second -data applies to the second -proc.
+
+  This command returns the name of the bitstream file created from the
+  inputs, or returns an error if it fails.
+
+Arguments:
+
+  -meminfo <arg> - (Required) Name of the memory mapping information (MMI)
+  file for the implemented design.
+
+  -data <arg> - (Required) Name of the Executable and Linkable Format (ELF)
+  file, or a MEM file to map into BRAM addresses.
+
+  -bit <arg> - (Required) Name of the input bitstream (BIT) file. If the file
+  extension is missing, an extension of .bit is assumed.
+
+  Note: The update_mem command can only update existing BIT files that are
+  not encrypted or compressed.
+
+  -proc <arg> - (Required) Instance path of the embedded processor.
+
+  Note: You can specify multiple processors for the update_mem command in
+  cases where a design has multiple embedded processors. In this case the
+  -data and -proc options must be specified in pairs, with the first -data
+  argument applying to the first -proc argument.
+
+  -out <arg> - (Required) Specify the name of output file, without suffix.
+  The file will have a suffix of .bit applied automatically.
+
+  -force - (Optional) Overwrite the specified output file if it already exists.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example reads the specified MEM info file, ELF file, and
+  bitstream file, and generates the merged bitstream file:
+
+    update_mem -meminfo top.mmi -data hello_world.elf -bit top.bit \ 
+    -proc design_1_i/microblaze_1 -out top_meminfo.bit
+
+  The following example shows the use of update_mem in a block design that
+  has two embedded microblaze processors:
+
+    update_mem -bit top.bit -meminfo top.mmi -data top1.elf -proc system_i/microblaze_1 -data top2.mem  -proc system_i/microblaze_2 -out top_out.bit
+
+See Also:
+
+   *  write_bitstream
+   *  write_bmm
+   *  write_mem_info

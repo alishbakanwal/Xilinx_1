@@ -1,0 +1,63 @@
+
+Description:
+
+  Assign unmapped IP address segments to address spaces in the IP Integrator
+  subsystem design.
+
+  If the target address space is not specified, the IP Integrator feature
+  will automatically assign the address segment to an available address space
+  on a connected AXI master.
+
+  If no bd_addr_seg objects are specified the assign_bd_address command will
+  assign all unmapped address segments to any connected AXI master address
+  spaces.
+
+  This command returns the newly mapped address segments, or returns an error
+  if it failed.
+
+Arguments:
+
+  -target_address_space <arg> - (Optional) The target address space to place
+  the segment into.
+
+  -boundary - (Optional) Assign address spaces to the hierarchical boundary
+  of the design. This lets you allocate address space for memory that exists
+  outside of the block design. Map scoped external slave interfaces into the
+  address space at contiguous offsets beginning at 0x000_0000.
+
+  -master_boundary - (Optional) For the scoped external master interfaces, a
+  slave segment is created is mapped into internal masters on the scoped
+  diagram, at the -offset and -range passed to it. .
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <objects> - The block design address segment objects to assign to the
+  target address space.
+
+Example:
+
+  The following example automatically assigns the specified address segment
+  object to an address space. In this example, the target space is not
+  provided, so the IP Integrator feature automatically assigns one:
+
+    assign_bd_address [get_bd_addr_segs \ 
+    {/microblaze_1_local_memory/ilmb_bram_if_cntlr/SLMB/Mem }]
+
+See Also:
+
+   *  create_bd_addr_seg
+   *  exclude_bd_addr_seg
+   *  get_bd_addr_segs
+   *  get_bd_addr_spaces
+   *  include_bd_addr_seg

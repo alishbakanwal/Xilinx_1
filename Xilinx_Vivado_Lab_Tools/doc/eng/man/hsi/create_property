@@ -1,0 +1,103 @@
+
+Description:
+
+  Creates a new property of the <type> specified with the user-defined <name>
+  for the specified <class> of objects. The property that is created can be
+  assigned to an object of the specified class with the set_property command,
+  but is not automatically associated with all objects of that class.
+
+  The report_property -all command will not report the newly created property
+  for an object of the specified class until the property has been assigned
+  to that object.
+
+
+Arguments:
+
+  -description <arg> - (Optional) Provide a description of the property being
+  created. The description will be returned by the tool help system when the 
+  property is queried.
+
+  -type <arg> - (Optional) The type of property to create. There allowed
+  property types include:
+
+   *  string - Allows the new property to be defined with string values. This
+      is the default value when -type is not specified.
+
+   *  int - Allows the new property to be defined with short four-byte signed
+      integer values with a range of -2,147,483,648 to 2,147,483,647. If a
+      floating point value is specified for an int property type, the HSM
+      tool will return an error.
+
+   *  long - Specifies signed 64-bit integers with value range of
+      -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807. If a floating
+      point value is specified for an long property type, the tool will
+      return an error.
+
+   *  double - Allows the new property value to be defined with a floating
+      point number.
+
+   *  bool - Allows the new property to be defined as a boolean with a true
+      (1, or yes) or false (0, or no) value.
+
+   *  enum - An enumerated data type, with the valid enumerated values
+      specified by the -enum_values option.
+
+   *  string_list - A Tcl list of string values.
+
+   *  int_list - A Tcl list of integer values.
+
+   *  double_list - A Tcl list of floating point values.
+
+  -enum_values <args> - (Optional) A list of enumerated values that the
+  property can have. The list must be enclosed in braces, {}, with values
+  separated by spaces. This option can only be used with -type enum.
+
+  -default_value <args> - (Optional) The default value to assign to the
+  property. This option can be used for string, int, bool, and enum type
+  properties.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <name> - (Required) The name of the property to be defined. The name is
+  case sensitive.
+
+  <class> - (Required) The class of object to assign the new property to. All
+  objects of the specified class will be assigned the newly defined property.
+  Valid classes are: design, net, cell, pin, port, Pblock, interface, and
+  fileset.
+
+
+Examples:
+
+  The following example defines a property called PURPOSE for cell objects:
+
+    create_property PURPOSE cell
+
+  Note: Because the -type was not specified, the value will default to strings.
+
+  The following example creates a pin property called COUNT which holds an
+  Integer value:
+
+    create_property -type int COUNT pin
+
+
+See Also:
+
+   *  get_property
+   *  list_property
+   *  list_property_value
+   *  report_property
+   *  reset_property
+   *  set_property
+

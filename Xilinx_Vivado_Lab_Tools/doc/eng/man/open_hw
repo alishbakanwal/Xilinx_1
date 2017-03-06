@@ -1,0 +1,96 @@
+
+Description:
+
+  Open the Hardware Manager in the Vivado Design Suite in either the Vivado
+  IDE or in Tcl or batch mode. Opening the Hardware Manager is the first step
+  in programming and/or debugging your design in Xilinx FPGA hardware. For
+  more information refer to the Vivado Design Suite User Guide: Programming
+  and Debugging (UG908).
+
+  Hardware Manager is a feature of the Vivado Design Suite which lets you
+  interact with FPGA devices on a board. The features of the Hardware Manager
+  include:
+
+   *  Logic Debug or Logic Analyzer- Debugging FPGA programmable logic designs.
+
+   *  Programming/Configuration - Program FPGA devices using JTAG and
+      configuring flash memory devices connected to FPGAs.
+
+   *  In-system Serial I/O debug - Adjust SERDES receive/transmit settings
+      and measure transmission bit error rates.
+
+   *  System Monitor - Control on chip system monitor and read system monitor
+      temperature and voltage values.
+
+  The Hardware Manager uses a number of first class objects, like hw_server,
+  hw_target, hw_device, and hw_ila. Each of these objects is related to other
+  objects, and has properties that can be set or read by the set_property and
+  get_property commands to configure or control its function in the Hardware
+  Manager. Refer to the Vivado Design Suite Properties Reference Guide
+  (UG912) for more information on these objects, or type:
+
+    help -class <object>
+
+  The steps to connect to hardware and program the target FPGA device are:
+
+   *  Open the hardware manager in the IDE. (open_hw)
+
+      Note: This step can be skipped if you are running in batch or Tcl mode.
+
+   *  Connect to a hardware server running either on the local machine, or on
+      a remote network accessible host. (connect_hw_server)
+
+   *  Open a hardware target on the connected hardware server. (open_hw_target)
+
+   *  Identify the Xilinx FPGA device on the open hardware target.
+      (current_hw_device, get_hw_devices)
+
+   *  Associate the bitstream data programming file (.bit), and probes file
+      (.ltx) if one exists, with the appropriate FPGA device. (set_property)
+
+   *  Program or download the programming file into the hardware device.
+      (program_hw_device, refresh_hw_device).
+
+  Note that you can run the Hardware Manager from within the Vivado tool
+  without having a project or design open. You can open the Hardware Manager,
+  connect to the hardware server, and program the device on the target by
+  providing a bitstream file, and probes file for debugging.
+
+  You can close the Hardware Manager using the close_hw command.
+
+  This command returns nothing if successful, and returns an error if it fails.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Example:
+
+  The following example opens the Hardware Manager in the Vivado Design Suite:
+
+    open_hw
+
+See Also:
+
+   *  close_hw
+   *  connect_hw_server
+   *  current_hw_device
+   *  current_hw_server
+   *  get_hw_devices
+   *  get_hw_server
+   *  get_hw_targets
+   *  open_hw_target
+   *  program_hw_device
+   *  refresh_hw_device
+   *  set_property

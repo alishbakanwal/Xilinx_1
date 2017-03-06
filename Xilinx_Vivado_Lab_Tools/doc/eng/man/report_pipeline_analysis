@@ -1,0 +1,91 @@
+
+Description:
+
+  This command performs an analysis of a synthesized design, hypothetically
+  inserting pipeline stages in the design and reports the potential frequency
+  (Fmax) increase of each clock domain. The analysis includes a search for
+  loops in the design, which may not be improved by pipelining, and
+  determines if such loops are critical paths in the design.
+
+  Returns a table showing the pipeline stages and the Fmax improvement. The
+  report begins with the original design and adds stages of latency (1, 2,
+  ... ) until there is no further improvement in Fmax. This reports a
+  theoretical upper limit to the frequency performance of the design.
+
+  The analysis is typically run on the un-placed synthesized netlist where
+  the logical netlist structure determines the performance. The report can be
+  run on the top-level design, or on out-of-context (OOC) sub-modules. This
+  report confirms whether the design frequency can be increased, as well as
+  how many pipeline registers must be added to the design to achieve the Fmax
+  improvement.
+
+  Note: By default the report is written to the Tcl console or STD output.
+  However, the results can also be written to a file.
+
+Arguments:
+
+  -cells <args> - (Optional) Perform pipeline analysis for the specified
+  hierarchical cells. Specifying multiple cells causes the pipeline analysis
+  report to be generated for each cell. The cells of interest can be
+  specified by name, or returned as an object using the get_cells command.
+
+  -verbose <arg> - (Optional) Specify the level of detail in the returned
+  report. The argument can be specified with an integer value greater than 0.
+
+  -clocks <args> - (Optional) Specifies the clock domains to analyze when
+  generating the report. If not specified, the timing paths for all clocks
+  are analyzed. This limits results to paths groups involving the specified
+  clock domains.
+
+  -file <arg> - (Optional) Write the report into the specified file. The
+  specified file will be overwritten if one already exists, unless -append is
+  also specified.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -include_paths_to_pipeline - (Optional) Report recommendations for paths to
+  pipeline in the current design.
+
+  Note: The -file option must also be specified when this option is used.
+
+  -append - (Optional) Append the output of the command to the specified file
+  rather than overwriting it.
+
+  Note: The -append option can only be used with the -file option.
+
+  -max_added_latency <arg> - (Optional) Specify the additional levels of
+  delay to add through pipeline insertion. The latency is specified as an
+  integer from 1 to 100, representing the maximum number of pipeline stages
+  to consider during the pipeline analysis. The default setting is 0, which
+  directs the tool to insert pipeline delays until there is no further
+  improvement in design performance. The tool analyzes the number of stages
+  up to the specified limit, or until there is not further gain in Fmax.
+
+  -report_loops - (Optional) Report the slowest path within a sequential
+  feedback loop. These are paths starting from and ending at the same
+  sequential cell, and may have zero, one, or more sequential cells in the
+  feedback path. Sequential loops cannot be pipelined.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+Examples:
+
+  The following example returns the name, period, waveform, and sources of
+  the clocks in the current design:
+
+    report_pipeline_analysis -file C:/Data/FPGA_Design/pipeline_report.txt
+
+See Also:
+
+   *  get_cells
+   *  get_clocks
+   *  report_cdc
+   *  report_design_analysis

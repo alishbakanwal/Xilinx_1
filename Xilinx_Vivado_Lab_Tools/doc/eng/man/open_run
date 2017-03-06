@@ -1,0 +1,61 @@
+
+Description:
+
+  Opens the specified synthesis run into a Netlist Design or implementation
+  run into an Implemented Design. The run properties defining the target part
+  and constraint set are combined with the synthesis or implementation
+  results to create the design view in the tool.
+
+  This command is intended to open a synthesized or implemented design that
+  was created from design runs in Project Mode in the Vivado Design Suite.
+
+  Use the open_checkpoint command to open a Non-Project based checkpoint into
+  memory, opening the design in Non-Project Mode. Refer to the Vivado Design
+  Suite User Guide: Design Flows Overview (UG892) for more information on
+  Project Mode and Non-Project Mode.
+
+Arguments:
+
+  -name - (Optional) This is the name assigned to the synthesized or
+  implemented design when the run is opened by the Vivado tool. This name is
+  for reference purposes, and has nothing to do with the top-level of the
+  design or any logic contained within.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <run> - (Required) Specifies the run name of the synthesis or
+  implementation run to open. The run must have completed synthesis or
+  implementation before it can be opened as a design.
+
+  Note: If you attempt to open a run that has not been launched the tool will
+  return an error.
+
+Examples:
+
+  The following command opens the specified synthesis run into a Netlist
+  Design named synthPass1:
+
+    open_run -name synthPass1 synth_1
+
+  The following opens an Implemented Design for impl_1:
+
+    open_run impl_1
+
+See Also:
+
+   *  launch_runs
+   *  link_design
+   *  open_checkpoint
+   *  read_checkpoint
+   *  write_checkpoint

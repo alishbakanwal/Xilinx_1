@@ -1,0 +1,63 @@
+﻿<html xml:lang="ja-jp" lang="ja-jp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="reference"/>
+<meta name="DC.Title" content="[Place Pblocks] ダイアログ ボックス"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_bqj_lqr_b5"/>
+<meta name="DC.Language" content="ja-JP"/>
+<link rel="stylesheet" type="text/css" href="../commonltr-ja.css"/>
+<title>[Place Pblocks] ダイアログ ボックス</title>
+</head>
+<body id="concept_bqj_lqr_b5">
+
+
+<h1 class="title topictitle1">[Place Pblocks] ダイアログ ボックス</h1>
+
+<div class="body refbody">
+<div class="section">
+<p class="p">このダイアログ ボックスでは、選択した Pblock の領域を描画して配置できます。<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug912-vivado-properties.pdf;a=xPblock" target="_blank">Pblock</a> は解析され、指定したスライス カウントとターゲット使用率に基づいてサイズが変更されます。</p>
+
+<ul class="ul" id="concept_bqj_lqr_b5__ul_gc5_ccp_v5">
+<li class="li"><span Class="uicontrol">[Parent block] : </span>検証する最上位ブロックまたはパーティションを指定します。デフォルトは、ROOT パーティションです。</li>
+
+<li class="li"><span Class="uicontrol">[Pblocks to Place] : </span>デザイン内の Pblock が表形式で表示され、配置する Pblock を選択できます。<ul class="ul" id="concept_bqj_lqr_b5__ul_ohs_ppq_xw">
+<li class="li"><span Class="uicontrol">[Place] : </span>特定の Pblock を配置の有効/無効を切り替えるチェック ボックスです。</li>
+
+<li class="li"><span Class="uicontrol">[Pblock] : </span>デザイン内の Pblock の名前です。</li>
+
+<li class="li"><span Class="uicontrol">[Utilization] : </span>ターゲット使用率は、デバイスの Pblock のサイズによって異なります。使用率が高いほど、定義されたエリアのデバイス リソースが消費されるので、Pblock は小さくなります。使用率が低いと、Pblock は大きくなります。<div Class="note_tip"><span class="tiptitle">ヒント:</span> まず最初の配置では高い使用率 (100% 以上など) から始めて、デザインのフロアプランを作成し、インプリメンテーションで使用率を下げることをお勧めします。</div>
+</li>
+
+</ul>
+</li>
+
+<li class="li"><span Class="uicontrol">[Set Utilization on All Pblocks] : </span>すべての Pblock のターゲット使用率を指定します。これにより一般的なターゲットが設定されます。これは、各 Pblock ごとに <span Class="uicontrol">[Utilization]</span> を使用すると上書きできます。</li>
+
+</ul>
+
+<p class="p"><span Class="uicontrol">[OK]</span> をクリックし、選択した Pblock の <a class="xref" href="device_window.html#concept_aqj_x3c_d5">[Device] ウィンドウ</a>に領域が自動的に描画されて配置されます。Pblock は配置した後、移動できます。</p>
+
+</div>
+
+<div class="section"><h2 class="title sectiontitle">関連項目</h2>
+<table cellpadding="4" cellspacing="0" summary="" id="concept_bqj_lqr_b5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow"> <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_bqj_lqr_b5__image_smm_1vr_b5" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">『Vivado<sup>®</sup> Design Suite ユーザー ガイド : デザイン解析およびクロージャ テクニック』</cite> (UG906) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug906-vivado-design-analysis.pdf;a=xFloorplanning" target="_blank">「フロアプラン」</a></td>
+ </tr>
+<tr class="strow"> <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_y3g_hbj_dv" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry"><cite class="cite">『Vivado Design Suite Tcl コマンド リファレンス ガイド』</cite> (UG835) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xplace_pblock" target="_blank">「place_pblock」</a></td>
+ </tr>
+<tr class="strow"> <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_av4_jvr_b5" src="../../images/play.png" alt="Icon"/></td>
+ <td valign="top" class="stentry"><a class="xref" href="http://japan.xilinx.com/video/hardware/design-analysis-floorplanning-with-vivado.html" target="_blank">Vivado Design Suite QuickTake ビデオ : Vivado でのデザイン解析およびフロアプラン</a></td>
+ </tr>
+</table>
+
+</div>
+
+</div>
+
+
+</body>
+</html>

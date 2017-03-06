@@ -1,0 +1,84 @@
+﻿<html xml:lang="ja-jp" lang="ja-jp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="reference"/>
+<meta name="DC.Title" content="[Real Settings] ダイアログ ボックス"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_bqj_lqr_b5"/>
+<meta name="DC.Language" content="ja-JP"/>
+<link rel="stylesheet" type="text/css" href="../commonltr-ja.css"/>
+<title>[Real Settings] ダイアログ ボックス</title>
+</head>
+<body id="concept_bqj_lqr_b5">
+
+
+<h1 class="title topictitle1">[Real Settings] ダイアログ ボックス</h1>
+
+<div class="body refbody">
+<div class="section">
+<div class="p">実数タイプの基数を使用すると、このダイアログ ボックスの設定に基づいて、バスの値が固定小数点または浮動小数点の実数として処理されます。<a class="xref" href="waveform_window.html#concept_aqj_x3c_d5">[Waveform] ウィンドウ</a>の右クリック メニューからは、<span Class="uicontrol"/>実数を含め、多くのタイプの 1 つとして信号の基数を定義できます。<div Class="note_important"><span class="importanttitle">重要:</span> 実数タイプの基数を信号に割り当てる前に、[Real Settings] ダイアログ ボックスを使用してその実数を設定する必要があります。</div>
+
+<ul class="ul" id="concept_bqj_lqr_b5__ul_ngh_pbb_xw">
+<li class="li"><a class="xref" href="#concept_bqj_lqr_b5__fixed">固定小数点</a></li>
+
+<li class="li"><a class="xref" href="#concept_bqj_lqr_b5__floating">浮動小数点</a></li>
+
+</ul>
+</div>
+
+</div>
+
+<div class="section" id="concept_bqj_lqr_b5__fixed"><h2 class="title sectiontitle">固定小数点</h2>
+
+<p class="p">固定小数点の実数とは、2 進数小数点または小数点の後に決まった桁数を持つ数字のことで、DSP アプリケーションでよく使用されます。2 進数小数点の後のビット数を指定することで、固定ビット数を定義して、実数の小数部分を示すことができます。</p>
+
+<ul class="ul" id="concept_bqj_lqr_b5__ul_gc5_ccp_v5">
+<li class="li"><span Class="uicontrol">[Signed] : </span>固定小数点は符号付きビットを含む符号付きの実数で示されます。</li>
+
+<li class="li"><span Class="uicontrol">[Unsigned] : </span>固定小数点は符号なしビットを含む符号なしの実数で示されます。</li>
+
+<li class="li"><span Class="uicontrol">[Binary Point] : </span>2 進数小数点 (Binary Point) が実数の整数部分と少数部分の間の仕切りとして動作します。指定した数字は、最下位ビット (LSB) からカウントして 2 進数小数点の発生するビット位置になります。</li>
+
+</ul>
+
+</div>
+
+<div class="section" id="concept_bqj_lqr_b5__floating"><h2 class="title sectiontitle">浮動小数点</h2>
+
+<p class="p">浮動小数点の実数は、指数部によって決まる小数部分 (仮数部) の固定有効桁数で示されます。数字の 2 進数小数点または小数点は、その数字の有効桁に応じて浮動にできます。</p>
+
+<ul class="ul" id="concept_bqj_lqr_b5__ul_zmd_4cb_xw">
+<li class="li"><span Class="uicontrol">[Single precision] : </span>実数は 32 ビット (分数部分 24 ビット、指数部分 8 ビット) を占める単精度浮動小数点で示されます。</li>
+
+<li class="li"><span Class="uicontrol">[Double precision] : </span>実数は 64 ビット (分数部分 53 ビット、指数部分 11 ビット) を占める倍精度浮動小数点で示されます。</li>
+
+<li class="li"><span Class="uicontrol">[Custom precision] : </span>指数部に割り当てられるビットと仮数部に割り当てられるビットをカスタマイズできます。<ul class="ul" id="concept_bqj_lqr_b5__ul_mk5_nf1_xw">
+<li class="li"><span Class="uicontrol">[Exponent width] : </span>指数に割り当てられるビット数</li>
+
+<li class="li"><span Class="uicontrol">[Fraction width] : </span>仮数に割り当てられるビット数<div Class="note_tip"><span class="tiptitle">ヒント:</span> 指数と分数部分の幅の最大値はそれぞれ 80 ビットです。</div>
+</li>
+
+</ul>
+</li>
+
+</ul>
+
+<p class="p"><span Class="uicontrol">[OK]</span> または <span Class="uicontrol">[Apply]</span> をクリックすると、[Waveform] ウィンドウで実数設定が選択した信号に割り当てられます。これにより、実数への信号基数も設定されます。</p>
+
+</div>
+
+<div class="section"><h2 class="title sectiontitle">関連項目</h2>
+<table cellpadding="4" cellspacing="0" summary="" id="concept_bqj_lqr_b5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow"> <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_bqj_lqr_b5__image_smm_1vr_b5" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">『Vivado<sup>®</sup> Design Suite ユーザー ガイド : ロジック シミュレーション』</cite> (UG900) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug900-vivado-logic-simulation.pdf;a=xCustomizingTheWaveform" target="_blank">「波形のカスタマイズ」</a></td>
+ </tr>
+</table>
+
+</div>
+
+</div>
+
+
+</body>
+</html>

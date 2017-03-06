@@ -1,0 +1,104 @@
+
+Description:
+
+  Gets a list of pin objects on the current hardware design that match a
+  specified search pattern. The default command gets a list of all pins in
+  the subsystem design.
+
+
+Arguments:
+
+  -regexp - (Optional) Specifies that the search <patterns> are written as
+  regular expressions. Both search <patterns> and -filter expressions must be
+  written as regular expressions when this argument is used. Xilinx regular
+  expression Tcl commands are always anchored to the start of the search
+  string. You can add ".*" to the beginning or end of a search string to
+  widen the search to include a substring. See
+  http://www.tcl.tk/man/tcl8.5/TclCmd/re_syntax.htm for help with regular
+  expression syntax.
+
+  Note: The Tcl built-in command regexp is not anchored, and works as a
+  standard Tcl command. For more information refer to
+  http://www.tcl.tk/man/tcl8.5/TclCmd/regexp.htm.
+
+  -filter <args> - (Optional) Filter the results list with the specified
+  expression. The -filter argument filters the list of objects returned by
+  get_pins based on property values on the pins. You can find the properties
+  on an object with the report_property or list_property commands. In the
+  case of the pins object, "DIR" and "TYPE" are some of the properties that
+  can be used to filter results.
+
+  The filter search pattern should be quoted to avoid having to escape
+  special characters that may be found in net, pin, or cell names, or other
+  properties. String matching is case-sensitive and is always anchored to the
+  start and to the end of the search string. The wildcard "*" character can
+  be used at the beginning or at the end of a search string to widen the
+  search to include a substring of the property value.
+
+  Note: The filter returns an object if a specified property exists on the
+  object, and the specified pattern matches the property value on the object.
+  In the case of the "*" wildcard character, this will match a property with
+  a defined value of ""
+
+  For string comparison, the specific operators that can be used in filter
+  expressions are "equal" (==), "not-equal" (!=), "match" (=~), and
+  "not-match" (!~). Numeric comparison operators <, >, <=, and >= can also be
+  used. Multiple filter expressions can be joined by AND and OR (&& and ||).
+  The following gets input pins that do NOT contain the "RESET" substring
+  within their name:
+
+    get_pins * -filter {DIRECTION == I && NAME !~ "*RESET*"}
+
+  -of_objects <arg> - (Optional) Get the pins connected to the specified IP
+  subsystem cell or net.
+
+  Note: The -of_objects option requires objects to be specified using the
+  get_* commands, such as get_cells or get_pins, rather than specifying
+  objects by name. In addition, -of_objects cannot be used with a search
+  <pattern>
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <patterns> - (Optional) Match hardware design pins against the
+  specified patterns. 
+
+  Note: More than one pattern can be specified to find multiple pins based on
+  different search criteria. You must enclose multiple search patterns in
+  braces {} to present the list as a single element
+
+
+Examples:
+
+  The following example gets a list of pins attached to the specified cell:
+
+    get_pins -of [get_cells axi_gpio_0]
+
+  Note: If there are no pins matching the pattern, the tool will return a
+  warning.
+
+  The following example gets a list of pins attached to the specified
+  subsystem net:
+
+    get_pins -of [get_nets ps7_axi_interconnect_0_M_AXI_BRESP]
+
+
+See Also:
+
+   *  get_intf_pins
+   *  get_intf_nets
+   *  get_nets
+   *  get_pins
+   *  list_property
+   *  report_property
+

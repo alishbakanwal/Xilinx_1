@@ -1,0 +1,157 @@
+#!/bin/bash
+#
+# COPYRIGHT NOTICE
+# Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
+#
+
+##
+# Setup default environmental variables
+##
+# RDI_BINROOT - Directory *this* script exists in
+#  E.x. 
+#    /usr/Test/Install/bin/example
+#    RDI_BINROOT=/usr/Test/Install/bin
+#
+# RDI_APPROOT - One directory above RDI_BINROOT
+#  E.x. 
+#    /usr/Test/Install/bin/example
+#    RDI_APPROOT=/usr/Test/Install
+#
+# RDI_BASEROOT - One directory above RDI_APPROOT
+#  E.x. 
+#    /usr/Test/Install/bin/example
+#    RDI_BINROOT=/usr/Test
+##
+. "`dirname \"$0\"`/setupEnv.sh"
+
+# Set XILINX_VIVADO
+XILINX_VIVADO=`dirname "$RDI_BINROOT"`
+export XILINX_VIVADO
+
+##
+# Launch the loader and specify the executable to launch
+##
+#
+# Loader arguments:
+#   -exec   -- Name of executable to launch
+##
+RDI_PROG=`basename "$0"`
+RDI_PATASK=yes
+export RDI_PATASK
+RDI_NO_JRE=yes
+export RDI_NO_JRE
+
+################################################################################
+# Set common RDI arguments
+#
+if [ "$XIL_NO_OVERRIDE" = "1" ]; then
+  XIL_PA_NO_XILINX_OVERRIDE=1
+  XIL_PA_NO_XILINX_SDK_OVERRIDE=1
+  XIL_PA_NO_MYVIVADO_OVERRIDE=1
+  export XIL_PA_NO_XILINX_OVERRIDE
+  export XIL_PA_NO_XILINX_SDK_OVERRIDE XIL_PA_NO_MYVIVADO_OVERRIDE
+fi
+
+if [ -z "$_RDI_SETENV_RUN" ]; then
+  . "`dirname \"$0\"`/setupEnv.sh"
+fi
+if [ ! -z "$_RDI_SETENV_RUN" ]; then
+  unset _RDI_SETENV_RUN
+fi
+
+if [[ "`uname`" == CYGWIN* ]]; then
+  trap "" INT
+  "$RDI_BINROOT/loader.bat" "$@"
+  exit $?
+fi
+
+if [[ "`uname`" == MINGW*NT* ]]; then
+  trap "" INT
+  cmd //c "$RDI_BINROOT/loader.bat" "$@"
+  exit $?
+fi
+
+RDI_OS_ARCH=32
+case `uname -m` in
+  x86_64) 
+    RDI_OS_ARCH=64
+    ;;
+esac
+
+#
+# If True check for the existence of RDI_PROG prior to invoking the
+# Function RDI_EXEC_COMMANDS
+#
+RDI_CHECK_PROG=True
+
+case "$XILINX" in 
+  *:*)
+    if [ "$XIL_SUPPRESS_OVERRIDE_WARNINGS" != "1" ]; then
+      echo "WARNING: \$XILINX contains multiple entries. Setting"
+      echo "         \$XIL_PA_NO_XILINX_OVERRIDE to 1."
+      echo 
+    fi
+    XIL_PA_NO_XILINX_OVERRIDE=1
+    ;;
+esac
+
+case "$XILINX_SDK" in 
+  *:*)
+    if [ "$XIL_SUPPRESS_OVERRIDE_WARNINGS" != "1" ]; then
+      echo "WARNING: \$XILINX_SDK contains multiple entries. Setting"
+      echo "         \$XIL_PA_NO_XILINX_SDK_OVERRIDE to 1."
+      echo 
+    fi
+    XIL_PA_NO_XILINX_SDK_OVERRIDE=1
+    ;;
+esac
+
+if [ "$XIL_SUPPRESS_OVERRIDE_WARNINGS" != "1" ]; then
+  if [ "$XIL_PA_NO_XILINX_OVERRIDE" = "1" ]; then
+    echo "WARNING: \$XIL_PA_NO_XILINX_OVERRIDE is set to 1."
+    echo "         When \$XIL_PA_NO_XILINX_OVERRIDE is enabled"
+    echo "         \$XILINX, \$MYXILINX, \$PATH, and \$LD_LIBRARY_PATH must"
+    echo "         be manually set."
+  fi
+
+  if [ "$XIL_PA_NO_XILINX_SDK_OVERRIDE" = "1" ]; then
+    echo "WARNING: \$XIL_PA_NO_XILINX_SDK_OVERRIDE is set to 1."
+    echo "         When \$XIL_PA_NO_XILINX_SDK_OVERRIDE is enabled"
+    echo "         \$XILINX_SDK, \$PATH must be manually set."
+  fi
+fi
+
+#
+# Handle options. If this is a release build rdiArgs.sh will
+# be mostly empty.
+#
+. "$RDI_BINROOT/rdiArgs.sh" "$@"
+
+#######################################
+# Search and set DIGILENT_DATA_DIR location
+
+if [ -z "$DIGILENT_DATA_DIR" ]; then
+  IFS=$':'
+  for SUB_RDI_DATA in $RDI_DATADIR; do
+    if [ -d "$SUB_RDI_DATA/xicom/cable_data/digilent/$RDI_PLATFORM" ]; then
+      DIGILENT_DATA_DIR="$SUB_RDI_DATA/xicom/cable_data/digilent/$RDI_PLATFORM"
+      export DIGILENT_DATA_DIR
+      break
+    fi
+  done
+  IFS=$' \t\n'
+fi
+
+if [ -z "$DIGILENT_DATA_DIR" ]; then
+    echo "WARNING: DIGILENT_DATA_DIR was not found therefore digilent cable"
+    echo "         drivers will not be loaded by hw_server."
+else
+  if [ "$RDI_VERBOSE" = "True" ]; then
+    echo "     **** hw_server ENVIRONMENT DEBUG INFO ****"
+    echo "   DIGILENT_DATA_DIR: \"$DIGILENT_DATA_DIR\""
+  fi
+fi
+
+
+#######################################
+"$RDI_BINROOT"/loader -exec $RDI_PROG "$@"

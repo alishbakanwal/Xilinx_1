@@ -1,0 +1,283 @@
+
+Description:
+
+  Note: If the design has no timing constraints, report_timing reports on
+  unconstrained paths in the design. However, if even one path has timing
+  constraints then report_timing only reports on the constrained paths in the
+  design, unless unconstrained timing paths are specified by the -from/-to
+  options.
+
+  This command performs timing analysis on the specified timing paths of the
+  current Synthesized or Implemented Design. By default the tool reports the
+  timing path with the worst calculated slack within each path group.
+  However, you can optionally increase the number of paths and delays
+  reported with the use of the -nworst or -max_paths arguments.
+
+  Note: The report_timing can be multi-threaded to speed the process. Refer
+  to the set_param command for more information on setting the
+  general.maxThreads parameter.
+
+  The timing engine runs in "quad" timing mode, analyzing min and max delays
+  for both slow and fast corners. You can configure the type of analysis
+  performed by the config_timing_corners command. However, it is not
+  recommended to change the default because this reduces the timing analysis
+  coverage.
+
+  Note: By default the report is written to the Tcl console or STD output.
+  However, the results can also be written to the GUI, to a file, or returned
+  as a string if desired.
+
+Arguments:
+
+  -from <args> - (Optional) The starting points of the timing paths to be
+  analyzed. Ports, pins, or cells can be specified as timing path
+  startpoints. You can also specify a clock object, and all startpoints
+  clocked by the named clock will be analyzed.
+
+  -rise_from <args> - (Optional) Similar to the -from option, but only the
+  rising edge of signals coming from the startpoints are considered for
+  timing analysis. If a clock object is specified, only the paths launched by
+  the rising edge of the clock are considered as startpoints.
+
+  -fall_from <args> - (Optional) Similar to the -from option, but only the
+  falling edge of signals coming from the startpoints are considered for
+  timing analysis. If a clock object is specified, only the paths launched by
+  the falling edge of the clock are considered as startpoints.
+
+  -to <args> - (Optional) The endpoints, or destination objects of timing
+  paths to be analyzed. Ports, pins, and cell objects can be specified as
+  endpoints. A clock object can also be specified, in which case endpoints
+  clocked by the named clock are analyzed.
+
+  -rise_to <args> - (Optional) Similar to the -to option, but only the rising
+  edge of signals going to the endpoints is considered for timing analysis.
+  If a clock object is specified, only the paths captured by the rising edge
+  of the named clock are considered as endpoints.
+
+  -fall_to <args> - (Optional) Similar to the -to option, but only the
+  falling edge of signals going to the endpoints is considered for timing
+  analysis. If a clock object is specified, only the paths captured by the
+  falling edge of the named clock are considered as endpoints.
+
+  -through <args> - (Optional) Consider only paths through the specified
+  pins, cell instance, or nets during timing analysis. You can specify
+  individual -through (or -rise_through and -fall_through) points in sequence
+  to define a specific path through the design for analysis. The order of the
+  specified through points is important to define a specific path. You can
+  also specify through points with multiple objects, in which case the timing
+  path can pass through any of the specified through objects.
+
+  -rise_through <args> - (Optional) Similar to the -through option, but
+  timing analysis is only performed on paths with a rising transition at the
+  specified objects.
+
+  -fall_through <args> - (Optional) Similar to the -through option, but
+  timing analysis is only performed on paths with a falling transition at the
+  specified objects.
+
+  -delay_type <arg> - (Optional) Specifies the type of delay to analyze when
+  running the timing report. The valid values are min, max, min_max,
+  max_rise, max_fall, min_rise, min_fall. The default setting for -delay_type
+  is max.
+
+  -setup - (Optional) Check for setup violations. This is the same as
+  specifying -delay_type max.
+
+  -hold - (Optional) Check for hold violations. This is the same as
+  specifying -delay_type min.
+
+  Note: -setup and -hold can be specified together, which is the same as
+  specifying -delay_type min_max .
+
+  -max_paths <arg> - (Optional) The maximum number of paths to output when
+  sorted by slack; or maximum number of paths per path group when sorted by
+  group, as specified by -sort_by. This is specified as a value greater than
+  or equal to 1. By default the report_timing command will report the single
+  worst timing path, or the worst path per path group.
+
+  -nworst <arg> - (Optional) The number of timing paths per endpoint to
+  output in the timing report. The timing report will return the <N> worst
+  paths based on the specified value, greater than or equal to 1. The default
+  setting is 1.
+
+  -unique_pins - (Optional) Show only one timing path for each unique set of
+  pins.
+
+  -path_type <arg> - (Optional) Specify the path data to output in the timing
+  report. The default format is full_clock_expanded. The valid path types
+  are:
+
+   *  end - Shows the endpoint of the path only, with calculated timing values.
+
+   *  summary - Displays the startpoints and endpoints with slack calculation.
+
+   *  short - Displays the startpoints and endpoints with calculated timing
+      values.
+
+   *  full - Displays the full timing path, including startpoints, through
+      points, and endpoints.
+
+   *  full_clock - Displays full clock paths in addition to the full timing
+      path.
+
+   *  full_clock_expanded - Displays full clock paths between a master clock
+      and generated clocks in addition to the full_clock timing path. This is
+      the default setting.
+
+  -input_pins - (Optional) Show input pins in the timing path report. For use
+  with -path_type full, full_clock, and full_clock_expanded.
+
+  -no_header - (Optional) Do not write a header to the report.
+
+  -label_reused - (Optional) For designs using incremental place and route
+  (read_checkpoint -incremental ), label pins with information related to the
+  physical data reused from the specified incremental checkpoint. Reuse
+  labels include:
+
+   *  R : Cell placement and routing to this pin are reused.
+
+   *  PNR : Cell placement is reused but routing to this pin is not reused.
+
+   *  NR : Neither cell placement nor routing to this pin is reused.
+
+   *  N : The cell, net, or pin is new. It does not exist in the incremental
+      checkpoint.
+
+  -slack_lesser_than <arg> - (Optional) Report timing on paths with a
+  calculated slack value less than the specified value. Used with
+  -slack_greater_than to provide a range of slack values of specific
+  interest.
+
+  -slack_greater_than <arg> - (Optional) Report timing on paths with a
+  calculated slack value greater than the specified value. Used with
+  -slack_lesser_than to provide a range of slack values of specific interest.
+
+  -group <args> - (Optional) Report timing for paths in the specified path
+  groups. Currently defined path groups can be determined with the
+  get_path_groups command.
+
+  Note: Each clock creates a path group. Path groups can also be defined with
+  the group_path command. The -group option cannot be specified with
+  -of_objects, which also specifies timing path objects.
+
+  -sort_by [ slack | group ] - (Optional) Sort timing paths in the report by
+  slack values, or by path group. Valid values are slack or group. By
+  default, the report_timing command reports the worst, or -nworst, timing
+  paths in the design. However, with -sort_by group , the report_timing
+  command returns the worst, or -nworst, paths of each path group.
+
+  -no_report_unconstrained - (Optional) Do not report timing on unconstrained
+  paths. Without this option specified, the report_timing command will
+  include unconstrained paths which will have infinite slack.
+
+  -user_ignored - (Optional) Report only the paths that are usually ignored
+  by timing due to presence of set_false_path or set_clock_groups
+  constraints.
+
+  Note: The -user_ignored and -no_report_unconstrained options are mutually
+  exclusive and cannot be specified together. The -user_ignored option is
+  also mutually exclusive with the -slack_lesser_than and -slack_greater_than
+  options.
+
+  -of_objects <args> - (Optional) Report timing on the specified timing path
+  objects. Used with the get_timing_paths command.
+
+  Note: The -of_objects option cannot be used with the various forms of
+  -from, -to , or -through options which are also used to identify timing
+  paths to report. The -of_objects option, which defines a timing path object
+  containing a DELAY_TYPE property, cannot be used with -setup, -hold or
+  -delay_type, which all also define a delay type. The -of_objects option
+  also cannot be specified with -group, which defines groups of timing path
+  objects.
+
+  -significant_digits <arg> - (Optional) The number of significant digits in
+  the output results. The valid range is 0 to 3. The default setting is 3
+  significant digits.
+
+  -column_style [ variable_width | anchor_left | fixed_width ] - (Optional)
+  Specify the format of the timing path portion of the timing report output.
+  The default format is anchor_left.
+
+  -file <arg> - (Optional) Write the report into the specified file. The
+  specified file will be overwritten if one already exists, unless -append is
+  also specified.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -append - (Optional) Append the output of the command to the specified file
+  rather than overwriting it.
+
+  Note: The -append option can only be used with the -file option.
+
+  -name <arg> - (Optional) Specifies the name of the results set for the GUI.
+
+  -return_string - (Optional) Directs the output to a Tcl string rather than
+  to the standard output. The Tcl string can be captured by a variable
+  definition and parsed or otherwise processed.
+
+  Note: This argument cannot be used with the -file option.
+
+  -warn_on_violation - (Optional) Specify that a Critical Warning will be
+  generated by the Vivado Design Suite when the timing report contains a
+  timing violation.
+
+  -cell <arg> - (Optional) Run the timing report from the level of the
+  specified cell instance. A cell can be specified by name, or as an object
+  returned by the get_cells command.
+
+  -rpx <arg> - (Optional) Specify the file name and path of an Xilinx report
+  file (RPX) to write. This is different from writing the report results to a
+  file using the -file argument. The RPX file is an interactive report that
+  contains all the report information and can be reloaded into memory in the
+  Vivado Design Suite using the open_report command. You should add a .rpx
+  file extension to the specified file name, as the Vivado tool will not
+  automatically assign a file extension.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example reports the timing for the 5 worst paths in the
+  design, reporting the full timing path, including input pins, with timing
+  values:
+
+    
+    report_timing -nworst 5 -path_type full -input_pins
+
+  The following example shows the use of the multiple through points to
+  define both a specific path (through state_reg1) and alternate paths
+  (through count_3 or count_4), and writes the timing results to the
+  specified file:
+
+    report_timing -from go -through {state_reg1} \ 
+       -through { count_3  count_4 } \ 
+       -to done -path_type summary -file C:/Data/timing1.txt
+
+See Also:
+
+   *  get_path_groups
+   *  get_timing_paths
+   *  group_path
+   *  place_design
+   *  report_timing_summary
+   *  route_design
+   *  set_clock_groups
+   *  set_false_path
+   *  set_msg_limit

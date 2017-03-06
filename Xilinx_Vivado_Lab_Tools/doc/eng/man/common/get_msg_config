@@ -1,0 +1,102 @@
+
+Description:
+
+  Returns the current message limit or count applied to a specified message
+  ID or severity, or returns all message configuration rules defined in the
+  current project. Message configuration rules are defined using the
+  set_msg_config command.
+
+  When used with -count this command will display the total number of
+  messages that have been generated with the matching message id, or for the
+  specified severity.
+
+  Note: The get_msg_config command reports the message count for the original
+  CPU process from which Vivado was launched. Any sub-processes that the
+  Vivado Design Suite launches, such as sub-processes used by the launch_runs
+  command to launch synthesis and implementation runs, will not be reported
+  in the message count. This can create confusion when the message count
+  returned by get_msg_config -count is different from what is displayed in
+  the Vivado IDE for instance, or different from what you expect. For this
+  reason, the -count option is best used for non-project based designs.
+
+  When used with -limit this command will display the current limit of
+  messages with the matching message id, or for the specified severity.
+
+  When used with -rules, it will display a table of all message configuration
+  rules currently in effect.
+
+  Note: You can only return the limit, the count, or the rules in a single
+  get_msg_config command. An error is returned if more than one action is
+  attempted.
+
+Arguments:
+
+  -id <arg> - (Optional) The message ID, which is included in all returned
+  messages. For example, "Common 17-54" and "Netlist 29-28".
+
+  -severity <value> - (Optional) The severity of the message. There are five
+  message severities:
+
+   *  ERROR - An ERROR condition implies an issue has been encountered which
+      will render design results unusable and cannot be resolved without user
+      intervention.
+
+   *  {CRITICAL WARNING} - A CRITICAL WARNING message indicates that certain
+      input/constraints will either not be applied or are outside the best
+      practices for a FPGA family. User action is strongly recommended.
+
+      Note: Since this is a two word value, it must be enclosed in {}.
+
+   *  WARNING - A WARNING message indicates that design results may be
+      sub-optimal because constraints or specifications may not be applied as
+      intended. User action may be taken or may be reserved.
+
+   *  INFO - An INFO message is the same as a STATUS message, but includes a
+      severity and message ID tag. An INFO message includes a message ID to
+      allow further investigation through answer records if needed.
+
+   *  STATUS - A STATUS message communicates general status of the process
+      and feedback to the user regarding design processing. A STATUS message
+      does not include a message ID.
+
+  -rules - (Optional) Return the message configuration rules in the current
+  project as defined by the set_msg_config command.
+
+  Note: When -rule is specified, all configuration rules for the current
+  project are returned regardless of any message qualifier such as -id or
+  -severity.
+
+  -limit - (Optional) Return the current limit of messages that match the
+  message ID or the message severity.
+
+  -count - (Optional) Return the current count of messages that match the
+  specified message ID or message severity.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example gets the current count of the specified INFO message:
+
+    get_msg_config -id "Common 17-81" -count
+
+  The following example returns the message configuration rules in the
+  current project:
+
+    get_msg_config -rules
+
+See Also:
+
+   *  reset_msg_config
+   *  set_msg_config

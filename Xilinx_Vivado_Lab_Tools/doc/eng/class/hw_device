@@ -1,0 +1,104 @@
+HW_DEVICE
+
+Description: 
+Within the Hardware Manager feature of the Vivado Design Suite, each hardware 
+target can have one or more Xilinx FPGA devices to program, or to use for 
+debugging purposes. The hw_device object is the physical part on the open hardware 
+target. The current device is specified or returned by the current_hw_device command.
+
+Related Objects:
+Hardware devices are associated with hardware targets, and can be queried as objects 
+of the hw_target object:
+
+	get_hw_devices -of [get_hw_targets] 
+
+You can also query the debug cores programmed onto a hardware device object:
+
+	get_hw_ilas -of [current_hw_device]
+
+Properties:
+The properties on the hw_device object may vary depending on the target part you 
+have selected. You can use the report_property command to report the properties 
+assigned to a hw_device object. Refer to the Vivado Design Suite Tcl Command 
+Reference (UG835) for more information. The properties assigned to the hw_device 
+object include the following, 
+with example values:
+
+Property                                                            Type          Read-only  Visible  Value
+CLASS                                                               string        true       true     hw_device
+DID                                                                 string        true       true     jsn-JTAG-SMT1-210203327463A-23651093-0
+IDCODE                                                              string        false      true     23651093
+INDEX                                                               int           true       true     0
+IR_LENGTH                                                           int           false      true     6
+IS_SYSMON_SUPPORTED                                                 bool          true       true     1
+MASK                                                                int           false      true     0
+NAME                                                                string        true       true     xc7k325t_0
+PART                                                                string        false      true     xc7k325t
+PROBES.FILE                                                         string        false      true     C:/Data/Vivado_Debug/ks_counter2_k7/project_1/project_1.runs/impl_1/debug_nets.ltx
+PROGRAM.FILE                                                        string        false      true     C:/Data/Vivado_Debug/ks_counter2_k7/project_1/project_1.runs/impl_1/ks_counter2.bit
+PROGRAM.HW_BITSTREAM                                                hw_bitstream  true       true     C:/Data/Vivado_Debug/ks_counter2_k7/project_1/project_1.runs/impl_1/ks_counter2.bit
+PROGRAM.HW_CFGMEM                                                   hw_cfgmem     true       true     
+PROGRAM.HW_CFGMEM_BITFILE                                           string        true       true     
+PROGRAM.HW_CFGMEM_TYPE                                              string        true       true     
+PROGRAM.IS_SUPPORTED                                                bool          true       true     1
+PROGRAM.OPTIONS                                                     string        false      true     
+REGISTER.BOOT_STATUS                                                string        true       true     00000000000000000000000000000000
+REGISTER.BOOT_STATUS.BIT00_0_STATUS_VALID                           string        true       true     0
+REGISTER.BOOT_STATUS.BIT01_0_FALLBACK                               string        true       true     0
+REGISTER.BOOT_STATUS.BIT02_0_INTERNAL_PROG                          string        true       true     0
+REGISTER.BOOT_STATUS.BIT03_0_WATCHDOG_TIMEOUT_ERROR                 string        true       true     0
+REGISTER.BOOT_STATUS.BIT04_0_ID_ERROR                               string        true       true     0
+REGISTER.BOOT_STATUS.BIT05_0_CRC_ERROR                              string        true       true     0
+REGISTER.BOOT_STATUS.BIT06_0_WRAP_ERROR                             string        true       true     0
+REGISTER.BOOT_STATUS.BIT07_RESERVED                                 string        true       true     0
+REGISTER.BOOT_STATUS.BIT08_1_STATUS_VALID                           string        true       true     0
+REGISTER.BOOT_STATUS.BIT09_1_FALLBACK                               string        true       true     0
+REGISTER.BOOT_STATUS.BIT10_1_INTERNAL_PROG                          string        true       true     0
+REGISTER.BOOT_STATUS.BIT11_1_WATCHDOG_TIMEOUT_ERROR                 string        true       true     0
+REGISTER.BOOT_STATUS.BIT12_1_ID_ERROR                               string        true       true     0
+REGISTER.BOOT_STATUS.BIT13_1_CRC_ERROR                              string        true       true     0
+REGISTER.BOOT_STATUS.BIT14_1_WRAP_ERROR                             string        true       true     0
+REGISTER.BOOT_STATUS.BIT15_RESERVED                                 string        true       true     00000000000000000
+REGISTER.CONFIG_STATUS                                              string        true       true     01000000000100000111100111111100
+REGISTER.CONFIG_STATUS.BIT00_CRC_ERROR                              string        true       true     0
+REGISTER.CONFIG_STATUS.BIT01_DECRYPTOR_ENABLE                       string        true       true     0
+REGISTER.CONFIG_STATUS.BIT02_PLL_LOCK_STATUS                        string        true       true     1
+REGISTER.CONFIG_STATUS.BIT03_DCI_MATCH_STATUS                       string        true       true     1
+REGISTER.CONFIG_STATUS.BIT04_END_OF_STARTUP_(EOS)_STATUS            string        true       true     1
+REGISTER.CONFIG_STATUS.BIT05_GTS_CFG_B_STATUS                       string        true       true     1
+REGISTER.CONFIG_STATUS.BIT06_GWE_STATUS                             string        true       true     1
+REGISTER.CONFIG_STATUS.BIT07_GHIGH_STATUS                           string        true       true     1
+REGISTER.CONFIG_STATUS.BIT08_MODE_PIN_M[0]                          string        true       true     1
+REGISTER.CONFIG_STATUS.BIT09_MODE_PIN_M[1]                          string        true       true     0
+REGISTER.CONFIG_STATUS.BIT10_MODE_PIN_M[2]                          string        true       true     0
+REGISTER.CONFIG_STATUS.BIT11_INIT_B_INTERNAL_SIGNAL_STATUS          string        true       true     1
+REGISTER.CONFIG_STATUS.BIT12_INIT_B_PIN                             string        true       true     1
+REGISTER.CONFIG_STATUS.BIT13_DONE_INTERNAL_SIGNAL_STATUS            string        true       true     1
+REGISTER.CONFIG_STATUS.BIT14_DONE_PIN                               string        true       true     1
+REGISTER.CONFIG_STATUS.BIT15_IDCODE_ERROR                           string        true       true     0
+REGISTER.CONFIG_STATUS.BIT16_SECURITY_ERROR                         string        true       true     0
+REGISTER.CONFIG_STATUS.BIT17_SYSTEM_MONITOR_OVER-TEMP_ALARM_STATUS  string        true       true     0
+REGISTER.CONFIG_STATUS.BIT18_CFG_STARTUP_STATE_MACHINE_PHASE        string        true       true     100
+REGISTER.CONFIG_STATUS.BIT21_RESERVED                               string        true       true     0000
+REGISTER.CONFIG_STATUS.BIT25_CFG_BUS_WIDTH_DETECTION                string        true       true     00
+REGISTER.CONFIG_STATUS.BIT27_HMAC_ERROR                             string        true       true     0
+REGISTER.CONFIG_STATUS.BIT28_PUDC_B_PIN                             string        true       true     0
+REGISTER.CONFIG_STATUS.BIT29_BAD_PACKET_ERROR                       string        true       true     0
+REGISTER.CONFIG_STATUS.BIT30_CFGBVS_PIN                             string        true       true     1
+REGISTER.CONFIG_STATUS.BIT31_RESERVED                               string        true       true     0
+REGISTER.IR                                                         string        true       true     110101
+REGISTER.IR.BIT0_ALWAYS_ONE                                         string        true       true     1
+REGISTER.IR.BIT1_ALWAYS_ZERO                                        string        true       true     0
+REGISTER.IR.BIT2_ISC_DONE                                           string        true       true     1
+REGISTER.IR.BIT3_ISC_ENABLED                                        string        true       true     0
+REGISTER.IR.BIT4_INIT_COMPLETE                                      string        true       true     1
+REGISTER.IR.BIT5_DONE                                               string        true       true     1
+REGISTER.USERCODE                                                   string        true       true     ffffffff
+SET_UNKNOWN_DEVICE                                                  bool          false      true     0
+USER_CHAIN_COUNT                                                    string        true       true     4
+
+To report the properties for a hw_device, you can copy and paste the following command 
+into the Vivado Design Suite Tcl shell or Tcl console:
+
+	report_property -all [lindex [get_hw_devices] 0]
+

@@ -1,0 +1,56 @@
+
+Description:
+
+  The add_bp command lets you add breakpoints to an HDL source file to pause
+  the current simulation.
+
+  A breakpoint is a user-determined stopping point in the source code used
+  for debugging the design. When simulating a design with breakpoints,
+  simulation of the design stops at each breakpoint to let you examine values
+  and verify the design behavior.
+
+  You can report breakpoints in the current simulation using the report_bps
+  command, and remove existing breakpoints using the remove_bps command.
+
+  This command returns a new breakpoint object if there is not already a
+  breakpoint set at the specified file line, or returns an existing
+  breakpoint object if there is already a breakpoint defined for the
+  specified file and line number.
+
+  Note: You can capture the returned breakpoint object in a Tcl variable if
+  needed.
+
+  The add_bp command returns an error if the command fails.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <file_name> - (Required) The name of the HDL source file to add a
+  breakpoint to.
+
+  <line_number> - (Required) The line number of the specified <file_name> to
+  add the breakpoint to.
+
+Examples:
+
+  The following example adds a the breakpoint to the HDL source file at the
+  specified line number:
+
+    add_bp C:/Data/ug937/sources/sinegen.vhd 137
+
+See Also:
+
+   *  remove_bps
+   *  report_bps

@@ -1,0 +1,87 @@
+
+Description:
+
+  Add a condition that is evaluated by a specified condition,
+  condition_expression, and runs a series of simulation Tcl commands when the
+  condition is TRUE.
+
+  Conditions can be defined prior to starting the simulation. When a
+  condition is added, the simulator evaluates the condition expression
+  anytime a signal change is detected. When a specified condition expression
+  becomes TRUE, the condition commands are run.
+
+  The add_condition command returns a condition identifier for the added
+  condition, or returns an error if the command fails.
+
+Arguments:
+
+  -name <arg> - (Optional) Provide a unique name for the condition. If no
+  name is specified, then a default named is automatically created.
+
+  -radix <arg> - (Optional) Specifies the radix to use for the value of the
+  condition. Allowed values are: default, dec, bin , oct, hex, unsigned , and
+  ascii.
+
+  Note: The radix dec indicates a signed decimal. Specify the radix unsigned
+  when dealing with unsigned data.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <condition_expression> - (Required) Specify an expression for the
+  condition. If the condition evaluates to true, the simulation will run the
+  specified <commands> . Specific operators that can be used in condition
+  expressions are "equal" (==), and "not-equal" (!=). Numeric comparison
+  operators <, >, <=, and >= can also be used. Multiple filter expressions
+  can be joined by AND and OR (&& and ||).
+
+  <commands> - (Required) Specify the Tcl commands or Tcl procedure to run
+  when the <condition_expression> is true. This command is surrounded by {}
+  (braces). The command can include standard Tcl commands and simulation Tcl
+  commands, except run, restart, and step . Tcl variables used in the
+  condition expression are surrounded by quotes "" instead of {} so variable
+  substitution can be performed. Refer to the Vivado Design Suite User Guide:
+  Using Tcl Scripting (UG894) for more information on variable substitution.
+
+Examples:
+
+  The following example defines a condition named resetLow, that becomes true
+  when the reset signal is low, and then puts a message to the standard
+  output, and stops the current simulation:
+
+    add_condition -name resetLow {/testbench/reset == 0 } { 
+    puts "Condition Reset was encountered at [current_time]. Stopping simulation." 
+    stop }
+
+  This next example defines a Tcl procedure, called myProc, that uses the
+  add_force command to define clk and reset signal values, and print a
+  standard message when it completes. A condition is then added that calls
+  myProc when reset is low:
+
+    
+    proc myProc {} { 
+      add_force clk {0 1} { 1 2} -repeat_every 4 -cancel_after 500 
+      add_force reset 1 
+      run 10 ns 
+      remove_force force2 
+      puts "Reached end of myProc" 
+    } 
+     
+    add_condition -radix unsigned /top/reset==0 myproc
+
+See Also:
+
+   *  add_force
+   *  remove_condition
+   *  report_condition
+   *  stop

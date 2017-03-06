@@ -1,0 +1,123 @@
+
+Description:
+
+  Report all timing exceptions applied to setup and hold checks defined by
+  timing constraints in the current design, or report the exceptions on the
+  specified timing paths.
+
+  Timing exceptions can be defined by timing constraints such as
+  set_false_path or set_multicycle_path that change the default assumptions
+  for timing paths in the design.
+
+  Note: The set_clock_groups constraint is not reported by the
+  report_exception command since it is not a considered a timing exception by
+  Vivado timing analysis.
+
+  The exceptions are reported to the standard output by default, but can be
+  redirected to a file or to a Tcl string variable.
+
+Arguments:
+
+  -from <args> - (Optional) A list of start points on the timing path to
+  report exceptions on.
+
+  -rise_from <args> - (Optional) A list of the start points on the timing
+  path to report exceptions on the rising-edge of the path.
+
+  -fall_from <args> - (Optional) A list of the start points on the timing
+  path to report exceptions on the falling-edge of the path.
+
+  Note: Using the report_exceptions command with -from/-through/-to options
+  only matches timing exceptions that have been defined with the same
+  -from/-through/-to command line options. The specified patterns can be
+  different but the cell, pin, and port objects must also be the same to be
+  reported as an exception.
+
+  -to <args> - (Optional) A list of the end points for the timing path to
+  report exceptions on.
+
+  -rise_to <args> - (Optional) A list of the end points on the timing path to
+  report exceptions on the rising-edge of the path.
+
+  -fall_to <args> - (Optional) A list of the end points on the timing path to
+  report exceptions on the falling-edge of the path.
+
+  -through <args> - (Optional) A list of pins, cell, or nets through which
+  the timing path passes.
+
+  -rise_through <args> - (Optional) A list of pins, cell, or nets through
+  which the rising-edge timing path passes.
+
+  -fall_through <args> - (Optional) Specifies the list of pins, cell, or nets
+  through which the falling-edge timing path passes.
+
+  -ignored - (Optional) Report timing path exceptions in the current design
+  that are ignored by the Vivado timing engine. Ignored constraints could be
+  the result of an incorrectly defined constraint, or of missing design
+  objects.
+
+  -summary - (Optional) Report a summary of all exceptions.
+
+  -coverage - (Optional) Report the coverage of all timing exceptions.
+
+  -ignored_objects - (Optional) Report the startpoints and endpoints that are
+  part of timing path exceptions, and ignored by the timing engine.
+
+  -no_header - (Optional) Do not write a header to the report.
+
+  -file <arg> - (Optional) Write the report into the specified file. By
+  default the timing exceptions are reported to the standard output, or the
+  Tcl console. The specified file will be overwritten if one already exists,
+  unless -append is also specified.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -append - (Optional) Append the output of the command to the specified file
+  rather than overwriting it.
+
+  Note: The -append option can only be used with the -file option.
+
+  -return_string - (Optional) Directs the output to a Tcl string rather than
+  to the standard output. The Tcl string can be captured by a variable
+  definition and parsed or otherwise processed.
+
+  Note: This argument cannot be used with the -file option.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  This example reports all timing exceptions in the current design:
+
+    report_exceptions
+
+  This example reports all timing exceptions ignored or overridden in the
+  current design:
+
+    report_exceptions -ignored
+
+See Also:
+
+   *  create_clock
+   *  create_generated_clock
+   *  report_timing
+   *  report_timing_summary
+   *  set_false_path
+   *  set_input_delay
+   *  set_max_delay
+   *  set_min_delay
+   *  set_multicycle_path
+   *  set_output_delay

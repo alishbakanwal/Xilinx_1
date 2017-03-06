@@ -1,0 +1,36 @@
+BD_NET
+
+Description: 
+A block design net, or a bd_net object, connects the pins on an IP Integrator 
+block design cell to other pins, or to external ports. The bd_net object connects 
+through multiple levels of the design hierarchy, connecting block design cells. 
+Every net has a name which identifies it in the design. All block design cells, 
+pins, and ports connected to these nets are electrically connected.
+
+Related Objects:
+The block design net, bd_net object, occurs in a block design, or diagram. It is 
+connected to ports (bd_port), and through pins (bd_pin) to block design cells 
+(bd_cell) in the diagram. You can query the bd_nets of the diagram, bd_cell, 
+bd_pin, and bd_port objects. 
+
+	get_bd_nets -of_objects [get_bd_ports]
+
+In addition, you can query the bd_cells, or the bd_pins, or bd_port objects that 
+are connected to a specific bd_net:
+
+	get_bd_cells -of_objects [get_bd_nets clk_wiz*]
+
+Properties:
+The properties on the bd_net object include the following:
+
+Property  Type    Read-only  Visible  Value
+CLASS     string  true       true     bd_net
+NAME      string  false      true     clk_wiz_1_locked
+PATH      string  true       true     /clk_wiz_1_locked
+
+To report the properties for the bd_net object, you can copy and paste the 
+following command into the Vivado Design Suite Tcl shell or Tcl console:
+
+	report_property -all [lindex [get_bd_nets] 0]
+
+

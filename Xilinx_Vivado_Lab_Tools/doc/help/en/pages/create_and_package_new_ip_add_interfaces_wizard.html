@@ -1,0 +1,95 @@
+﻿<html xml:lang="en-us" lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="reference"/>
+<meta name="DC.Title" content="Add Interfaces"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_bqj_lqr_b5"/>
+<link rel="stylesheet" type="text/css" href="../../commonltr.css"/>
+<title>Add Interfaces</title>
+</head>
+<body id="concept_bqj_lqr_b5">
+
+
+ <h1 class="title topictitle1">Add Interfaces</h1>
+
+ <div class="body refbody">
+     <div class="section">
+  <p class="p">The Add Interfaces page lets you add and configure slave and master interface pins, as well as
+                an interrupt pin, to the AXI4 peripheral you define. </p>
+
+  <ul class="ul" id="concept_bqj_lqr_b5__ul_azt_c5r_b5">
+   <li class="li"><span Class="uicontrol">Enable Interrupt Support</span>: Enable this checkbox to add an interrupt pin
+                    to the IP. The generated IP supports edge or level interrupts. </li>
+
+   <li class="li"><span Class="uicontrol">Add Interface</span>: Above the middle display window, where the added
+                    interfaces are listed, click the green plus sign (<img class="image" id="concept_bqj_lqr_b5__image_z3s_qs5_c5" src="../../images/add_button.png"/>) to add a
+                    new interface pin to your peripheral IP. </li>
+
+   <li class="li"><span Class="uicontrol">Remove Interface</span>: Click the red minus sign (<img class="image" id="concept_bqj_lqr_b5__image_ocp_k55_c5" src="../../images/Remove1.png"/>) to delete an
+                    interface pin from your peripheral IP. </li>
+
+                <li class="li"><span Class="uicontrol">Name</span>: Specify a name for the interface that is currently
+                    selected in the middle display window. </li>
+
+                <li class="li"><span Class="uicontrol">Interface Type</span>: Specify the interface type for the AXI
+                    interface. The supported interface types are AXI4, AXI4-Lite, and AXI4-Stream.
+                    See <a class="xref" href="http://www.xilinx.com/ipcenter/axi4.htm#details" target="_blank">AXI4 Details</a> for more information. </li>
+
+                <li class="li"><span Class="uicontrol">Interface Mode</span>: Specify a <span Class="uicontrol">Slave</span> or
+                        <span Class="uicontrol">Master</span> interface mode for the selected interface. </li>
+
+                <li class="li"><span Class="uicontrol">Data Width (Bits)</span>: Defines the read and write data width
+                    of the AXI4 interface. The data width, expressed in bits, varies depending upon
+                    the AXI4 interface type selected. Select the appropriate data width from the
+                    available values. </li>
+
+                <li class="li"><span Class="uicontrol">Memory Size (Bytes)</span>: The memory size (MEMORY_SIZE),
+                    expressed in bytes, is only supported for AXI4-full slave interfaces. Select the
+                    appropriate memory size from the available values. </li>
+
+                <li class="li"><span Class="uicontrol">Number of Registers</span>: The number of registers (NUM_REG) is
+                    only supported for AXI4-Lite slave interfaces.</li>
+
+  </ul>
+
+  <p class="p">When you finish adding and configuring interface pins to the AXI4 peripheral IP, you can click
+                    <span Class="uicontrol">Next</span> to open the <a class="xref" href="create_and_package_new_ip_create_peripheral_wizard.html">Create Peripheral</a> page. </p>
+
+   </div>
+
+   <div class="section"><h2 class="title sectiontitle">See Also</h2>
+   
+            <table cellpadding="4" cellspacing="0" summary="" id="concept_bqj_lqr_b5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow">
+                    <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_bqj_lqr_b5__image_smm_1vr_b5" src="../../images/book_icon.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">Vivado<sup>®</sup> Design Suite User Guide: Creating and
+                            Packaging Custom IP</cite> (UG1118), <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug1118-vivado-creating-packaging-custom-ip.pdf;a=xCreatingANewAXI4Peripheral" target="_blank">Creating a New AXI4
+                        Peripheral</a></td>
+
+                </tr>
+<tr class="strow">
+                    <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_pzc_mrk_35" src="../../images/book_icon.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry"><cite class="cite">Vivado Design Suite: AXI Reference Guide</cite>
+                        <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/ipdoc?c=axi_ref_guide;v=latest;d=ug1037-vivado-axi-reference-guide.pdf;a=xCreatingANewAXI4Peripheral" target="_blank">(UG1037)</a></td>
+
+                </tr>
+<tr class="strow">
+                    <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_av4_jvr_b5" src="../../images/play.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry"><a class="xref" href="http://www.xilinx.com/cgi-bin/docs/ndoc?t=video;d=hardware/creating-an-axi-peripheral-in-vivado.html" target="_blank">Vivado Design Suite QuickTake Video: Creating an AXI
+                            Peripheral in Vivado</a></td>
+
+                </tr>
+</table>
+
+  </div>
+
+ </div>
+
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+
+Description:
+
+  Check the current design against a specified set of methodology checks and
+  report any errors or violations that are found.
+
+  Methodology checks are a special class of design rule checks (DRC) that are
+  accessible through this separate Tcl command. The methodology checks are a
+  necessary part of the design flow, and should be considered mandatory after
+  implementation and prior to generating the bitstream.
+
+  Note: Other than their availability through the separate report_methodology
+  command, the checks are standard design rule checks in every other way.
+
+  The report_methodology command requires an open design to check the design
+  rules against. The command returns a report with the results of violations
+  found by the design rule checks. Violations are returned as Vivado objects
+  that can be listed with the get_drc_violations command, and are associated
+  with cells, pins, ports, nets, and sites in the current design. You can get
+  the cells, nets, and other design objects that are associated with
+  methodology violation objects, using the -of_objects option of the
+  get_cells command for instance.
+
+  The report_methodology command runs two default rule decks, or you can use
+  the -checks option to specify the set of checks to run. Methodology checks
+  can also be enabled or disabled in the default rule decks using the
+  IS_ENABLED property on the rule check object:
+
+    set_property IS_ENABLED FALSE [get_drc_checks PDRC-190]
+
+  If a rule IS_ENABLED false, the rule will not be run by the
+  report_methodology command.
+
+  Note: You can reset the properties of a methodology rule to the factory
+  default settings using the reset_drc_check command.
+
+  You can reset the current results of the report_methodology command,
+  clearing any found violations, using the reset_methodology command.
+
+Arguments:
+
+  -name <arg> - (Optional) The name to assign to the results when run in GUI
+  mode.
+
+  -checks <args> - (Optional) A list of rule checks to run the methodology
+  report against. All specified rules will be checked against the current
+  design. Rules are listed by their group name or full key. Using the -checks
+  option creates a temporary user-defined rule deck, with the specified
+  design rule checks, and uses the temporary rule deck for the run.
+
+  -file <arg> - (Optional) Write the methodology report into the specified
+  file. The specified file will be overwritten if one already exists, unless
+  -append is also specified.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -append - (Optional) Append the output of the command to the specified file
+  rather than overwriting it.
+
+  Note: The -append option can only be used with the -file option.
+
+  -return_string - (Optional) Directs the output to a Tcl string rather than
+  to the standard output. The Tcl string can be captured by a variable
+  definition and parsed or otherwise processed.
+
+  Note: This argument cannot be used with the -file option.
+
+  -rpx <arg> - (Optional) Specify the file name and path of an Xilinx report
+  file (RPX) to write. This is different from writing the report results to a
+  file using the -file argument. The RPX file is an interactive report that
+  contains all the report information and can be reloaded into memory in the
+  Vivado Design Suite using the open_report command. You should add a .rpx
+  file extension to the specified file name, as the Vivado tool will not
+  automatically assign a file extension.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following examples run the default methodology checks against the
+  current design, and writes the results to the specified file:
+
+    report_methodology -file C:/Data/methodology_Rpt1.txt -append
+
+  Note: The -append option adds the result to the specified file.
+
+See Also:
+
+   *  get_methodology_checks
+   *  get_methodology_violations
+   *  report_drc
+   *  reset_methodology

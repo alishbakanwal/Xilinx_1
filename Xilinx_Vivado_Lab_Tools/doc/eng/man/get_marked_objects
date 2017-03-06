@@ -1,0 +1,52 @@
+
+Description:
+
+  Get the marked objects in the current design open in the Vivado IDE.
+  Objects can be marked with the mark_objects command.
+
+  You can get all marked objects in the design, or specify marked objects by
+  color, or by RGB value.
+
+  Note: This Tcl command works only when Vivado is run in GUI mode.
+
+Arguments:
+
+  -rgb <args> - (Optional) The color to use in the form of an RGB code
+  specified as {R G B}. For instance, {255 255 0} specifies the color yellow,
+  while {0 255 0} specifies green.
+
+  -color <arg> - (Optional) The color used for marking the specified object
+  or objects. Supported colors are: red, green, blue, magenta, yellow, cyan,
+  and orange.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example gets all the marked objects in the current design:
+
+    get_marked_objects
+
+  The following example gets the object in the current design that are marked
+  in the specified color:
+
+    get_marked_objects -color yellow
+
+See Also:
+
+   *  get_highlighted_objects
+   *  get_marked_objects
+   *  highlight_objects
+   *  mark_objects
+   *  select_objects

@@ -1,0 +1,77 @@
+
+Description:
+
+  This command allows the user to disconnect a specified net from one or more
+  pins or ports in the netlist of an open Synthesized or Implemented Design.
+
+  Netlist editing changes the in-memory view of the netlist in the current
+  design. It does not change the files in the source fileset, or change the
+  persistent design on the disk. Changes made to the netlist may be saved to
+  a design checkpoint using the write_checkpoint command, or may be exported
+  to a netlist file such as Verilog, VHDL, or EDIF, using the appropriate
+  write_* command.
+
+  Note: Netlist editing is not allowed on the elaborated RTL design.
+
+Arguments:
+
+  -prune - (Optional) Remove hierarchical pins, ports, or nets that are left
+  unconnected after disconnecting the specified nets. This will not remove
+  the pins specified by -objects, which are disconnected, but removes the net
+  and pins or ports connected to the specified pins.
+
+  -net <arg> - (Optional) Specifies the net to disconnect. If no net is
+  specified, the net connected to the first pin or port object will be
+  disconnected.
+
+  Note: Although you can create a bus using the -bus_from and -bus_to
+  arguments of the create_net command, you must disconnect each bit of the
+  bus separately using the disconnect_net command.
+
+  -objects <args> - (Required) The list of pin or port objects to disconnect
+  the net from.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Example:
+
+  Using the following connection network:
+
+    leaf_cell1/pin1 > net1 > block1/pin1 > 
+        topnet 
+    < block2/pin1 < net2 < leaf_cell2/pin1
+
+  This example first disconnects the signal, topnet, from block1/pin1, and
+  then prunes topnet, block2/pin1, and net2, but does not prune
+  leaf_cell2/pin1:
+
+    disconnect_net -prune -net topnet -objects [get_pins block1/pin1]
+
+  Note: net2 is not removed, because block1/pin1 is not pruned as part of the
+  -prune option.
+
+  The following example disconnects the specified bit of the dataBus:
+
+    
+    disconnect_net -net dataBus[1] -objects {dataIN[1] myDMA/data[1]}
+
+See Also:
+
+   *  connect_net
+   *  remove_net
+   *  create_net
+   *  write_checkpoint
+   *  write_edif
+   *  write_verilog
+   *  write_vhdl

@@ -1,0 +1,69 @@
+
+Description:
+
+  Creates a wave divider in the wave form viewer. The wave divider can be
+  used to separate groups of related objects, for easier viewing.
+
+  The wave divider can be added into a specified or current waveform
+  configuration at the specified location. If no location is specified the
+  wave divider is inserted at the end of the waveform configuration.
+
+  This command returns the name of the newly-created wave divider.
+
+  Note: This command can only be used when running a simulation.
+
+Arguments:
+
+  -into <wcfgGroupVbusObj> - (Optional) Specifies the wave configuration,
+  group, or virtual bus into which the new wave object(s) are inserted. If
+  <wcfgGroupVbusObj> is a string instead of an object, it is treated as the
+  name of a group in the current WCFG. If no such group is found, the tool
+  searches the names of the virtual buses of the current WCFG. If still not
+  found, the tool searches the names of all WCFG objects. If no -into object
+  is specified, the current wave configuration is assumed.
+
+  -at_wave <waveObj> - (Optional) Adds a wave divider at a specified wave
+  object. If <waveObj> is a string, it is treated as the display name of a
+  wave object.
+
+  -after_wave <waveObj> - (Optional) Adds a wave divider after a specified
+  wave object. If <waveObj> is a string, it is treated as the display name of
+  a wave object.
+
+  -before_wave <waveObj> - (Optional) Adds a wave divider before a specified
+  wave object. If <waveObj> is a string, it is treated as the display name of
+  a wave object.
+
+  -color <arg> - (Optional) Sets the color property of the new wave object(s)
+  to a pre-defined color name or a color specified by a six-digit RGB format
+  (RRGGBB).
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <name> - (Optional) Creates a divider with the specified display name. The
+  default name is new_divider.
+
+Examples:
+
+  The following example inserts a wave divider named Div1, after the CLK wave
+  object:
+
+    add_wave_divider -after_wave CLK Div1
+
+See Also:
+
+   *  add_wave
+   *  add_wave_group
+   *  add_wave_marker
+   *  add_wave_virtual_bus

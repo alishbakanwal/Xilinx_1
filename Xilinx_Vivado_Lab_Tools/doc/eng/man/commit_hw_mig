@@ -1,0 +1,55 @@
+
+Description:
+
+  Commit the current values of properties defined on the specified memory IP
+  debug core hardware objects in the Hardware Manager feature of the Vivado
+  Design Suite to the current hardware device.
+
+  The commit_hw_mig command takes the current property values defined on a
+  hw_mig object in the Vivado logic analyzer, and commits them to the current
+  hardware device connected to the hardware server.
+
+  When you change the property values on the hw_mig object, like the CONFIG.*
+  properties, they are not written to the hardware device until you use the
+  commit_hw_mig command.
+
+  This command returns nothing if successful, or returns an error if it fails.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <hw_objects> - (Optional) Inputs can be any hw_mig, hw_device, hw_target,
+  or hw_server object. If no object is specified, the current hw_device is
+  targeted.
+
+  Note: The objects must be specified using the appropriate get_hw_xxx
+  command, for instance get_hw_sysmon, rather than specified by name.
+
+Example:
+
+  The following example commits the current properties on the hw_mig object
+  to the current hardware device:
+
+    commit_hw_mig [lindex [get_hw_migs] 0]
+
+See Also:
+
+   *  connect_hw_server
+   *  current_hw_device
+   *  get_hw_migs
+   *  implement_mig_cores
+   *  refresh_hw_mig
+   *  report_hw_mig
+   *  set_property

@@ -1,0 +1,59 @@
+
+Description:
+
+  Report details of the IO banks of the current design. Details include
+  device specific information such as target part, package, and speed grade,
+  and also provides information related to each pin on the device.
+
+  This command returns the requested report, or returns an error if it fails.
+
+Arguments:
+
+  -file <arg> - (Optional) Write the report into the specified file.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -name <arg> - (Optional) The name to assign to the reported results when
+  run in GUI mode.
+
+  -append - (Optional) Append the output of the command to the specified file
+  rather than overwriting it.
+
+  Note: The -append option can only be used with the -file option. It cannot
+  be specified with -format XML.
+
+  -format [ xml | text ] - (Optional) Specifies the format of the output as
+  either XML, or an ASCII text file. The default output is text.
+
+  Note: The format applies when -file is specified, but is otherwise ignored.
+
+  -return_string - (Optional) Directs the output to a Tcl string rather than
+  to the standard output. The Tcl string can be captured by a variable
+  definition and parsed or otherwise processed.
+
+  Note: This argument cannot be used with the -file option.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example reports the IO blocks of the current design:
+
+    report_io
+
+See Also:
+
+   *  report_route_status

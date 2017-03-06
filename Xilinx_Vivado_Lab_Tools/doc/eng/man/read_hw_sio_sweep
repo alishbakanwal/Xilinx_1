@@ -1,0 +1,60 @@
+
+Description:
+
+  Read a hardware SIO sweep data directory and create a hw_sio_sweep object
+  in the Hardware Manager feature of the Vivado Design Suite.
+
+  The SIO sweep data can be written to disk using the write_hw_sio_sweep
+  command, after running the sweep using the run_hw_sio_sweep command. This
+  command reads the sweep directory containing multiple SIO scan data files.
+
+  If no hw_sio_sweep object is specified, a new hw_sio_sweep object is
+  created and is named sequentially following any existing hw_sio_sweep
+  objects. After being read from disk, any of the SIO scans in the sweep can
+  be plotted and viewed in the Vivado serial I/O analyzer by using the
+  display_hw_sio_scan command.
+
+  This command returns a hw_sio_sweep object, or returns an error if it fails.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <directory> - (Required) The name of the dirctory containing the SIO sweep
+  data to read.
+
+  <hw_sio_sweep> - (Optional) Specify an existing hw_sio_sweep object to read
+  the scan data files of the sweep into. The hw_sio_sweep object can be
+  specified by name, or as an object returned by the get_hw_sio_sweeps
+  command.
+
+Example:
+
+  The following example reads the specified sweep directory and creates a new
+  hw_sio_sweep object, then displays one of the hw_sio_scans from that sweep:
+
+    read_hw_sio_sweep C:/Data/SWEEP_1/ 
+    display_hw_sio_scan [get_hw_sio_scans {SCAN_86}]
+
+See Also:
+
+   *  create_hw_sio_sweep
+   *  current_hw_device
+   *  display_hw_sio_scan
+   *  get_hw_sio_sweeps
+   *  remove_hw_sio_sweep
+   *  run_hw_sio_sweep
+   *  stop_hw_sio_sweep
+   *  wait_on_hw_sio_sweep
+   *  write_hw_sio_sweep

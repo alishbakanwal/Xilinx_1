@@ -1,0 +1,127 @@
+
+Description:
+
+  Create a clock object with the specified period or waveform defined in
+  nanoseconds (ns). This command defines primary clocks which are used by the
+  timing engine as the delay propagation starting point of any clock edge.
+  The defined clock can be added to the definition of an existing clock, or
+  overwrite the existing clock.
+
+  A virtual clock can be created that has no source in the design. A virtual
+  clock can be used as a time reference for setting input and output delays
+  but does not physically exist in the design.
+
+  A clock can also be generated from an existing physical clock, and derive
+  many of its properties from the master clock. Use the
+  create_generated_clock command to derive a clock from an existing physical
+  clock.
+
+  Note: If you use create_clock to create a generated clock, instead of
+  create_generated_clock, the created clock does not inherit any of the
+  properties of its source clock. The insertion delay and jitter of the
+  parent clock will not be propagated to the generated clock, causing
+  incorrect timing calculations.
+
+  The create_clock command returns the name of the clock object that is
+  created.
+
+Arguments:
+
+  -period <arg> - (Required) Specifies the clock period of the clock object
+  to be created. The value is specified as nanoseconds (ns) and must be
+  greater than zero (>0).
+
+  -name <arg> - (Optional) The name of the clock object to be created. If the
+  name is omitted, a system-generated name will be used based on the
+  specified source <objects>. You can also use the -name option without
+  source <objects> to create a virtual clock for the design that is not
+  associated with a physical source on the design.
+
+  -waveform <arg1 arg2 ...> - (Optional) The rising and falling edge times of
+  the waveform of the defined clock, in nanoseconds, over one full clock
+  cycle. You can use multiple rising and falling edges to define the
+  characteristics of the waverform, but there must be an even number of
+  edges, representing both the rising and falling edges of the waveform. The
+  first time specified (arg1) represents the time of the first rising
+  transition, and the second time specified (arg2) is the falling edge. If
+  the value for the falling edge is smaller than the value for the rising
+  edge, it means that the falling edge occurs before the rising edge.
+
+  Note: If you do not specify the waveform, the default waveform is assumed
+  to have a rising edge at time 0.0 and a falling edge at one half the
+  specified period (-period/2).
+
+  -add - (Optional) Define multiple clocks on the same source for
+  simultaneous analysis with different clock waveforms. Use -name to specify
+  the new clock to add. If you do not specify this option, the create_clock
+  command will automatically assign a name and will overwrite any existing
+  clock of the same name.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <objects> - (Optional) The ports, pins, or nets which are the source of the
+  specified clock. If you specify a clock on a source object that already has
+  a clock, the new clock will overwrite the original clock unless you also
+  specify the -add option. If no <objects> are specified to attach the clock
+  object to, the clock will be created as a virtual clock in the design.
+
+  Note: The first driver pin of a specified net will be used as the source of
+  the clock.
+
+Examples:
+
+  The following example creates a physical clock called bftClk and defines
+  the clock period:
+
+    create_clock -name bftClk -period 5.000 [get_ports bftClk]
+
+  Note: If the get_ports command defining the objects is left off of this
+  example, a virtual clock is created in the design rather than a physical
+  clock.
+
+  The following example creates a clock named clk on the input port, bftClk,
+  with a period of 10ns, the rising edge at 2.4ns and the falling edge at
+  7.4ns:
+
+    create_clock -name clk -period 10.000 -waveform {2.4 7.4} [get_ports bftClk]
+
+  The following example creates a virtual clock since no clock source is
+  specified:
+
+    create_clock -name virtual_clock -period 5.000
+
+  The following example creates a clock with the falling edge at 2ns and the
+  rising edge at 7ns:
+
+    create_clock -name clk -period 10.000 -waveform {7 2} [get_ports bftClk]
+
+  Note: Because the falling edge is earlier than the rising edge in the
+  -waveform definition, although it is specified as arg2, it occurs first in
+  the waveform.
+
+See Also:
+
+   *  all_clocks
+   *  create_generated_clock
+   *  get_clocks
+   *  report_clocks
+   *  report_clock_interaction
+   *  report_clock_networks
+   *  report_clock_utilization
+   *  set_clock_groups
+   *  set_clock_latency
+   *  set_clock_uncertainty
+   *  set_input_delay
+   *  set_output_delay
+   *  set_propagated_clock

@@ -1,0 +1,24 @@
+
+Description:
+
+  Stops GUI mode and places the tool into Tcl mode, running in the Vivado
+  Design Suite Tcl shell. In Tcl mode, all commands must be entered as Tcl
+  commands or through Tcl scripts.
+
+Arguments:
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example stops and closes the GUI and places the tool into Tcl
+  mode:
+
+    stop_gui
+
+See Also:
+
+   *  start_gui

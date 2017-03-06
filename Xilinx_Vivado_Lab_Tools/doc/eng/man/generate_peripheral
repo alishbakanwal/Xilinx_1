@@ -1,0 +1,87 @@
+
+Description:
+
+  Generate the output products for the specified peripheral object. The
+  output products are written to the IP repository location specified when
+  the IP is created by the create_peripheral command, under the name of the
+  IP as specified at creation.
+
+Arguments:
+
+  -driver - (Optional) Create software driver files containing offsets of
+  software addressable registers in the generated peripheral, as well as
+  masks and register access macros or utility functions. The software driver
+  self test example file contains self test example code to test various
+  hardware features of the peripheral.
+
+  -example_design - (Optional) Write example design data for the specified
+  peripheral. This includes the design.tcl to create a block design
+  incorporating the new peripheral in IP Integrator, and a test bench, called
+  design_tb.v, for simulating the example design.
+
+  Note: This option is not currently supported for AXI peripherals that
+  implement the AXI stream interface as defined by the -axi_type option of
+  the add_peripheral_interface command. .
+
+  -bfm_example_design - (Optional) Create a TCL script to generate a block
+  design using the IP integrator feature of the Vivado Design Suite ad a bus
+  functional model (BFM) test bench to test the read and write operations of
+  the AXI peripheral.
+
+  Note: AXI4 BFM requires a license for use during simulation.
+
+  -debug_hw_example_design - (Optional) Create a Tcl script to generate a
+  block design for debugging the AXI peripheral using the JTAG-to-AXI debug
+  core in the Hardware Manager feature of the tool. Refer to the Vivado
+  Design Suite User Guide: Programming and Debugging (UG908) for more
+  information on working with the Hardware Manager.
+
+  -enable_interrupt - (Optional) Add an interrupt pin and supporting logic,
+  to enable the interrupt operation on the peripheral.
+
+  -force - (Optional) Overwrite any existing output products in the IP
+  repository even if they are current.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <peripheral> - (Required) The peripheral object to generate output products
+  for. The peripheral is created with the create_peripheral command, and
+  should be captured in a Tcl variable at the time it is created to
+  facilitate further processing by this and other related commands. See the
+  example below.
+
+Example:
+
+  This example creates a new AXI peripheral, with the VLNV attribute as
+  specified, and captures the peripheral object in a Tcl variable for later
+  processing, then adds AXI slave interfaces to the peripheral, and generates
+  the output products for the peripheral:
+
+    set perifObj [ create_peripheral {myCompany.com} {user} {testAXI1} \ 
+       {1.3} -dir {C:/Data/new_periph} ] 
+    add_peripheral_interface {S0_AXI} -interface_mode {slave} \ 
+       -axi_type {lite} $perifObj 
+    add_peripheral_interface {S1_AXI} -interface_mode {slave} \ 
+       -axi_type {lite} $perifObj 
+    generate_peripheral -driver -bfm_example_design \ 
+       -enable_interrupt $perifObj 
+    write_peripheral $perifObj 
+    set_property ip_repo_paths  C:/Data/new_periph [current_fileset] 
+    update_ip_catalog -rebuild
+
+See Also:
+
+   *  add_peripheral_interface
+   *  create_peripheral
+   *  write_peripheral

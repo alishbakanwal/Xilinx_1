@@ -1,9 +1,0 @@
-STAGE_NAME,GUI_DISPLAY_NAME,READ_SIMPLE,READ_COMPLEX,WRITE_SIMPLE,WRITE_COMPLEX,WRITE_DM
-01_read_clock_alignment,1 - Read Clock Alignment,0,0,0,0,0
-02_read_dq_training_simple,2 - Read DQ Training (Simple),1,0,0,0,0
-03_read_qvld_training,3 - Read QVLD Training,0,0,0,0,0
-04_write_training,4 - Write Training,0,0,1,0,0
-05_bit_slip_training,5 - Bit Slip Training,0,0,0,0,0
-06_byte_align_training,6 - Byte Align Training,0,0,0,0,0
-07_read_dq_training_complex,7 - Read DQ Training (Complex),0,1,0,0,0
-08_write_read_sanity_check,8 - Write Read Sanity Check,0,0,0,0,0

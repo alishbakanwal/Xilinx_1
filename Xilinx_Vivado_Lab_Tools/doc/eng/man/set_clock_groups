@@ -1,0 +1,86 @@
+
+Description:
+
+  Define clocks, or groups of clocks, that are exclusive with or asynchronous
+  to other clocks in the design. Exclusive or asynchronous clocks are not
+  active at the same time, and paths between them can be ignored during
+  timing analysis.
+
+  Using this command is similar to defining false path constraints for data
+  paths moving between exclusive or asynchronous clock groups.
+
+  If only one group is specified, the clocks in that group are asynchronous
+  or exclusive to all other clocks in the design, but not to each other. If a
+  new clock is created after the set_clock_groups command, it is asynchronous
+  to that group as well.
+
+  This command can also be used for multiple clocks that are derived from a
+  single BUFGMUX as both of the clocks will not be active at the same time.
+
+  Note: This command operates silently and does not return direct feedback of
+  its operation.
+
+Arguments:
+
+  -name <group_name> - (Optional) Name of the clock group to be created. A
+  name will be automatically assigned if one is not specified.
+
+  -logically_exclusive - (Optional) The specified clocks are logically
+  exclusive.
+
+  Note: -logically_exclusive, -physically_exclusive and -asynchronous are
+  mutually exclusive arguments.
+
+  -physically_exclusive - (Optional) The specified clocks are physically
+  exclusive, and cannot exist in the design at the same time.
+
+  -asynchronous - (Optional) The specified clocks are asynchronous to one
+  another.
+
+  -group <args> - (Optional) The list of clocks to be included in the clock
+  group. Each group of clocks is exclusive with or asynchronous with the
+  clocks specified in all other groups.
+
+  Note: If only one group of clocks is specified, that group is exclusive
+  with or asynchronous to all other clocks in the design. Clocks can be
+  specified by name, or as clock objects returned by the get_clocks command.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  Group all the elements driven by src_clk and sync_clk into separate clock
+  groups. The clock groups are asynchronous to each other:
+
+    set_clock_groups -group src_clk -group sync_clk -asynchronous
+
+  The following example includes the generated clocks of the specified
+  clocks, and adds those to the clock group:
+
+    set_clock_groups -group [get_clocks -include_generated_clocks src_clk] \ 
+    -group [get_clocks -include_generated_clocks sync_clk]  -asynchronous
+
+  Note: In the preceding example, src_clk and sync_clk, and all their
+  generated clocks, are asynchronous. Otherwise the generated clocks would be
+  timed against each other and the other master clock.
+
+  In this example, the specified clocks are grouped together, and are
+  asynchronous to all other clocks in the design:
+
+    set_clock_groups -async -group [get_clocks {J_CLK U_CLK}]
+
+See Also:
+
+   *  get_clocks
+   *  set_false_path

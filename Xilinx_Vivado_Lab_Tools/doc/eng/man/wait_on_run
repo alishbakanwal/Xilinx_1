@@ -1,0 +1,60 @@
+
+Description:
+
+  Blocks the execution of Tcl commands until the specified run has completed
+  either successfully or in error, or until the specified amount of time has
+  elapsed.
+
+  This command will tell you when the run has terminated, but not the results
+  of the run. To determine if the run has completed successfully, you could
+  query the value of the PROGRESS property of the run:
+
+    launch_runs synth_1  
+    wait_on_run synth_1  
+    if {[get_property PROGRESS [get_runs synth_1]] != "100%"} {  
+       error "ERROR: synth_1 failed"  
+    }
+
+  The wait_on_run command can be used for runs that have been launched. If
+  the specified run has not been launched when the wait_on_run command is
+  used, you will get an error. Runs that have already completed do not return
+  an error.
+
+  Note: This command is used for running the tool in batch mode or from Tcl
+  scripts. It is ignored when running interactively from the GUI.
+
+Arguments:
+
+  -timeout <arg> - (Optional) The time in minutes that the wait_on_run
+  command should wait until the run finishes. This allows you to define a
+  period of time beyond which the tool should resume executing Tcl commands
+  even if the specified run has not finished execution. The default value of
+  -1 is used if timeout is not specified, meaning that there is no limit to
+  the amount of time the tool will wait for the run to complete.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <run> - (Required) The name of the run to wait on.
+
+Examples:
+
+  The following example launches the impl_1 run, and then waits for the
+  specified run to complete, or to wait for one hour, whichever occurs first:
+
+    launch_runs impl_1 
+    wait_on_run -timeout 60 impl_1
+
+See Also:
+
+   *  launch_runs

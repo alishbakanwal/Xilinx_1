@@ -1,0 +1,92 @@
+
+Description:
+
+  Specify cell instances to include or exclude in power optimization. The
+  specified cells are optimized using the power_opt_design command.
+
+  Note: Block RAM optimizations are performed by default with the opt_design
+  command. Some or all BRAM cells can be excluded from the opt_design
+  optimization using the set_power_opt command as well.
+
+  The effect of multiple set_power_opt commands is cumulative, so that you
+  can specify a broad class of cell types to optimize, include specific
+  hierarchical cells, and then exclude cells within the included hierarchy to
+  refine the power optimization.
+
+  The power optimizations that have been performed can be reported using the
+  report_power_opt command.
+
+Arguments:
+
+  -include_cells <args> - (Optional) Include only these instances for clock
+  gating. Use this option to list specific cells or blocks to be optimized
+  using power_opt_design. The default is to include all cells in power
+  optimization.
+
+  -exclude_cells <args> - (Optional) Exclude these instances from clock
+  gating. The default is to not exclude cells from power optimization. The
+  -exclude_cells option excludes from the currently included cells. By
+  default all cells are included, however, if -include_cells has been
+  specified, then -exclude_cells applies only to the currently included
+  cells.
+
+  -clocks <args> - (Optional) Perform power optimizations on instances
+  clocked by the specified clocks only. The default is to include all clocks
+  in the design.
+
+  Note: It is possible to use both -clocks and -include_cells to produce a
+  list of cells that are not clocked by the specified clocks, resulting in no
+  power optimization.
+
+  -cell_types [ all | bram | reg | srl | none ] - (Optional) Perform power
+  optimization on the specified cell types only. The default is to perform
+  power optimization on all types of cells. You can use all or none to reset,
+  or clear, any prior set_power_opt commands. You can also specify one or
+  more of bram, srl, or reg type cells.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example sets power optimization for BRAM cells only, and then
+  runs power optimization:
+
+    set_power_opt -cell_types bram 
+    power_opt_design
+
+  The following example sets power optimization for BRAM and REG type cells,
+  then adds SRLs, and runs power optimization. Then all cells are cleared,
+  and only SRLs are included, and power optimization is run again:
+
+    set_power_opt -cell_types { bram reg}  
+    set_power_opt -cell_types { srl}  
+    power_opt_design 
+    set_power_opt -cell_types { none} 
+    set_power_opt -cell_types { srl}  
+    power_opt_design
+
+  The following example sets power optimization for BRAM cells only, excludes
+  the cpuEngine block from optimization, but then includes the
+  cpuEngine/cpu_dbg_dat_i block, then performs power optimization:
+
+    set_power_opt -cell_types bram 
+    set_power_opt -exclude_cells cpuEngine 
+    set_power_opt -include_cells cpuEngine/cpu_dbg_dat_i 
+    power_opt_design
+
+See Also:
+
+   *  opt_design
+   *  power_opt_design
+   *  report_power_opt

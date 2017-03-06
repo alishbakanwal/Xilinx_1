@@ -1,0 +1,38 @@
+
+Description:
+
+  Removes the specified hw_cfgmem object from the current hw_device.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <cfgmem> - (Required) Specify a hw_cfgmem object to remove from the current
+  hw_device. The hw_cfgmem must be specified as an object as returned by
+  get_hw_cfgmems or current_hw_cfgmem, rather than simply by name.
+
+Example:
+
+  The following example removes the current hw_cfgmem object:
+
+    delete_hw_cfgmem [current_hw_cfgmem]
+
+See Also:
+
+   *  create_hw_cfgmem
+   *  current_hw_device
+   *  get_hw_cfgmems
+   *  get_hw_device
+   *  get_property
+   *  program_hw_cfgmem

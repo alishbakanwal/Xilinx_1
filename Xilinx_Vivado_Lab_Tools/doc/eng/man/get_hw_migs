@@ -1,0 +1,128 @@
+
+Description:
+
+  Returns the hw_mig objects on the current hardware device.
+
+  Memory IP included in the Xilinx IP Catalog are used to generate memory
+  controllers and interfaces for Xilinx<tm tmtype="reg"/> devices. Memory IP
+  includes different IP cores from the Xilinx IP catalog depending on the
+  device architecture and memory interface specified. Refer to Zynq-7000 AP
+  SoC and 7 Series Devices Memory Interface Solutions (UG586), or UltraScale
+  Architecture-Based FPGAs Memory Interface Solutions (PG150), for details of
+  the available memory IP.
+
+  When added to a design, the memory IP needs to be implemented into the
+  design. This occurs after the design is synthesized, during the design
+  optimization phase of implementation, or opt_design, or can be done
+  manually with the implement_mig_cores command.
+
+  A memory controller can be debug enabled when added into the design from
+  the Xilinx IP catalog. In the Vivado logic analyzer, or the Vivado Lab
+  Edition, memory controllers implemented into a design are associated with
+  hw_mig objects, one hw_mig object per debug-enabled memory controller. The
+  hw_mig object will have all the properties needed to get the calibration
+  status and draw the per-bit eye margin views.
+
+  In the Vivado logic analyzer, or Vivado Lab Edition, the hw_mig object lets
+  you verify the calibration and read window margins in your memory interface
+  design. You can use the hardware manager GUI to check the calibration
+  status, verify the read margin for both rising and falling edges of the
+  clock or DQS. You can also use an ILA core to verify the data integrity for
+  the read and write operations.
+
+  This command returns a list of hw_mig objects on the current hardware
+  device, or returns an error if it fails.
+
+Arguments:
+
+  -of_objects <arg> - (Optional) Return the memory IP objects of the
+  specified hw_server, hw_target, or hw_device objects.
+
+  Note: The -of_objects option requires objects to be specified using the
+  get_* commands, such as get_cells or get_pins, rather than specifying
+  objects by name. In addition, -of_objects cannot be used with a search
+  <pattern>.
+
+  -regexp - (Optional) Specifies that the search <patterns> are written as
+  regular expressions. Both search <patterns> and -filter expressions must be
+  written as regular expressions when this argument is used. Xilinx regular
+  expression Tcl commands are always anchored to the start of the search
+  string. You can add ".*" to the beginning or end of a search string to
+  widen the search to include a substring. See
+  http://perldoc.perl.org/perlre.html for help with regular expression
+  syntax.
+
+  Note: The Tcl built-in command regexp is not anchored, and works as a
+  standard Tcl command. For more information refer to
+  http://www.tcl.tk/man/tcl8.5/TclCmd/regexp.htm.
+
+  -nocase - (Optional) Perform case-insensitive matching when a pattern has
+  been specified. This argument applies to the use of -regexp only.
+
+  -filter <args> - (Optional) Filter the results list with the specified
+  expression. The -filter argument filters the list of objects returned by
+  get_hw_migs based on property values on the objects. You can find the
+  properties on an object with the report_property or list_property commands.
+  In the case of the hw_mig object, "DISPLAY_NAME", "BYTES", and "NIBBLES"
+  are some of the properties that can be used to filter results.
+
+  The filter search pattern should be quoted to avoid having to escape
+  special characters that may be found in net, pin, or cell names, or other
+  properties. String matching is case-sensitive and is always anchored to the
+  start and to the end of the search string. The wildcard "*" character can
+  be used at the beginning or at the end of a search string to widen the
+  search to include a substring of the property value.
+
+  Note: The filter returns an object if a specified property exists on the
+  object, and the specified pattern matches the property value on the object.
+  In the case of the "*" wildcard character, this will match a property with
+  a defined value of "".
+
+  For string comparison, the specific operators that can be used in filter
+  expressions are "equal" (==), "not-equal" (!=), "match" (=~), and
+  "not-match" (!~). Numeric comparison operators <, >, <=, and >= can also be
+  used. Multiple filter expressions can be joined by AND and OR (&& and ||).
+  The following gets input pins that do NOT contain the "RESET" substring
+  within their name:
+
+    get_pins * -filter {DIRECTION == IN && NAME !~ "*RESET*"}
+
+  Boolean (bool) type properties can be directly evaluated in filter
+  expressions as true or not true:
+
+    -filter {IS_PRIMITIVE && !IS_LOC_FIXED}
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <patterns> - (Optional) Match hw_mig objects against the specified
+  patterns. The default pattern is the wildcard `*` which gets a list of all
+  hw_migs available on the current hardware device.
+
+Example:
+
+  The following example gets the memory IP defined on the current hardware
+  target:
+
+    get_hw_migs -of_objects [current_hw_target]
+
+See Also:
+
+   *  commit_hw_mig
+   *  connect_hw_server
+   *  current_hw_device
+   *  current_hw_target
+   *  implement_mig_cores
+   *  refresh_hw_mig
+   *  report_hw_mig
+   *  set_property

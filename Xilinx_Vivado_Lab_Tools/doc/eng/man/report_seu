@@ -1,0 +1,62 @@
+
+Description:
+
+  Many devices, especially those that operate in space or in high altitudes,
+  must be able to handle single-event upsets (SEUs), caused when charged
+  particles collide with electronic circuitry.
+
+  Xilinx IP cores, like the Soft Error Mitigation (SEM) core, and design
+  techniques such as triple module redundancy (TMR), let you design layers of
+  SEU protection into your products. If one circuit fails, redundant circuits
+  perform a voting function to identify and correct the circuit that has
+  failed. See http://www.xilinx.com/products/quality/single-event-upsets.htm
+  for more information.
+
+  This command reports the device resources used for mitigation of
+  single-event upsets (SEU) and other single-event effects (SEEs) in the
+  design.
+
+  This command returns the SEU report, or returns an error if it fails.
+
+Arguments:
+
+  -file <arg> - (Optional) Write the report into the specified file. This
+  command will overwrite any files of the same name without warning.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -append - (Optional) Append the output of the command to the specified file
+  rather than overwriting it.
+
+  Note: The -append option can only be used with the -file option.
+
+  -return_string - (Optional) Directs the output to a Tcl string rather than
+  to the standard output. The Tcl string can be captured by a variable
+  definition and parsed or otherwise processed.
+
+  Note: This argument cannot be used with the -file option.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example writes the SEU report to the specified file:
+
+    report_seu -file C:/Data/seu_mitigation.txt
+
+See Also:
+
+   *  synth_design

@@ -1,0 +1,64 @@
+
+Description:
+
+  Writes the timing delays for cells in the design to a Standard Delay Format
+  (SDF) file.
+
+  The output SDF file can be used by the write_verilog command to create
+  Verilog netlists for static timing analysis and timing simulation.
+
+Arguments:
+
+  -process_corner [ fast | slow ] - (Optional) Write delays for a specified
+  process corner. Delays are greater in the slow process corner than in the
+  fast process corner. Valid values are `slow` or `fast`. By default, the SDF
+  file is written for the slow process corner.
+
+  -cell <arg> - (Optional) Write the SDF file from a specific cell of the
+  design hierarchy. The default is to create an SDF file for the whole
+  design.
+
+  -rename_top <arg> - (Optional) Rename the top module in the output SDF file
+  as specified.
+
+  -force - (Optional) Forces the overwrite of an existing SDF file of the
+  same name.
+
+  -mode [ timesim | sta ]- (Optional) Specifies the mode to use when writing
+  the SDF file. Valid values are:
+
+   *  timesim - Output an SDF file to be used for timing simulation. This is
+      the default setting.
+
+   *  sta - Output an SDF file to be used for static timing analysis (STA).
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <file> - (Required) The file name of the SDF file to write. The SDF file is
+  referenced in the Verilog netlist by the use of the -sdf_anno and -sdf_file
+  arguments of the write_verilog command.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+Examples:
+
+  The following example writes an SDF file to the specified directory:
+
+    write_sdf C:/Data/FPGA_Design/designOut.sdf
+
+See Also:
+
+   *  write_verilog

@@ -1,0 +1,153 @@
+
+Description:
+
+  This command lets you configure the messages returned by the HSM tool in
+  the current session. Use this command to change the severity of messages,
+  to limit the number of times a message is reported, or to suppress the
+  message altogether. However, you can only perform one of these actions at
+  one time with set_msg_config:
+
+   *  Customize the severity of messages returned by the tool to specific
+      levels appropriate to your usage. For instance, set the severity of a
+      specified message ID from one type, such as WARNING, to another type,
+      such as ERROR.
+
+   *  Define the number of messages that will be returned by the tool during
+      a design session, or single invocation. You can specify the limit of a
+      specific message ID, or the limit for a specific severity of messages.
+
+   *  Suppress a specific message ID from being reported by the tool at all.
+      You can enable messages that were previously suppressed using the
+      reset_msg_config command.
+
+   *  An error is returned if more than one action is attempted in a single
+      set_msg_config command.
+
+  Message qualifiers of string, ID, and severity are used to determine which
+  messages are configured by the set_msg_config command. You must supply at
+  least one message qualifier to identify a message or group of messages to
+  apply the command to. Multiple qualifiers have an AND relationship; the
+  configuration rule will be applied only to messages matching all
+  qualifiers.
+
+  Note: set_msg_config does not support the use of wildcards in message
+  qualifiers
+
+  Message configuration rules are project specific, and are persistent with
+  the project when the project is closed and reopened. Use the get_msg_config
+  command to report the current configuration of a specific message, or the
+  configuration rules defined in the current project.
+
+  Restore messages to their default configurations using the reset_msg_config
+  command.
+
+  Note: The default message limit for all message IDs is set to 100, and is
+  defined by the parameter messaging.defaultLimit. This is the limit applied
+  to each separate message returned by the tool. You can report the current
+  value of this parameter with the get_param command, and change it as needed
+  using the set_param command.
+
+
+Arguments:
+
+  -id <arg> - (Optional) Specify the message ID to configure. Every message
+  delivered by the tool has a unique global message ID that consists of an
+  application sub-system code and a message identifier. This results in a
+  message ID that looks like the following:
+
+    "HSM 17-54"
+
+  -string <args> - (Optional) Apply the selected operation only to messages
+  that contain the given list of strings. Strings must be enclosed in braces,
+  and multiple strings can be specified separated by spaces:
+
+    {{HSM} {All Programmable}}
+
+  Note: Strings are case sensitive.
+
+  -severity - (Required) The severity of the message. There are five message
+  severities:
+
+   *  ERROR - An ERROR condition implies an issue has been encountered which
+      will render design results unusable and cannot be resolved without user
+      intervention.
+
+   *  {CRITICAL WARNING} - A CRITICAL WARNING message indicates that certain
+      input/constraints will either not be applied or are outside the best
+      practices for a FPGA family. User action is strongly recommended.
+
+      Note: Since this is a two word value, it must be enclosed in {} or "".
+
+   *  WARNING - A WARNING message indicates that design results may be
+      sub-optimal because constraints or specifications may not be applied as
+      intended. User action may be taken or may be reserved.
+
+   *  INFO - An INFO message is the same as a STATUS message, but includes a
+      severity and message ID tag. An INFO message includes a message ID to
+      allow further investigation through answer records if needed.
+
+   *  STATUS - A STATUS message communicates general status of the process
+      and feedback to the user regarding design processing. A STATUS message
+      does not include a message ID.
+
+      Note: Because STATUS messages do not have message IDs, you cannot
+      change the severity level of a STATUS message.
+
+
+  -limit <arg> - (Optional) The message limit specified as an integer value
+  >= 1. You can restore the message limit to the messaging.defaultLimit by
+  specifying a count of -1.
+
+  -new_severity <arg> - (Optional) For the messages that match the qualifier,
+  specify a new message severity. Valid values are defined above under the
+  -severity option.
+
+  -suppress - (Optional) Suppress the specified messages from further
+  reporting.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+
+Examples:
+
+  The following example elevates a common INFO message to a Critical Warning:
+
+    set_msg_config -id "HSM 1-7" -new_severity "CRITICAL WARNING"
+
+  The following example suppresses messages with the specified message ID:
+
+    set_msg_config -suppress -id {HSM 9-10}
+
+  The following example results in warning messages with message ID "17-35",
+  and containing "clk" in the message, being redefined as Error messages:
+
+    set_msg_config -severity warning -string "clk" -id "17-35" -new_severity error
+
+  The following example gets the current default message limit, specifies a
+  new default value, then defines a different message limit for the specified
+  message id:
+
+    get_param messaging.defaultLimit
+       100
+    set_param messaging.defaultLimit 1000
+    set_msg_config -id "common 17-81" -limit 1500
+
+
+See Also:
+
+   *  get_msg_config
+   *  get_param
+   *  reset_msg_config
+   *  set_param
+

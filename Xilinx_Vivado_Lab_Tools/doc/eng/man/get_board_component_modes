@@ -1,0 +1,110 @@
+
+Description:
+
+  Gets a list of various component modes defined on the current board, as
+  defined in the Board Interface file.
+
+  The board file, board.xml located in the data/boards folder of the Vivado
+  Design Suite installation area, stores information regarding board
+  attributes. The board provides a representation of the overall system that
+  the Xilinx device is a part of, and can help define key aspects of the
+  design, such as clock constraints, I/O port assignments, and supported
+  interfaces. You can create custom boards by defining a custom Board
+  Interface file, as described in the Vivado Design Suite User Guide:
+  System-Level Design Entry (UG895).
+
+  The component mode defines various modes of operations that the components
+  on a board may have, and the interfaces and preferred IP of those modes.
+
+  This command returns a list of component modes, or returns an error if it
+  fails.
+
+Arguments:
+
+  -regexp - (Optional) Specifies that the search <patterns> are written as
+  regular expressions. Both search <patterns> and -filter expressions must be
+  written as regular expressions when this argument is used. Xilinx regular
+  expression Tcl commands are always anchored to the start of the search
+  string. You can add ".*" to the beginning or end of a search string to
+  widen the search to include a substring. See
+  http://perldoc.perl.org/perlre.html for help with regular expression
+  syntax.
+
+  Note: The Tcl built-in command regexp is not anchored, and works as a
+  standard Tcl command. For more information refer to
+  http://www.tcl.tk/man/tcl8.5/TclCmd/regexp.htm.
+
+  -nocase - (Optional) Perform case-insensitive matching when a pattern has
+  been specified. This argument applies to the use of -regexp only.
+
+  -all - (Optional) Return a list of all component modes defined in the Board
+  Interface file of the current board.
+
+  -filter - (Optional) Filter the results list with the specified expression.
+  The -filter argument filters the list of objects returned by
+  get_board_component_modes based on property values on the component modes.
+  You can find the properties on an object with the report_property or
+  list_property commands. Any property/value pair can be used as a filter. In
+  the case of the component mode object, "NAME" and "INTERFACES" are two of
+  the properties that can be used to filter results.
+
+  The filter search pattern should be quoted to avoid having to escape
+  special characters that may be found in net, pin, or cell names, or other
+  properties. String matching is case-sensitive and is always anchored to the
+  start and to the end of the search string. The wildcard "*" character can
+  be used at the beginning or at the end of a search string to widen the
+  search to include a substring of the property value.
+
+  Note: The filter returns an object if a specified property exists on the
+  object, and the specified pattern matches the property value on the object.
+  In the case of the "*" wildcard character, this will match a property with
+  a defined value of "".
+
+  For string comparison, the specific operators that can be used in filter
+  expressions are "equal" (==), "not-equal" (!=), "match" (=~), and
+  "not-match" (!~). Numeric comparison operators <, >, <=, and >= can also be
+  used. Multiple filter expressions can be joined by AND and OR (&& and ||).
+  The following gets input pins that do NOT contain the "RESET" substring
+  within their name:
+
+    get_pins * -filter {DIRECTION == IN && NAME !~ "*RESET*"}
+
+  Boolean (bool) type properties can be directly evaluated in filter
+  expressions as true or not true:
+
+    -filter {IS_PRIMITIVE && !IS_LOC_FIXED}
+
+  -of_objects <args> - (Required) Get the component modes of the specified
+  board_components.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <patterns> - (Optional) Match component modes against the specified search
+  patterns. The default pattern is the wildcard `*` which gets a list of all
+  component modes defined on the specified board components.
+
+Examples:
+
+  The following example gets the component modes defined in the Board
+  Interface file of the specified board:
+
+    get_board_component_modes -of_objects [get_board_components *part0*]
+
+See Also:
+
+   *  current_board
+   *  get_board_buses
+   *  get_board_part_interfaces
+   *  get_board_parts
+   *  get_boards

@@ -1,0 +1,4 @@
+STAGE_NAME,STAGE,CODE,UNIT_1,WARNING
+startup,0,1,na,RTL XSDB BRAM setting smaller than code computes range required.
+Address Calibration,1,2,bit,Small eye found with less than 30% valid window.
+Address Calibration,1,3,bit,Right edge of the window is set to the maximum tap count.

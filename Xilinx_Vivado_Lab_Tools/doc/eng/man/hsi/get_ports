@@ -1,0 +1,102 @@
+
+Description:
+
+  Gets a list of port objects in the current hardware design that match 
+  a specified search pattern. The default command gets a list of all 
+  ports in the hardware design.
+
+  The external connections in an hardware design are ports, or interface
+  ports. The external connections in an IP Integrator cell, or hierarchical
+  module, are pins and interface pins. Use the get_pins and get_intf_pins 
+  commands to select the pin objects.
+
+
+Arguments:
+
+  -regexp - (Optional) Specifies that the search <patterns> are written as
+  regular expressions. Both search <patterns> and -filter expressions must be
+  written as regular expressions when this argument is used. Xilinx regular
+  expression Tcl commands are always anchored to the start of the search
+  string. You can add ".*" to the beginning or end of a search string to
+  widen the search to include a substring. See
+  http://www.tcl.tk/man/tcl8.5/TclCmd/re_syntax.htm for help with regular
+  expression syntax.
+
+  Note: The Tcl built-in command regexp is not anchored, and works as a
+  standard Tcl command. For more information refer to
+  http://www.tcl.tk/man/tcl8.5/TclCmd/regexp.htm.
+
+  -filter <args> - (Optional) Filter the results list with the specified
+  expression. The -filter argument filters the list of objects returned by
+  get_ports based on property values on the ports. You can find the
+  properties on an object with the report_property or list_property commands.
+  In the case of the IP subsystem port object, "DIRECTION", "TYPE", and "SENSITIVITY"
+  are some of the properties that can be used to filter results.
+
+  The filter search pattern should be quoted to avoid having to escape
+  special characters that may be found in net, pin, or cell names, or other
+  properties. String matching is case-sensitive and is always anchored to the
+  start and to the end of the search string. The wildcard "*" character can
+  be used at the beginning or at the end of a search string to widen the
+  search to include a substring of the property value.
+
+  Note: The filter returns an object if a specified property exists on the
+  object, and the specified pattern matches the property value on the object.
+  In the case of the "*" wildcard character, this will match a property with
+  a defined value of ""
+
+  For string comparison, the specific operators that can be used in filter
+  expressions are "equal" (==), "not-equal" (!=), "match" (=~), and
+  "not-match" (!~). Numeric comparison operators <, >, <=, and >= can also be
+  used. Multiple filter expressions can be joined by AND and OR (&& and ||).
+  The following gets input pins that do NOT contain the "RESET" substring
+  within their name:
+
+    get_ports * -filter {DIRECTION == IN && NAME !~ "*RESET*"}
+
+  -of_objects <arg> - (Optional) Get the ports connected to the specified IP
+  subsystem nets returned by get_nets.
+
+  Note: The -of_objects option requires objects to be specified using the
+  get_* commands, such as get_cells or get_pins, rather than specifying
+  objects by name. In addition, -of_objects cannot be used with a search
+  <pattern>
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <patterns> - (Optional) Match ports against the specified patterns. The
+  default pattern is the wildcard `*` which gets a list of all ports in the
+  subsystem design. More than one pattern can be specified to find multiple
+  ports based on different search criteria.
+
+  Note: You must enclose multiple search patterns in braces {} to present the
+  list as a single element.
+
+
+Examples:
+
+  The following example gets the ports connected to the specified hardware
+  subsystem net:
+
+    get_ports -of_objects [get_nets bridge_1_apb_m] -filter {DIRECTION==I} 	
+
+  Note: If there are no ports matching the pattern, the tool will return a
+  warning.
+
+
+See Also:
+
+   *  get_nets
+   *  get_pins
+

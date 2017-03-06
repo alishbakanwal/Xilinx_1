@@ -1,0 +1,73 @@
+﻿<html xml:lang="en-us" lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="concept"/>
+<meta name="DC.Title" content="Timing Constraints Summary"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_aqj_x3c_d5"/>
+<link rel="stylesheet" type="text/css" href="../../commonltr.css"/>
+<title>Timing Constraints Summary</title>
+</head>
+<body id="concept_aqj_x3c_d5">
+
+
+ <h1 class="title topictitle1">Timing Constraints Summary</h1>
+
+ <div class="body conbody">
+  <div class="section">
+  <p class="p">The Summary page of the Timing Constraints wizard shows the constraints that are defined and
+      ready to be added to the design. The constraints are saved to the target XDC file when you
+      press <span Class="uicontrol">Finish</span> to close the Timing Constraints wizard. The constraints
+      were applied to the in-memory design when each page was advanced as you moved through each
+      page of the wizard, however, clicking <span Class="uicontrol">Cancel</span> will cause the in-memory
+      constraints to be lost as well. </p>
+
+  <ul class="ul" id="concept_aqj_x3c_d5__ul_azt_c5r_b5">
+   <li class="li"><span Class="uicontrol">View Timing Constraints</span>: This opens the Timing Constraints window for
+    you to examine the constraints that were written. </li>
+
+   <li class="li"><span Class="uicontrol">Create Timing Summary Report</span>: This runs the Report Timing Summary
+    command for the current design using the newly defined timing constraints. Timing violations
+    will likely be reported if the period or I/O delay constraints that you entered are too
+    difficult to meet.</li>
+
+   <li class="li"><span Class="uicontrol">Create Check Timing Report</span>: This runs the Check Timing report for the
+    current design using the newly defined timing constraints. </li>
+
+   <li class="li"><span Class="uicontrol">Create DRC Report using only timing checks</span>: This runs the Report DRC
+    command for the current design, applying only the timing checks. </li>
+
+  </ul>
+
+  <p class="p">As discussed in the <cite class="cite">UltraFast™ Design Methodology Guide for the Vivado<sup>®</sup> Design Suite</cite> (UG949), the process of defining timing constraints can be
+   broken down into iterative steps. It might take multiple passes through the Timing Constraints
+   wizard to complete the definition of constraints. </p>
+
+  </div>
+
+  <div class="section"><h2 class="title sectiontitle">See Also</h2>
+   
+   <table cellpadding="4" cellspacing="0" summary="" id="concept_aqj_x3c_d5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow">
+     <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_aqj_x3c_d5__image_vvv_3pq_d5" src="../../images/book_icon.png" alt="Icon"/></td>
+
+     <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">UltraFast Design Methodology Guide for the Vivado Design Suite</cite> (UG949),
+       <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?d=ug949-vivado-design-methodology.pdf;a=xDefiningTimingConstraintsInFourSteps" target="_blank">Defining Timing Constraints in Four Steps</a></td>
+
+    </tr>
+<tr class="strow">
+     <td valign="top" class="stentry"><img class="image" id="concept_aqj_x3c_d5__image_smm_1vr_b5" src="../../images/book_icon.png" alt="Icon"/></td>
+
+     <td valign="top" class="stentry"><cite class="cite">Vivado Design Suite User Guide: Using Constraints</cite> (UG903), <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug903-vivado-using-constraints.pdf;a=xTimingConstraintsWizard" target="_blank">Timing Constraints Wizard</a></td>
+
+    </tr>
+</table>
+
+  </div>
+
+ </div>
+
+
+</body>
+</html>

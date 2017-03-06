@@ -1,0 +1,92 @@
+﻿<html xml:lang="en-us" lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="reference"/>
+<meta name="DC.Title" content="Place Pblocks"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_bqj_lqr_b5"/>
+<link rel="stylesheet" type="text/css" href="../../commonltr.css"/>
+<title>Place Pblocks</title>
+</head>
+<body id="concept_bqj_lqr_b5">
+
+
+ <h1 class="title topictitle1">Place Pblocks</h1>
+
+ <div class="body refbody">
+     <div class="section">
+            <p class="p">This dialog box lets the Vivado tool draw and place regions for selected Pblock. The
+                tool analyzes the <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug912-vivado-properties.pdf;a=xPblock" target="_blank">Pblock</a> and sizes it based on the slice
+                count and the target utilization rate you specify.</p>
+
+            <ul class="ul" id="concept_bqj_lqr_b5__ul_gc5_ccp_v5">
+                <li class="li"><span Class="uicontrol">Parent block</span>: Specify the top-level block or partition to
+                    evaluate. The default is the ROOT partition.</li>
+
+                <li class="li"><span Class="uicontrol">Pblocks to Place</span>: Displays a list of Pblocks in the
+                    design in a table form, and lets you select which of the Pblocks to place.<ul class="ul" id="concept_bqj_lqr_b5__ul_ohs_ppq_xw">
+                        <li class="li"><span Class="uicontrol">Place</span>: A checkbox to enable or disable a specific
+                            Pblock for placement.</li>
+
+                        <li class="li"><span Class="uicontrol">Pblock</span>: The name of the Pblocks in the design. </li>
+
+                        <li class="li"><span Class="uicontrol">Utilization</span>: The target utilization rate
+                            determines the size of the Pblock on the device. A high utilization rate
+                            will make the Pblock smaller as it consumes more of the device resources
+                            in the defined area. A low utilization rate will make the Pblock larger.
+                                <div Class="note_tip"><span class="tiptitle">Tip:</span> You can start with a high utilization rate, even
+                                greater than 100%, for initial placement and to create a floorplan
+                                for the design, and lower the utilization rate for
+                                implementation.</div>
+</li>
+
+                    </ul>
+
+                </li>
+
+                <li class="li"><span Class="uicontrol">Set Utilization on All Pblocks</span>: Specify the target
+                    utilization  rate for all Pblocks. This sets a general target that you can
+                    override using the <span Class="uicontrol">Utilization</span> for individual
+                    Pblocks.</li>
+
+            </ul>
+
+            <p class="p">Click <span Class="uicontrol">OK</span> to automatically draw and place regions in the <a class="xref" href="device_window.html#concept_aqj_x3c_d5">Device</a> window
+                for the selected Pblocks. After the Pblocks have been placed, you can move them </p>
+
+        </div>
+
+        <div class="section"><h2 class="title sectiontitle">See Also</h2>
+            
+            <table cellpadding="4" cellspacing="0" summary="" id="concept_bqj_lqr_b5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow">
+                    <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_bqj_lqr_b5__image_smm_1vr_b5" src="../../images/book_icon.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">Vivado<sup>®</sup> Design Suite User Guide: Design Analysis
+                            and Closure Techniques</cite> (UG906), <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug906-vivado-design-analysis.pdf;a=xFloorplanning" target="_blank">Floorplanning</a></td>
+
+                </tr>
+<tr class="strow">
+                    <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_y3g_hbj_dv" src="../../images/book_icon.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry"><cite class="cite">Vivado Design Suite Tcl Command Reference Guide</cite> (UG835),
+                            <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xplace_pblock" target="_blank">place_pblock</a></td>
+
+                </tr>
+<tr class="strow">
+                    <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_av4_jvr_b5" src="../../images/play.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry"><a class="xref" href="http://www.xilinx.com/video/hardware/design-analysis-floorplanning-with-vivado.html" target="_blank">Vivado Design Suite QuickTake Video: Design Analysis and Floorplanning
+                            with Vivado</a></td>
+
+                </tr>
+</table>
+
+        </div>
+
+ </div>
+
+
+</body>
+</html>

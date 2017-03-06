@@ -1,0 +1,55 @@
+
+Description:
+
+  Sets the external (feedback) delay in nanoseconds (ns) between an output
+  and input port. The external delay is used in the calculation of the
+  PLL/MMCM compensation delay for PLLs/MMCMs with external feedback.
+
+  A min or max value can be specified. By default the value specified applies
+  to both min (hold) and max (setup) compensation delays.
+
+  The command returns the defined delay.
+
+Arguments:
+
+  -from <arg> - (Required) The output port name.
+
+  -to <arg> - (Required) The input port name.
+
+  -min - (Optional) Specifies the delay_value is a minimum delay value for
+  hold time analysis.
+
+  -max - (Optional) Specifies the delay_value is a maximum delay value for
+  setup analysis.
+
+  -add - (Optional) Add the specified delay to the existing external delay
+  value.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <delay_value> - (Required) The external delay value specified as
+  nanoseconds (ns). The default value is 0.
+
+Examples:
+
+  The following example sets the external feedback delay to 1.0 ns between
+  the port ClkOut and ClkFb:
+
+    set_external_delay -from [get_ports ClkOut] -to [get_ports ClkFb] 1.0
+
+See Also:
+
+   *  report_timing
+   *  set_input_delay
+   *  set_output_delay

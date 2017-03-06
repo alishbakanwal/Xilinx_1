@@ -1,0 +1,46 @@
+
+Description:
+
+  Tie up or down the unconnected pins of cells in the open synthesized or
+  implemented design. The command uses an internal process to identify
+  whether a pin should be tied up or down.
+
+  This command is intended to tie up or down the unconnected pins of cells
+  added to the netlist with the create_cell command.
+
+Arguments:
+
+  -of_objects <args> - (Optional) Tie up or down the unused pins of the
+  specified cell objects.
+
+  Note: The -of_objects option requires objects to be specified using the
+  get_* commands, such as get_cells or get_pins, rather than specifying
+  objects by name. In addition, -of_objects cannot be used with a search
+  <pattern>.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Example:
+
+  The following example ties the unused pins of cells up or down, depending
+  on their usage:
+
+    tie_unused_pins -of_objects [get_cells cpuEngine]
+
+See Also:
+
+   *  create_cell
+   *  create_pin
+   *  get_cells
+   *  get_pins

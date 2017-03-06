@@ -1,0 +1,51 @@
+
+Description:
+
+  Reset the timing data and constraints for the current design. Use this
+  command to clear the current in-memory timing data and constraints, and
+  force the timing engine to reevaluate the design comprehensively rather
+  than iteratively.
+
+  After clearing the constraints from the in-memory design, you must reload
+  any needed constraints using the read_xdc command. The Vivado tool will not
+  automatically reload the constraints.
+
+  Note: This command deletes the in-memory timing view, not the timing
+  report. Use the delete_timing_results command to delete the reported timing
+  information.
+
+Arguments:
+
+  -invalid - (Optional) Remove the invalid timing constraints as well as the
+  valid timing constraints when resetting the design. Invalid constraints
+  contain an error or are assigned to missing design objects, and are ignored
+  by the Vivado timing engine at the time the XDC file is read, and so do not
+  affect timing results. Resetting invalid constraints removes them from the
+  in-memory design, so they will be lost if not previously saved to a
+  constraints file.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example clears the current timing data from memory, including
+  any invalid timing constraints:
+
+    reset_timing -invalid
+
+See Also:
+
+   *  delete_timing_results
+   *  report_timing
+   *  report_timing_summary

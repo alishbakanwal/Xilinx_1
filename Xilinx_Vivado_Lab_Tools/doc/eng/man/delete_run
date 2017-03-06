@@ -1,0 +1,47 @@
+
+Description:
+
+  Deletes the specified run from the project, and deletes all results of the
+  run from the project directory on the hard drive unless otherwise
+  specified.
+
+Arguments:
+
+  -noclean_dir - Do not delete the run results from the hard drive. The run
+  will be deleted from the project, but the run files will remain in the
+  project directory.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <run> - (Required) The name of the synthesis or implementation run to
+  delete from the project.
+
+Examples:
+
+  The following example deletes the first_pass run from the project:
+
+    delete_run first_pass
+
+  Note: In this example, all run results will also be removed from the
+  project directory on the hard drive.
+
+  The following command deletes the first_pass run, but leaves the run
+  results on the hard drive:
+
+    delete_run -noclean_dir first_pass
+
+See Also:
+
+   *  create_run
+   *  current_run

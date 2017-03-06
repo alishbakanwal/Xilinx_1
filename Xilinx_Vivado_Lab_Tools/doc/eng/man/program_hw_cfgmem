@@ -1,0 +1,138 @@
+
+Description:
+
+  Erase, blank check, program, and/or verify the specified hw_cfgmem object
+  with the memory configuration file defined in the object`s PROGRAM.FILE
+  property. The memory configuration file is created with the write_cfgmem
+  command, and associated with the hw_cfgmem object using the set_property
+  command as shown in the example.
+
+  The process whereby the design specific data is loaded or programmed into
+  the Xilinx<tm tmtype="reg"/> FPGA is called configuration. The
+  create_hw_cfgmem command defines a flash memory device used for configuring
+  and booting the FPGA device.
+
+  After the hw_cfgmem object is created, and associated with the hw_device,
+  the configuration memory can be programmed with the bitstream and other
+  data from a memory configuration file created with the write_cfgmem
+  command. The hw_cfgmem object is programmed using the program_hw_cfgmem
+  command.
+
+  The program_hw_config command will run a multi-step process to erase the
+  configuration memory device, perform a blank check to validate that the
+  device is empty, program the device with the memory configuration file, and
+  verify the programming on the device. Properties on the hw_cfgmem object
+  determine which steps of the programming process are performed. These
+  properties include:
+
+   *  PROGRAM.FILES - Specifies the memory configuration files to use for
+      programming the device. The memory configuration files are created with
+      the write_cfgmem command.
+
+   *  PROGRAM.ADDRESS_RANGE - Specifies the address range of the
+      configuration memory device to program. The address range values can
+      be:
+
+       -  {use_file} - Use only the address space required by the memory
+          configuration file to erase, blank check, program, and verify.
+
+       -  {entire_device} - Erase, blank check, program, and verify the
+          entire device.
+
+   *  PROGRAM.ERASE - Erases the contents of the flash memory when true. This
+      is a boolean property with a value of 0 (false) or 1 (true).
+
+   *  PROGRAM.BLANK_CHECK - Checks the device to make sure the device is void
+      of data prior to programming. This is a boolean property with a value
+      of 0 (false) or 1 (true).
+
+   *  PROGRAM.CFG_PROGRAM - Program the device with the specified
+      PROGRAM.FILE. This is a boolean property with a value of 0 (false) or 1
+      (true).
+
+   *  PROGRAM.VERIFY - Verify the device after programming. This is a boolean
+      property with a value of 0 (false) or 1 (true).
+
+  The program_hw_cfgmem command can also generate an SVF file for in-system
+  and remote programming of Xilinx devices. SVF is an industry standard file
+  format that is used to describe JTAG chain operations by describing the
+  information that needs to be shifted into the device chain. SVF files are
+  ASCII files that can be written and modified in any text editor. Many
+  third-party programming utilities can use the SVF file to program Xilinx
+  devices in a JTAG chain.
+
+  This command returns a transcript of its process when successful, or
+  returns an error if it fails.
+
+Arguments:
+
+  -svf_file <arg> - (Optional) Create an SVF output file for programming SPI
+  and BPI Flash configuration memories. The SVF file can be used by third
+  party tools, and also supports JTAG transaction tracing and improving
+  Bullseye coverage.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -force - (Optional) Overwrite the specified SVF file if it already exists.
+
+  Note: If -force is specified with -append, the -append option is ignored,
+  and a new SVF file is created overwriting the existing file.
+
+  -append - (Optional) Append the SVF output to the specified file rather
+  than overwriting it.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <hw_cfgmem> - (Required) Specify a hw_cfgmem object to program. The
+  hw_cfgmem must be specified as an object by get_hw_cfgmems or
+  current_hw_cfgmem, rather than simply by name.
+
+Example:
+
+  The following example creates a hw_cfgmem object associated with the
+  current_hw_device, defines the memory configuration file created from the
+  bitstream with the write_cfgmem command, defines other properties of the
+  programming process, and then programs the hw_cfgmem object:
+
+    create_hw_cfgmem -hw_device [current_hw_device] [lindex $cfgParts 0 ] 
+    set cfgMem [current_hw_cfgmem] 
+    set_property PROGRAM.FILE {C:/Data/config_n25q128.mcs} $cfgMem 
+    set_property PROGRAM.ADDRESS_RANGE  {use_file} $cfgMem 
+    set_property PROGRAM.BLANK_CHECK  1 $cfgMem 
+    set_property PROGRAM.ERASE  1 $cfgMem 
+    set_property PROGRAM.CFG_PROGRAM  1 $cfgMem 
+    set_property PROGRAM.VERIFY  1 $cfgMem 
+    program_hw_cfgmem $cfgMem
+
+  Note: In this example, the current hw_cfgmem object is assigned to the
+  variable $cfgMem.
+
+  The following example programs the current hw_cfgmem object:
+
+    program_hw_cfgmem [current_hw_cfgmem]
+
+See Also:
+
+   *  create_hw_cfgmem
+   *  current_hw_cfgmem
+   *  current_hw_device
+   *  delete_hw_cfgmem
+   *  get_cfgmem_parts
+   *  get_hw_cfgmems
+   *  get_property
+   *  readback_hw_cfgmem
+   *  set_property
+   *  write_cfgmem

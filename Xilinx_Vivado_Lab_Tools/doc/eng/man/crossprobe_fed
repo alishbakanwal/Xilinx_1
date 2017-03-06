@@ -1,0 +1,51 @@
+
+Description:
+
+  This command allows you to cross-probe from the tool to the Xilinx FPGA
+  Editor that was opened with the launch_fpga_editor command. You can select
+  both objects and timing paths to cross-probe between the editors.
+
+Arguments:
+
+  -run <name> - (Optional) The run name to use when cross-probing.
+
+  -path <paths> - (Optional) One or more paths to cross-probe in the FPGA
+  Editor.
+
+  -objects <objects> - (Optional) One or more objects to cross-probe in the
+  FPGA Editor. You can use any of the get_* commands, such as get_cells or
+  get_ports, to select objects for cross-probing in the FPGA Editor. See the
+  example below.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example defines a group of objects to be cross-probed in the
+  FPGA Editor using the get_cells command to hierarchically locate primitive
+  cells:
+
+    crossprobe_fed -run impl_1 -objects [get_cells -hier -filter {IS_PRIMITIVE==1}]
+
+  The following example identifies a path to be cross-probed in the FPGA
+  Editor:
+
+    crossprobe_fed -path {wbClk i_2090 wbClk_IBUF i_2089 n_0_2089 \ 
+       egressLoop[4].egressFifo/buffer_fifo/infer_fifo.empty_reg_reg}
+
+See Also:
+
+   *  get_cells
+   *  get_ports
+   *  launch_fpga_editor

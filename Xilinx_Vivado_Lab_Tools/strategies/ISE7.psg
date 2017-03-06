@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<PAStrategies>
+
+<Strategy Version="1" Minor="0">
+	<StratHandle Name="EA #1" Flow="ISE7">
+		<Desc>PAR High Effort level, Normal Extra effort level</Desc>
+	</StratHandle>
+	<Step Id="ngdbuild">
+	</Step>
+	<Step Id="map">
+	</Step>
+	<Step Id="par">
+		<Option Id="OverallEffEnum">2</Option>
+		<Option Id="ExtraEffEnum">0</Option>
+	</Step>
+	<Step Id="trce">
+	</Step>
+	<Step Id="xdl">
+	</Step>
+</Strategy>
+
+<Strategy Version="1" Minor="0">
+	<StratHandle Name="EA #2" Flow="ISE7">
+		<Desc>Timing Driven Map Extra Effort level, PAR High effort level, Normal Extra effort level</Desc>
+	</StratHandle>
+	<Step Id="ngdbuild">
+	</Step>
+	<Step Id="map">
+ 		<Option Id="EffortLvlEnum">2</Option>
+		<Option Id="ExtraEffEnum">0</Option>
+		<Option Id="TimingBool">1</Option>
+	</Step>
+	<Step Id="par">
+		<Option Id="OverallEffEnum">2</Option>
+		<Option Id="ExtraEffEnum">0</Option>
+	</Step>
+	<Step Id="trce">
+	</Step>
+	<Step Id="xdl">
+	</Step>
+</Strategy>
+
+<Strategy Version="1" Minor="0">
+	<StratHandle Name="EA #3" Flow="ISE7">
+		<Desc>Timing Driven Map High Effort level, PAR High effort level, resynthesis</Desc>
+	</StratHandle>
+	<Step Id="ngdbuild">
+	</Step>
+	<Step Id="map">
+		<Option Id="GlobalOptBool">0</Option>
+		<Option Id="TimingBool">1</Option>
+		<Option Id="RegDupBool">1</Option>
+		<Option Id="EffortLvlEnum">2</Option>
+	</Step>
+	<Step Id="par">
+		<Option Id="OverallEffEnum">2</Option>
+	</Step>
+	<Step Id="trce">
+	</Step>
+	<Step Id="xdl">
+	</Step>
+</Strategy>
+
+<Strategy Version="1" Minor="0">
+	<StratHandle Name="EA #4" Flow="ISE7">
+		<Desc>Timing Driven Map High Effort level, PAR High effort level, resynthesis and retiming</Desc>
+	</StratHandle>
+	<Step Id="ngdbuild">
+	</Step>
+	<Step Id="map">
+		<Option Id="RetimingBool">0</Option>
+		<Option Id="TimingBool">1</Option>
+		<Option Id="GlobalOptBool">0</Option>
+		<Option Id="EffortLvlEnum">2</Option>
+		<Option Id="RegDupBool">1</Option>
+	</Step>
+	<Step Id="par">
+		<Option Id="OverallEffEnum">2</Option>
+	</Step>
+	<Step Id="trce">
+	</Step>
+	<Step Id="xdl">
+	</Step>
+</Strategy>
+
+<Strategy Version="1" Minor="0">
+	<StratHandle Name="EA #5" Flow="ISE7">
+		<Desc>PAR Medium effort level</Desc>
+	</StratHandle>
+	<Step Id="ngdbuild">
+	</Step>
+	<Step Id="map">
+	</Step>
+	<Step Id="par">
+		<Option Id="OverallEffEnum">1</Option>
+	</Step>
+	<Step Id="trce">
+	</Step>
+	<Step Id="xdl">
+	</Step>
+</Strategy>
+
+<Strategy Version="1" Minor="0">
+	<StratHandle Name="EA #6" Flow="ISE7">
+		<Desc>PAR High effort level</Desc>
+	</StratHandle>
+	<Step Id="ngdbuild">
+	</Step>
+	<Step Id="map">
+	</Step>
+	<Step Id="par">
+		<Option Id="OverallEffEnum">2</Option>
+	</Step>
+	<Step Id="trce">
+	</Step>
+	<Step Id="xdl">
+	</Step>
+</Strategy>
+
+<Strategy Version="1" Minor="0">
+	<StratHandle Name="EA #7" Flow="ISE7">
+		<Desc>Timing Driven Map High Effort level, PAR High effort level</Desc>
+	</StratHandle>
+	<Step Id="ngdbuild">
+	</Step>
+	<Step Id="map">
+		<Option Id="EffortLvlEnum">2</Option>
+		<Option Id="TimingBool">1</Option>
+	</Step>
+	<Step Id="par">
+		<Option Id="OverallEffEnum">2</Option>
+	</Step>
+	<Step Id="trce">
+	</Step>
+	<Step Id="xdl">
+	</Step>
+</Strategy>
+
+<Strategy Version="1" Minor="0">
+   <StratHandle Name="ISE Defaults" Flow="ISE7">
+      <Desc>ISE Defaults</Desc>
+   </StratHandle>
+   <Step Id="ngdbuild"></Step>
+   <Step Id="map"></Step>
+   <Step Id="par"></Step>
+   <Step Id="trce"></Step>
+   <Step Id="xdl"></Step>
+</Strategy>
+
+</PAStrategies>

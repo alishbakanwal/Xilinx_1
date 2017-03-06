@@ -1,0 +1,45 @@
+
+Description:
+
+  Refresh the block design cell or cells that reference module definitions
+  from RTL source files by rereading the module definition from the source
+  file.
+
+  Note: This command does not cause the Vivado tool to reread the source
+  file. If changes have been made to the source file it must be separately
+  updated.
+
+  This command returns a transcript of the update process as well as any
+  warnings related to design changes, or returns nothing if the command
+  fails.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <ips> - (Optional) Specifies the module references in the current design to
+  upgrade. Modules can be specified by name, or returned by the get_ips
+  command.
+
+Examples:
+
+  The following example updates the specified module references in the
+  current design:
+
+    update_module_reference {rtlRam_0 uart_0}
+
+See Also:
+
+   *  create_bd_cell
+   *  create_bd_design

@@ -1,0 +1,122 @@
+SOFTWARE LICENSE AGREEMENT OF
+WinDriver™ v8.11
+Jungo© 1997 - 2006
+JUNGO ("LICENSOR") IS WILLING TO LICENSE THE ACCOMPANYING
+SOFTWARE TO YOU ONLY IF YOU ACCEPT ALL OF THE TERMS IN
+THIS LICENSE AGREEMENT. PLEASE READ THE TERMS CAREFULLY
+BEFORE YOU INSTALL THE SOFTWARE, BECAUSE BY INSTALLING
+THE SOFTWARE YOU ARE AGREEING TO BE BOUND BY THE TERMS
+OF THIS AGREEMENT. IF YOU DO NOT AGREE TO THESE TERMS,
+LICENSOR WILL NOT LICENSE THIS SOFTWARE TO YOU, AND IN
+THAT CASE YOU SHOULD IMMEDIATELY DELETE ALL COPIES OF THIS
+SOFTWARE YOU HAVE IN ANY FORM.
+
+OWNERSHIP OF THE SOFTWARE
+1. The enclosed Licensor software program ("Software") and the accompanying written materials are
+owned by Licensor or its suppliers and are protected by United States of America copyright laws, by
+laws of other nations, and by international treaties.
+GRANT OF LICENSE
+2. The scope of your license depends on the type of license you purchased from Jungo.
+The variety of license scopes is set forth below:
+(a) Node-lock (Single license for one developer on one development computer):
+• Individuals: Jungo grants you as an individual, a personal non-exclusive, "one-user"
+license to use the Software on a single computer in the manner provided below at the site
+for which the license was given.
+• Entities: If you are an entity, Jungo grants you the right to designate one individual within
+your organization to have the right to use the Software on a single computer in the manner
+provided below at the site for which the license was given.
+(b) Single-user floating license (one concurrent developer):
+• Individuals: Jungo grants you as an individual, a personal, non-exclusive, "one-user"
+license to use the Software (i.e., only you may use the Software) on either stand-alone
+computers or on computer networks by a maximum of ONE copy of the Software to be
+running at any given time in the manner provided below at the site for which the license
+was given.
+• Entities: If you are an entity, Jungo grants you the right to designate individuals within
+your organization to have the right to use the Software on either stand-alone computers
+or on computer networks by a maximum of ONE copy of the Software to be running at
+any given time and a maximum of ONE individual using this running copy in the manner
+provided below at the site for which the license was given.
+3. If you have not yet purchased a license to the Software, Licensor grants you the right to use the
+Software for an evaluation period of 30 days. If you wish to continue using the Software and
+accompanying written materials after the evaluation period, you must register the Software by sending
+the required payment to Licensor. You will then receive a license for continued use and a registration
+code that will permit you to use the Software on a single computer free of payment reminders. The
+Software may come with extra programs and features that are available for use only to registered users
+through the use of their registration code.
+
+RESTRICTIONS ON USE AND TRANSFER
+4. Files distribution:
+(a) You may not distribute any of the headers or source files that are included in the Software
+package unless otherwise specified in this section.
+(b) The license allows you, royalty free, to distribute the following files only when complying with
+sections 4c – 4f and section 5 of this agreement:
+• Windows:
+– windrvr6.sys
+– wdapi811.dll
+– wdapi_dotnet811.dll (Windows 2000/XP/Server 2003/Vista)
+– wdreg.exe
+– difxapi.dll
+• Windows CE:
+– windrvr6.dll
+– wdapi811.dll
+• Linux:
+– windrvr_gcc_v2.a windrvr_gcc_v3.a windrvr_gcc_v3_regparm.a
+– kp_linux_gcc_v2.o kp_linux_gcc_v3.o kp_linux_gcc_v3_regparm.o
+– libwdapi811.so kp_wdapi811_gcc_v2.a
+– kp_wdapi811_gcc_v3.a, kp_wdapi811_gcc_v3_regparm.a
+– linux_wrappers.c, linux_wrappers.h, wdusb_linux.c, wdusb_interface.h, wd_ver.h,
+linux_common.h, windrvr.h
+– wdreg
+• Solaris:
+– windrvr6
+– libwdapi811.so
+• VxWorks:
+– windrvr6.o
+(c) The files listed in section 4b may be distributed only as part of the application you are
+distributing, and only if they significantly contribute to the functionality of your application.
+(d) NOTE: The distribution of the windrvr.h header file is permitted only on Linux.
+(e) You may not modify the distributed files specified in section 4b of this agreement.
+(f) You may not distribute any header file that describes the WinDriver functions, or functions that
+call the WinDriver functions and have the same basic functionality as that of the WinDriver
+functions.
+5. WinDriver may not be used to develop a development product, an API, or any products, which will
+eventually be part of a development product or environment, without the written consent of the licensor.
+6. You may make printed copies of the written materials accompanying the Software provided that only
+users bound by this license use them.
+7. You may not distribute or transfer your registration code or transfer the rights given by the registration
+code.
+8. You may not rent or lease the Software or otherwise transfer or assign the right to use the Software.
+9. You may not reverse engineer, decompile, or disassemble the Software.
+DISCLAIMER OF WARRANTY
+10. THIS SOFTWARE AND ITS ACCOMPANYING WRITTEN MATERIALS ARE PROVIDED BY
+LICENSOR "AS IS" AND ANY EXPRESS OR IMPLIEDWARRANTIES, INCLUDING, BUT
+NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE, AND NON-INFRINGEMENT, ARE DISCLAIMED.
+11. IN NO EVENT SHALL LICENSOR OR ITS SUPPLIERS BE LIABLE FOR ANY DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, SAVINGS, OR PROFITS; OR BUSINESS INTERRUPTION)
+HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+OF SUCH DAMAGE. Because some states do not allow the exclusion or limitation of liability for
+consequential or incidental damages, the above limitation may not apply to you.
+12. This Agreement is governed by the laws of the state of Israel.
+13. If you have any questions concerning this Agreement or wish to contact Licensor for any reason, please
+write:
+Jungo © 1997 - 2006
+Web site: http://www.jungo.com
+E-mail: sales@jungo.com
+Voice: 1-877-514-0537(USA) +972-9-885-9365(Worldwide)
+Fax: 1-877-514-0538(USA) +972-9-885-9366(Worldwide)
+Address: Jungo
+1 HaMachsev st.
+P.O.Box 8493
+Netanya
+Zip code 42504
+Israel
+U.S. GOVERNMENT RESTRICTED RIGHTS
+14. The Software and documentation are provided with RESTRICTED RIGHTS. Use, duplication, or
+disclosure by the Government is subject to restrictions set forth in subparagraph (c)(1) of The Rights
+in Technical Data and Computer Software clause at DFARS 252.227-7013 or subparagraphs (c)(1)(ii)
+and (2) of Commercial Computer Software - Restricted Rights at 48 CFR 52.227-19, as applicable.

@@ -1,0 +1,86 @@
+
+Description:
+
+  Performs a setup and hold check for a data pin with respect to another data
+  pin. This is different from a conventional setup and hold check that is
+  done with respect to a clock pin.
+
+  This command defines min and max requirements between two endpoints,
+  similar to setup (max) and hold (min) timing checks. Setup and hold checks
+  are referenced from the related pin, specified by -from, to the constrained
+  pin, specified by -to. The related pin is similar to the clock pin in a
+  conventional setup and hold check. The timing analysis compares arrival
+  times between the two specified endpoints. The difference must be less than
+  the set_data_check <value> requirement in order to meet timing.
+
+  Limitations of the set_data_check command include:
+
+   *  Variations in the destination clock delay are ignored.
+
+   *  This command is used for timing purposes only, and is not considered by
+      the Vivado placer or router.
+
+  Note: This command returns nothing if successful, or returns an error if it
+  fails.
+
+Arguments:
+
+  -from <value> - (Optional) Check the datapath from the specified data pin,
+  port, or net. The -from argument specifies the related pin.
+
+  -to <value> - (Optional) Check the datapath to the specified data pin,
+  port, or net. The -to argument specifies the constrained pin
+
+  -rise_from <value> - (Optional) Check the datapath from the rising edge of
+  the specified data pin, port, or net.
+
+  -fall_from <value> - (Optional) Check the datapath from the falling edge of
+  the specified data pin, port, or net.
+
+  -rise_to <value> - (Optional) Check the datapath to the rising edge of the
+  specified data pin, port, or net.
+
+  -fall_to <value> - (Optional) Check the datapath to the falling edge of the
+  specified data pin, port, or net.
+
+  -setup <value> - (Optional) Perform only the setup data check. The default
+  is to perform both setup and hold checks.
+
+  -hold <value> - (Optional) Perform the hold data check. The default is to
+  perform both setup and hold checks.
+
+  -clock <value> - (Optional) Specify the clock domain at the related pin or
+  port of the checks.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <value> - (Required) The setup or hold time specified in nanoseconds (ns)
+  for the defined data checks.
+
+Examples:
+
+  The following example defines a data check for a setup violation from pin
+  A_IN to pin C_IN:
+
+    set_data_check -from A_IN -to C_IN -setup 2.0
+
+  In the above example, A_IN is the related pin and C_IN is the constrained
+  pin. The above constraint would do a setup check of C_IN with respect to
+  A_IN. The data at C_IN should arrive 2.0 ns prior to the edge of A_IN.
+
+See Also:
+
+   *  report_timing
+   *  set_min_delay
+   *  set_max_delay

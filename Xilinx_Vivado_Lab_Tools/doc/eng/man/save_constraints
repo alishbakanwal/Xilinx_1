@@ -1,0 +1,37 @@
+
+Description:
+
+  Saves any changes to the constraints files of the active constraints set.
+  This command writes any changes to the constraints files to the project
+  data on the hard drive; saving any work in progress and committing any
+  changes.
+
+Arguments:
+
+  -force - (Optional) Save the active constraints files regardless of whether
+  any changes have been made, overwriting the current target constraints
+  file.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example saves the constraints files for the active
+  constraints set regardless of any changes to the files:
+
+    save_constraints -force
+
+See Also:
+
+   *  save_constraints_as

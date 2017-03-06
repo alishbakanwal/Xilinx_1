@@ -1,0 +1,44 @@
+
+Description:
+
+  This command reads memory files of type MEM, DAT, or COE, and adds the
+  files to the in-memory design, or the current project, to initialize BRAM
+  memory for behavioral simulation, synthesis and post-synthesis simulation.
+
+  If the memory is not initialized in the design, then it will be initialized
+  to all 0s.
+
+  This command returns the name of the files read, or returns an error if it
+  fails.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <files> - (Required) The name of the MEM, DAT, or COE file to read.
+
+  Note: If the path is not specified as part of the file name, the tool will
+  search for the specified file in the current working directory and then in
+  the directory from which the tool was launched.
+
+Examples:
+
+  The following example:
+
+    read_mem  C:/Data/design1.mem
+
+See Also:
+
+   *  generate_mem_files
+   *  write_bmm

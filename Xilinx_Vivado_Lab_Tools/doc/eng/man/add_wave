@@ -1,0 +1,101 @@
+
+Description:
+
+  The add_wave command creates one or more new design-based wave objects.
+
+  This command returns the name of the newly-created wave object(s).
+
+  Note: This command can only be used when running a simulation. At a
+  minimum, you must specify an item, which is an HDL object (signal) within
+  the simulation project. In the Vivado interface, the object would display
+  in the Objects Window.
+
+Arguments:
+
+  -into <wcfgGroupVbusObj> - (Optional) Specifies the wave configuration,
+  group, or virtual bus into which the new wave object(s) are inserted. If
+  <wcfgGroupVbusObj> is a string instead of an object, it is treated as the
+  name of a group in the current WCFG. If no such group is found, the tool
+  searches the names of the virtual buses of the current WCFG. If still not
+  found, the tool searches the names of all WCFG objects. If no -into object
+  is specified, the current wave configuration is assumed.
+
+  -at_wave <waveObj> - (Optional) Adds a wave object at a specified wave
+  object. If <waveObj> is a string, it is treated as the display name of a
+  wave object.
+
+  -after_wave <waveObj> - (Optional) Adds a wave object after a specified
+  wave object. If <waveObj> is a string, it is treated as the display name of
+  a wave object.
+
+  -before_wave <waveObj> - (Optional) Adds a wave object before a specified
+  wave object. If <waveObj> is a string, it is treated as the display name of
+  a wave object.
+
+  -reverse - (Optional) Sets the IS_REVERSED property of the new wave
+  object(s) to true.
+
+  -radix <arg> - (Optional) Sets the radix property of the new wave object(s)
+  to radix. Allowed values are: default, dec, bin, oct, hex, unsigned, and
+  ascii.
+
+  -color <arg> - (Optional) Sets the color property of the new wave object(s)
+  to color, which is either a pre-defined color name or a color specified by
+  a six-digit RGB format (RRGGBB).
+
+  -name <arg> - (Optional) Sets the DISPLAY_NAME property of the new wave
+  object to the specified name. It is an error for there to be more than one
+  new wave object being created.
+
+  -recursive | -r - (Optional) If <items> specifies a scope, this option
+  specifies that all sub-scopes of that scope should also be added.
+
+  -regexp - (Optional) Specifies that <items> are written as regular
+  expressions Xilinx regular expression commands are always anchored to the
+  start of the search string. You can add ".*" to the beginning of the search
+  string to widen the search. See <ph>See http://perldoc.perl.org/perlre.html
+  for help with regular expression syntax.</ph>
+
+  Note: The Tcl built-in command regexp is not anchored, and works as a
+  standard Tcl command. For more information refer to
+  http://www.tcl.tk/man/tcl8.5/TclCmd/regexp.htm.
+
+  -nocase - (Optional) Perform case-insensitive matching when a pattern has
+  been specified. This argument applies to the use of -regexp only.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <items> - (Required) Add waves for the specified HDL objects in the current
+  simulation.
+
+Examples:
+
+  Add a clk to the existing waveform configuration:
+
+    add_wave clk 
+    clk
+
+  Add the dout_tvalid signal from the rsb_design_testbench to the existing
+  simulation waveform configuration:
+
+    
+    add_wave dout_tvalid 
+    /rsb_design_testbench/dout_tvalid
+
+See Also:
+
+   *  add_wave_divider
+   *  add_wave_group
+   *  add_wave_marker
+   *  add_wave_virtual_bus

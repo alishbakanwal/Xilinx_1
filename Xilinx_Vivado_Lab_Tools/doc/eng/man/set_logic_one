@@ -1,0 +1,50 @@
+
+Description:
+
+  Sets the specified input ports or input pins to a logic one. This command
+  is NOT supported in Synthesis.
+
+  Note: This command operates silently and does not return direct feedback of
+  its operation.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <objects> - (Required) A list of the input ports and pins to be affected.
+
+Examples:
+
+  The following example sets the specified input port to a logic one:
+
+    set_logic_one [get_ports reset]
+
+  The following example sets the input ports reset and wbDataForInput to a
+  logic one:
+
+    set_logic_one [list [get_ports reset] [get_ports wbDataForInput]]
+
+  The following example sets the input pin I on instance reset_IBUF to a
+  logic one:
+
+    set_logic_one [get_pins reset_IBUF_inst/I]
+
+See Also:
+
+   *  all_inputs
+   *  get_pins
+   *  get_ports
+   *  set_logic_dc
+   *  set_logic_unconnected
+   *  set_logic_zero

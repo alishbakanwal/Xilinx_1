@@ -1,0 +1,68 @@
+﻿<html xml:lang="ja-jp" lang="ja-jp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="reference"/>
+<meta name="DC.Title" content="[Edit Constraints Sets] ダイアログ ボックス"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_bqj_lqr_b5"/>
+<meta name="DC.Language" content="ja-JP"/>
+<link rel="stylesheet" type="text/css" href="../commonltr-ja.css"/>
+<title>[Edit Constraints Sets] ダイアログ ボックス</title>
+</head>
+<body id="concept_bqj_lqr_b5">
+
+
+<h1 class="title topictitle1">[Edit Constraints Sets] ダイアログ ボックス</h1>
+
+<div class="body refbody">
+<div class="section">
+<p class="p">このダイアログ ボックスでは、新しい制約セットを定義したり、既存の制約セットを編集したりできるほか、新しい制約ファイルを作成して、指定した制約セットに追加もできます。</p>
+
+<p class="p">リストされる順番にファイルから制約が読み出されるので、制約セットのファイル順は重要です。リストの最初で定義される制約は、後で定義される制約で上書きされる可能性があります。制約の優先順位の詳細は、<cite class="cite">『Vivado<sup>®</sup> Design Suite ユーザー ガイド : 制約の使用』</cite> (UG903) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug903-vivado-using-constraints.pdf;a=XDCPrecedence" target="_blank">このセクション</a>を参照してください。</p>
+
+<ul class="ul" id="concept_bqj_lqr_b5__ul_azt_c5r_b5">
+<li class="li"><span Class="uicontrol">[Specify constraint set] : </span>編集する制約セットを選択します。デフォルトでは、アクティブな制約セットが選択されますが、別の既存制約セットを選択したり、プロジェクト用に新しい制約セットを作成することもできます。<span Class="uicontrol">[Create Constraint Set...]</span> をクリックすると [Create Constraint Set ] ダイアログ ボックスが開き、新しい制約セットの名前を指定できます。<ul class="ul" id="concept_bqj_lqr_b5__ul_ps5_5r5_c5">
+<li class="li"><span Class="uicontrol">[Make Active] : </span>選択した制約セットをプロジェクトのアクティブ制約セットにします。アクティブな制約セットには、現在のデザインに適用される制約すべてが含まれ、新しい制約が保存されます。このチェックボックスは、アクティブな制約セットを編集中には使用できません。</li>
+
+</ul>
+</li>
+
+<li class="li"><span Class="uicontrol">[Add Files] : </span>ファイルを選択するダイアログ ボックスが開き、追加する制約ファイル (.xdc) または管理されていない Tcl スクリプト (.tcl) を選択できます。複数のファイルを選択した場合は、ファイル リストに指定した順に追加されます。<div Class="note_tip"><span class="tiptitle">ヒント:</span> <img class="image" id="concept_bqj_lqr_b5__image_z3s_qs5_c5" src="../../images/add_button.png"/> をクリックして <span Class="uicontrol">[Add Files]</span> をクリックしても同じ操作を実行できます。</div>
+</li>
+
+<li class="li"><span Class="uicontrol">[Create File] : </span><a class="xref" href="create_constraints_file_dialog.html">[Create Constraints File]</a> ダイアログ ボックスが開き、ファイル タイプ、ファイル名、ファイルを保存するディレクトリを指定できます。空のファイルが作成されるので、ファイルを開いて編集したり、Timing Constraints ウィザードを使用して制約を定義したり、またはデザインの配置配線を変更してプロジェクトまたは制約を保存することにより、制約をこのファイルに追加できます。<div Class="note_tip"><span class="tiptitle">ヒント:</span> <img class="image" id="concept_bqj_lqr_b5__image_fkv_2ql_s5" src="../../images/add_button.png"/> をクリックして <span Class="uicontrol">[Create Files]</span> をクリックしても同じ操作を実行できます。</div>
+</li>
+
+<li class="li"> <span Class="uicontrol">[Remove]</span> (<img class="image" id="concept_bqj_lqr_b5__image_zvd_y4l_s5" src="../../images/Remove1.png"/>) : 現在のプロジェクトから選択したファイルを削除します。ファイルは現在のプロジェクトから削除されますが、ハード ドライブからは削除されません。</li>
+
+<li class="li"><span Class="uicontrol">[Move Up] : </span>ファイル リストでファイルが選択されている場合、上矢印ボタン (<img class="image" id="concept_bqj_lqr_b5__image_a5l_m55_c5" src="../../images/up.png"/>) が使用できるようになり、リスト内でファイルを上に移動できます。</li>
+
+<li class="li"><span Class="uicontrol">[Move Down] : </span>ファイル リストでファイルが選択されている場合、下矢印ボタン (<img class="image" id="concept_bqj_lqr_b5__image_egh_n55_c5" src="../../images/down.png"/>) が使用できるようになり、リスト内でファイルを下に移動できます。</li>
+
+<li class="li"><span Class="uicontrol">[Copy constraints file into project] : </span>ローカル プロジェクト ディレクトリの sources フォルダーに指定した制約ファイルをコピーできます。ローカルおよびリモート ソースの使用に関する詳細は、<cite class="cite">『Vivado<sup>®</sup> Design Suite ユーザー ガイド : システム レベル デザイン入力』</cite> (UG895) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug895-vivado-system-level-design-entry.pdf;a=xUsingRemoteSourcesOrCopyingSourcesIntoProject" target="_blank">このセクション</a>を参照してください。</li>
+
+</ul>
+
+</div>
+
+<div class="section"><h2 class="title sectiontitle">関連項目</h2>
+<table cellpadding="4" cellspacing="0" summary="" id="concept_bqj_lqr_b5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow"> <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_bqj_lqr_b5__image_smm_1vr_b5" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">『Vivado Design Suite ユーザー ガイド : 制約の使用』</cite> (<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=2015.4;d=ug903-vivado-using-constraints.pdf" target="_blank">UG903</a>)</td>
+ </tr>
+<tr class="strow"> <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_av4_jvr_b5" src="../../images/play.png" alt="Icon"/></td>
+ <td valign="top" class="stentry"><a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/ndoc?t=video;d=hardware/design-constraints-overview.html" target="_blank">Vivado Design Suite QuickTake ビデオ : デザイン制約の概要</a></td>
+ </tr>
+<tr class="strow"> <td valign="top" class="stentry"><img class="image" id="concept_bqj_lqr_b5__image_ug5_fts_g5" src="../../images/play.png" alt="Icon"/></td>
+ <td valign="top" class="stentry"><a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/ndoc?t=video;d=hardware/working-with-constraint-sets.html" target="_blank">Vivado Design Suite QuickTake ビデオ : 制約セットの使用</a></td>
+ </tr>
+</table>
+
+</div>
+
+</div>
+
+
+</body>
+</html>

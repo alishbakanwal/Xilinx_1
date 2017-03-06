@@ -1,0 +1,91 @@
+
+Description:
+
+  Places cells onto device resources of the target part. Cells can be placed
+  onto specific BEL sites (e.g. SLICE_X49Y60/A6LUT), or into available SLICE
+  resources (e.g. SLICE_X49Y60). If you specify the SLICE but not the BEL the
+  tool will determine an appropriate BEL within the specified SLICE if one is
+  available.
+
+  When placing a cell onto a specified site, the site must not be currently
+  occupied, or an error will be returned: "Cannot set site and bel property
+  of instances. Site SLICE_X49Y61 is already occupied."
+
+  You can test if a site is occupied by querying the IS_OCCUPIED property of
+  a BEL site:
+
+    get_property IS_OCCUPIED [get_bels SLICE_X48Y60/D6LUT]
+
+  Note: The IS_OCCUPIED property of a SLICE only tells you if some of the
+  BELs within the SLICE are occupied; not whether or not the SLICE is fully
+  occupied.
+
+  This command can be used to place cells, or to move placed cells from one
+  site on the device to another site. The command syntax is the same for
+  placing an unplaced cell, or moving a placed cell.
+
+  When moving a placed cell, if you specify only the SLICE for the site, the
+  tool will attempt to place the cell onto the same BEL site in the new SLICE
+  as it currently is placed. For instance moving a cell from the B6LUT, by
+  specifying a new SLICE, will cause the tool to attempt to place the cell
+  onto the B6LUT in the new SLICE. If this BEL site is currently occupied, an
+  error is returned.
+
+  Note: This command returns nothing if successful, or returns an error if it
+  fails.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <cell_site_list> - (Required) Specifies a list of cells and sites as
+  {<cell_name> <site> }. The cell name is listed first, followed the BEL site
+  or SLICE to place the cell onto. If the site is specified as a SLICE, the
+  tool will select an available BEL within the SLICE. Multiple cells can be
+  placed onto multiple sites by repeating the cell/site pair multiple times
+  as needed:
+
+    {<cell_name1> 
+     <site1> <cell_name2>  
+    site2> \ 
+    <cell_name3> <site3>...  
+    cell_nameN> <siteN> }
+
+Examples:
+
+  The following example places the specified cell onto the specified BEL site:
+
+    place_cell div_cntr_reg_inferredi_4810_15889 SLICE_X49Y60/D6LUT
+
+  The following example places the specified cell into the specified SLICE:
+
+    place_cell div_cntr_reg_inferredi_4810_15889 SLICE_X49Y61
+
+  Note: The tool will select an appropriate BEL site if one is available. If
+  no BEL is available, and error will be returned.
+
+  The following example places multiple cells onto multiple sites:
+
+    
+    place_cell  { \ 
+       cpuEngine/cpu_iwb_adr_o/buffer_fifo/i_4810_17734 SLICE_X49Y60/A6LUT \ 
+       cpuEngine/or1200_cpu/or1200_mult_mac/i_4775_15857 SLICE_X49Y60/B6LUT \ 
+       cpuEngine/cpu_iwb_adr_o/buffer_fifo/xlnx_opt_LUT_i_4810_18807_2 \ 
+       SLICE_X49Y60/C6LUT }
+
+See Also:
+
+   *  create_cell
+   *  remove_cell
+   *  unplace_cell

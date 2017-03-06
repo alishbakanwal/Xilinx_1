@@ -1,0 +1,55 @@
+
+Description:
+
+  Reset the current simulation to its starting condition, by cleaning out the
+  various output files created during compilation and simulation for the
+  specified simulation fileset.
+
+  Note: Local files will be removed from the project simulation folders
+  without warning.
+
+  The command returns nothing if successful, or an error if it fails.
+
+Arguments:
+
+  -mode [ behavioral | post-synthesis | post-implementation ] - (Optional)
+  Specify the simulation mode to reset. Valid values include behavioral
+  simulation, post-synthesis, or post implementation simulation. The default
+  mode is behavioral.
+
+  -type [ functional | timing ] - (Optional) Cannot be used with -mode
+  behavioral. Specifies functional simulation of just the netlist, or timing
+  simulation of the netlist and SDF file. Post-synthesis timing simulation
+  uses SDF component delays from the synth_design command.
+  Post-implementation timing simulation uses SDF delays from the place_design
+  and route_design commands.
+
+  Note: Do not use -type with -mode behavioral, or the tool will return an
+  error.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <simset> - (Optional) Specify a simulation fileset to remove. The default
+  simset is sim_1.
+
+Examples:
+
+  The following example resets the post-synthesis timing simulation by
+  removing files for the sim_2 simset:
+
+    reset_simulation -mode post-synthesis -type timing sim_2
+
+See Also:
+
+   *  launch_xsim

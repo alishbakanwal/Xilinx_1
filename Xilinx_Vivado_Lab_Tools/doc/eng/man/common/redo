@@ -1,0 +1,45 @@
+
+Description:
+
+  Note: The UNDO and REDO commands are intended for use in the Vivado IDE,
+  and are not recommended for use in Tcl scripts to restore designs to a
+  former state. To restore a design to a specific condition, you must write a
+  design checkpoint using the write_checkpoint command, to be restored using
+  read_checkpoint.
+
+  Redo a command that has been previously undone. This command can be used
+  repeatedly to redo a series of commands.
+
+  If a command group has been created using the startgroup and endgroup
+  commands, the redo command will redo the group of commands as a sequence.
+
+Arguments:
+
+  -list - (Optional) Get the list of commands that can be redone. When you
+  use the undo command, the tool will step backward through a list of
+  commands. The redo command can then be used to redo those commands.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example returns a list of commands that can be redone:
+
+    redo -list
+
+See Also:
+
+   *  undo
+   *  startgroup
+   *  endgroup

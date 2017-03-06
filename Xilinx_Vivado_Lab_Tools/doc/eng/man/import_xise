@@ -1,0 +1,51 @@
+
+Description:
+
+  Imports an ISE project file (XISE) into the current project. This allows
+  ISE projects to be quickly migrated into the Vivado Design Suite for
+  synthesis, simulation, and implementation. All project source files,
+  constraint files, simulation files, and run settings are imported from the
+  ISE project and recreated in the current project.
+
+  This command should be run on a new empty project. Since source files,
+  constraints, and run settings are imported from the ISE project, any
+  existing source files or constraints may be overwritten.
+
+Arguments:
+
+  -copy_sources - (Optional) Copy source files in the ISE project to the
+  local project directory structure rather than referencing them from their
+  current location. The default is to reference source files from their
+  current location.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <file> - (Required) The name of the ISE project file (.XISE) to be imported
+  into the current project.
+
+Examples:
+
+  The following example creates a new project called importISE, and then
+  imports the ISE project file (first_use.xise) into the new project.
+
+    create_project importISE C:/Data/importISE import_xise \ 
+    C:/Data/FPGA_design/ise_designs/drp_des/first_use.xise
+
+  Note: This example does not specify the -copy_sources argument, so all
+  source files in the ISE project will be added to the current project by
+  reference.
+
+See Also:
+
+   *  create_project

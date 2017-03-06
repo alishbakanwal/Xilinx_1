@@ -1,0 +1,44 @@
+
+Description:
+
+  Moves files returned by the get_files command from one fileset to another
+  while maintaining the properties on the files.
+
+  This command returns the list of files that were moved, or an error if the
+  command fails.
+
+Arguments:
+
+  -fileset <arg> - (Optional) The destination fileset to which the specified
+  source files should be moved. If no fileset is specified the files are
+  moved to the sources_1 fileset by default. An error is returned if the
+  specified fileset does not exist.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <files> - (Optional) One or more file objects returned by the get_files
+  command.
+
+  Note: You must specify file objects returned by the get_files command, and
+  not simply specify file names.
+
+Examples:
+
+  The following example moves the file, top_full.xdc, to the constrs_2 fileset.
+
+    move_files -fileset constrs_2 [get_files top_full.xdc]
+
+See Also:
+
+   *  get_files

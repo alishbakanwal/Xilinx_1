@@ -1,0 +1,82 @@
+
+Description:
+
+  Add cells to the netlist of the current Synthesized or Implemented design.
+
+  Note: You cannot add cells to library macros, or macro-primitives.
+
+  New cell instances can be added to the top-level of the design, or
+  hierarchically within any module of the design. Instances can reference an
+  existing cell from the library or design source files, or a black box
+  instance can be added that reference cells that have not yet been created.
+
+  Netlist editing changes the in-memory view of the netlist in the current
+  design. It does not change the files in the source fileset, or change the
+  persistent design on the disk. Changes made to the netlist may be saved to
+  a design checkpoint using the write_checkpoint command, or may be exported
+  to a netlist file such as Verilog, VHDL, or EDIF, using the appropriate
+  write_* command.
+
+  Note: Netlist editing is not allowed on the elaborated RTL design.
+
+  This command returns the name of the created cell instance or instances.
+
+Arguments:
+
+  -reference <arg> - (Required) The library cell or source file module
+  referenced by the new cell instances.
+
+  -black_box - (Optional) Define a black box instance of the specified
+  reference cell. Use this argument when the reference cell does not exist
+  yet, but you would like to create a black box instance of the cell for a
+  top-down design approach.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <cells> - (Required) Instance names of the cells to create. The instance
+  name can be specified as a hierarchical name, from the top-level of the
+  design. In this case, you must use the hierarchy separator character in the
+  hierarchical instance name. You can determine the current hierarchy
+  separator with the get_hierarchy_separator command.
+
+Examples:
+
+  The following example creates three new cell instances of the or1200_cpu
+  module with the specified instance names:
+
+    create_cell -reference or1200_cpu myCell1 myCell2 myCell3
+
+  The following example sets the hierarchy separator character, then creates
+  a black box instance for the referenced cell, specifying a hierarchical
+  instance name:
+
+    set_hierarchy_separator | 
+    create_cell -reference dmaBlock -black_box usbEngine0|myDMA
+
+  Note: The tool will return an error when -black_box is used, but the
+  -reference cell already exists.
+
+See Also:
+
+   *  connect_net
+   *  create_net
+   *  create_pin
+   *  create_port
+   *  remove_cell
+   *  rename_cell
+   *  set_hierarchy_separator
+   *  write_checkpoint
+   *  write_edif
+   *  write_verilog
+   *  write_vhdl

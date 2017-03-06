@@ -1,0 +1,44 @@
+
+Description:
+
+  Set or get the current wave configuration object for the current simulation.
+
+  In the Vivado<tm tmtype="reg"/> simulator GUI, you can work with a waveform
+  to analyze your design and debug your code. A wave configuration displays
+  with top-level HDL objects, and can be further populated using commands
+  like add_wave and add_wave_divider.
+
+  This command returns the name of the current wave configuration object.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <wcfgObj> - (Optional) Specify a wave configuration object to set as the
+  current wave configuration. The wave configuration object can either be
+  specified by name, or as an object returned by the get_wave_configs
+  command.
+
+Examples:
+
+  The following example gets the testbench wave config object and makes it
+  the current wave configuration in the simulation:
+
+    current_wave_config [get_wave_config testbench]
+
+See Also:
+
+   *  create_wave_config
+   *  get_wave_configs
+   *  open_wave_config

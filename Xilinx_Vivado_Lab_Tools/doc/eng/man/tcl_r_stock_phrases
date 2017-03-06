@@ -1,0 +1,102 @@
+
+Arguments:
+
+  <p id="arg_quiet"> -quiet - (Optional) Execute the command quietly,
+  returning no messages from the command. The command also returns TCL_OK
+  regardless of any errors encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  <p id="arg_verbose">-verbose - (Optional) Temporarily override any message
+  limits and return all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <p id="arg_regex">-regexp - (Optional) Specifies that the search <patterns>
+  are written as regular expressions. Both search <patterns> and -filter
+  expressions must be written as regular expressions when this argument is
+  used. Xilinx regular expression Tcl commands are always anchored to the
+  start of the search string. You can add ".*" to the beginning or end of a
+  search string to widen the search to include a substring. See
+  http://perldoc.perl.org/perlre.html for help with regular expression
+  syntax.
+
+  Note: The Tcl built-in command regexp is not anchored, and works as a
+  standard Tcl command. For more information refer to
+  http://www.tcl.tk/man/tcl8.5/TclCmd/regexp.htm.
+
+  <p id="arg_nocase">-nocase - (Optional) Perform case-insensitive matching
+  when a pattern has been specified. This argument applies to the use of
+  -regexp only.
+
+  <p id="arg_operators">The filter search pattern should be quoted to avoid
+  having to escape special characters that may be found in net, pin, or cell
+  names, or other properties. String matching is case-sensitive and is always
+  anchored to the start and to the end of the search string. The wildcard "*"
+  character can be used at the beginning or at the end of a search string to
+  widen the search to include a substring of the property value.
+
+  Note: The filter returns an object if a specified property exists on the
+  object, and the specified pattern matches the property value on the object.
+  In the case of the "*" wildcard character, this will match a property with
+  a defined value of "".
+
+  <p id="arg_operators_1">For string comparison, the specific operators that
+  can be used in filter expressions are "equal" (==), "not-equal" (!=),
+  "match" (=~), and "not-match" (!~). Numeric comparison operators <, >, <=,
+  and >= can also be used. Multiple filter expressions can be joined by AND
+  and OR (&& and ||). The following gets input pins that do NOT contain the
+  "RESET" substring within their name:
+
+    get_pins * -filter {DIRECTION == IN && NAME !~ "*RESET*"}
+
+  <p id="arg_operators_2">Boolean (bool ) type properties can be directly
+  evaluated in filter expressions as true or not true:
+
+    -filter {IS_PRIMITIVE && !IS_LOC_FIXED}
+
+  <p id="arg_editNetlist">Netlist editing changes the in-memory view of the
+  netlist in the current design. It does not change the files in the source
+  fileset, or change the persistent design on the disk. Changes made to the
+  netlist may be saved to a design checkpoint using the write_checkpoint
+  command, or may be exported to a netlist file such as Verilog, VHDL, or
+  EDIF, using the appropriate write_* command.
+
+  Note: Netlist editing is not allowed on the elaborated RTL design.
+
+Notes:
+
+  Note: To improve memory and performance, the get_* commands return a
+  container list of a single type of objects (e.g. cells, nets, pins, or
+  ports). You can add new objects to the list (using lappend for instance),
+  but you can only add the same type of object that is currently in the list.
+  Adding a different type of object, or string, to the list is not permitted
+  and will result in a Tcl error.
+
+  Note: If the path is not specified as part of the file name, the tool will
+  search for the specified file in the current working directory and then in
+  the directory from which the tool was launched.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  Note: The -of_objects option requires objects to be specified using the
+  get_* commands, such as get_cells or get_pins , rather than specifying
+  objects by name. In addition, -of_objects cannot be used with a search
+  <pattern> .
+
+  Note: This command returns nothing if successful, or returns an error if it
+  fails.
+
+  Note: You must use the open_hw command to open the Hardware Manager in the
+  Vivado Design Suite before using this command.
+
+  <ph id="regex">See http://perldoc.perl.org/perlre.html for help with
+  regular expression syntax.</ph>
+
+  Note: The Tcl built-in command regexp is not anchored, and works as a
+  standard Tcl command. For more information refer to
+  http://www.tcl.tk/man/tcl8.5/TclCmd/regexp.htm.

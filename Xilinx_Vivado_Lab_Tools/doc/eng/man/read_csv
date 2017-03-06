@@ -1,0 +1,72 @@
+
+Description:
+
+  Imports port definition and package pin placement information from a comma
+  separated value (CSV) file.
+
+  The port definitions in a CSV file can be imported into an I/O Pin Planning
+  project. In a Pin Planning project, importing a CSV file replaces the
+  current port definitions. Any ports in the design that are not found in the
+  imported CSV file will be removed.
+
+  In all other projects the port definitions are defined in the source design
+  data, however package pin assignments and port attributes can be read from
+  the specified CSV file.
+
+  The ports read from the CSV file can not have spaces in the name, or the
+  tool will return an error. The specific format and requirements of the CSV
+  file are described in the Vivado Design Suite User Guide: I/O and Clock
+  Planning (UG899).
+
+Arguments:
+
+  -quiet_diff_pairs - (Optional) The tool transcripts messages related to
+  pins that may be inferred as differential pairs when importing the CSV
+  file. This option suppresses messages related to inferring differential
+  pairs.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <file> - (Required) The file name of the CSV file to be imported.
+
+  Note: If the path is not specified as part of the file name, the tool will
+  search for the specified file in the current working directory and then in
+  the directory from which the tool was launched.
+
+Examples:
+
+  The following example imports a CSV file into an open project:
+
+    read_csv C/Data/pinList.csv
+
+  The following example sets up a new IO Pin Planning project, and then
+  imports the specified CSV file into it, and infers any differential pairs
+  in the CSV file:
+
+    create_project myPinPlan C:/Data/myPinPlan -part xc7v285tffg1157-1 
+    set_property design_mode PinPlanning [current_fileset] 
+    open_io_design -name io_1 
+    read_csv C:/Data/import.csv 
+    infer_diff_pairs -filetype csv C:/Data/import.csv
+
+  Note: The design_mode property on the source fileset is what determines the
+  nature of the project.
+
+See Also:
+
+   *  create_project
+   *  infer_diff_pairs
+   *  open_io_design
+   *  set_property
+   *  write_csv

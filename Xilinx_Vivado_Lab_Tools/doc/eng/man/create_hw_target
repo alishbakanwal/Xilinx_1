@@ -1,0 +1,102 @@
+
+Description:
+
+  The Vivado hardware manager supports programming of hardware devices
+  through the use of Serial Vector Format (SVF) files. SVF files are ASCII
+  files that contain both programming instructions and configuration data.
+  These files are used by ATE machines and embedded controllers to perform
+  boundary-scan operations. The SVF file captures the JTAG commands needed to
+  program the bitstream directly into a Xilinx device, or indirectly into a
+  flash memory device. The SVF file can be written using the write_hw_svf
+  command, or applied to an open hw_target through the execute_hw_svf
+  command. Refer to the Vivado Design Suite User Guide: Programming and
+  Debugging (UG908) for more information.
+
+  The specific process for creating the hw_svf file is:
+
+   *  Create an SVF target using create_hw_target.
+
+   *  Open the SVF target.
+
+   *  Create one or more devices on the SVF target using create_hw_device.
+
+   *  Program the devices using commands like program_hw_devices.
+
+   *  Write the SVF file of operation commands using write_hw_svf.
+
+  The create_hw_target command creates an SVF hw_target object on the current
+  hw_server that can be used as a platform for programming devices, and
+  exporting the programming commands in an SVF file. The SVF target, is a
+  hw_target object that can be queried and managed like other hw_targets
+  using commands like get_hw_targets and current_hw_target.
+
+  Note: When using the SVF flow, Xilinx recommends that you connect to a
+  local hw_server on your system, as the SVF target does not require
+  connection to an actual hardware board or device.
+
+  SVF hw_targets can be identified by the boolean IS_SVF property that can be
+  returned by get_property or report_property commands. This property is TRUE
+  for SVF targets.
+
+  This command returns nothing if successful, or returns an error if it fails.
+
+Arguments:
+
+  -copy <arg> - (Optional) Specifies that the new SVF hw_target should be a
+  copy of an existing hw_target. The argument specifies a physical hw_target
+  or SVF hw_target as returned by the get_hw_targets command.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <target_name> - Specifies the name to assign to the new SVF hw_target object.
+
+Examples:
+
+  The following example creates a SVF hw_target object that is a copy of the
+  specified hw_target:
+
+    create_hw_target -copy [get_hw_targets *210203327996A] svfTarget
+
+  The following example gets the currently defined SVF hw_target objects:
+
+    get_hw_targets -filter {IS_SVF}
+
+  The following example shows all of the steps needed for the SVF flow. First
+  open the Vivado hardware manager and connect to a local hw_server; create
+  and open an SVF hw_target; add a hw_device and program the bitstream into
+  this device; and write the SVF file capturing the programming commands for
+  the device:
+
+    open_hw 
+    connect_hw_server 
+    create_hw_target my_svf_target 
+    open_hw_target 
+    create_hw_device -part xc7k325t 
+    set_property PROGRAM.FILE {C:/Data/k7_design.bit} [current_hw_device] 
+    program_hw_devices [current_hw_device] 
+    write_hw_svf my_xc7k325t.svf 
+    close_hw_target
+
+See Also:
+
+   *  connect_hw_server
+   *  create_hw_device
+   *  current_hw_target
+   *  get_hw_targets
+   *  get_property
+   *  program_hw_devices
+   *  report_hw_targets
+   *  report_property
+   *  set_property
+   *  write_hw_svf

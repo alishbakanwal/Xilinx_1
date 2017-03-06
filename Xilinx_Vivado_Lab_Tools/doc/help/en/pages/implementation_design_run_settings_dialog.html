@@ -1,0 +1,106 @@
+﻿<html xml:lang="en-us" lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="reference"/>
+<meta name="DC.Title" content="Implementation Design Run Settings"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_bqj_lqr_b5"/>
+<link rel="stylesheet" type="text/css" href="../../commonltr.css"/>
+<title>Implementation Design Run Settings</title>
+</head>
+<body id="concept_bqj_lqr_b5">
+
+
+    <h1 class="title topictitle1">Implementation Design Run Settings</h1>
+
+ <div class="body refbody">
+     <div class="section">
+            <p class="p">The Implementation Design Run Settings dialog box lets you define the strategy as
+                well as customize the options for the selected implementation run. The default
+                options for the selected strategy are displayed in a table, and you can modify
+                options or values to customize the strategy. </p>
+
+            <ul class="ul" id="concept_bqj_lqr_b5__ul_azt_c5r_b5">
+                <li class="li"><span Class="uicontrol">Run report methodology after routing</span>: Enable this
+                    checkbox to run methodology checks at the end of the routing process to identify
+                    any timing or process errors. </li>
+
+                <li class="li"><span Class="uicontrol">Incremental Compile</span>: Specifies a design checkpoint (DCP)
+                    to use as a reference for the next implementation run. The reference design is
+                    usually an earlier iteration or variation of the current design that has been
+                    synthesized, placed, and routed. However, you can also use a checkpoint that is
+                    only partially placed or routed. See this <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug904-vivado-implementation.pdf;a=xIncrementalCompile" target="_blank">link</a> in the <cite class="cite">Vivado Design Suite
+                        User Guide: Implementation</cite> (UG904) for more information. </li>
+
+                <li class="li"><span Class="uicontrol">Strategy</span>: Specifies the predefined Vivado<sup>®</sup> Design Suite strategies, or lets you create your own strategy by modifying
+                    the options for the selected strategy. Strategies are predefined configurations
+                    of the Tcl commands that make up the synthesis or implementation runs.  You can
+                    modify the individual settings or options for a strategy to meet your specific
+                    objectives. For more information on the synthesis and implementation commands,
+                    and available options and directives, refer to the following commands in the
+                        <cite class="cite">Vivado Design Suite Tcl Command Reference Guide</cite> (UG835): <ul class="ul" id="concept_bqj_lqr_b5__ul_tmq_nch_xw">
+                        <li class="li"><a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xsynth_design" target="_blank">synth_design</a></li>
+
+                        <li class="li"><a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xopt_design" target="_blank">opt_design</a></li>
+
+                        <li class="li"><a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xpower_opt_design" target="_blank">power_opt_design</a></li>
+
+                        <li class="li"><a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xplace_design" target="_blank">place_design</a></li>
+
+                        <li class="li"><a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xphys_opt_design" target="_blank">phys_opt_design</a></li>
+
+                        <li class="li"><a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xroute_design" target="_blank">route_design</a></li>
+
+                        <li class="li"><a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xwrite_bitsream" target="_blank">write_bitstream</a></li>
+
+                    </ul>
+<div Class="note_tip"><span class="tiptitle">Tip:</span> A modified strategy is indicated by an asterisk (*) in the
+                        strategy name. You can click the <span Class="uicontrol">Save Strategy As</span>
+                        button (<img class="image" id="concept_bqj_lqr_b5__image_ex4_sxk_55" src="../../images/copy.png"/>) to save
+                        the strategy as a new user-defined strategy. </div>
+</li>
+
+                <li class="li"><span Class="uicontrol">Description</span>: Provides a brief summary of the goal of the
+                    selected strategy. You can define the description when saving user-defined
+                    strategies.</li>
+
+                <li class="li"><span Class="uicontrol">Options</span>: Shows a table view of the options available in
+                    the selected implementation strategy. Select an option in the table to display a
+                    description of the option. In the Options table, the implementation strategy is
+                    broken down into the various steps that make up the optimization, placement, and
+                    routing process. See this <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug904-vivado-implementation.pdf;a=xImplementationSubProcesses" target="_blank">link</a> in the <cite class="cite">Vivado Design Suite
+                        User Guide: Implementation</cite> (UG904) for more information. You can
+                    change some features of the selected strategy by changing the settings in the
+                    Options table. You can use the <span Class="uicontrol">More Options</span> field for
+                    each command in the Options table to add any additional command options. <div Class="note_important"><span class="importanttitle">Important:</span> Many implementation strategies use the
+                            <span class="keyword parmname">-directive</span> argument to configure the
+                        implementation. Changing the settings in the Options table is not
+                        recommended for strategies using non-default directives as this can result
+                        in errors during implementation. </div>
+</li>
+
+            </ul>
+
+ </div>
+
+  <div class="section"><h2 class="title sectiontitle">See Also</h2>
+   
+      <table cellpadding="4" cellspacing="0" summary="" id="concept_bqj_lqr_b5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow">
+                    <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_bqj_lqr_b5__image_ifx_flv_c5" src="../../images/book_icon.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">Vivado Design Suite User Guide: Implementation</cite> (UG904),
+                            <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug904-vivado-implementation.pdf;a=xCustomizingImplementationStrategies" target="_blank">Customizing Implementation
+                            Strategies</a></td>
+
+                </tr>
+</table>
+
+  </div>
+
+ </div>
+
+
+</body>
+</html>

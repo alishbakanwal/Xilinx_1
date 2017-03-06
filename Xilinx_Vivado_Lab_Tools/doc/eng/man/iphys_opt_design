@@ -1,0 +1,125 @@
+
+Description:
+
+  The iphys_opt_design command describes a specific optimization that was
+  performed by the phys_opt_design command, such as replicating a critical
+  cell or pulling registers from a block RAM to improve critical path delay.
+  The iphys_opt_design command includes all the information necessary to
+  recreate both the post-optimization logical netlist and the placement
+  changes required for the optimized netlist.
+
+  Interactive physical optimization can be used in two ways:
+
+   *  Applying post-placement physical optimizations to the pre-placement
+      netlist to improve the overall placement result and improve design
+      performance.
+
+   *  Saving the physical optimizations in a Tcl script to be repeated as
+      needed.
+
+  The various optimizations performed by phys_opt_design can be written to an
+  iphys_opt Tcl script by write_iphys_opt_tcl , and read into the design by
+  the read_iphys_opt_tcl command.
+
+  Note: The iphys_opt_design command is intended for use inside the iphys_opt
+  Tcl script file. These commands can be edited in the context of the
+  iphys_opt Tcl script, but they are not intended to be specified at the
+  command line.
+
+  This command returns a transcript of its processes, or an error if it fails.
+
+Arguments:
+
+  -fanout_opt - (Optional) Performs delay-driven optimization on the
+  specified net, by replicating drivers to reduce delay.
+
+  -critical_cell_opt - (Optional) Replicate cells on specified nets to reduce
+  delays.
+
+  -placement_opt - (Optional) Move cells to reduce delay on specified nets.
+
+  -rewire - (Optional) Refactor logic cones to reduce logic levels and reduce
+  delay on critical signals.
+
+  -net <arg> - (Optional) Specify the net to apply an optimization to.
+
+  -cluster <args> - (Optional) Specify a cluster of load pins.
+
+  -place_cell <args> - (Optional) Place the specified cells, or cells
+  connected to the specified pins, on the device sites specified.
+
+  -place - (Optional) Replay placement of the transformation.
+
+  -dsp_register_opt - (Optional) Improve critical path delay by moving
+  registers from slices to DSP blocks, or from DSP blocks to slices.
+
+  -bram_register_opt - (Optional) Improve critical path delay by moving
+  registers from slices to block RAMs, or from block RAMs to slices.
+
+  -shift_register_opt - (Optional) Perform shift register optimization to
+  improve timing on negative slack paths between shift register cells (SRLs)
+  and other logic cells.
+
+  -cell <arg> - (Optional) Specify a cell to apply an optimization to.
+
+  -packing - (Optional) Packing in DSP/BRAM.
+
+  -unpacking - (Optional) Unpacking in DSP/BRAM.
+
+  -port <arg> - (Optional) Specify a port on a cell to apply the optimization
+  to.
+
+  -critical_pin_opt - For LUT inputs, this optimization performs remapping of
+  logical pins to physical pins, also known as pin-swapping, to improve
+  critical path timing.
+
+  -skipped_optimization - (Optional) Defines the specified optimization as
+  not performed. These are optimizations identified by phys_opt_design that
+  are skipped because suitable locations for optimized logic cannot be found.
+  For example, BRAM register optimizations to improve slack that are skipped
+  because no suitable locations can be found for the registers.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example performs a critical cell optimization on the
+  specified net and cluster of ports:
+
+    iphys_opt_design -critical_cell_opt -net \ 
+       {ADUR_CORE_INST/CPE_INST/CPE_ANT_RESOURCE_TDM_INST0 \ 
+       /CPE_ANT_LINE_IQ_TDM_ANT0_INST/CPE_PN_MULT_INST/CPE_PN_MUL_INST3 \ 
+       /Q_PNI_MULT_INST/pn_mult_reg[3][0]} \ 
+       -cluster {pn_mult[3]_i_14_replica  {\ 
+       {ADUR_CORE_INST/CPE_INST/CPE_ANT_RESOURCE_TDM_INST0 \ 
+       /CPE_ANT_LINE_IQ_TDM_ANT0_INST/CPE_PN_MULT_INST/CPE_PN_MUL_INST2 \ 
+       /Q_ADD_INST/pn_mult_reg[3]_i_6_CARRY8/S[0]}}}\ 
+       -cluster {pn_mult[3]_i_14_replica_1  {\ 
+       {ADUR_CORE_INST/CPE_INST/CPE_ANT_RESOURCE_TDM_INST0 \ 
+       /CPE_ANT_LINE_IQ_TDM_ANT0_INST/CPE_PN_MULT_INST/CPE_PN_MUL_INST0 \ 
+       /Q_ADD_INST/pn_mult_reg[3]_i_10_CARRY8/S[0]}}}\
+
+  The following example performs a shift register optimization on the
+  specified cell:
+
+    iphys_opt_design -shift_register_opt -cell \ 
+       {ADUR_CORE_INST/EMIF_INTERFACE_INST/EMIF_HOST_IF_INST/DLY_INST1 \ 
+       /PD_INST_FPGA/delay_chain_reg[9][16]_srl9} -port D
+
+See Also:
+
+   *  phys_opt_design
+   *  read_iphys_opt_tcl
+   *  report_phys_opt_design
+   *  write_iphys_opt_tcl

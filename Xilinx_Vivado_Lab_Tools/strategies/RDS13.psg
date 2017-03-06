@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<PAStrategies>
+
+<Strategy Version="1" Minor="2">
+	<StratHandle Name="Rodin Synthesis Defaults" Flow="RDS13">
+		<Desc>Rodin Synthesis Defaults</Desc>
+	</StratHandle>
+  <Step Id="synth_design">
+  </Step>
+</Strategy>
+
+</PAStrategies>

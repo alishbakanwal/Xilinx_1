@@ -1,0 +1,99 @@
+﻿<html xml:lang="ja-jp" lang="ja-jp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="concept"/>
+<meta name="DC.Title" content="プライマリ クロック"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_aqj_x3c_d5"/>
+<meta name="DC.Language" content="ja-JP"/>
+<link rel="stylesheet" type="text/css" href="../commonltr-ja.css"/>
+<title>プライマリ クロック</title>
+</head>
+<body id="concept_aqj_x3c_d5">
+
+
+<h1 class="title topictitle1">プライマリ クロック</h1>
+
+<div class="body conbody">
+<div class="section" id="concept_aqj_x3c_d5__test"><h2 class="title sectiontitle">プライマリ クロックの理解</h2>
+<div class="fig fignone" id="concept_aqj_x3c_d5__fig_vxf_xmc_d5"><p class="figcap"><span class="figtitleprefix">図: </span>プライマリ クロックの例 :</p>
+<br/><img class="image" id="concept_aqj_x3c_d5__image_wxf_xmc_d5" src="../../images/primary_clocks.png"/><br/> </div>
+
+<div class="p">clk 信号で FD0 と FD1 レジスタの開始時間と到着時間が制御されています。clk 入力ポートにクロックを作成すると、FD0/C から FD1/D へのタイミング パスのセットアップおよびホールド スラックがチェックされるようになります。次はその例です。<pre Class="codeblock">create_clock -name clk -period 6.667 [get_ports clk]</pre>
+</div>
+
+<p class="p">[Constraints for Pulse Width Check Only] の表には、セットアップ/ホールド/リカバリ/リムーバルではなく、パルス幅解析にのみ必要なプライマリ クロックがリストされます。パルス幅チェックでは、min_period、max_period、min_low_pulse_width、min_high_pulse_width とプリミティブ クロック ピンのスキューがチェックされます。デフォルトでは、これらの制約はウィザードで選択されていません。</p>
+
+</div>
+
+<div class="section"><h2 class="title sectiontitle">[Primary Clocks] ページの理解</h2>
+
+<ul class="ul" id="concept_aqj_x3c_d5__ul_nl4_qdh_45">
+<li class="li"><span Class="uicontrol">[Recommended Constraints] : </span>タイミング制約ウィザードでは、デザインのプライマリ クロックの候補が識別され、これらのクロックを定義するための制約が推奨されます。クロック周期および位相などの詳細は、ユーザーが定義するようになっています。</li>
+
+<li class="li"><span Class="uicontrol">[Constraints for Pulse Width Check Only] : </span>これらは、パルス幅チェックを実行するのに必要であると識別されたクロックです。パルス幅チェックは、合成またはインプリメンテーションには影響しませんが、デザインのビットストリームを生成する前に実行しておく必要があります。詳細は、<cite class="cite">『Vivado Design Suite ユーザー ガイド : デザイン解析およびクロージャ テクニック』</cite> (UG906) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug906-vivado-design-analysis.pdf;a=xPulseWidthChecks" target="_blank">このセクション</a>を参照してください。</li>
+
+<li class="li"><span Class="uicontrol">[Tcl Command Preview] : </span>[Recommended Constraints] にリストされているようにプライマリ クロックを定義するのに使用される <a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xcreate_clock" target="_blank">create_clock</a> コマンドが表示されます。これらの制約がデザインに追加されます。</li>
+
+<li class="li"><span Class="uicontrol">[Existing Constraints] : </span>現在定義されているプライマリ クロック制約が表示されます。</li>
+
+</ul>
+
+<p class="p">上記のセクションにはそれぞれツールバーもあり、次のコマンドの 1 つまたは複数を実行できます</p>
+
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="concept_aqj_x3c_d5__table_rdz_bvv_y5" class="table" frame="void" border="0" rules="none">    <tbody class="tbody"> <tr class="row">
+<td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_gdk_ts3_45" src="../../images/search_button.png"/></td>
+
+<td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Search</span></td>
+
+<td class="entry" align="left" valign="top" width="73.4959349593496%">検索文字列を入力するためのテキスト入力フィールドが表示されます。</td>
+</tr>
+ <tr class="row">
+<td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_icv_zt3_45" src="../../images/select_all_button.png"/></td>
+
+<td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Select All</span></td>
+
+<td class="entry" align="left" valign="top" width="73.4959349593496%">推奨される制約すべてを選択します。</td>
+</tr>
+ <tr class="row">
+<td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_qwr_153_45" src="../../images/edit_selected_button.png"/></td>
+
+<td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Edit selected row</span></td>
+
+<td class="entry" align="left" valign="top" width="73.4959349593496%">クロックの属性を定義するための [Primary Clock Constraints] ダイアログ ボックスを開きます。これらの属性は、[Recommended Constraints] リストのフィールドを直接クリックしても編集できます。</td>
+</tr>
+ <tr class="row">
+<td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_wtn_b53_45" src="../../images/clock_networks_button.png"/></td>
+
+<td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Clock Networks</span></td>
+
+<td class="entry" align="left" valign="top" width="73.4959349593496%">新しいクロック ネットワーク レポートを生成する <span Class="uicontrol">[Report Clock Networks]</span> コマンドと既存レポートを開く <span Class="uicontrol">[View Clock Networks]</span> コマンドを実行するためのサブメニューが表示されます。<div Class="note_tip"><span class="tiptitle">ヒント:</span> クロック ネットワークは、<a class="xref" href="clock_networks_window.html">[Clock Networks] ウィンドウ</a>にレポートされます。</div>
+</td>
+</tr>
+ </tbody>
+ </table>
+</div>
+
+</div>
+
+<div class="section"><h2 class="title sectiontitle">関連項目</h2>
+<table cellpadding="4" cellspacing="0" summary="" id="concept_aqj_x3c_d5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow"> <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_aqj_x3c_d5__image_vvv_3pq_d5" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">『UltraFast™ 設計手法ガイド (Vivado<sup>®</sup> Design Suite 用)』</cite> (UG949) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?d=j_ug949-vivado-design-methodology.pdf;a=xCreatingPrimaryClocks" target="_blank">「プライマリ クロックの作成」</a></td>
+ </tr>
+<tr class="strow"> <td valign="top" class="stentry"><img class="image" id="concept_aqj_x3c_d5__image_smm_1vr_b5" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry"><cite class="cite">『Vivado Design Suite ユーザー ガイド : 制約の使用』</cite> (UG903) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug903-vivado-using-constraints.pdf;a=xPrimaryClocks" target="_blank">「プライマリ クロック」</a></td>
+ </tr>
+<tr class="strow"> <td valign="top" class="stentry"><img class="image" id="concept_aqj_x3c_d5__image_av4_jvr_b5" src="../../images/play.png" alt="Icon"/></td>
+ <td valign="top" class="stentry"><a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/ndoc?t=video;d=hardware/creating-basic-clock-constraints.html" target="_blank">Vivado Design Suite QuickTake ビデオ : 基本的なクロック制約の作成</a></td>
+ </tr>
+</table>
+
+</div>
+
+</div>
+
+
+</body>
+</html>

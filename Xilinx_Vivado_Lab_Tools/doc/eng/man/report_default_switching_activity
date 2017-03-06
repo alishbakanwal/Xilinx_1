@@ -1,0 +1,76 @@
+
+Description:
+
+  Displays the default switching activity currently configured for the
+  specified element type.
+
+  The default switching activity values are defined using the
+  set_switching_activity command.
+
+  Note: By default the report is written to the Tcl console or STD output.
+  However, the results can also be written to a file or returned as a string
+  if desired.
+
+Arguments:
+
+  -static_probability - (Optional) Include static probability in the report
+  but do not include toggle rate.
+
+  -toggle_rate - (Optional) Include toggle rate in the report but do not
+  include static probability.
+
+  Note: Both toggle rate and probability will be reported unless either
+  -toggle_rate or -static_probability is specified to limit the results.
+
+  -type <types> - (Required) The component types that are reported. Valid
+  values are: input, input_set, input_reset, input_enable, register, dsp,
+  bram_read_enable, bram_write_enable, output_enable, clock, all.
+
+  -file <arg> - (Optional) Write the report into the specified file. The
+  specified file will be overwritten if one already exists.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -return_string - (Optional) Return the report as a string rather than a
+  data set.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example reports the default switching attributes for dsps:
+
+    report_default_switching_activity -type dsp 
+    Default Dsp Probability = 0.50 
+    Default Dsp Toggle Rate (%) = 12.50
+
+  The following example reports the default switching attributes for all
+  types, and stores it into a Tcl variable swa1:
+
+    set swa1 [report_default_switching_activity -type all -return_string]
+
+  Note: Without the -return_string argument, the command will perform
+  correctly, but the $swa variable will not be assigned the reported
+  information.
+
+See Also:
+
+   *  power_opt_design
+   *  report_power
+   *  report_switching_activity
+   *  reset_default_switching_activity
+   *  reset_switching_activity
+   *  set_switching_activity

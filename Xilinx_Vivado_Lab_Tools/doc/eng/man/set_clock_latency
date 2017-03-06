@@ -1,0 +1,89 @@
+
+Description:
+
+  This command defines a clock`s source or network latency for specified
+  clocks, ports, or pins.
+
+  Note: This command operates silently and does not return direct feedback of
+  its operation.
+
+  Source latency is the time in nanoseconds that a clock signal takes to
+  propagate from its waveform origin to the clock definition point in the
+  design. For example, this would be the time delay for the clock to
+  propagate from its source (oscillator) on the system board to the FPGA
+  input port.
+
+  Network latency is the time a clock signal takes to propagate from its
+  definition point in the design to a register clock pin on the timing path.
+  The total clock latency at a register clock pin is the sum of a clock`s
+  source latency and network latency.
+
+Arguments:
+
+  -clock <args> - (Optional) Specifies a list of clocks associated with the
+  <latency> assigned to the specified <objects>. If the -clock argument is
+  not used, the clock <latency> will be applied to all clocks passing through
+  the specified pins and ports.
+
+  -rise - (Optional) Defines the latency for the rising clock edge.
+
+  -fall - (Optional) Defines the latency for the falling clock edge.
+
+  -min - (Optional) Defines the minimum latency for the specified clocks for
+  multi-corner analysis.
+
+  -max - (Optional) Defines the maximum latency for the specified clocks for
+  multi-corner analysis.
+
+  Note: The -min and -max options are mutually exclusive.
+
+  -source - (Optional) Defines the specified <latency> as a source latency.
+  Clock source latencies can only be specified for clock objects and clock
+  source pins.
+
+  Note: Without the -source argument the <latency> is considered as network
+  latency.
+
+  -late - (Optional) The time delay specified by -latency is how late the
+  clock edge arrives.
+
+  -early - (Optional) The time delay specified by -latency is how early the
+  clock edge arrives.
+
+  Note: The -early and -late options are mutually exclusive, and can only be
+  specified when -source is also specified.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <latency> - (Required) The amount of clock latency, specified as
+  nanoseconds, to apply.
+
+  <objects> - (Required) The clock, port, or pin objects on which to apply
+  the latency. Specifying pin or port objects assigns the latency to all
+  register clock pins in the transitive fanout of the pins or ports. If
+  -clock is used, the latency is applied to all register clock pins of the
+  specified clocks.
+
+  Note: If <objects> specifies a clock, the -clock argument is unnecessary,
+  and is ignored.
+
+Examples:
+
+  This example will set an early latency on the rising edge of CLK_A.
+
+    set_clock_latency -source -rise -early 0.4 [get_ports CLK_A]
+
+See Also:
+
+   *  report_timing

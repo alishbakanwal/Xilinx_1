@@ -1,0 +1,42 @@
+
+Description:
+
+  Sets the character that will be used for separating levels of hierarchy in
+  the design.
+
+  Note: This command operates silently and does not return direct feedback of
+  its operation
+
+Arguments:
+
+  <separator> - (Optional) The new character to use as a hierarchy separator.
+  Valid characters to use as the hierarchy separator are: `/`, `@`, `^`, `#`,
+  `.`, and `|`. The default character is `/`, and is used when no <separator>
+  is specified.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  This example changes the hierarchy separator to the `|` character:
+
+    set_hierarchy_separator |
+
+  The following example restores the default hierarchy separator, `/`:
+
+    set_hierarchy_separator
+
+See Also:
+
+   *  get_hierarchy_separator

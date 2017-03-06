@@ -1,0 +1,66 @@
+
+Description:
+
+  Saves the active constraint set as a new constraint set, with local copies
+  of any constraint files that are part of the constraint set. The design
+  name is not changed by this command.
+
+  Use this command to save changes to the constraints in a design without
+  affecting the current constraint files. This allows you to do some
+  "what-if" type development of design constraints.
+
+  Note: The new constraint set created by the save_design_as command will not
+  be active in the design, although it will be referenced by the design. To
+  make the constraint set active you must set the constrset property to point
+  to the new constraint set for specific runs. See the example below.
+
+Arguments:
+
+  -dir <arg> - (Optional) The directory into which constraints files are
+  saved. The constraint files from the active constraint set are copied into
+  the specified directory, with relative paths from the current constraint
+  files preserved in the new copies.
+
+  -target_constrs_file <arg> - (Optional) Target constraints file for the new
+  fileset. If a path is not specified, the file will be found or created in
+  the fileset directory..
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <name> - (Required) Specifies the name of the constraint set to write.
+
+Examples:
+
+  The following example saves the active constraint set into a new constraint
+  set called newCon, and copies any constraint files for the constraint set
+  into the specified directory:
+
+    save_constraints_as -dir C:/Data/con1 newCon
+
+  The following example saves the active constraint set as a new constraint
+  set called newCon2, and copies any constraint files into the newCon2
+  constraint directory under project sources. The constrset property for the
+  specified synthesis and implementation runs are then set to point to the
+  new constraint set:
+
+    save_constraints_as newCon2 
+    set_property constrset newCon2 [get_runs synth_1] 
+    set_property constrset newCon2 [get_runs impl_1]
+
+  Note: The constraint set is not active in the design until it has been set
+  to active for the current runs.
+
+See Also:
+
+   *  save_design

@@ -1,0 +1,57 @@
+
+Description:
+
+  Load the specified features of the Vivado Design Suite into memory.
+
+  In order to reduce the memory footprint of the Vivado Design Suite, there
+  are groups of Tcl commands called "features" which are unavailable for use
+  until you run a command from that feature set, or unless you explicitly
+  load the feature using the load_features command.
+
+  For example, the load_features simulator command loads the commands for the
+  Vivado simulator, as does directly launching the Vivado simulator using the
+  launch_xsim command.
+
+  To access the complete list of Tcl commands associated with a feature of
+  the Vivado Design Suite, and the help text for these commands, you can load
+  the feature into the application memory using the load_features command
+  without actually running the feature of the tool.
+
+  You can list the features that are available to be loaded using the
+  list_features command. The list of features is dynamic, and changes from
+  release to release.
+
+  The command returns nothing if successful, or an error message if failed.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <features> - List of features to load.
+
+Examples:
+
+  The following example loads the Vivado simulator feature:
+
+    load_features simulator
+
+  The following example loads all of the loadable feature sets of the Vivado
+  Design Suite:
+
+    load_features [list_features]
+
+See Also:
+
+   *  help
+   *  list_features

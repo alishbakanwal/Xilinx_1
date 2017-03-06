@@ -1,0 +1,42 @@
+
+Description:
+
+  Joins two existing ports to create a differential pair. The port
+  directions, interfaces, and other properties must match in order for the
+  specified ports to be joined as a differential pair. Otherwise an error
+  will be returned.
+
+  Note: The two ports must first be created, either by using the create_port
+  command or by reading in an XDC file, prior to making them into a
+  differential pair.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <ports> - (Required) Two port objects to join as a differential pair. The
+  first port specified will be the positive side of the differential pair.
+
+Examples:
+
+  The following example joins the two specified ports to create a
+  differential pair:
+
+    make_diff_pair_ports port_Pos1 port_Neg1
+
+See Also:
+
+   *  create_interface
+   *  create_port
+   *  split_diff_pair_ports

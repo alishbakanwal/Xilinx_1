@@ -1,0 +1,54 @@
+
+Description:
+
+  Reset the current project to its starting condition, with source and
+  constraint files, by cleaning out the various output files created during
+  synthesis, simulation, implementation, and write_bitstream. Also resets the
+  state of the project to the start of the design flow.
+
+  Note: Any user-defined Tcl variables that are in the global namespace (i.e.
+  not in a project-specific namespace) are not reset or cleared by this
+  command. Global variables are persistent with the invocation of Vivado and
+  are only cleared when the Vivado Design Suite is closed. You can also use
+  the unset command to expressly clear a specific Tcl variable.
+
+Arguments:
+
+  -exclude_runs - (Optional) Exclude the <project>.runs folder from the reset
+  process. In this case, the runs folder will be preserved, while the rest of
+  the project data will be removed.
+
+  -exclude_ips - (Optional) Exclude the <project>.srcs/sources_1/ip folder
+  from the reset process. In this case, the IP folder, containing the IP
+  cores and generated targets, will be preserved, while the rest of the
+  project data will be removed.
+
+  -exclude_sim_runs - (Optional) Exclude the <project>.sim folder from the
+  reset process. In this case, the simulation folder will be preserved, while
+  the rest of the project data will be removed.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Example:
+
+  The following example resets the current project, while preserving the
+  simulation run data, and returning all messages regardless of message
+  limits:
+
+    reset_project -exclude_sim_runs -verbose
+
+See Also:
+
+   *  create_project
+   *  current_project

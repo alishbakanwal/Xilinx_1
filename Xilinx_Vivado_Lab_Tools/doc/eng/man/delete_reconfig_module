@@ -1,0 +1,33 @@
+
+Description:
+
+  Removes the specified reconfigurable module (RM) from the current design.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <reconfig_module> - One or more reconfiurable modules to delete from the
+  design. The RM is specified by the hierarchical name <cell>:<name>.
+
+Examples:
+
+  In the example below the BramSecond reconfigurable module is deleted from
+  the U1_RP_Bram partition cell:
+
+    delete_reconfig_module U1_RP_Bram:BramSecond
+
+See Also:
+
+   *  create_reconfig_module

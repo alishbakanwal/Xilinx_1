@@ -1,0 +1,62 @@
+
+Description:
+
+  Highlights the specified or selected object or objects in a color as
+  determined by one of the available color options.
+
+  Note: Only one of the available color option should be used to specify the
+  highlight color. However, if more than one color option is used, the order
+  of precedence to define the color is -rgb, -color_index, and -color.
+
+  Selected objects are automatically unselected in order to display the
+  objects in the specified highlight color. Objects can be unhighlighted with
+  the unhighlight_objects command.
+
+Arguments:
+
+  -color_index arg - (Optional) Valid values are integers from 1 to 20.
+  Specifies the color index to use for highlighting the selected object or
+  objects. The color index is defined by the Highlight category of the Tools
+  > Options > Themes command. Refer to the Vivado Design Suite User Guide:
+  Using the IDE (UG893) for more information on setting themes.
+
+  -rgb args - (Optional) The color to use in the form of an RGB code
+  specified as {R G B}. For instance, {255 255 0} specifies the color yellow.
+
+  -color arg - (Optional) The color to use for highlighting the specified
+  object or objects. Supported highlight colors are: red, green, blue,
+  magenta, yellow, cyan, and orange.
+
+  Note: White is the color used to display selected objects with the
+  select_objects command.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <objects> - (Required) Specifies one or more objects to be highlighted.
+
+Examples:
+
+  The following example highlights the currently selected objects in the
+  color red:
+
+    highlight_objects -color red [get_selected_objects]
+
+See Also:
+
+   *  get_highlighted_objects
+   *  get_marked_objects
+   *  get_selected_objects
+   *  mark_objects
+   *  select_objects
+   *  unhighlight_objects

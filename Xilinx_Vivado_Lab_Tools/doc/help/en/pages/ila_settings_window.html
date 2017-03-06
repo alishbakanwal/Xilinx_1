@@ -1,0 +1,137 @@
+﻿<html xml:lang="en-us" lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="concept"/>
+<meta name="DC.Title" content="ILA Settings"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_aqj_x3c_d5"/>
+<link rel="stylesheet" type="text/css" href="../../commonltr.css"/>
+<title>ILA Settings</title>
+</head>
+<body id="concept_aqj_x3c_d5">
+
+
+ <h1 class="title topictitle1">ILA Settings</h1>
+
+ <div class="body conbody">
+        <div class="section">
+            <p class="p">This window is one of five windows displayed in the <a class="xref" href="hw_ila_window.html#concept_aqj_x3c_d5">Hardware ILA</a>
+                dashboard by default. The ILA Settings window provides configuration options for the
+                selected Integrated Logic Analyzer (ILA) debug core programmed into the current
+                device. You can use the ILA core to probe specific signals of the design, to trigger
+                on programmed hardware events, and capture data from the Xilinx® FPGA device in
+                real-time. </p>
+
+            <ul class="ul" id="concept_aqj_x3c_d5__ul_id4_12g_cx">
+                <li class="li"><span Class="uicontrol">Trigger Mode</span>: Specify the type of trigger events for the
+                    debug core. Setting the trigger mode to a BASIC type trigger or ADVANCED type
+                    trigger determines the commands and options that are available in the <a class="xref" href="ila_trigger_window.html#concept_aqj_x3c_d5">ILA Trigger
+                        Setup</a> window. <ul class="ul" id="concept_aqj_x3c_d5__ul_w4b_c2g_cx">
+                        <li class="li"><span Class="uicontrol">BASIC_ONLY</span>: The trigger condition is the result
+                            of a boolean expression used to evaluate the values on each of the
+                            associated ILA probes. </li>
+
+                        <li class="li"><span Class="uicontrol">BASIC_OR_TRIG_IN</span>: The ILA core is triggered by a
+                            boolean expression considering probe values, or by the TRIG_IN port on
+                            the core. </li>
+
+                        <li class="li"><span Class="uicontrol">ADVANCED_ONLY</span>: The ILA core is configured to have
+                            advanced trigger capabilities defined in a user-defined Trigger State
+                            Machine (TSM). </li>
+
+                        <li class="li"><span Class="uicontrol">ADVANCED_OR_TRIG_IN</span>: The ILA core is triggered by
+                            the TSM or by the TRIG_IN port on the core. </li>
+
+                        <li class="li"><span Class="uicontrol">TRIG_IN_ONLY</span>: The ILA core is triggered only by
+                            the TRIG_IN port on the core.</li>
+
+                    </ul>
+</li>
+
+                <li class="li"><span Class="uicontrol">TRIG OUT mode</span>: Specify how or when to transition the
+                    TRIG_OUT port on the ILA core. The TRIG_OUT signal can be used as an input
+                    trigger mechanism for other ILA debug cores.<ul class="ul" id="concept_aqj_x3c_d5__ul_hsv_4vg_cx">
+                        <li class="li"><span Class="uicontrol">DISABLED</span>: Disable the TRIG_OUT port on the ILA
+                            core. This is the default. </li>
+
+                        <li class="li"><span Class="uicontrol">TRIGGER_ONLY</span>: Transition the TRIG_OUT port only
+                            when the trigger conditions have been satisfied. </li>
+
+                        <li class="li"><span Class="uicontrol">TRIG_IN_ONLY</span>: Transition the TRIG_OUT only when
+                            the TRIG_IN signal transitions. Use this to pass the trigger event along
+                            a chain of ILA cores.</li>
+
+                        <li class="li"><span Class="uicontrol">TRIGGER_OR_TRIG_IN</span>: Transition the TRIG_OUT when
+                            either the trigger conditions are satisfied, or the TRIG_IN signal
+                            transitions.</li>
+
+                    </ul>
+</li>
+
+                <li class="li"><span Class="uicontrol">Capture Mode</span>: Set to ALWAYS or BASIC. Capture and store a
+                    data sample on the probes of the debug core ALWAYS during a given clock cycle,
+                    or only if the capture condition evaluates to "true" (BASIC). When set to BASIC,
+                    the capture condition for each probe can be defined in the <a class="xref" href="ila_capture_window.html#concept_aqj_x3c_d5">ILA Capture
+                        Setup</a> window.</li>
+
+                <li class="li"><span Class="uicontrol">Number of windows</span>: Specify the number of data windows to
+                    store captured sample data. The first data window will be filled with data from
+                    the first trigger event, and each subsequent window will be filled upon
+                    subsequent triggering events or capture conditions.</li>
+
+                <li class="li"><span Class="uicontrol">Window data depth</span>: Define the number of data samples the
+                    selected ILA debug core can capture in a data window. The data depth defaults to
+                    the MAX_DATA_DEPTH property of the ILA debug core, which is defined when the
+                    core is created. The data depth can be specified as an integer which is a power
+                    of two, from 1 to the MAX_DATA_DEPTH of the core.</li>
+
+                <li class="li"><span Class="uicontrol">Trigger position in window</span>: An integer value related to
+                    the <span Class="uicontrol">Window data depth</span> that lets you capture sample data
+                    ahead of the trigger event. For instance, with a data depth of 1024, a trigger
+                    position of 100 allows you to capture 100 data samples ahead of the trigger, and
+                    the remaining data samples at and after the trigger event.</li>
+
+                <li class="li"><span Class="uicontrol">General Settings</span>: Specify the <span Class="uicontrol">Refresh
+                        rate</span> in milliseconds for the current ILA debug core.</li>
+
+            </ul>
+
+        </div>
+
+        <div class="section"><h2 class="title sectiontitle">See Also</h2>
+            
+            <table cellpadding="4" cellspacing="0" summary="" id="concept_aqj_x3c_d5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow">
+                    <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_aqj_x3c_d5__image_exb_qcg_cx" src="../../images/book_icon.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">Vivado Design Suite User Guide: Programming and Debug</cite>
+                        (UG908), <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug908-vivado-programming-debugging.pdf;a=xUsingTheILADefaultDashboard" target="_blank">Using the ILA Default
+                        Dashboard</a></td>
+
+                </tr>
+<tr class="strow">
+                    <td valign="top" class="stentry"><img class="image" id="concept_aqj_x3c_d5__image_n5n_s3d_dx" src="../../images/book_icon.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry"><cite class="cite">Vivado Design Suite User Guide: Programming and Debug</cite>
+                        (UG908), <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug908-vivado-programming-debugging.pdf;a=xModifyingPropertiesOnTheDebugCores" target="_blank">Modifying Properties on the Debug
+                            Cores</a></td>
+
+                </tr>
+<tr class="strow">
+                    <td valign="top" class="stentry"><img class="image" id="concept_aqj_x3c_d5__image_twh_kyy_yw" src="../../images/book_icon.png" alt="Icon"/></td>
+
+                    <td valign="top" class="stentry"><cite class="cite">Vivado Design Suite Tcl Command Reference Guide</cite> (UG835),
+                            <a class="xref" href="http://www.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xrun_hw_ila" target="_blank">run_hw_ila</a></td>
+
+                </tr>
+</table>
+
+        </div>
+
+  
+ </div>
+
+
+</body>
+</html>

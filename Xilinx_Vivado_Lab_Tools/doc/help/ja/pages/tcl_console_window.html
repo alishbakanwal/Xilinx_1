@@ -1,0 +1,93 @@
+﻿<html xml:lang="ja-jp" lang="ja-jp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="concept"/>
+<meta name="DC.Title" content="[Tcl Console] ウィンドウ"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_aqj_x3c_d5"/>
+<meta name="DC.Language" content="ja-JP"/>
+<link rel="stylesheet" type="text/css" href="../commonltr-ja.css"/>
+<title>[Tcl Console] ウィンドウ</title>
+</head>
+<body id="concept_aqj_x3c_d5">
+
+
+<h1 class="title topictitle1">[Tcl Console] ウィンドウ</h1>
+
+<div class="body conbody">
+<div class="section">
+<p class="p">[Tcl Console] ウィンドウは Vivado<sup>®</sup> IDE  のコマンド ライン インターフェイスであり、直接コマンドを入力してデザインのエレメントを処理できます。コマンドを入力していくと、自動コンプリート機能により、入力した文字で開始するコマンド (複数ある場合はそれらのリスト) が表示されます。コマンドの 1 つをクリックするか、入力し続けて特定のコマンドに選択肢を狭めていきます。</p>
+
+<p class="p">[Tcl Console] ウィンドウには、入力されたコマンドのログと、これらのコマンドを実行した際に Vivado ツールから戻されたメッセージも表示されます。このログは、Tcl コマンドが Vivado IDE で実行されるとリアルタイムでアップデートされます。</p>
+
+<div Class="note_tip"><span class="tiptitle">ヒント:</span> 使用した Tcl コマンドは <span Class="filepath">vivado.jou</span> ファイルに、コマンドのログおよびメッセージは <span Class="filepath">vivado.log</span> ファイルに記述されます。詳細は、<cite class="cite">『Vivado Design Suite ユーザー ガイド : Vivado IDE の使用』</cite> (UG893) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug893-vivado-ide.pdf;a=xOutputFiles" target="_blank">このセクション</a>を参照してください。</div>
+
+<p class="p">[Tcl Console] ウィンドウに次のように入力すると、Tcl コマンドのヘルプが表示されます。</p>
+
+<pre Class="codeblock"><a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf;a=xhelp" target="_blank"><samp class="ph codeph">help</samp></a> <var class="keyword varname">command_name</var> </pre>
+
+<p class="p">[Tcl Console] ウィンドウのツールバーには、次のコマンドがあります。</p>
+
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="concept_aqj_x3c_d5__table_rdz_bvv_y5" class="table" frame="void" border="0" rules="none">    <tbody class="tbody"> <tr class="row">
+<td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_i32_nk2_p5" src="../../images/collapse_button.png"/></td>
+
+<td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Collapse all</span></td>
+
+<td class="entry" align="left" valign="top" width="73.4959349593496%">[Tcl Console] ウィンドウのログの展開が閉じられ、実行された Tcl コマンドのみが表示されます。 生成されたメッセージは表示されません。<div Class="note_tip"><span class="tiptitle">ヒント:</span> これにより、[Tcl Console] ウィンドウからコマンドをテキスト エディターにコピーして貼り付けることができるので、Tcl スクリプトが作成しやすくなります。</div>
+</td>
+</tr>
+ <tr class="row">
+<td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_oll_mk2_p5" src="../../images/expand_button.png"/></td>
+
+<td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Expand all</span></td>
+
+<td class="entry" align="left" valign="top" width="73.4959349593496%">[Tcl Console] ウィンドウのログが展開され、さまざまな Tcl コマンドからのメッセージすべてが表示されるので、ツールをモニターしたりデザインを理解しやすくなります。</td>
+</tr>
+ <tr class="row">
+<td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_nkx_swg_j5" src="../../images/pause_button.png"/></td>
+
+<td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Pause</span></td>
+
+<td class="entry" align="left" valign="top" width="73.4959349593496%">特定のセクションを読めるように、ログのスクロールが一時停止されます。一時停止しても、メッセージは取り込まれています。[Pause]<span Class="uicontrol"/> ボタンをもう 1 度クリックすると、スクロールが再開されます。</td>
+</tr>
+ <tr class="row">
+<td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_glv_zxg_j5" src="../../images/show_find_button.png"/></td>
+
+<td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Show</span></td>
+
+<td class="entry" align="left" valign="top" width="73.4959349593496%">[Tcl Console] ウィンドウの一番下に検索バーが表示され、テキスト文字列を検索してハイライトすることができます。</td>
+</tr>
+ <tr class="row">
+<td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_hcc_pxg_j5" src="../../images/clear_button.png"/></td>
+
+<td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Clear</span></td>
+
+<td class="entry" align="left" valign="top" width="73.4959349593496%">前のコマンドおよびメッセージが [Tcl Console] ウィンドウから削除されます。</td>
+</tr>
+ </tbody>
+ </table>
+</div>
+
+</div>
+
+<div class="section"><h2 class="title sectiontitle">関連項目</h2>
+<table cellpadding="4" cellspacing="0" summary="" id="concept_aqj_x3c_d5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow"> <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_aqj_x3c_d5__image_smm_1vr_b5" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">『Vivado Design Suite ユーザー ガイド : Vivado IDE の使用』</cite> (UG893) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug893-vivado-ide.pdf;a=xUsingTheTclConsole" target="_blank">「[Tcl Console] ウィンドウの使用」</a></td>
+ </tr>
+<tr class="strow"> <td valign="top" class="stentry"><img class="image" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry"><cite class="cite">『Vivado Design Suite Tcl コマンド リファレンス ガイド』</cite> <a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug835-vivado-tcl-commands.pdf" target="_blank">(UG835)</a></td>
+ </tr>
+<tr class="strow"> <td valign="top" class="stentry"><img class="image" id="concept_aqj_x3c_d5__image_xh4_wny_y5" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry"><cite class="cite">『Vivado Design Suite ユーザー ガイド : Tcl スクリプト機能の使用』</cite> (<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug894-vivado-tcl-scripting.pdf" target="_blank">UG894</a>)</td>
+ </tr>
+</table>
+
+</div>
+
+</div>
+
+
+</body>
+</html>

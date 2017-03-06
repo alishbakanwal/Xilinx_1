@@ -1,0 +1,75 @@
+
+Description:
+
+  Reorders source files in the specified fileset. Takes the files indicated
+  and places them at the front of, the back of, or before or after other
+  files within the fileset. This command also has an auto reorder feature
+  that reorders the files based on the requirements of the current top module
+  in the design.
+
+Arguments:
+
+  -fileset <arg> - (Optional) The fileset in which to reorder files. The
+  default is the sources_1 source fileset.
+
+  -before <arg> - (Optional) Place the specified files before this file in
+  the fileset. The file must be specified with the full path name in the
+  fileset.
+
+  -after <arg> - (Optional) Place the specified files after this file in the
+  fileset. The file must be specified with the full path name in the fileset.
+
+  -front - (Optional) Place the specified files at the front of the list of
+  files in the fileset.
+
+  -back - (Optional) Place the specified files at the back of the list of
+  files in the fileset.
+
+  -auto - (Optional) Enable automatic reordering based on the hierarchy
+  requirements of the current top-module in the project. Often used after
+  changing the top module with the "set_property top" command.
+
+  -disable_unused - (Optional) Disable any files not currently used by the
+  hierarchy based on the top-module. Often used after changing the top module
+  with the "set_property top" command.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <files> - (Required) One or more files to relocate in the fileset. Files
+  must be specified by their full path name in the fileset, and are reordered
+  in the order they are specified.
+
+Examples:
+
+  The following example takes the specified files and moves them to the front
+  of the source fileset:
+
+    reorder_files -front {C:/Data/FPGA/file1.vhdl C:/Data/FPGA/file2.vhdl}
+
+  Note: The default source fileset is used in the preceding example since the
+  -fileset argument is not specified.
+
+  The following example sets a new top_module in the design, and then
+  automatically reorders and disables unused files based on the hierarchy of
+  the new top-module:
+
+    set_property top block1 [current_fileset] 
+    reorder_files -auto -disable_unused
+
+See Also:
+
+   *  add_files
+   *  create_fileset
+   *  current_fileset
+   *  remove_files

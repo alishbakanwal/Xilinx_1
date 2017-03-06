@@ -1,0 +1,170 @@
+
+Description:
+
+  Create a DRC violation object and manage the list of design objects
+  associated with the violation for reporting by the report_drc command.
+
+  The create_drc_violation command is specified as part of the Tcl checker
+  procedure that defines and implements the checking feature of a
+  user-defined design rule check created by the create_drc_check command. A
+  violation object is created by the Tcl checker each time a violation of the
+  design rule is encountered.
+
+  The process in brief is:
+
+   *  Write a Tcl checker procedure to define the method applied when
+      checking the user-defined rule, and the objects to check against the
+      rule. The Tcl checker procedure is defined in a separate Tcl script
+      that must be loaded by the source command prior to running report_drc.
+
+   *  Use create_drc_violation in the Tcl checker to identify and flag
+      violations found when checking the rule against a design.
+
+   *  Define a user-defined DRC rule check using the create_drc_check command
+      that calls the Tcl checker proc from the -rule_body .
+
+   *  Create a rule deck using the create_drc_ruledeck command, and add the
+      user-defined rule check to the rule deck using the add_drc_checks
+      command.
+
+   *  Run report_drc, and specify either the rule deck, or the user-defined
+      rule check to check for violations.
+
+  Violations are reported by the report_drc command, and violation objects
+  can be returned by the get_drc_violations command. The design objects
+  associated with a DRC violation object can be obtained using the
+  -of_objects option of the appropriate get_* command, such as get_cells,
+  get_nets, or get_ports for instance:
+
+    get_ports -of_objects [get_drc_violations -name drc_1 NSTD*]
+
+Arguments:
+
+  -name <arg> - (Required) The name of the design rule check associated with
+  the violation. This should be the same name used by the create_drc_check
+  command which calls the associated Tcl checker procedure from its
+  -rule_body argument. Messages from the create_drc_violation command are
+  passed up to the drc_check with the same -name.
+
+  -severity <arg> - (Optional) The severity of the created violation. This
+  allows individual DRC violations to override the default severity of a
+  specific rule check. The default severity for user-defined DRCs is
+  determined by the definition of -severity in the create_drc_check command.
+  The supported values are:
+
+   *  ERROR
+
+   *  "CRITICAL WARNING"
+
+   *  WARNING
+
+   *  ADVISORY
+
+  Note: The SEVERITY is stored as a property on the DRC rule associated with
+  the DRC violation object.
+
+  -msg <arg> - (Optional) This is a violation specific message that is
+  substituted for the general string variable (%STR) specified in the
+  optional placeholder message defined in the create_drc_check command.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <objects> - (Optional) Cell, port, pin, net, clock region, site, and
+  package I/O bank objects associated with violations found by the Tcl
+  checker procedure that are substituted into the placeholder message of the
+  drc_object with the same -name. Design objects map to substitution keys in
+  the message as follows:
+
+   *  %ELG - netlist elements such as cells, ports, pins, and nets.
+
+   *  %CRG - clock regions.
+
+   *  %SIG - device sites.
+
+   *  %PBG - package I/O banks.
+
+  Note: Both the order and the type of <objects> passed from the
+  create_drc_violation command must match the -msg specification from the
+  create_drc_check command, or the expected substitution will not occur.
+
+Examples:
+
+  The following Tcl script defines the dataWidthCheck procedure which is
+  called by the -rule_body argument of the RAMW-1 check. This Tcl script file
+  must be loaded into the tool using the source command, prior to running the
+  report_drc command.
+
+  Some features of the Tcl checker proc to notice are:
+
+   *  A list variable is created to store violations ($vios )
+
+   *  A violation object is created, and added to the list variable, each
+      time a violation is found.
+
+   *  The placeholder key %ELG in the $msg string is dynamically substituted
+      with the specific $bram cell associated with the violation.
+
+   *  The dataWidthCheck proc returns an error code when any violations are
+      found ($vios >0) to inform the report_drc command of the results of the
+      check.
+
+   *  The list of violations is passed along with the return code, and the
+      violations are reported by report_drc.
+
+    # This is a simplistic check -- report BRAM cells with WRITE_WIDTH_B 
+    # wider than 36. 
+    proc dataWidthCheck {} { 
+      # list to hold violations 
+      set vios {} 
+     
+      # iterate through the objects to be checked 
+      foreach bram [get_cells -hier -filter {PRIMITIVE_SUBGROUP == bram}] { 
+        set bwidth [get_property WRITE_WIDTH_B $bram] 
+        if { $bwidth > 36} { 
+          # define the message to report when violations are found 
+          set msg "On cell %ELG, WRITE_WIDTH_B is $bwidth" 
+          set vio [ create_drc_violation -name {RAMW-1} -msg $msg $bram ] 
+          lappend vios $vio 
+        } 
+      } 
+      if {[llength $vios] > 0} { 
+        return -code error $vios 
+      } else { 
+        return {} 
+      } 
+     
+    } 
+    create_drc_check -name {RAMW-1} -hiername {RAMB Checks} \ 
+       -desc {Data Width Check} -rule_body dataWidthCheck \ 
+       -severity Advisory
+
+  Note: The script file can contain both the Tcl checker procedure, and the
+  create_drc_check command that defines it for use by report_drc command. In
+  this case, when the Tcl script file is sourced, both the dataWidthCheck
+  proc and the RAMW-1 design rule check are loaded into the tool.
+
+See Also:
+
+   *  add_drc_checks
+   *  create_drc_ruledeck
+   *  create_drc_check
+   *  get_cells
+   *  get_drc_checks
+   *  get_drc_violations
+   *  get_nets
+   *  get_pins
+   *  get_ports
+   *  get_sites
+   *  report_drc
+   *  set_property

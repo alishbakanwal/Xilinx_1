@@ -1,2 +1,0 @@
-The fuji.v file needs to include the BIBUF module
-use "patch -R -i patchfile.v" to make sure this is included!

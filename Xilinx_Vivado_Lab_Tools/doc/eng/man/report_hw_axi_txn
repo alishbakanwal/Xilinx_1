@@ -1,0 +1,95 @@
+
+Description:
+
+  Report the results of the specified AXI transactions on the JTAG to AXI
+  Master, hw_axi.
+
+  You can use this command after creating hw_axi_txn objects on existing
+  hw_axi objects, and then running the hw_axi to exercise the defined
+  transaction.
+
+  The JTAG to AXI Master core can only be controlled using Tcl commands. You
+  can issue AXI read and write transactions using the create_hw_axi_txns
+  command. However, before issuing these commands, it is important to reset
+  the JTAG to AXI Master core using the reset_hw_axi command.
+
+  This command reports the transaction data in the specified format, or
+  returns an error if it fails.
+
+Arguments:
+
+  -w arg - (optional) The number of data bytes per output line. The default
+  is 8 bytes per line.
+
+  -t arg - (Optional) Specify the form and size of the output data. The
+  accepted values for formatting the transaction data are:
+
+   *  d[SIZE] signed decimal, SIZE bytes per integer
+
+   *  b[SIZE] binary, SIZE bytes per integer
+
+   *  o[SIZE] octal, SIZE bytes per integer
+
+   *  u[SIZE] unsigned decimal, SIZE bytes per integer
+
+   *  x[SIZE] hexadecimal, SIZE bytes per integer
+
+   *  The default output format is x4, or 4-bytes in hex.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <hw_axi_txns> - (Required) The hw_axi_txn objects to report. The hw_axi_txn
+  must be specified as an object returned by the get_hw_axi_txns command.
+
+Example:
+
+  This example resets the hw_axi core to a known state from which to begin
+  running AXI transactions; then creates an AXI transaction associated with
+  the hw_axi to read the contents of the first four locations of the AXI
+  core; then runs the hw_axi to process the transactions associated with the
+  core; and finally reports the data read from the transaction:
+
+    reset_hw_axi [get_hw_axis hw_axi_1] 
+    create_hw_axi_txn read_txn [get_hw_axis hw_axi_1] -type READ \ 
+       -address 00000000 -size 32 -len 4 -cache 3 -id 0 -rst 1 
+    run_hw_axi [get_hw_axi_txns [get_hw_axis}} 
+    report_hw_axi_txn [get_hw_axi_txns read_txn]
+
+  This example creates AXI read and write transactions, runs the hw_axi, and
+  reports on the results:
+
+    create_hw_axi_txn wr_txn [lindex [get_hw_axis] 0] -address 80000000 \ 
+    -data {11112222 33334444 55556666 77778888} -len 4 -type write 
+    create_hw_axi_txn rd_txn [lindex [get_hw_axis] 0] -address 80000000 \ 
+    -len 4 -type read 
+     
+    run_hw_axi [get_hw_axi_txns wr_txn] 
+    set wr_report [report_hw_axi_txn wr_txn -w 32] 
+    puts $wr_report 
+     
+    run_hw_axi [get_hw_axi_txns rd_txn] 
+    set rd_report [report_hw_axi_txn rd_txn -w 32] 
+    puts $rd_report 
+     
+    close_hw_target; 
+    disconnect_hw_server;
+
+See Also:
+
+   *  create_hw_axi_txns
+   *  delete_hw_axi_txn
+   *  get_hw_axis
+   *  get_hw_axi_txns
+   *  refresh_hw_axi
+   *  reset_hw_axi

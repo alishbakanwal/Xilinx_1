@@ -1,0 +1,64 @@
+
+Description:
+
+  Rename a single hierarchical or leaf-level cell in the current synthesized
+  or implemented design.
+
+  Note: You cannot rename cells with DONT_TOUCH property set to TRUE.
+
+  Netlist editing changes the in-memory view of the netlist in the current
+  design. It does not change the files in the source fileset, or change the
+  persistent design on the disk. Changes made to the netlist may be saved to
+  a design checkpoint using the write_checkpoint command, or may be exported
+  to a netlist file such as Verilog, VHDL, or EDIF, using the appropriate
+  write_* command.
+
+  Note: Netlist editing is not allowed on the elaborated RTL design.
+
+  Changes to the names of cells, nets, pins, and ports, will also affect the
+  design constraints defined in the in-memory design. Constraints are
+  automatically modified to target the new object name, however these are not
+  written back to the source XDC file. Saving the modified in-memory design
+  using write_checkpoint will save both the renamed objects and modified
+  constraints.
+
+  This command returns nothing if successful, or an error if it fails.
+
+Arguments:
+
+  -to <arg> - (Required) Specify the new name to assign to the specified
+  cell. Specified names can not contain Tcl special characters: `"\{};$#
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <cell> - (Required) Instance name of the cell to rename.
+
+Examples:
+
+  The following example changes the name of the hierarchical or1200_cpu cell
+  as specified:
+
+    rename_cell -to or1200_gpu or1200_cpu
+
+See Also:
+
+   *  connect_net
+   *  create_cell
+   *  create_net
+   *  remove_cell
+   *  set_hierarchy_separator
+   *  write_checkpoint
+   *  write_edif
+   *  write_verilog
+   *  write_vhdl

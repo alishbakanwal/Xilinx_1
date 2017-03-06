@@ -1,0 +1,115 @@
+
+Description:
+
+  Update the IP Catalog associated with the current design.
+
+  The Xilinx<tm tmtype="reg"></tm> IP catalog, or repository, is located in
+  the installation hierarchy of the Vivado Design Suite software release
+  being used. You can also add custom IP to the repository by using the
+  set_property command to set the IP_REPO_PATHS property on the source
+  fileset to point to the locations of custom IP, as shown in the example
+  below.
+
+  The update_ip_catalog command lets you add, delete, disable, or enable
+  individual IP cores in the catalog. When referring to individual cores, you
+  can reference them by the path to the component.xml file, or by referencing
+  the VLNV property of the IP.
+
+  Note: The VLNV property refers to the Vendor:Library:Name:Version string
+  which uniquely identifies the IP in the catalog.
+
+  This command returns a transcript of its process if successful, or returns
+  an error if it fails.
+
+Arguments:
+
+  -rebuild - (Optional) Rebuild the complete IP Catalog index, or just
+  rebuild the index for the IP repository specified by the -repo_path .
+
+  -add_ip <arg> - (Optional) Add an individual IP core to the specified IP
+  repository. This argument requires the -repo_path argument to also be
+  specified. The IP is specified as a path to the component.xml of the IP, or
+  the path to a zip file containing the IP.
+
+  -delete_ip <arg> - (Optional) Remove an IP core from the specified IP
+  repository. This argument requires the -repo_path argument to also be
+  specified. The IP is specified as a path to the component.xml of the IP, or
+  as the VLNV property of the IP.
+
+  -delete_mult_ip <arg> - (Optional) Remove the specified IP cores from the
+  IP repository. This argument requires the -repo_path argument to also be
+  specified. The IPs are specified either as paths to the component.xml
+  files, or as the VLNV properties of the IP.
+
+  -disable_ip <arg> - (Optional) Disable an IP core from the specified IP
+  repository. This argument requires the -repo_path argument to also be
+  specified. The IP is specified as a path to the component.xml of the IP, or
+  as the VLNV property of the IP.
+
+  -enable_ip <arg> - (Optional) Enable a previously disabled IP core from the
+  specified repository. This argument requires the -repo_path argument to
+  also be specified. The IP is specified as a path to the component.xml of
+  the IP, or as the VLNV property of the IP.
+
+  -add_interface <arg> - (Optional) Specify the path to the XML file of a
+  user-defined AXI interface to add to the IP repository.
+
+  -create_index - (Optional) Cache the specified repository`s data on disk,
+  to improve load time. This argument requires the -repo_path argument to
+  also be specified.
+
+  -repo_path <arg> - (Optional) Used in conjunction with -rebuild, -add_ip,
+  -delete_ip, -delete_mult_ip or -create_index to specify the directory name
+  of an IP repository to operate on.
+
+  Note: The IP repository must have been previously added to the current
+  source fileset using the set_property command to set the IP_REPO_PATH. See
+  the example below.
+
+  -update_module_ref - (Optional) Refresh the block design cell or cells that
+  reference module definitions from RTL source files by rereading a module
+  definition from the source file.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example sets the IP_REPO_PATHS property of the current Source
+  fileset, to add an IP repository, then rebuilds the IP catalog index for
+  the whole IP catalog:
+
+    set_property IP_REPO_PATHS C:/Data/IP_LIB [current_fileset] 
+    update_ip_catalog -rebuild
+
+  This example disables the IP specified by its VLNV property from the
+  specified IP repository:
+
+    
+    update_ip_catalog -disable_ip {myCo.com:ip:custom_decoder:1.0} \ 
+       -repo_path C:/Data/ip
+
+  This example disables the IP specified by the path to the component.xml
+  file, from the IP repository:
+
+    
+    update_ip_catalog -disable_ip C:/Data/ip/custom_encoder_1/component.xml \ 
+    -repo_path C:/Xilinx/Vivado/data/ip
+
+See Also:
+
+   *  create_ip
+   *  import_ip
+   *  generate_target
+   *  update_module_reference
+   *  validate_ip

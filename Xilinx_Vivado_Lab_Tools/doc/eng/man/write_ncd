@@ -1,0 +1,37 @@
+
+Description:
+
+  This command exports a Xilinx Native Circuit Description (NCD) file from an
+  implemented design. The NCD file is created by MAP and PAR during
+  implementation, and converts the logical Netlist Design into a physical
+  design implementing the targeted Xilinx device architecture.
+
+Arguments:
+
+  -force - Overwrite the NCD file if it already exists.
+
+  <file> - The filename of the NCD file to write.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example writes an NCD file from the current implemented
+  design to the specified file:
+
+    write_ncd C:/Data/FPGA_Design/designOut.ncd

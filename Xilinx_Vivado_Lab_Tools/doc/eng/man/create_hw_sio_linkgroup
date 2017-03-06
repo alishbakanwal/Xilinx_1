@@ -1,0 +1,60 @@
+
+Description:
+
+  Create a new group to associate the specified TX to RX communication links
+  on the IBERT debug core implemented on the current device.
+
+  Vivado Serial I/O analyzer is a link-based analyzer. The links define the
+  communication paths and protocols between transmitters and receivers of the
+  GigaBit transceivers on the device. Link groups, or hw_sio_linkgroup
+  objects, let you associate links into related groups, to collectively
+  configure properties and run scans.
+
+  This command returns the name of the linkgroup created, or returns an error
+  if the command fails.
+
+Arguments:
+
+  -description <arg> - (Optional) Provide a brief description that acts as a
+  label for the link group. This description is stored on the DESCRIPTION
+  property of the hw_sio_linkgroup object.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <hw_sio_links> - (Required) Specify one or more hw_sio_link objects to
+  associate together as a group. The hw_sio_links must be specified as
+  objects as returned by the create_hw_sio_link or get_hw_sio_links commands.
+
+  Note: If you include a hw_sio_link object that already belongs to another
+  linkgroup, the command will return an error.
+
+Example:
+
+  The following example uses the DESCRIPTION property on hw_sio_link objects
+  to identify which links to add to a new link group:
+
+    create_hw_sio_linkgroup -description "LoopBack Links" \ 
+       [get_hw_sio_links -filter {DESCRIPTION == Link_12 || DESCRIPTION == \ 
+       "Link 9" || DESCRIPTION == "Link 10" || DESCRIPTION == "Link 11" }]
+
+See Also:
+
+   *  create_hw_sio_link
+   *  create_hw_sio_linkgroup
+   *  current_hw_device
+   *  get_hw_sio_iberts
+   *  get_hw_sio_links
+   *  get_hw_sio_linkgroups
+   *  remove_hw_sio_links
+   *  remove_hw_sio_linkgroups

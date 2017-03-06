@@ -1,0 +1,166 @@
+
+Description:
+
+  Note: This command is supported for Xilinx UltraScale devices only, and
+  does not support 7 series devices.
+
+  The report_synchronizer_mtbf command reports mean time between failures
+  (MTBF) of each clock domain crossing (CDC) synchronizer chain in a design,
+  and provides an overall MTBF covering all synchronizers. Synchronizer
+  registers must have ASYNC_REG properties with value TRUE to be properly
+  identified as synchronizers for reporting.
+
+  Asynchronous clock domain crossings (CDCs) can fail due to metastability as
+  data is captured asynchronously and may settle to different values on
+  different loads in the circuit. Synchronizer registers are used to improve
+  overall circuit reliability for designs which contain multiple clock
+  domains, in which asynchronous data transfers occur, or in which external
+  asynchronous signals are captured with an internal clock. A synchronizer
+  chain consists of two or more registers connected sequentially with the
+  first stage capturing the data signal from the asynchronous clock domain.
+  The successive register stages provide additional settling time for
+  metastable events and increase MTBF. The synchronizer registers must have
+  ASYNC_REG properties with values of TRUE. Besides reporting MTBF, the
+  ASYNC_REG properties instruct synthesis, simulation and implementation
+  tools to optimize for increased MTBF and improve overall behavior of the
+  synchronizer circuit.
+
+  Note: Avoid using different set/reset or clock enable control signals on
+  registers within a synchronizer chain.
+
+  This command returns the MTBF report, or returns an error if it fails. The
+  command issues a warning message when the MTBF cannot be calculated
+  correctly, for example when a CDC is improperly constrained. The following
+  conditions result in an UNDEFINED synchronizer MTBF value:
+
+   *  One or both clocks of the CDC are unconstrained.
+
+   *  There is a timing violation involving registers in the synchronizer
+      chain.
+
+   *  There is a zero toggle rate detected for the CDC data.
+
+  In the case of a zero toggle rate, it may be necessary to use the
+  set_switching_activity command to manually override the toggle rate on the
+  CDC net with a realistic value. This involves assigning the Toggle Rate and
+  the Static Probability:
+
+   *  Toggle Rate: The number of CDC data signal transitions measured in
+      Million Transitions per Second.
+
+   *  Static Probability: The percentage of time during which the CDC data
+      signal is driven at a high logic level.
+
+  Example: to assign a toggle rate of 12.5% with 0.5 static probability on a
+  CDC net named resync[0]:
+
+    set_switching_activity -toggle_rate 12.5 -static_probability 0.5 \ 
+    [get_nets resync[0]]
+
+  The report contents include the following data for each synchronizer chain
+  in the design:
+
+   *  MTBF: The Mean Time Between Failures for the CDC synchronizer reported
+      in dynamic time units, from seconds to years. An invalid MTBF value is
+      reported as UNDEFINED.
+
+   *  Data Toggle Rate: The rate at which the CDC data switches, based on the
+      default switching activity for the design as reported by
+      report_switching_activity. Measured in (Mts) Millions of Transitions
+      per Second. The rate can be overridden using the set_switching_activity
+      command targeting the CDC net object.
+
+   *  Data Sample Rate: The rate at which the CDC data is sampled, equivalent
+      to the synchronizer chain frequency, measured in MHz.
+
+   *  Settling Time: The total amount of positive slack in nanoseconds on the
+      timing paths from synchronizer register outputs. Higher Settling Time
+      increases MTBF.
+
+   *  Sending Domain: The clock domain of the source of the CDC data. A value
+      of UNCONSTRAINED is reported if the source clock is not defined.
+
+   *  Receiving Domain: The clock domain of the destination of the CDC data.
+      A value of UNCONSTRAINED is reported if the destination clock is not
+      defined.
+
+   *  Number of Stages: This is the length of the synchronizer chain, which
+      equals the number of registers with ASYNC_REG value of TRUE. The MTBF
+      calculation will determine the likelihood that the output register or
+      registers (should the fanout be greater than 1) will experience a
+      metastable event. For example in a typical synchronizer containing 2
+      registers with the ASYNC_REG property set, the MTBF calculation
+      indicates the probability that the output register(s) following the
+      last ASYNC_REG register will capture an incorrect value resulting from
+      the metastable event. When a synchronizer is connected to more than 1
+      output register, the minimum slack from all the paths will be used in
+      the MTBF calculation to ensure that all registers capture the same
+      logic level.
+
+   *  CDC Net Name: This is the logical net name of the CDC data, the data
+      that is captured asynchronously.
+
+  This command returns the MTBF report, or returns an error if it fails.
+
+  The report also includes an overall MTBF calculated using the MTBF of all
+  synchronizers in the design, calculated as the inverse of the sum of the
+  reciprocals of the individual synchronizer MTBF values: (1 / (1/MTBF_1 +
+  1/MTBF_2 + … + 1/MTBF_N) ) for N synchronizers.
+
+Arguments:
+
+  -file <arg> - (Optional) Write the report into the specified file. This
+  command will overwrite any files of the same name without warning.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -append - (Optional) Append the output of the command to the specified file
+  rather than overwriting it.
+
+  Note: The -append option can only be used with the -file option.
+
+  -return_string - (Optional) Directs the output to a Tcl string rather than
+  to the standard output. The Tcl string can be captured by a variable
+  definition and parsed or otherwise processed.
+
+  Note: This argument cannot be used with the -file option.
+
+  -warn_if_mtbf_below <arg> - (Optional) Specify a value as a floating point
+  number, below which the Vivado Design Suite will issue a warning in
+  addition to the report. The default value is 1e+12.
+
+  -no_header - (Optional) Write the report without the addition of the
+  standard header.
+
+  -report_endpoints - (Optional) Report the total number of CDC path
+  endpoints. This is the sum of Safe, Unsafe, and Unknown endpoints.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example writes the MTBF report to the specified file:
+
+    report_synchronizer_mtbf -file C:/Data/mtbf_report.txt
+
+See Also:
+
+   *  get_nets
+   *  report_cdc
+   *  report_clock_interaction
+   *  report_clock_networks
+   *  report_switching_activity
+   *  set_switching_activity

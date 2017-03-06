@@ -1,0 +1,179 @@
+
+Description:
+
+  Checks the design elements of ports, pins, and paths, against the current
+  timing constraints. Use this command to identify possible problems with
+  design data and timing constraints before running the report_timing
+  command. The check_timing command runs a series of default timing checks,
+  and reports a summary of any violations found. To get detailed information
+  about violations, use the -verbose option.
+
+  Note: By default the report is written to the Tcl console or STD output.
+  However, the results can also be written to the GUI with the -name option,
+  or to a file with -file.
+
+  Default Timing Checks:
+
+   *  constant_clock - Checks for clock signals connected to a constant
+      signal (gnd/vss/data).
+
+   *  generated_clocks - Checks for loops, or circular definitions within the
+      generated clock network. This check will return an error if a generated
+      clock uses a second generated clock as its source, when the second
+      generated clock uses the first clock as its source.
+
+   *  latch_loops - Checks for and warns of combinational latch loops in the
+      design.
+
+   *  loops - Checks for and warns of combinational feedback loops in the
+      design.
+
+   *  multiple_clock - Warns if multiple clocks reach a register clock pin.
+      If more than one clock signal reaches a register clock pin it is
+      unclear which clock will be used for analysis. In this case, use the
+      set_case_analysis command so that only one clock will propagate to the
+      register clock pin.
+
+   *  no_clock - Reports unclocked registers. In this case, no setup or hold
+      checks are performed on data pins related to the register clock pin.
+
+   *  no_input_delay - Reports the input ports without an input delay
+      constraint. Input delays can be assigned using the set_input_delay
+      command. Input ports that are unclocked will not be checked for input
+      delays.
+
+   *  no_output_delay - Reports the output ports without an output delay
+      constraint. Output delays can be assigned using the set_output_delay
+      command. Output ports that are unclocked will not be checked for output
+      delays.
+
+   *  partial_input_delay - Reports the input ports having partially defined
+      input delay constraints. Assigning set_input_delay -max or
+      set_input_delay -min to an input port, without assigning the other,
+      creates a partially defined input delay. In such cases, paths starting
+      from the input port may become unconstrained and no timing checks will
+      be done against the port. Assigning set_input_delay without specifying
+      either -min or -max allows the tool to assume both min and max delays,
+      and so does not result in a partial input delay.
+
+      Note: Unclocked input ports are not checked for partial input delays.
+
+   *  partial_output_delay - Reports the output ports having partially
+      defined output delay constraints. Assigning set_output_delay -max or
+      set_output_delay -min to an output port, without assigning the other,
+      creates a partially defined output delay. In such cases, paths reaching
+      the port may become unconstrained and no timing checks will be done
+      against the port. Assigning set_output_delay without specifying either
+      -min or -max allows the tool to assume both min and max delays, and so
+      does not result in a partial output delay.
+
+      Note: Unclocked output ports are not checked for partial output delays.
+
+   *  pulse_width_clock - Reports clock pins that have only a pulse width
+      check associated with the pin, and no setup or hold check, no recovery,
+      removal, or clk->Q check.
+
+   *  unconstrained_internal_endpoints - This warning identifies timing path
+      endpoints at register data pins that are not constrained. Endpoints at
+      register data pins are constrained by clock assignment using the
+      create_clock command. Endpoints at output ports are checked and
+      reported by the no_output_delay check.
+
+   *  unexpandable_clocks - Reports clock sets in which the period is not
+      expandable with respect to each other, when there is at least 1 path
+      between the clock sets. A clock is unexpandable if no common multiples
+      are found within 1000 cycles between the source and destination clocks.
+
+Arguments:
+
+  -file <arg> - (Optional) Write the results to the specified file on disk.
+  By default, the output of this command is written to the Tcl console.
+
+  Note: If the path is not specified as part of the file name, the tool will
+  write the named file into the current working directory, or the directory
+  from which the tool was launched.
+
+  -append - Append the results to the specified file. As a default the
+  check_timing command will overwrite an existing file when the -file
+  argument is specified.
+
+  -no_header - (Optional) Do not write the standard header to the report.
+  This is a boolean option that is enabled by its use.
+
+  -loop_limit <arg> - (Optional) The number of loops to identify and report
+  during the loop and latch_loop checks. The check_timing command will
+  continue to perform other checks after the -loop_limit has been reached.
+
+  -name <arg> - (Optional) Creates the named report in the Timing Results
+  view of the GUI.
+
+  -override_defaults <args> - (Optional) Override the default timing checks
+  and run only the specified checks.
+
+  Note: Multiple checks should be enclosed in quotes, "", or braces, {}.
+
+  -include <args> - (Optional) Run the specified checks in addition to the
+  current default checks.
+
+  -exclude <args> - (Optional) Exclude the specified checks from the default
+  checks performed by the check_timing command. Specify the checks to be
+  excluded from the list of default checks.
+
+  -return_string - (Optional) Directs the output to a Tcl string rather than
+  to the standard output. The Tcl string can be captured by a variable
+  definition and parsed or otherwise processed.
+
+  Note: This argument cannot be used with the -file option.
+
+  -rpx <arg> - (Optional) Specify the file name and path of an Xilinx report
+  file (RPX) to write. This is different from writing the report results to a
+  file using the -file argument. The RPX file is an interactive report that
+  contains all the report information and can be reloaded into memory in the
+  Vivado Design Suite using the open_report command. You should add a .rpx
+  file extension to the specified file name, as the Vivado tool will not
+  automatically assign a file extension.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Return more detailed results from the checks that are
+  run. Returns details of the problems found.
+
+Examples:
+
+  The following example runs check_timing, but excludes the specified checks
+  from the default timing checks:
+
+    check_timing -exclude {loops generated_clocks}
+
+  The following example uses the -verbose argument to obtain detailed results
+  running just the multiple_clocks check, and then uses get_clocks to look
+  further into the issue:
+
+    check_timing -verbose -override_defaults {multiple_clock} 
+      Checking multiple_clock. 
+      There are 2 register/latch pins with multiple clocks. 
+      procEngine/mode_du/set_reg[0]/C 
+      provEngine/mode_du/set_reg[1]/C 
+    get_clocks -of_objects [get_pin procEngine/mode_du/set_reg[0]/C] 
+      sysClk coreClk
+
+See Also:
+
+   *  create_clock
+   *  get_clocks
+   *  open_report
+   *  report_timing
+   *  set_case_analysis
+   *  set_input_delay
+   *  set_max_delay
+   *  set_output_delay

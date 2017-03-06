@@ -1,0 +1,83 @@
+
+Description:
+
+  Writes a post-implementation hardware definition of the open design,
+  including the generated bitstream, for use in the software development
+  tools (SDK).
+
+  The write_sysdef command, as well as the write_hwdef command, is intended
+  to simplify the movement of designs from the Vivado Design Suite to
+  software development in SDK. Both of these commands are run automatically
+  by the Vivado Design Suite when generating the output products for a
+  top-level design that includes a block design with an embedded processor
+  like MicroBlaze, or Zynq-7000 All Programmable SoC. Block designs are
+  created in the IP Integrator feature of the Vivado Design Suite with the
+  create_bd_design command.
+
+  The write_hwdef command runs after place_design, and the write_sysdef
+  command runs after write_bitstream. The sysdef file includes all of the
+  contents of the hardware definition file created by the write_hwdef
+  command, with the addition of the bitstream (.bit) file and the memory map
+  information (.mmi).
+
+  The write_sysdef command returns nothing if successful, or an error if the
+  command fails.
+
+Arguments:
+
+  -force - (Optional) Overwrite and existing system definition file if one
+  exists. If this option is not specified, then the Vivado Design Suite will
+  not overwrite an existing file.
+
+  -hwdef <arg> - (Required) Specify the hardware definition file to include
+  in the system definition file.
+
+  -bitfile <arg> - (Required) Specify the bitstream file to include in the
+  system definition file.
+
+  -meminfo <arg> - (Optional) Specify the BRAM memory file to include in the
+  system definition file. This file can be either the memory map information
+  file (.mmi) written by the write_mem_info command, or the block memory map
+  file created by write_bmm.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <file> - (Required) Specify the name of the system definition file to
+  write. The file can include the path and file extension. The default file
+  extension of .sysdef is used if an extension is not specified.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+Examples:
+
+  The following example writes a system definition file from the specified
+  hardware definition file, including the bitfile and the block memory map as
+  specified:
+
+    write_sysdef -hwdef "C:/Data/ug940/lab1/zynq_design.hwdef" \ 
+       -bitfile "C:/ug940/lab1/zynq_debug/zynq_debug.runs/impl_1/zynq_design.bit" \ 
+       -meminfo "C:/ug940/lab1/zynq_debug/zynq_debug.runs/impl_1/zynq_design.mmi" \ 
+        C:/Data/ug940/lab1/zynq_design.sysdef
+
+See Also:
+
+   *  create_bd_design
+   *  launch_sdk
+   *  place_design
+   *  write_bitstream
+   *  write_bmm
+   *  write_hwdef
+   *  write_mem_info

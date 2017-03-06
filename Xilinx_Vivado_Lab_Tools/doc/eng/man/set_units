@@ -1,0 +1,70 @@
+
+Description:
+
+  This command specifies the default units to be assumed when the design is
+  analyzed. Specifically, the -current, -voltage, -power, and -resistance
+  options impact the values returned by the report_power command.
+
+  The set_units command can be used multiple times to define and redefine
+  units. If set_units includes a previously set unit value, the unit is
+  redefined.
+
+  Note: This command operates silently and does not return direct feedback of
+  its operation.
+
+Arguments:
+
+  -capacitance <arg> - (Optional) Specify the unit of capacitance in Farads.
+  Valid values range from kilofarads (kF) to femtofarads (fF). The default
+  unit of capacitance is picofarads (pF).
+
+  -current <arg> - (Optional) Specify the unit of current in amperes. Valid
+  values range from kiloAmps (kA) to femtoAmps (fA). The default unit of
+  amperes is milliAmps (mA).
+
+  -voltage <arg> - (Optional) Specify the unit of voltage in Volts. Valid
+  values range from kilovolts (kV) to femotovolts (fV). The default unit of
+  voltage is Volts (V).
+
+  -power <arg> - (Optional) Specify the unit of power in watts. Valid values
+  range from kilowatts (kW) to femtowatts (fW). The default unit of power is
+  milliwatts (mW).
+
+  -resistance <arg> - (Optional) Specify the unit of resistance in ohms.
+  Valid values range from kilo-ohm (kOhm) to femto-ohm (fOhm). The default
+  unit of resistance is ohms (Ohm).
+
+  -altitude [ meters | feet ] - (Optional) Specify the unit of altitude as
+  meters or feet. The default unit is meters.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  Specify that voltage should be in millivolts and all values should use
+  three digits
+
+    set_units -voltage mV
+
+  The following example changes the default unit for current to Amperes:
+
+    set_units -voltage kV -current A
+
+  Note: The second example of set_units redefines the Voltage units defined
+  in the first example, as well as defining the units for current.
+
+See Also:
+
+   *  report_power
+   *  set_operating_conditions

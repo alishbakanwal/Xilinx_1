@@ -1,0 +1,68 @@
+
+Description:
+
+  Get the value of a single HDL object at the current simulation run time.
+
+  Note: Use the report_values command to return the values of more than one
+  HDL objects.
+
+  HDL objects include HDL signals, variables, or constants as defined in the
+  Verilog or VHDL testbench and source files. An HDL signal includes Verilog
+  wire or reg entities, and VHDL signals. Examples of HDL variables include
+  Verilog real, realtime, time, and event.
+
+  HDL constants include Verilog parameters and localparams, and VHDL generic
+  and constants. The HDL scope, or scope, is defined by a declarative region
+  in the HDL code such as a module, function, task, process, or begin-end
+  blocks in Verilog. VHDL scopes include entity/architecture definitions,
+  block, function, procedure, and process blocks.
+
+Arguments:
+
+  -radix <arg> - (Optional) Specifies the radix to use when returning the
+  value of the specified object. Allowed values are: default, dec, bin, oct,
+  hex, unsigned, and ascii.
+
+  Note: The radix dec indicates a signed decimal. Specify the radix unsigned
+  when dealing with unsigned data.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <hdl_object> - (Required) Specifies a single HDL object to get the value
+  of. The object can be specified by name, or can be returned as an object
+  from the get_objects command.
+
+Examples:
+
+  The following example gets the value of the sysClk signal:
+
+    get_value sysClk 
+       Z
+
+  This example shows the difference between the bin, dec, and unsigned radix
+  on the value returned from the specified bus:
+
+    get_value -radix bin /test/bench_VStatus_pad_0_i[7:0] 
+       10100101 
+    get_value -radix unsigned /test/bench_VStatus_pad_0_i[7:0] 
+       165 
+    get_value -radix dec /test/bench_VStatus_pad_0_i[7:0] 
+       -91
+
+See Also:
+
+   *  current_time
+   *  get_objects
+   *  set_value
+   *  report_values

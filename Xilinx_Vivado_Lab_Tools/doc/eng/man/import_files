@@ -1,0 +1,109 @@
+
+Description:
+
+  Imports one or more files or the source file contents of one or more
+  directories to the specified fileset.
+
+  For every file added to a project the Vivado Design Suite attempts to store
+  and maintain both a relative path and an absolute path to the file or
+  directory. When a project is opened, these paths are used to locate the
+  files and directories. By default the Vivado Design Suite applies a
+  Relative First approach to resolving paths, searching the relative path
+  first, then the absolute path. You can use the PATH_MODE property to change
+  how the Vivado tool resolves file paths or properties for specific objects.
+  For more information, see the Vivado Design Suite Properties Reference
+  Guide (UG912) .
+
+  Note: Importing multiple files one at a time can cause noticeable
+  performance degradation. It is more efficient to use a single import_files
+  command to import a list of files:
+
+    import_files {file1 file2 file3 ... fileN}
+
+  This command is different from the add_files command, which adds files by
+  reference into the specified fileset. This command imports the files into
+  the local project folders under project.srcs\<fileset>\imports and then
+  adds the file to the specified fileset.
+
+Arguments:
+
+  -fileset <name> - (Optional) The fileset to which the specified source
+  files should be added. If the specified fileset does not exist, the tool
+  will return an error. If no fileset is specified the files will be added to
+  the source fileset by default.
+
+  -force - (Optional) Overwrite files of the same name in the local project
+  directory and in the fileset.
+
+  -norecurse - (Optional) Do not recurse through subdirectories of any
+  specified directories. Without this argument the tool will also search
+  through any subdirectories for additional source files that can be added to
+  a project.
+
+  -flat - (Optional) Import all files into the imports folder without
+  preserving their relative paths. By default the directory structure of
+  files is preserved as they are imported into the design.
+
+  -relative_to <arg> - (Optional) Import the files relative to the specified
+  directory. This allows you to preserve the path to the imported files in
+  the directory structure of the local project. The files will be imported to
+  the imports folder with the path relative to the specified directory.
+
+  Note: The relative_to argument is ignored if the -flat argument is also
+  specified. The -flat command eliminates the directory structure of the
+  imported files.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <files> - (Optional) One or more file names or directory names to be added
+  to the specified fileset. If a directory name is specified, all valid
+  source files found in the directory, and in subdirectories of the
+  directory, will be added. If no files are specified, the tool imports files
+  in the source set for the current project.
+
+  Note: If the path is not specified as part of the file name, the current
+  working directory is used, or the directory from which the tool was
+  launched.
+
+Examples:
+
+  The following example imports the top.ucf file into the constrs_1
+  constraint fileset.
+
+    
+    import_files -fileset constrs_1 top.ucf
+
+  The following example imports the valid source files into the source
+  fileset (sources_1) as a default since the -fileset argument is not
+  specified. In addition, the -norecurse argument restricts the tool to
+  looking only in the specified \level1 directory and not searching any
+  subdirectories. All valid source files will be imported into the \imports
+  folder of the project because the -flat argument has been specified.
+
+    import_files C:/Data/FPGA_Design/level1 -norecurse -flat
+
+  Note: Without the -flat option a \level1 directory would be created inside
+  of the \imports folder of the project.
+
+  The following example imports files into the source fileset (sources_1 )
+  because the -fileset argument is not specified. Valid source files are
+  imported from the \level1 directory, and all subdirectories, and the files
+  will be written into the \imports folder of the project starting at the
+  \Data directory due to the use of the -relative_to argument.
+
+    import_files C:/Data/FPGA_Design/level1 -relative_to C:/Data
+
+See Also:
+
+   *  add_files

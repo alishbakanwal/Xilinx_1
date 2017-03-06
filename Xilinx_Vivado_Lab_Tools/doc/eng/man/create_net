@@ -1,0 +1,75 @@
+
+Description:
+
+  Create new nets in the current netlist of an open Synthesized or
+  Implemented Design.
+
+  Note: You cannot add nets to library macros, or macro-primitives.
+
+  Nets can be created hierarchically from the top-level of the design, or
+  within any level of the hierarchy by specifying the hierarchical net name.
+
+  Bus nets can be created with increasing or decreasing bus indexes, using
+  negative and positive index values.
+
+  New nets are unconnected in the netlist at the time of creation. You must
+  connect nets as desired using the connect_net command. Connected nets can
+  be unconnected using the disconnect_net command, and can be removed from
+  the netlist using the remove_net command.
+
+  Netlist editing changes the in-memory view of the netlist in the current
+  design. It does not change the files in the source fileset, or change the
+  persistent design on the disk. Changes made to the netlist may be saved to
+  a design checkpoint using the write_checkpoint command, or may be exported
+  to a netlist file such as Verilog, VHDL, or EDIF, using the appropriate
+  write_* command.
+
+  Note: Netlist editing is not allowed on the elaborated RTL design.
+
+Arguments:
+
+  -from <arg> - (Optional) The starting index of a new bus.
+
+  -to <arg> - (Optional) The ending index of a new bus.
+
+  Note: Specifying -from or -to without the other will results in a one-bit
+  bus with index value specified by the -from or -to argument.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <nets> - (Required) The names of nets to create. Net names can be specified
+  from the top-level, as name only (net1), or can be specified within the
+  design hierarchy by specifying the hierarchical net name
+  (cell1/cellA/net1).
+
+Example:
+
+  The following example creates a new 24-bit bus in the current Synthesized
+  or Implemented Design:
+
+    create_net tempBus -from 23 -to 0
+
+See Also:
+
+   *  connect_net
+   *  create_pin
+   *  create_port
+   *  disconnect_net
+   *  get_nets
+   *  remove_net
+   *  resize_net_bus
+   *  write_checkpoint
+   *  write_edif
+   *  write_verilog
+   *  write_vhdl

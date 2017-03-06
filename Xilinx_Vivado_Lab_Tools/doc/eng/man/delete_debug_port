@@ -1,0 +1,48 @@
+
+Description:
+
+  Deletes ports from Vivado Lab Edition debug cores in the current project.
+  You can disconnect a signal from a debug port using disconnect_debug_port,
+  or remove the port altogether using this command.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <ports> - (Required) The core_name/port_name of the debug port to be
+  removed from the core.
+
+Examples:
+
+  The following example deletes the DATA port from myCore:
+
+    delete_debug_port myCore/DATA
+
+  Note: Some ports cannot be deleted because an ILA port requires one CLK
+  port and one TRIG port as a minimum.
+
+  The following example deletes the trigger ports (TRIG) from the myCore
+  debug core:
+
+    delete_debug_port [get_debug_ports myCore/TRIG*]
+
+  Note: This example will not delete all TRIG ports from myCore, because an
+  ILA core must have at least one TRIG port. The effect of this command will
+  be to delete the TRIG ports starting at TRIG0 and removing all of them
+  except the last port.
+
+See Also:
+
+   *  disconnect_debug_port
+   *  get_debug_ports

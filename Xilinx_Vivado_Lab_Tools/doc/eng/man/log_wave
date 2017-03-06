@@ -1,0 +1,49 @@
+
+Description:
+
+  Log simulation activity for the specified HDL objects into the waveform
+  database file (.wdb) for viewing using Vivado simulator waveform viewer.
+
+  In the Vivado simulator, an HDL object is an entity that can hold a value,
+  such as a wire, signal, or register.
+
+  Unlike add_wave, this command does not add the waveform object to waveform
+  configuration. It simply enables logging of waveform activity to the Vivado
+  simulator waveform database (WDB). See the Vivado Design Suite User Guide:
+  Logic Simulation (UG900) for more information.
+
+  This command returns nothing.
+
+Arguments:
+
+  -recursive | -r - (Optional) Recursively log the waveform activity of the
+  specified HDL objects, and the children of the specified HDL objects.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <hdl_objects> - (Required) Specifies the HDL objects to include in the
+  Vivado simulator waveform database file. The level of hierarchy is also
+  represented in the hdl_objects pattern. For instance /tb/UUT/* indicates
+  all HDL objects within the /tb/UUT level of the design.
+
+Examples:
+
+  The following example logs the waveform activities for the specified HDL
+  objects.
+
+    log_wave -r [get_objects /testbench/dut/*]
+
+See Also:
+
+   *  get_objects

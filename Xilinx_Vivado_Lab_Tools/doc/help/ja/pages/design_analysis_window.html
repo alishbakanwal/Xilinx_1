@@ -1,0 +1,152 @@
+﻿<html xml:lang="ja-jp" lang="ja-jp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="copyright" content="(C) Copyright 2005"/>
+<meta name="DC.rights.owner" content="(C) Copyright 2005"/>
+<meta name="DC.Type" content="concept"/>
+<meta name="DC.Title" content="[Design Analysis Results] ウィンドウ"/>
+<meta name="DC.Format" content="XHTML"/>
+<meta name="DC.Identifier" content="concept_aqj_x3c_d5"/>
+<meta name="DC.Language" content="ja-JP"/>
+<link rel="stylesheet" type="text/css" href="../commonltr-ja.css"/>
+<title>[Design Analysis Results] ウィンドウ</title>
+</head>
+<body id="concept_aqj_x3c_d5">
+
+
+<h1 class="title topictitle1">[Design Analysis Results] ウィンドウ</h1>
+
+<div class="body conbody">
+<div class="section">
+<p class="p" id="concept_aqj_x3c_d5__p_ftk_rrw_25">[Design Analysis Results] ウィンドウには、<span Class="uicontrol">[Report Design Analysis]</span> コマンドの結果が表示されます。このウィンドウは、2 つのセクションに分割されます。左側には、デザインと report コマンドに関する一般情報と、レポートされるタイミング パスのセットアップおよびホールド パス特性などの目次が表示されます。</p>
+
+<p class="p">デザイン解析結果は右側に表形式で表示されます。選択したオプションによって、レポートで実行されたタイミング パス、複雑性解析、密集解析などが表示されます。列のヘッダーを右クリックすると、列を表示および非表示にするコマンドと列幅を管理するコマンドが表示されます。表の情報は、列ヘッダーを 1 回または 2 回クリックすると並び替えることができます。表の詳細は、<cite class="cite">『Vivado<sup>®</sup> Design Suite ユーザー ガイド : Vivado IDE の使用』</cite> (UG893)  の<a class="xref" href="http://japanx.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug893-vivado-ide.pdf;a=xUsingDataTableWindows" target="_blank">このセクション</a>を参照してください。</p>
+
+<p class="p">[Design Analysis Results] ウィンドウには、左側に表形式のツール バーが、右側に結果の表が表示されます。</p>
+
+<ul class="ul" id="concept_aqj_x3c_d5__ul_nt2_pqf_j5">
+<li class="li">左側の表形式のツールバーには、次のコマンドが含まれます。 
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="concept_aqj_x3c_d5__table_fvy_tmw_vw" class="table" frame="void" border="0" rules="none">    <tbody class="tbody"> <tr class="row">
+<td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_gvy_tmw_vw" src="../../images/search_button.png"/></td>
+
+<td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Search</span></td>
+
+<td class="entry" align="left" valign="top" width="73.4959349593496%">検索パターンを入力する検索フィールドが開きます。</td>
+</tr>
+ <tr class="row">
+<td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_hvy_tmw_vw" src="../../images/collapse_button.png"/></td>
+
+<td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Collapse all</span></td>
+
+<td class="entry" align="left" valign="top" width="73.4959349593496%">[Design Analysis Results] ウィンドウの左側の階層の展開が閉じられます。</td>
+</tr>
+ <tr class="row">
+<td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_ivy_tmw_vw" src="../../images/expand_button.png"/></td>
+
+<td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Expand all</span></td>
+
+<td class="entry" align="left" valign="top" width="73.4959349593496%">[Design Analysis Results] ウィンドウの左側の階層が展開されます。</td>
+</tr>
+ <tr class="row">
+<td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_jvy_tmw_vw" src="../../images/backward.png"/></td>
+
+<td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Previous</span></td>
+
+<td class="entry" align="left" valign="top" width="73.4959349593496%">[Design Analysis Results] ウィンドウの前の表示が復元されます。</td>
+</tr>
+ <tr class="row">
+<td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_kvy_tmw_vw" src="../../images/forward.png"/></td>
+
+<td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Next</span></td>
+
+<td class="entry" align="left" valign="top" width="73.4959349593496%">[Previous] で表示していた前の表示が元の表示に戻されます。<div Class="note_tip"><span class="tiptitle">ヒント:</span> このコマンドは、<span Class="uicontrol">[Previous]</span> コマンドを使用した後にのみ使用可能です。</div>
+</td>
+</tr>
+ <tr class="row">
+<td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_lvy_tmw_vw" src="../../images/rerun_button.png"/></td>
+
+<td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Rerun</span></td>
+
+<td class="entry" align="left" valign="top" width="73.4959349593496%"><span Class="uicontrol">[Report Design Analysis]</span> コマンドが再実行されます。</td>
+</tr>
+ <tr class="row">
+<td class="entry" align="center" valign="top" width="8.130081300813009%"><img class="image" id="concept_aqj_x3c_d5__image_mvy_tmw_vw" src="../../images/HideEmptyColumns.png"/></td>
+
+<td class="entry" align="left" valign="top" width="18.3739837398374%"><span Class="uicontrol">Show only sections with content</span></td>
+
+<td class="entry" align="left" valign="top" width="73.4959349593496%">オンまたはオフにして、内容や結果のないデザイン解析レポートのセクションを表示または非表示にします。</td>
+</tr>
+ </tbody>
+ </table>
+</div>
+</li>
+
+<li class="li">結果の表のツールバーには、次のコマンドが含まれます。 
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="concept_aqj_x3c_d5__table_rdz_bvv_y35" class="table" frame="void" border="0" rules="none">    <tbody class="tbody"> <tr class="row">
+<td class="entry" align="center" valign="top" width="8.81057268722467%"><img class="image" id="concept_aqj_x3c_d5__image_c4l_lk2_p5" src="../../images/search_button.png"/></td>
+
+<td class="entry" align="left" valign="top" width="27.57709251101322%"><span Class="uicontrol">Search</span></td>
+
+<td class="entry" align="left" valign="top" width="63.61233480176212%">検索パターンを入力する検索フィールドが開きます。検索パターンに合うように内容がフィルターされ、結果の表に表示されます。</td>
+</tr>
+ <tr class="row">
+<td class="entry" align="center" valign="top" width="8.81057268722467%"><img class="image" id="concept_aqj_x3c_d5__image_tpz_vmd_55" src="../../images/schematic_button.png"/></td>
+
+<td class="entry" align="left" valign="top" width="27.57709251101322%"><span Class="uicontrol">Schematic</span></td>
+
+<td class="entry" align="left" valign="top" width="63.61233480176212%">[Schematic] ウィンドウが開き、現在選択しているオブジェクトが表示されます。</td>
+</tr>
+ <tr class="row">
+<td class="entry" align="center" valign="top" width="8.81057268722467%"><img class="image" id="concept_aqj_x3c_d5__image_a3j_z3g_j5" src="../../images/mark.png"/></td>
+
+<td class="entry" align="left" valign="top" width="27.57709251101322%"><span Class="uicontrol">Mark Selected Objects</span></td>
+
+<td class="entry" align="left" valign="top" width="63.61233480176212%">結果の表の選択オブジェクトが [Device] および [Netlist] ウィンドウなどのほかのウィンドウでマークされます。<div Class="note_tip"><span class="tiptitle">ヒント:</span> タイミング パスの始点は緑色、終点は赤色、通過点は選択した色で表示されます。</div>
+</td>
+</tr>
+ <tr class="row">
+<td class="entry" align="center" valign="top" width="8.81057268722467%"><img class="image" id="concept_aqj_x3c_d5__image_lkc_m4w_vw" src="../../images/Percent.png"/></td>
+
+<td class="entry" align="left" valign="top" width="27.57709251101322%"><span Class="uicontrol">Show Percentage</span></td>
+
+<td class="entry" align="left" valign="top" width="63.61233480176212%">結果の表の値が値ではなく % で表示されます。</td>
+</tr>
+ <tr class="row">
+<td class="entry" align="center" valign="top" width="8.81057268722467%"><img class="image" id="concept_aqj_x3c_d5__image_mbm_p4k_v5" src="../../images/Clock.png"/></td>
+
+<td class="entry" align="left" valign="top" width="27.57709251101322%"><span Class="uicontrol">Select Clock Paths when Timing Paths are selected</span></td>
+
+<td class="entry" align="left" valign="top" width="63.61233480176212%">ソースおよびデスティネーション クロック パスをデータパスと一緒に選択します。</td>
+</tr>
+ <tr class="row">
+<td class="entry" align="center" valign="top" width="8.81057268722467%"><img class="image" id="concept_aqj_x3c_d5__image_djd_tvb_ww" src="../../images/HideEmptyColumns.png"/></td>
+
+<td class="entry" align="left" valign="top" width="27.57709251101322%"><span Class="uicontrol">Hide Unused</span></td>
+
+<td class="entry" align="left" valign="top" width="63.61233480176212%">結果の表の空または未使用の列の表示を切り替えることができます。</td>
+</tr>
+ </tbody>
+ </table>
+</div>
+</li>
+
+</ul>
+
+</div>
+
+<div class="section"><h2 class="title sectiontitle">関連項目</h2>
+<table cellpadding="4" cellspacing="0" summary="" id="concept_aqj_x3c_d5__simpletable_clj_v5r_b5" border="0" class="simpletable"><tr class="strow"> <td valign="top" class="stentry" width="4.761904761904762%"><img class="image" id="concept_aqj_x3c_d5__image_lf4_qvj_p5" src="../../images/book_icon.png" alt="Icon"/></td>
+ <td valign="top" class="stentry" width="95.23809523809524%"><cite class="cite">『Vivado Design Suite ユーザー ガイド : デザイン解析およびクロージャ テクニック』</cite> (UG906) の<a class="xref" href="http://japan.xilinx.com/cgi-bin/docs/rdoc?v=replace;d=ug906-vivado-design-analysis.pdf;a=xReportDesignAnalysis" target="_blank">「デザイン解析レポート」</a></td>
+ </tr>
+<tr class="strow"> <td valign="top" class="stentry"><img class="image" id="concept_aqj_x3c_d5__image_w4f_4kv_vw" src="../../images/play.png" alt="Icon"/></td>
+ <td valign="top" class="stentry"><a class="xref" href="http://japan.xilinx.com/video/hardware/vivado-report-design-analysis.html" target="_blank">Vivado Design Suite QuickTake ビデオ : Vivado のデザイン解析レポート</a></td>
+ </tr>
+</table>
+
+</div>
+
+</div>
+
+
+</body>
+</html>

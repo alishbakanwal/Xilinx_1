@@ -1,0 +1,198 @@
+
+Description:
+
+  Gets a list of cell objects in the current design that match a specified
+  search pattern. The default command returns a list of all cells in the
+  current_instance of the open design, as specified by the current_instance
+  command.
+
+  You can use the -hierarchical option to extract cells from the hierarchy of
+  the current design.
+
+  The get_cells command also includes an option to get all replicated cells
+  that are added to a design during physical optimization, or
+  phys_opt_design. The use of the -include_replicated_objects option returns
+  the replicated cells of an object when the original cell is returned. You
+  can use this option to ensure that constraints or properties that are
+  applied to a cell are also applied to its replicated cells.
+
+  Note: To improve memory and performance, the get_* commands return a
+  container list of a single type of objects (e.g. cells, nets, pins, or
+  ports). You can add new objects to the list (using lappend for instance),
+  but you can only add the same type of object that is currently in the list.
+  Adding a different type of object, or string, to the list is not permitted
+  and will result in a Tcl error.
+
+Arguments:
+
+  -hsc <arg> - (Optional) Set the hierarchy separator. The default hierarchy
+  separator is `/`.
+
+  -hierarchical - (Optional) Get cells from all levels of the design
+  hierarchy starting from the level of the current_instance, or from the top
+  of the current design. Without this argument, the command will only get
+  cells from the current_instance of the design hierarchy. When using
+  -hierarchical, the search pattern should not contain a hierarchy separator
+  because the search pattern is applied at each level of the hierarchy, not
+  to the full hierarchical cell name. For instance, searching for U1/*
+  searches each level of the hierarchy for instances with U1/ in the name.
+  This may not return the intended results. This is illustrated in the
+  examples below.
+
+  Note: When used with -regexp, the specified search string is matched
+  against the full hierarchical name, and the U1/* search pattern will work
+  as intended.
+
+  -regexp - (Optional) Specifies that the search <patterns> are written as
+  regular expressions. Both search <patterns> and -filter expressions must be
+  written as regular expressions when this argument is used. Xilinx regular
+  expression Tcl commands are always anchored to the start of the search
+  string. You can add ".*" to the beginning or end of a search string to
+  widen the search to include a substring. See
+  http://perldoc.perl.org/perlre.html for help with regular expression
+  syntax.
+
+  Note: The Tcl built-in command regexp is not anchored, and works as a
+  standard Tcl command. For more information refer to
+  http://www.tcl.tk/man/tcl8.5/TclCmd/regexp.htm.
+
+  -nocase - (Optional) Perform case-insensitive matching when a pattern has
+  been specified. This argument applies to the use of -regexp only.
+
+  -filter <args> - (Optional) Filter the results list with the specified
+  expression. The -filter argument filters the list of objects returned by
+  get_cells based on property values on the cells. You can find the
+  properties on an object with the report_property or list_property commands.
+  In the case of the "cell" object, "IS_PARTITION", "IS_PRIMITIVE" and
+  "IS_LOC_FIXED" are some of the properties that can be used to filter
+  results.
+
+  The filter search pattern should be quoted to avoid having to escape
+  special characters that may be found in net, pin, or cell names, or other
+  properties. String matching is case-sensitive and is always anchored to the
+  start and to the end of the search string. The wildcard "*" character can
+  be used at the beginning or at the end of a search string to widen the
+  search to include a substring of the property value.
+
+  Note: The filter returns an object if a specified property exists on the
+  object, and the specified pattern matches the property value on the object.
+  In the case of the "*" wildcard character, this will match a property with
+  a defined value of "".
+
+  For string comparison, the specific operators that can be used in filter
+  expressions are "equal" (==), "not-equal" (!=), "match" (=~), and
+  "not-match" (!~). Numeric comparison operators <, >, <=, and >= can also be
+  used. Multiple filter expressions can be joined by AND and OR (&& and ||).
+  The following gets input pins that do NOT contain the "RESET" substring
+  within their name:
+
+    get_pins * -filter {DIRECTION == IN && NAME !~ "*RESET*"}
+
+  Boolean (bool) type properties can be directly evaluated in filter
+  expressions as true or not true:
+
+    -filter {IS_PRIMITIVE && !IS_LOC_FIXED}
+
+  -of_objects <arg> - (Optional) Get the cells connected to the specified
+  pins, timing paths, nets, bels, clock regions, sites or DRC violation
+  objects.
+
+  Note: The -of_objects option requires objects to be specified using the
+  get_* commands, such as get_cells or get_pins, rather than specifying
+  objects by name. In addition, -of_objects cannot be used with a search
+  <pattern>.
+
+  -match_style - (Optional) Indicates that the search pattern matches UCF
+  constraints or SDC constraints. The default is SDC.
+
+  -include_replicated_objects - (Optional) Include cells that have been added
+  through replication during optimizations. This option is valid only when
+  specified with <patterns>, and returns replicated cell instances that match
+  the pattern. As a default, the get_cells command does not return replicated
+  cells.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <patterns> - (Optional) Match cells against the specified patterns. The
+  default pattern is the wildcard `*` which gets a list of all cells in the
+  project. More than one pattern can be specified to find multiple cells
+  based on different search criteria.
+
+  Note: You must enclose multiple search patterns in braces, {}, or quotes,
+  "", to present the list as a single element.
+
+Examples:
+
+  The following example uses regular expression to return cells in the BFT
+  example design that match the filter expressions for NAME and REF_NAME. In
+  the first command the NAME is specified in the search pattern, while the
+  second command filters on the NAME property. These commands return the same
+  results:
+
+    get_cells -regexp -filter { REF_NAME =~ FD.* } .*validFor.* 
+    get_cells -regexp -filter { NAME =~ .*validFor.* && REF_NAME =~ FD.* }
+
+  The following example searches all levels of the hierarchy for cells
+  beginning with cpu, or fft, and joins each cell returned with the newline
+  character to put it on a separate line:
+
+    join [get_cells -hier {cpu* fft*}] \n
+
+  This example gets a list of properties and property values attached to the
+  second object of the list returned by get_cells:
+
+    report_property [lindex [get_cells] 1]
+
+  Note: If there are no cells matching the pattern you will get a warning.
+
+  This example prints a list of the library cells instantiated into the
+  design at all levels of the hierarchy, sorting the list for unique names so
+  that each cell is only printed one time:
+
+    foreach cell [lsort -unique [get_property LIB_CELL [get_cells -hier \ 
+    -filter {IS_PRIMITIVE==1}]]] {puts $cell}
+
+  The following example demonstrates the effect of -hierarchical searches,
+  without and with -regexp:
+
+    get_cells -hierarchical *mmcm* 
+       mmcm_replicator_inst_1 
+       mmcm_replicator_inst_1/mmcm_stage[0].mmcm_channel[0].mmcm 
+    get_cells -hierarchical -regexp .*mmcm.* 
+       mmcm_replicator_inst_1 
+       mmcm_replicator_inst_1/mmcm_stage[0].mmcm_channel[0].mmcm 
+       mmcm_replicator_inst_1/mmcm_stage[0].mmcm_channel[0].mmcm/GND 
+       mmcm_replicator_inst_1/mmcm_stage[0].mmcm_channel[0].mmcm/MMCM_Base
+
+  Note: The last two cells (GND and MMCM_Base) were not returned in the first
+  example (without -regexp) because the cell names do not match the search
+  pattern, as it is applied to each level of the hierarchy.
+
+  The following example runs the report_drc command on the current design,
+  and returns any cells associated with DRC violations:
+
+    report_drc -name drc_1 
+    get_cells -of_objects [get_drc_violations]
+
+See Also:
+
+   *  current_instance
+   *  get_drc_vioations
+   *  get_lib_cells
+   *  get_nets
+   *  get_pins
+   *  list_property
+   *  phys_opt_design
+   *  report_drc
+   *  report_property

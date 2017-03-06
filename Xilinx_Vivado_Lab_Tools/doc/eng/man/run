@@ -1,0 +1,70 @@
+
+Description:
+
+  Run the current simulation from the current time to the specified time, or
+  until the simulation stops.
+
+  A running simulation can be stopped at a predetermined time, at a specific
+  breakpoint in the HDL source code, by encountering a TRUE condition, by
+  evaluating the circuit until there are no remaining events, or by
+  encountering a runtime error such as an out-of-bounds value.
+
+  The run command instructs an existing simulation to run for a specified
+  length of time, or until there are no remaining events. The time is
+  specified as a floating point number indicating a period of time in the
+  current simulation units, or in the specified units.
+
+Arguments:
+
+  -all - Run the simulation until no event is left in the event queue, a
+  breakpoint or valid condition is encountered, or a run time exception
+  occurs.
+
+  Note: This is the default when no other options are specified.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <time> - (Optional) Specifies the length of the simulation run time. The
+  time can be specified as a floating point number, or using the keyword all.
+
+  Note: Using the keyword all is the same as using the -all option.
+
+  <unit> - (Optional) One of the following time units (with or without space
+  between time and unit) can be specified: fs, ps, ns, us, ms, or sec. The
+  default is the value of time_unit .
+
+Examples:
+
+  The following example runs an existing simulation for the specified
+  simulation run time, using the default units (ns):
+
+    run 1000
+
+  The following example runs an existing simulation for 300 microseconds (us):
+
+    run 300 us
+
+  The following example runs the current simulation until no event is left in
+  the event queue, a breakpoint or valid condition is met, or a simulation
+  runtime error occurs:
+
+    run -all
+
+See Also:
+
+   *  add_bp
+   *  add_condition
+   *  restart
+   *  step
+   *  stop

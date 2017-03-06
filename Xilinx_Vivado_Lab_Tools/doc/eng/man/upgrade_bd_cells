@@ -1,0 +1,52 @@
+
+Description:
+
+  Upgrade IP Integrator cells to the latest version available in the IP
+  Integrator catalog.
+
+  This command lets you update IP Integrator subsystem designs from an
+  earlier release to use the IP cores from the latest catalog.
+
+  This command returns the list of IP Integrator cells that were upgraded, or
+  returns an error if it fails.
+
+Arguments:
+
+  -latest - (Optional) Upgrade the specified cells to the latest available
+  version from the IP catalog. This option is the default, and is not
+  required.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <objects> - The IP Integrator cells to upgrade to the latest version. These
+  objects must be specified using the get_bd_cells command. Objects cannot be
+  referenced by name.
+
+Example:
+
+  The following example upgrades the specified cells to the latest version
+  available in the IP Integrator catalog:
+
+    upgrade_bd_cells [get_bd_cells {vidOut1 cmpy_1 newMod1}] 
+    INFO: [BD 41-1162] The cell `/vidOut1` is already at its latest version. 
+    INFO: [BD 41-1162] The cell `/cmpy_1` is already at its latest version. 
+    WARNING: [BD 41-1082] Hierarchy block (/newMod1) cannot be directly upgraded.  
+    Please dive into the hierarchy and select individual cells to upgrade.
+
+  Note: A warning message is returned for the user-defined hierarchical module.
+
+See Also:
+
+   *  create_bd_cells
+   *  get_bd_cells
